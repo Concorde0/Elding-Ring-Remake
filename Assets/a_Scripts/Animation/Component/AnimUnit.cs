@@ -9,38 +9,36 @@ namespace RPG.Animation
 {
     public class AnimUnit : AnimBehaviour
     {
-        //用于保存clipPlayable的节点实例，便于管理
-        private AnimationClipPlayable _anim;
-        
-        public AnimUnit(PlayableGraph graph, AnimationClip clip) : base(graph)
+        //为了便于管理，用变量保存这个ClipPlayable
+        private readonly AnimationClipPlayable _anim;
+
+        public AnimUnit(PlayableGraph graph, AnimationClip clip, float enterTime = 0f) : base(graph,enterTime)
         {
+            //将动画片段连接到Adapter上
             _anim = AnimationClipPlayable.Create(graph, clip);
-            _adapterPlayable.AddInput(_anim,0,1f);
-            
-            Disable();
+            _adapterPlayable.AddInput(_anim, 0, 1f);
         }
 
         public override void Enable()
         {
             base.Enable();
-            _adapterPlayable.SetTime(0f);
-            _anim.SetTime(0f);
-            _anim.Play();
             _adapterPlayable.Play();
+            _anim.Play();
+            _anim.SetTime(0);
+            _adapterPlayable.SetTime(0);
         }
 
         public override void Disable()
         {
             base.Disable();
-            _anim.Pause();
             _adapterPlayable.Pause();
-        }
-
-        public override void Execute(Playable playable, FrameData info)
-        {
-            base.Execute(playable, info);
+            _anim.Pause();
             
         }
+        
+        
     }
+    
+    
 }
 
