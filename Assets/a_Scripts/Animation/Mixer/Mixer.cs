@@ -31,7 +31,8 @@ namespace RPG.Animation
             //这里为什么要加额外的两个参数呢？
             //第二个参数 0，表示 初始时 Mixer 没有任何输入端口。
             //第三个参数 true，表示 自动归一化权重（保证加起来等于 1），这样你后面就不用手动去 normalize。
-            _mixer = AnimationMixerPlayable.Create(graph,0,true);
+            //我操，第三个参数被unity弃用了
+            _mixer = AnimationMixerPlayable.Create(graph,0);
             //adapter应该是要连接Mixer,再连到addInput的吧？
             //把这个 Mixer 挂到外层的 AdapterPlayable 上
             _adapterPlayable.AddInput(_mixer,0,1f);
