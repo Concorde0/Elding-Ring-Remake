@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using RPG.InputSystem;
 using UnityEngine;
-using RPG.InputSystem;
 public class GameLoop : MonoBehaviour
 {
     public InputData inputData;

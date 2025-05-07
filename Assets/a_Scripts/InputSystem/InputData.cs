@@ -9,12 +9,14 @@ using System.IO;
 
 namespace RPG.InputSystem
 {
+    //InputData 是一个 输入系统的数据管理类，用于统一存储、更新和序列化玩家的输入设定
     [Serializable]
     public class InputData
     {
         public List<Key> keys = new List<Key>();
         public List<ValueKey> valueKeys = new List<ValueKey>();
         public List<AxisKey> axisKeys = new List<AxisKey>();
+        public List<ComboKey> comboKeys = new List<ComboKey>();
 
         public Key GetKeyObject(string name)
         {
@@ -27,6 +29,11 @@ namespace RPG.InputSystem
         public AxisKey GetAxisKeyObject(string name)
         {
             return axisKeys.Find(x => x.name == name);
+        }
+
+        public ComboKey GetComboKeyObject(string name)
+        {
+            return comboKeys.Find(x => x.name == name);
         }
 
         public void SetKey(string name, KeyCode keyCode)
@@ -71,6 +78,15 @@ namespace RPG.InputSystem
             if (axisKey != null)
             {
                 axisKey.SetNegKey(negKey);
+            }
+        }
+
+        public void SetComboKey(string name, KeyCode[] keycode)
+        {
+            ComboKey comboKey = GetComboKeyObject(name);
+            if (comboKey != null)
+            {
+                comboKey.SetKey(keycode);
             }
         }
 
@@ -126,6 +142,19 @@ namespace RPG.InputSystem
             }
         }
 
+        public bool GetComboKeyDown(string name)
+        {
+            ComboKey comboKey = GetComboKeyObject(name);
+            if (comboKey != null)
+            {
+                return comboKey.isDown;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void SetKeyEnable(string name, bool enable)
         {
             Key key = GetKeyObject(name);
@@ -150,6 +179,15 @@ namespace RPG.InputSystem
             if (axisKey != null)
             {
                 axisKey.enable = enable;
+            }
+        }
+
+        public void SetComboKeyEnable(string name, bool enable)
+        {
+            ComboKey comboKey = GetComboKeyObject(name);
+            if (comboKey != null)
+            {
+                comboKey.enable = enable;
             }
         }
 
@@ -256,6 +294,37 @@ namespace RPG.InputSystem
                         {
                             axisKeys[i].value = 0;
                         }
+                    }
+                }
+            }
+        }
+
+        private void UpdateComboKeys()
+        {
+            for (int i = 0; i < comboKeys.Count; i++)
+            {
+                if (comboKeys[i].enable)
+                {
+                    bool allKeysPressed = true;
+
+                    // 检查绑定的所有按键是否按下
+                    foreach (KeyCode key in comboKeys[i].keyCodes)
+                    {
+                        if (!Input.GetKey(key))
+                        {
+                            allKeysPressed = false;
+                            break;  // 如果有任意一个按键没有按下，就认为组合键未激活
+                        }
+                    }
+
+                    // 如果所有按键都按下，标记组合键为按下
+                    if (allKeysPressed)
+                    {
+                        comboKeys[i].isDown = true;
+                    }
+                    else
+                    {
+                        comboKeys[i].isDown = false;
                     }
                 }
             }

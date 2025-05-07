@@ -75,6 +75,11 @@ namespace RPG.InputSystem
             return _inputData.GetAxis(name);
         }
 
+        public static bool GetCombo(string name)
+        {
+            return _inputData.GetComboKeyDown(name);
+        }
+
         public static void SetKey(string name, KeyCode keyCode)
         {
             _inputData.SetKey(name, keyCode);
@@ -98,6 +103,11 @@ namespace RPG.InputSystem
         public static void SetAxisNegKey(string name, KeyCode neg)
         {
             _inputData.SetAxisNegKey(name, neg);
+        }
+
+        public static void SetComboKey(string name, KeyCode[] combo)
+        {
+            _inputData.SetComboKey(name, combo);
         }
 
         public static void StartSetKey(Action<KeyCode> setKey, Action<KeyCode> displayKey)
@@ -165,6 +175,16 @@ namespace RPG.InputSystem
                 return axisKey.negKey;
             }
             return KeyCode.None;
+        }
+
+        public static KeyCode[] GetComboKey(string name)
+        {
+            ComboKey comboKey = _inputData.GetComboKeyObject(name);
+            if (comboKey != null)
+            {
+                return comboKey.keyCodes;
+            }
+            return new[] { KeyCode.None };
         }
         
     }

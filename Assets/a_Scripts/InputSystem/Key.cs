@@ -5,19 +5,21 @@ using System;
 
 namespace RPG.InputSystem
 {
+    //TODO:缺少组合键
     public enum KeyTrigger{
         Once,Double,Continuity,
     }
     
     //控制单击或双击
+    
     [Serializable]
     public class Key
     {
+        
         public string name;
         public KeyTrigger trigger;
         [HideInInspector] public bool isDown;
         [HideInInspector] public bool isDoubleDown;
-
         [HideInInspector] public bool acceptDoubleDown;
 
         //检测双击之间的间隔
@@ -100,6 +102,37 @@ namespace RPG.InputSystem
             {
                 this.enable = enable;
                 value = 0;
+            }
+        }
+
+        [Serializable]
+        public class ComboKey
+        {
+            public string name;
+            public KeyCode[] keyCodes;
+            public bool isDown;
+            public bool enable = true;
+
+            public void SetKey(KeyCode[] keys)
+            {
+                keyCodes = keys;
+            }
+
+            public bool IsPressedAllKeys(KeyCode[] keys)
+            {
+                if (!enable || keyCodes == null || keyCodes.Length == 0) return false;
+
+                foreach (var key in keyCodes)
+                {
+                    if (!Input.GetKey(key)) return false;
+                }
+                return true;
+            }
+
+            public void SetEnable(bool enable)
+            {
+                this.enable = enable;
+                isDown = false;
             }
         }
         
