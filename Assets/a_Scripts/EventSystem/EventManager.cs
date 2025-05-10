@@ -4,7 +4,7 @@ namespace RPG.EventSystem
 {
     public class EventManager : Singleton<EventManager>
     {
-        private EventGroup _root = new EventGroup("Root");
+        private readonly EventGroup _root = new EventGroup("Root");
 
         public SingleEvent CreateEvent(string name, string parent = "Root")
         {
@@ -118,6 +118,7 @@ namespace RPG.EventSystem
             if(target == null) return;
             target.SetEnable(enable, includeChildren);
         }
+        
         public void Update()
         {
             _root?.Update();

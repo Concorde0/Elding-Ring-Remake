@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NotCondition : MonoBehaviour
+namespace RPG.FSM
 {
-    // Start is called before the first frame update
-    void Start()
+    public class NotCondition<T> : FSMCondition<T>
     {
-        
-    }
+        private FSMCondition<T> _condition;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public NotCondition(FSMCondition<T> condition)
+        {
+            _condition = condition;
+        }
+
+        public override bool Condition(T owner)
+        {
+            return _condition.Condition(owner);
+        }
     }
 }
+
+
