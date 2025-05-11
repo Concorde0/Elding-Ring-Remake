@@ -9,23 +9,23 @@ namespace RPG.FSM
     //单参数委托
     public abstract class FSMCondition<T>
     {
-        public delegate bool ConditionHandler<T>(T owner);
-        private ConditionHandler<T> _conditionHandler;
+        // ConditionHandler<T> 是一个「类型」，它代表“接收一个 T、返回 bool 的方法
+        private Func<T, bool> _conditionHandle;
         
         public FSMCondition() { }
-        public FSMCondition(ConditionHandler<T> handle)
+        public FSMCondition(Func<T, bool> handle)
         {
             BindCondition(handle);
         }
 
-        public void BindCondition(ConditionHandler<T> handle)
+        public void BindCondition(Func<T, bool> handle)
         {
-            _conditionHandler = handle;
+            _conditionHandle = handle;
         }
 
         public virtual bool Condition(T owner)
         {
-            return _conditionHandler != null && _conditionHandler.Invoke(owner);
+            return _conditionHandle != null && _conditionHandle.Invoke(owner);
         }
         
         //运算符重载 ！ | &
@@ -50,14 +50,12 @@ namespace RPG.FSM
     //双参数委托
     public abstract class FSMCondition<T1, T2> : FSMCondition<T1>
     {
-        public delegate bool ConditionHandler<T1,T2>(T1 owner1,T2 owner2);
-        private readonly ConditionHandler<T1, T2> _condition;
+        private readonly Func<T1, T2, bool> _condition;
         private readonly T2 _value;
         public FSMCondition() { }
-
-        public FSMCondition(ConditionHandler<T1, T2> handle, T2 value)
+        public FSMCondition(Func<T1, T2, bool> condition, T2 value)
         {
-            _condition = handle;
+            _condition = condition;
             _value = value;
         }
 
