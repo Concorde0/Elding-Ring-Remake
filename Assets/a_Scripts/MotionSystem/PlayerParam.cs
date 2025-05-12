@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using RPG.Animation;
 using UnityEngine;
-using UnityEngine.Playables;
 
 
 namespace RPG.MotionSystem
 {
-    public class PlayerAnim
+    
+    //动画配置层
+    public class PlayerParam : MonoBehaviour
     {
-
-        
-    } 
+    
+    }
 }
 
