@@ -41,6 +41,7 @@ namespace RPG.AnimationSystem
 
                 _mixer = AnimationMixerPlayable.Create(graph);
                 _adapterPlayable.AddInput(_mixer, 0, 1f);
+                
                 for (int i = 0; i < clips.Length; i++)
                 {
                     _mixer.AddInput(AnimationClipPlayable.Create(graph, clips[i].clip), 0);
@@ -58,9 +59,10 @@ namespace RPG.AnimationSystem
                 _clipCount = clips.Length;
                 _pointer.Set(1, 1);
                 SetPointer(0, 0);
-
-                Disable();
+                
             }
+            
+            public BlendTree2D(PlayableGraph graph, AnimParam param) : this(graph, param.blendClip, param.enterTime) { }
             
 
             public void SetPointer(Vector2 vector)
@@ -112,8 +114,7 @@ namespace RPG.AnimationSystem
                 _mixer.Play();
                 _adapterPlayable.SetTime(0f);
                 _adapterPlayable.Play();
-
-                //_animLength = ((AnimationClipPlayable)m_mixer.GetInput(0)).GetAnimationClip().length;
+                
             }
 
             public override void Disable()

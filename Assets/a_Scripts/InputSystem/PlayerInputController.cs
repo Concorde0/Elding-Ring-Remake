@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerInputController
 {
-    private PlayerInput _input;
+    private readonly PlayerInput _input;
 
     private PlayerParam _param;
     public PlayerInputController(PlayerParam param)
@@ -21,7 +21,6 @@ public class PlayerInputController
     public void Enable()
     {
         _input.Enable();
-        
     }
 
     public void Stop()

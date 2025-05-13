@@ -20,20 +20,17 @@ public class GameLoop : MonoBehaviour
             Instance = this;
         }
         
-        
-        
-        
     }
 
     private void Start()
     {
-        _player = new PlayerMotion(playerModel, animSetting);
-        
+        _player = new PlayerMotion(playerModel, animSetting);   
         _player.Start();
     }
 
     private void Update()
     {
+        Debug.Log(_player.Param.moveInput);
         _player.Update();
     }
 
@@ -45,6 +42,5 @@ public class GameLoop : MonoBehaviour
     private void OnDisable()
     {
         _player.Stop();
-        
     }
 }

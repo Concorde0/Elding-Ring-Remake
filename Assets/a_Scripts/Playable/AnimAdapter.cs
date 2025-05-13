@@ -38,6 +38,12 @@ namespace RPG.AnimationSystem
         {
             return _animBehaviour.GetEnterTime();
         }
+
+        public override void OnGraphStop(Playable playable)
+        {
+            base.OnGraphStop(playable);
+            _animBehaviour?.Stop();
+        }
     }
 
 }
