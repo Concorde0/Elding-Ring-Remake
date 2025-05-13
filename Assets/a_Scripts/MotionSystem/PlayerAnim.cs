@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using RPG.Animation;
+using RPG.AnimationSystem;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Animations;
 
-namespace RPG.Animation
+namespace RPG.AnimationSystem
 {
     
     //需要通过 AnimAdapter 来控制 AnimBehaviour 的生命周期和状态，所以要在Enable和Disable中重新调用Behaviour中的方法

@@ -438,13 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerModel: {fileID: 1414545971}
-  idleClips:
-  - {fileID: 1827226128182048838, guid: 9308426cf84547d48ba71a3019f01484, type: 3}
-  moveClips:
-  - clip: {fileID: 1827226128182048838, guid: a243e1dd992688845b2e34930c244250, type: 3}
-    pos: {x: 0, y: 0}
-  - clip: {fileID: 1827226128182048838, guid: 22038c8c63f4d3246b643a582fff9129, type: 3}
-    pos: {x: 0, y: 0}
+  animSetting: {fileID: 11400000, guid: 1fefaba27d3916042bad6da4cb3bd8f2, type: 2}
 --- !u!136 &1985486121
 CapsuleCollider:
   m_ObjectHideFlags: 0

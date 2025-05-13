@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 using UnityEngine.Playables;
 
 
-namespace RPG.Animation
+namespace RPG.AnimationSystem
 {
         [System.Serializable]
         public struct BlendClip2D
@@ -35,9 +35,7 @@ namespace RPG.Animation
             private int _pointerX;
             private int _pointerY;
 
-            public BlendTree2D(PlayableGraph graph,
-                BlendClip2D[] clips, float enterTime = 0f, float eps = 1e-5f) :
-                base(graph, enterTime)
+            public BlendTree2D(PlayableGraph graph, BlendClip2D[] clips, float enterTime = 0f, float eps = 1e-5f) : base(graph, enterTime)
             {
                 _datas = new DataPair[clips.Length];
 

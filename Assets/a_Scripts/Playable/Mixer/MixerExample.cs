@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 using UnityEngine.Animations;
 using UnityEngine.Serialization;
 
-namespace RPG.Animation
+namespace RPG.AnimationSystem
 {
     public class MixerExample : MonoBehaviour
     {

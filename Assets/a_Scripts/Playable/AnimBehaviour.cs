@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Animations;
 
-namespace RPG.Animation
+namespace RPG.AnimationSystem
 {
     //写这个 AnimBehaviour，是为了创建一个自己的动画状态逻辑系统!!
     public abstract class AnimBehaviour

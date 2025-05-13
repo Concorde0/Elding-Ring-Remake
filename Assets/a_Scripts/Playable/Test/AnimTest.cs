@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 using UnityEngine.Animations;
 
 
-namespace RPG.Animation
+namespace RPG.AnimationSystem
 {
     public class AnimTest : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-namespace RPG.Animation
+namespace RPG.AnimationSystem
 {
     [Serializable]
     public class AnimParam

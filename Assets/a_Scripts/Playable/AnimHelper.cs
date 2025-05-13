@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Animations;
 
-namespace RPG.Animation
+namespace RPG.AnimationSystem
 {
     public abstract class AnimHelper
     {
