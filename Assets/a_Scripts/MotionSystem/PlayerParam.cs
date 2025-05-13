@@ -7,9 +7,10 @@ namespace RPG.MotionSystem
 {
     
     //动画配置层
-    public class PlayerParam : MonoBehaviour
+    public class PlayerParam
     {
-    
+        public Vector2 moveInput;
+        public bool run;
     }
 }
 

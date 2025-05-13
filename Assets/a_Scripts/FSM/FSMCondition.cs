@@ -7,7 +7,7 @@ using System;
 namespace RPG.FSM
 {
     //单参数委托
-    public abstract class FSMCondition<T>
+    public class FSMCondition<T>
     {
         // ConditionHandler<T> 是一个「类型」，它代表“接收一个 T、返回 bool 的方法
         private Func<T, bool> _conditionHandle;
@@ -48,7 +48,7 @@ namespace RPG.FSM
     }
     
     //双参数委托
-    public abstract class FSMCondition<T1, T2> : FSMCondition<T1>
+    public class FSMCondition<T1, T2> : FSMCondition<T1>
     {
         private readonly Func<T1, T2, bool> _condition;
         private readonly T2 _value;

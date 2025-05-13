@@ -1,15 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Animation;
 using RPG.MotionSystem;
 using UnityEngine;
 public class GameLoop : MonoBehaviour
 {
     public Transform playerModel;
     public AnimationClip[] idleClips;
+    public BlendClip2D[] moveClips;
     
     public static GameLoop Instance;
-
+    
     private PlayerMotion _player;
     private void Awake()
     {
@@ -17,6 +19,7 @@ public class GameLoop : MonoBehaviour
         {
             Instance = this;
         }
+        
     }
 
     private void Start()
@@ -29,8 +32,13 @@ public class GameLoop : MonoBehaviour
         _player.Update();
     }
 
+    private void OnEnable()
+    {
+    }
+
     private void OnDisable()
     {
         _player.Stop();
+        
     }
 }

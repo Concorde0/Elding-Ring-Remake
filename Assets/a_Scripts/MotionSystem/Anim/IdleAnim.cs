@@ -10,7 +10,7 @@ namespace RPG.MotionSystem
 {
     public class IdleAnim : AnimBehaviour
     {
-        private Mixer _mixer;
+        private readonly Mixer _mixer;
         public IdleAnim(PlayableGraph graph, float enterTime, AnimationClip[] clips) : base(graph, enterTime)
         {
             _mixer = new Mixer(graph);

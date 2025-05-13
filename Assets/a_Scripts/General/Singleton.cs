@@ -1,39 +1,25 @@
 using UnityEngine;
 
-public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Singleton<T> where T : class,new()
 {
-    private static T instance;
+    private static T m_instance;
+    private static readonly object syslock = new object();
 
     public static T Instance
     {
         get
         {
-            if (instance == null)
+            if(m_instance == null)
             {
-                // 在场景中查找现有实例
-                instance = FindObjectOfType<T>();
-
-                // 如果还没有，就创建一个新的 GameObject 来挂载
-                if (instance == null)
+                lock(syslock)
                 {
-                    GameObject singletonObject = new GameObject(typeof(T).Name);
-                    instance = singletonObject.AddComponent<T>();
+                    if(m_instance == null)
+                    {
+                        m_instance = new T();
+                    }
                 }
             }
-            return instance;
-        }
-    }
-
-    protected virtual void Awake()
-    {
-        // 防止重复创建
-        if (instance == null)
-        {
-            instance = this as T;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
+            return m_instance;
         }
     }
 }

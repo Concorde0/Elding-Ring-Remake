@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using RPG.Animation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -11,17 +12,22 @@ namespace RPG.MotionSystem
     public class PlayerAnim
     {
         private PlayableGraph _graph;
-        private Mixer _mixer;
+        private readonly Mixer _mixer;
         //这个字典是把状态名切换成索引值，才能让mixer切换动画
-        private Dictionary<string,int> _animMap;
+        private readonly Dictionary<string,int> _animStateIndex;
+        private PlayerParam _param;
+        
         public PlayerAnim(PlayerMotion motion, AnimationClip[] clips)
         {
             _graph = PlayableGraph.Create();
             _mixer = new Mixer(_graph);
-            _animMap = new Dictionary<string, int>();
+            _animStateIndex = new Dictionary<string, int>();
+            _param = motion.Param;
             
-            var idle = new IdleAnim(_graph, 0.5f,clips);
-            AddState("Idle",idle);
+            var idleAnim = new IdleAnim(_graph, 0.5f,clips);
+            AddState("Idle",idleAnim);
+            
+            
             
             AnimHelper.SetOutput(_graph, motion.Model.GetComponent<Animator>(),_mixer);
             AnimHelper.Start(_graph);
@@ -37,13 +43,14 @@ namespace RPG.MotionSystem
         
         public void TransitionTo(string name)
         {
-           _mixer.TransitionTo(_animMap[name]); 
+           _mixer.TransitionTo(_animStateIndex[name]); 
         }
+        
 
         private void AddState(string name, AnimBehaviour anim)
         {
             _mixer.AddInput(anim);
-            _animMap.Add(name,_mixer.inputCount - 1);
+            _animStateIndex.Add(name,_mixer.inputCount - 1);
         }
         
     } 

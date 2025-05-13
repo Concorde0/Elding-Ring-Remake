@@ -66,6 +66,11 @@ namespace RPG.Animation
             graph.Play();
             behaviour.Enable();
         }
+        
+        public static ComputeShader GetComputer(string name)
+        {
+            return Object.Instantiate(Resources.Load<ComputeShader>("Compute/" + name));
+        }
     }
 }
 
