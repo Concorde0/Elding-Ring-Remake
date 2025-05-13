@@ -21,6 +21,7 @@ public class PlayerInputController
     public void Enable()
     {
         _input.Enable();
+        
     }
 
     public void Stop()

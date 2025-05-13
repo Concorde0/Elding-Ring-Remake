@@ -17,15 +17,19 @@ namespace RPG.MotionSystem
         private readonly Dictionary<string,int> _animStateIndex;
         private PlayerParam _param;
         
-        public PlayerAnim(PlayerMotion motion, AnimationClip[] clips)
+        public PlayerAnim(PlayerMotion motion, AnimSetting setting)
         {
             _graph = PlayableGraph.Create();
             _mixer = new Mixer(_graph);
             _animStateIndex = new Dictionary<string, int>();
             _param = motion.Param;
             
-            var idleAnim = new IdleAnim(_graph, 0.5f,clips);
+            var idleAnim = new IdleAnim(_graph,setting.GetParam("Idle"));
             AddState("Idle",idleAnim);
+            
+            var moveAnim = new MoveAnim(_graph, setting.GetParam("Run"));
+            AddState("Move",moveAnim);
+            
             
             
             

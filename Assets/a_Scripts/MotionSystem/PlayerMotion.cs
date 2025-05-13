@@ -10,38 +10,37 @@ namespace RPG.MotionSystem
     {
         public PlayerInputController Input{get;private set;}
         public PlayerAI AI { get; private set; }
-        // public PlayerInputController Input { get; private set; }
         public PlayerParam Param { get; private set; }
         public PlayerMotor Motor { get; private set; }
         public PlayerAnim Anim { get; private set; }
         public Transform Model { get; private set; }
 
-        public PlayerMotion(Transform model, AnimationClip[] clips)
+        public PlayerMotion(Transform model, AnimSetting setting)
         {
             Model = model;
             Param = new PlayerParam();
-            // Input = new PlayerInputController(Param);
-            Anim = new PlayerAnim(this,clips);
+            Input = new PlayerInputController(Param);
+            Anim = new PlayerAnim(this,setting);
             Motor = new PlayerMotor(this);
             AI = new PlayerAI(this);
         }
 
-        public void Enable()
+        public void Start()
         {
-            // Input.Enable();
+            Input.Enable();
         }
         
 
         public void Update()
         {
-            // Input.Update();
-            // AI.Update();
+            Input.Update();
+            AI.Update();
         }
 
         public void Stop()
         {
             Anim.Stop();
-            // Input.Stop();
+            Input.Stop();
         }
     }
 }

@@ -7,8 +7,8 @@ using UnityEngine;
 public class GameLoop : MonoBehaviour
 {
     public Transform playerModel;
-    public AnimationClip[] idleClips;
-    public BlendClip2D[] moveClips;
+    public AnimSetting animSetting;
+    
     
     public static GameLoop Instance;
     
@@ -20,11 +20,16 @@ public class GameLoop : MonoBehaviour
             Instance = this;
         }
         
+        
+        
+        
     }
 
     private void Start()
     {
-        _player = new PlayerMotion(playerModel, idleClips);
+        _player = new PlayerMotion(playerModel, animSetting);
+        
+        _player.Start();
     }
 
     private void Update()
@@ -34,6 +39,7 @@ public class GameLoop : MonoBehaviour
 
     private void OnEnable()
     {
+        
     }
 
     private void OnDisable()

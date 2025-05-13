@@ -4,33 +4,32 @@ using RPG.Animation;
 using UnityEngine;
 using UnityEngine.Playables;
 
-
-
 namespace RPG.MotionSystem
 {
-    public class IdleAnim : AnimBehaviour
+    public class MoveAnim : AnimBehaviour
     {
         private readonly Mixer _mixer;
-        public IdleAnim(PlayableGraph graph, float enterTime, AnimationClip clips) : base(graph, enterTime)
+
+        public MoveAnim(PlayableGraph graph, float enterTime, AnimationClip[] clips) : base(graph, enterTime)
         {
             _mixer = new Mixer(graph);
-            _adapterPlayable.AddInput(_mixer.GetAnimAdapterPlayable(),0,1f);
+            _adapterPlayable.AddInput(_mixer.GetAnimAdapterPlayable(), 0, 1f);
 
-            var idleAnim = new AnimUnit(graph, clips, 0.5f);
-            _mixer.AddInput(idleAnim);
+            for (int i = 0; i < clips.Length; i++)
+            {
+                var moveAnim = new AnimUnit(graph, clips[i], 0.5f);
+                _mixer.AddInput(moveAnim);
+            }
+
         }
 
-        public IdleAnim(PlayableGraph graph, AnimParam param) : this(graph, param.enterTime, param.clip)
+        public MoveAnim(PlayableGraph graph, AnimParam param) : this(graph, param.enterTime,param.clipGroup)
         {
             
         }
 
-        public override void Execute(Playable playable, FrameData info)
-        {
-            base.Execute(playable, info);
-        }
 
-        public override void Enable()
+    public override void Enable()    
         {
             base.Enable();
             

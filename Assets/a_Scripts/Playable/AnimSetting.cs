@@ -13,7 +13,7 @@ namespace RPG.Animation
             Single,
             Group,
             InfoGroup,
-            BlendClip
+            BlendClip,
         }
 
         public string name = "Anim";
@@ -32,7 +32,7 @@ namespace RPG.Animation
         public float enterTime;
     }
     
-    [CreateAssetMenu(fileName = "New Anim Setting", menuName = "GuGame/Animation/Anim Setting")]
+    [CreateAssetMenu(fileName = "New Anim Setting", menuName = "Game/Animation/Anim Setting")]
     public class AnimSetting : ScriptableObject
     {
         public List<AnimParam> animParams;
