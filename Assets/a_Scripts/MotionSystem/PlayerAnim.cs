@@ -51,6 +51,13 @@ namespace RPG.MotionSystem
         public void TransitionTo(string name)
         {
            _mixer.TransitionTo(_animStateIndex[name]); 
+           
+           
+        }
+
+        public void SetMoveAnim(float x, float y)
+        {
+            _moveAnim.SetPointer(x,y);
         }
         
 
@@ -59,6 +66,7 @@ namespace RPG.MotionSystem
             _mixer.AddInput(anim);
             _animStateIndex.Add(name,_mixer.inputCount - 1);
         }
+        
         
     } 
 }

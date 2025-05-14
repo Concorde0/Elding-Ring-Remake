@@ -16,6 +16,9 @@ public class PlayerInputController
         _input = new PlayerInput();
         _input.GamePlay.Move.performed += ctx => _param.moveInput = ctx.ReadValue<Vector2>();
         _input.GamePlay.Move.canceled += ctx => _param.moveInput = Vector2.zero;
+        
+        // _input.GamePlay.Run.performed  += _ => _param.run = true;
+        // _input.GamePlay.Run.canceled   += _ => _param.run = false;
     }
     
     public void Enable()

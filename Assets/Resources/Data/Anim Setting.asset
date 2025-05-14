@@ -35,6 +35,6 @@ MonoBehaviour:
     - clip: {fileID: 1827226128182048838, guid: 22038c8c63f4d3246b643a582fff9129, type: 3}
       pos: {x: 0, y: -1}
     - clip: {fileID: 1827226128182048838, guid: 51b06413fddc78740b3cc7588fc49a98, type: 3}
-      pos: {x: -1, y: 1}
+      pos: {x: -1, y: 0}
     - clip: {fileID: 1827226128182048838, guid: d6df87a29010ada4d81d43fdc2ba87a0, type: 3}
-      pos: {x: 1, y: -1}
+      pos: {x: 1, y: 0}

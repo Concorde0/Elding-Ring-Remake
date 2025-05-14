@@ -35,7 +35,7 @@ namespace RPG.MotionSystem
         {
             //TODO:需要切换多种移动的动画逻辑
             _anim.TransitionTo("Move");
-            
+            _anim.SetMoveAnim(input.x, input.y);
         }
     }
 }

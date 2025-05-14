@@ -26,16 +26,24 @@ namespace RPG.MotionSystem
             
             
             
-            var moveInput = new FSMCondition<PlayerMotion>(m => m.Param.moveInput.sqrMagnitude >= 0.01f);
+            // var moveInput = new FSMCondition<PlayerMotion>(m => m.Param.moveInput.sqrMagnitude >= 0.01f);
+            // idle.AddCondition(moveInput,"Move");
+            // move.AddCondition(!moveInput,"Idle");
             
-            idle.AddCondition(moveInput,"Move");
-            move.AddCondition(!moveInput,"Idle");
+            var moveCondition = new CompoundCondition<PlayerMotion>()
+                .AddEnterCondition(m => m.Param.moveInput.sqrMagnitude >= 0.1f) // 进入条件：输入强度 > 0.1
+                .AddExitCondition(m => m.Param.moveInput.sqrMagnitude < 0.05f)   // 退出条件：输入强度 < 0.05
+                .Build();
+            var moveFSMCondition = new FSMCondition<PlayerMotion>(moveCondition);
+            idle.AddCondition(moveFSMCondition,"Move");
+            move.AddCondition(new FSMCondition<PlayerMotion>(m => !moveCondition(m)),"Idle");
             
         }
 
         public void Update()
         {
             _fsm.Update();
+            
         }
     }
 }

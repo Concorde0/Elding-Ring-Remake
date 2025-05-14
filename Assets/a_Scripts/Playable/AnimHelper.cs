@@ -70,6 +70,7 @@ namespace RPG.AnimationSystem
         public static ComputeShader GetComputer(string name)
         {
             return Object.Instantiate(Resources.Load<ComputeShader>("Compute/" + name));
+            
         }
     }
 }

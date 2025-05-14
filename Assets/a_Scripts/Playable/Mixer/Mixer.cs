@@ -186,7 +186,7 @@ namespace RPG.AnimationSystem
             }
         }
 
-        private void SetWeight(int index, float weight)
+        public void SetWeight(int index, float weight)
         {
             if (index >= 0 && index < _mixer.GetInputCount())
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
+using UnityEngine.Rendering;
 
 
 namespace RPG.AnimationSystem
@@ -18,7 +19,7 @@ namespace RPG.AnimationSystem
         {
             private struct DataPair
             {
-                public float x;
+                public float x; 
                 public float y;
                 public float output;
             }
@@ -37,6 +38,7 @@ namespace RPG.AnimationSystem
 
             public BlendTree2D(PlayableGraph graph, BlendClip2D[] clips, float enterTime = 0f, float eps = 1e-5f) : base(graph, enterTime)
             {
+                
                 _datas = new DataPair[clips.Length];
 
                 _mixer = AnimationMixerPlayable.Create(graph);
@@ -72,6 +74,8 @@ namespace RPG.AnimationSystem
 
             public void SetPointer(float x, float y)
             {
+                
+                
                 if (_pointer.x == x && _pointer.y == y)
                 {
                     return;
@@ -84,8 +88,14 @@ namespace RPG.AnimationSystem
                 _computeShader.SetFloat(_pointerY, y);
 
                 _computeBuffer.SetData(_datas);
-                _computeShader.Dispatch(_kernel, _clipCount, 1, 1);
+                
+                // _computeShader.Dispatch(_kernel, _clipCount, 1, 1);
+                int threadGroupsX = Mathf.CeilToInt(_clipCount / 16.0f);
+                _computeShader.Dispatch(_kernel, threadGroupsX, 1, 1);
+                
                 _computeBuffer.GetData(_datas);
+                
+                
                 for (i = 0; i < _clipCount; i++)
                 {
                     _total += _datas[i].output;
@@ -93,7 +103,9 @@ namespace RPG.AnimationSystem
 
                 for (i = 0; i < _clipCount; i++)
                 {
-                    _mixer.SetInputWeight(i, _datas[i].output / _total);
+                    // _mixer.SetInputWeight(i, _datas[i].output / _total);
+                    float normalizedWeight = ( _total > 0) ? _datas[i].output /  _total : 0;
+                    _mixer.SetInputWeight(i, normalizedWeight);
                 }
 
                 _total = 0f;
