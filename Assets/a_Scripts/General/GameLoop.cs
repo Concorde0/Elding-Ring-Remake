@@ -30,7 +30,6 @@ public class GameLoop : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_player.Param.moveInput);
         _player.Update();
     }
 
