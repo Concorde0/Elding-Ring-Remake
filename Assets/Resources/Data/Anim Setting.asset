@@ -23,7 +23,7 @@ MonoBehaviour:
     blendClip: []
   - name: Move
     type: 3
-    enterTime: 0.5
+    enterTime: 0.2
     clip: {fileID: 0}
     clipGroup: []
     infoGroup: []

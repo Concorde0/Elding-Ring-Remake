@@ -35,7 +35,6 @@ namespace RPG.AnimationSystem
             private int _kernel;
             private int _pointerX;
             private int _pointerY;
-
             public BlendTree2D(PlayableGraph graph, BlendClip2D[] clips, float enterTime = 0f, float eps = 1e-5f) : base(graph, enterTime)
             {
                 
@@ -89,7 +88,6 @@ namespace RPG.AnimationSystem
 
                 _computeBuffer.SetData(_datas);
                 
-                // _computeShader.Dispatch(_kernel, _clipCount, 1, 1);
                 int threadGroupsX = Mathf.CeilToInt(_clipCount / 16.0f);
                 _computeShader.Dispatch(_kernel, threadGroupsX, 1, 1);
                 
@@ -103,7 +101,6 @@ namespace RPG.AnimationSystem
 
                 for (i = 0; i < _clipCount; i++)
                 {
-                    // _mixer.SetInputWeight(i, _datas[i].output / _total);
                     float normalizedWeight = ( _total > 0) ? _datas[i].output /  _total : 0;
                     _mixer.SetInputWeight(i, normalizedWeight);
                 }
@@ -146,6 +143,8 @@ namespace RPG.AnimationSystem
                 base.Stop();
                 _computeBuffer.Dispose();
             }
+            
+            
         }
 }
 

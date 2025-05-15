@@ -21,7 +21,6 @@ namespace RPG.MotionSystem
         public PlayerAnim(PlayerMotion motion, AnimSetting setting)
         {
             
-            
             _graph = PlayableGraph.Create();
             
             _mixer = new Mixer(_graph);

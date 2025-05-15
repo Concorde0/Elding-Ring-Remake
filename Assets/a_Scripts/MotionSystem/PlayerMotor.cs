@@ -25,7 +25,6 @@ namespace RPG.MotionSystem
             _rigidbody = _model.GetComponent<Rigidbody>();
             
         }
-        
         public void Idle()
         {
             _anim.TransitionTo("Idle");
@@ -33,7 +32,6 @@ namespace RPG.MotionSystem
 
         public void Move(Vector2 input)
         {
-            //TODO:需要切换多种移动的动画逻辑
             _anim.TransitionTo("Move");
             _anim.SetMoveAnim(input.x, input.y);
         }
