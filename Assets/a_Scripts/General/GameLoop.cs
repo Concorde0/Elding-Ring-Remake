@@ -38,6 +38,11 @@ public class GameLoop : MonoBehaviour
         Debug.Log("Animator.deltaPosition: " + _animator.deltaPosition);
     }
 
+    private void FixedUpdate()
+    {
+        _player.FixedUpdate();
+    }
+
     private void OnEnable()
     {
         

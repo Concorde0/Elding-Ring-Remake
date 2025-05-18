@@ -66,6 +66,11 @@ namespace RPG.MotionSystem
             _animStateIndex.Add(name,_mixer.inputCount - 1);
         }
         
+        public void EvaluateGraph(float deltaTime)
+        {
+            _graph.Evaluate(deltaTime); // 非常重要
+        }
+
         
     } 
 }

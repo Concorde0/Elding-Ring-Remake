@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -35,6 +36,14 @@ namespace RPG.MotionSystem
             _anim.TransitionTo("Move");
             _anim.SetMoveAnim(input.x, input.y);
         }
+        
+        public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot)
+        {
+            // 简单实现：直接叠加到角色Transform上
+            _model.position += (Vector3)deltaPos;
+            _model.rotation = math.mul(_model.rotation, deltaRot);
+        }
+
     }
 }
 
