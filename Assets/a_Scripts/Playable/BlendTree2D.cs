@@ -123,6 +123,7 @@ namespace RPG.AnimationSystem
         /// </summary>
         private void ComputeWeights(Vector2 pointer)
         {
+            // 1) 让 ComputeShader 写出 raw outputs
             _computeShader.SetFloat(_pointerXId, pointer.x);
             _computeShader.SetFloat(_pointerYId, pointer.y);
             _computeBuffer.SetData(_dataArray);
@@ -131,11 +132,36 @@ namespace RPG.AnimationSystem
             _computeShader.Dispatch(_kernel, groups, 1, 1);
             _computeBuffer.GetData(_dataArray);
 
-            // 归一化
-            float sum = 0f;
-            for (int i = 0; i < _clipCount; i++) sum += _dataArray[i].output;
+            // 2) 找到 output 值最顶的三个索引
+            //    我们先把 (index, output) 收集到列表里：
+            var list = new List<(int idx, float val)>(_clipCount);
             for (int i = 0; i < _clipCount; i++)
-                _targetWeights[i] = sum > 0 ? _dataArray[i].output / sum : 0f;
+                list.Add((i, _dataArray[i].output));
+
+            // 排一下，降序
+            list.Sort((a,b) => b.val.CompareTo(a.val));
+
+            // 取前三（如果少于3，就取全部）
+            int take = Math.Min(3, _clipCount);
+            var topIndices = new HashSet<int>();
+            for (int i = 0; i < take; i++)
+                topIndices.Add(list[i].idx);
+
+            // 3) 清零其它通道的 raw output，并计算 these 三个的总和
+            float sum = 0f;
+            for (int i = 0; i < _clipCount; i++)
+            {
+                if (topIndices.Contains(i))
+                    sum += _dataArray[i].output;
+                else
+                    _dataArray[i].output = 0f;
+            }
+
+            // 4) 最后归一化，只对三条通道赋权重
+            for (int i = 0; i < _clipCount; i++)
+                _targetWeights[i] = (sum > 0f && _dataArray[i].output > 0f)
+                    ? _dataArray[i].output / sum
+                    : 0f;
         }
 
         private void ApplyWeights(float[] weights)
