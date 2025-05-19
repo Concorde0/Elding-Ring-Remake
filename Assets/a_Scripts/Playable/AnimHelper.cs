@@ -20,7 +20,7 @@ namespace RPG.AnimationSystem
         public static void Start(PlayableGraph graph)
         {
             GetAdapter(graph.GetOutputByType<AnimationPlayableOutput>(0).GetSourcePlayable()).Enable();
-            graph.Play();
+            // graph.Play();
         }
         
         //GetInput(int) return 当前索引的Playable

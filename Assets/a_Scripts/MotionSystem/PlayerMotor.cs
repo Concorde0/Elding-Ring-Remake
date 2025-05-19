@@ -14,7 +14,6 @@ namespace RPG.MotionSystem
         private readonly PlayerAnim _anim;
 
         private Transform _model;
-        private Rigidbody _rigidbody;
         private PlayerParam _param;
         
 
@@ -23,7 +22,6 @@ namespace RPG.MotionSystem
             _anim = motion.Anim;
             _param = motion.Param;
             _model = motion.Model;
-            _rigidbody = _model.GetComponent<Rigidbody>();
             
         }
         public void Idle()

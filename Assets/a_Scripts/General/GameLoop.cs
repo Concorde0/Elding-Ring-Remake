@@ -13,7 +13,6 @@ public class GameLoop : MonoBehaviour
     public static GameLoop Instance;
     
     private PlayerMotion _player;
-    private Animator _animator;
     
     private void Awake()
     {
@@ -22,7 +21,6 @@ public class GameLoop : MonoBehaviour
             Instance = this;
         }
         
-        _animator = playerModel.GetComponent<Animator>();
       
     }
 
@@ -35,7 +33,6 @@ public class GameLoop : MonoBehaviour
     private void Update()
     {
         _player.Update();
-        Debug.Log("Animator.deltaPosition: " + _animator.deltaPosition);
     }
 
     private void FixedUpdate()

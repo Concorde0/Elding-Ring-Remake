@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RPG.AnimationSystem;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Playables;
 
 
@@ -68,7 +69,8 @@ namespace RPG.MotionSystem
         
         public void EvaluateGraph(float deltaTime)
         {
-            _graph.Evaluate(deltaTime); // 非常重要
+            _graph.Evaluate(deltaTime); 
+            Debug.Log($"[Anim] EvaluateGraph called with deltaTime = {deltaTime} at time = {Time.time}");
         }
 
         

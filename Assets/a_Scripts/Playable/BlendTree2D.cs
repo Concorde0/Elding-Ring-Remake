@@ -1,152 +1,153 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.Playables;
-using UnityEngine.Rendering;
-
+using UnityEngine.Animations;
 
 namespace RPG.AnimationSystem
 {
-        [System.Serializable]
-        public struct BlendClip2D
+    [Serializable]
+    public struct BlendClip2D
+    {
+        public AnimationClip clip;
+        public Vector2 pos;
+    }
+
+    public class BlendTree2D : AnimBehaviour
+    {
+        private AnimationMixerPlayable _mixer;
+        private int _clipCount;
+
+        // 平滑过渡字段
+        private float[] _prevWeights;
+        private float[] _targetWeights;
+        private float[] _weightSpeed;
+        private float   _blendTime = 0.1f;
+        private float   _timeToNext;
+
+        // ComputeShader 相关
+        private ComputeShader _computeShader;
+        private ComputeBuffer _computeBuffer;
+        private int _kernel;
+        private int _pointerXId;
+        private int _pointerYId;
+        private struct DataPair { public float x, y, output; }
+        private DataPair[] _dataArray;
+
+        public BlendTree2D(PlayableGraph graph, BlendClip2D[] clips, float enterTime = 0f)
+            : base(graph, enterTime)
         {
-            public AnimationClip clip;
-            public Vector2 pos;
+            _clipCount = clips.Length;
+
+            // 初始化数组
+            _prevWeights   = new float[_clipCount];
+            _targetWeights = new float[_clipCount];
+            _weightSpeed   = new float[_clipCount];
+            _dataArray     = new DataPair[_clipCount];
+
+            // 初始化 ComputeShader
+            _computeShader = AnimHelper.GetComputer("Blend2D");
+            _computeBuffer = new ComputeBuffer(_clipCount, sizeof(float)*3);
+            _kernel = _computeShader.FindKernel("Compute");
+            _pointerXId = Shader.PropertyToID("pointerX");
+            _pointerYId = Shader.PropertyToID("pointerY");
+            _computeShader.SetFloat("eps", 1e-5f);
+            _computeShader.SetBuffer(_kernel, "dataBuffer", _computeBuffer);
+
+            // 创建 Mixer
+            _mixer = AnimationMixerPlayable.Create(graph, 0);
+            _adapterPlayable.AddInput(_mixer, 0, 1f);
+
+            // 填充剪辑和采样点
+            for (int i = 0; i < _clipCount; i++)
+            {
+                var c = clips[i];
+                _dataArray[i].x = c.pos.x;
+                _dataArray[i].y = c.pos.y;
+                _dataArray[i].output = 0f;
+
+                var clipPlayable = AnimationClipPlayable.Create(graph, c.clip);
+                _mixer.AddInput(clipPlayable, 0, 0f);
+            }
+
+            // 初始权重
+            ComputeWeights(Vector2.zero);
+            Array.Copy(_targetWeights, _prevWeights, _clipCount);
+            ApplyWeights(_prevWeights);
+        }
+        public BlendTree2D(PlayableGraph graph, AnimParam param) : this(graph, param.blendClip, param.enterTime) { }
+
+        /// <summary>
+        /// 设置新的二维指针(x,y)，开始平滑过渡
+        /// </summary>
+        public void SetPointer(float x, float y)
+        {
+            // 缓存当前权重
+            for (int i = 0; i < _clipCount; i++)
+                _prevWeights[i] = _mixer.GetInputWeight(i);
+
+            // 计算目标权重
+            ComputeWeights(new Vector2(x, y));
+
+            // 计算速率
+            _timeToNext = _blendTime;
+            for (int i = 0; i < _clipCount; i++)
+                _weightSpeed[i] = (_targetWeights[i] - _prevWeights[i]) / _blendTime;
         }
 
-        public class BlendTree2D : AnimBehaviour
+        public override void Execute(Playable playable, FrameData info)
         {
-            private struct DataPair
+            base.Execute(playable, info);
+            if (!enable) return;
+
+            if (_timeToNext > 0f)
             {
-                public float x; 
-                public float y;
-                public float output;
-            }
+                float dt = (float)info.deltaTime;
+                _timeToNext -= dt;
 
-            private AnimationMixerPlayable _mixer;
-            private Vector2 _pointer;
-            private float _total;
-            private int _clipCount;
-
-            private ComputeShader _computeShader;
-            private ComputeBuffer _computeBuffer;
-            private DataPair[] _datas;
-            private int _kernel;
-            private int _pointerX;
-            private int _pointerY;
-            public BlendTree2D(PlayableGraph graph, BlendClip2D[] clips, float enterTime = 0f, float eps = 1e-5f) : base(graph, enterTime)
-            {
-                
-                _datas = new DataPair[clips.Length];
-
-                _mixer = AnimationMixerPlayable.Create(graph);
-                _adapterPlayable.AddInput(_mixer, 0, 1f);
-                
-                for (int i = 0; i < clips.Length; i++)
-                {
-                    _mixer.AddInput(AnimationClipPlayable.Create(graph, clips[i].clip), 0);
-                    _datas[i].x = clips[i].pos.x;
-                    _datas[i].y = clips[i].pos.y;
-                }
-
-                _computeShader = AnimHelper.GetComputer("Blend2D");
-                _computeBuffer = new ComputeBuffer(clips.Length, 12);
-                _kernel = _computeShader.FindKernel("Compute");
-                _computeShader.SetBuffer(_kernel, "dataBuffer", _computeBuffer);
-                _computeShader.SetFloat("eps", eps);
-                _pointerX = Shader.PropertyToID("pointerX");
-                _pointerY = Shader.PropertyToID("pointerY");
-                _clipCount = clips.Length;
-                _pointer.Set(1, 1);
-                SetPointer(0, 0);
-                
-            }
-            
-            public BlendTree2D(PlayableGraph graph, AnimParam param) : this(graph, param.blendClip, param.enterTime) { }
-            
-
-            public void SetPointer(Vector2 vector)
-            {
-                SetPointer(vector.x, vector.y);
-            }
-
-            public void SetPointer(float x, float y)
-            {
-                
-                
-                if (_pointer.x == x && _pointer.y == y)
-                {
-                    return;
-                }
-
-                _pointer.Set(x, y);
-
-                int i;
-                _computeShader.SetFloat(_pointerX, x);
-                _computeShader.SetFloat(_pointerY, y);
-
-                _computeBuffer.SetData(_datas);
-                
-                int threadGroupsX = Mathf.CeilToInt(_clipCount / 16.0f);
-                _computeShader.Dispatch(_kernel, threadGroupsX, 1, 1);
-                
-                _computeBuffer.GetData(_datas);
-                
-                
-                for (i = 0; i < _clipCount; i++)
-                {
-                    _total += _datas[i].output;
-                }
-
-                for (i = 0; i < _clipCount; i++)
-                {
-                    float normalizedWeight = ( _total > 0) ? _datas[i].output /  _total : 0;
-                    _mixer.SetInputWeight(i, normalizedWeight);
-                }
-
-                _total = 0f;
-            }
-
-            public override void Enable()
-            {
-                base.Enable();
-
-                SetPointer(0, 0);
+                // 插值权重
                 for (int i = 0; i < _clipCount; i++)
                 {
-                    _mixer.GetInput(i).Play();
-                    _mixer.GetInput(i).SetTime(0f);
+                    float w = _mixer.GetInputWeight(i) + _weightSpeed[i] * dt;
+                    _mixer.SetInputWeight(i, Mathf.Clamp01(w));
                 }
 
-                _mixer.SetTime(0f);
-                _mixer.Play();
-                _adapterPlayable.SetTime(0f);
-                _adapterPlayable.Play();
-                
+                // 结束时强制设置目标权重
+                if (_timeToNext <= 0f)
+                    ApplyWeights(_targetWeights);
             }
-
-            public override void Disable()
-            {
-                base.Disable();
-                for (int i = 0; i < _clipCount; i++)
-                {
-                    _mixer.GetInput(i).Pause();
-                }
-
-                _mixer.Pause();
-                _adapterPlayable.Pause();
-            }
-
-            public override void Stop()
-            {
-                base.Stop();
-                _computeBuffer.Dispose();
-            }
-            
-            
         }
+
+        /// <summary>
+        /// 调用 ComputeShader 计算原始逆距离权重并归一化
+        /// </summary>
+        private void ComputeWeights(Vector2 pointer)
+        {
+            _computeShader.SetFloat(_pointerXId, pointer.x);
+            _computeShader.SetFloat(_pointerYId, pointer.y);
+            _computeBuffer.SetData(_dataArray);
+
+            int groups = Mathf.CeilToInt(_clipCount / 16f);
+            _computeShader.Dispatch(_kernel, groups, 1, 1);
+            _computeBuffer.GetData(_dataArray);
+
+            // 归一化
+            float sum = 0f;
+            for (int i = 0; i < _clipCount; i++) sum += _dataArray[i].output;
+            for (int i = 0; i < _clipCount; i++)
+                _targetWeights[i] = sum > 0 ? _dataArray[i].output / sum : 0f;
+        }
+
+        private void ApplyWeights(float[] weights)
+        {
+            for (int i = 0; i < _clipCount; i++)
+                _mixer.SetInputWeight(i, weights[i]);
+        }
+
+        public override void Stop()
+        {
+            base.Stop();
+            _computeBuffer.Dispose();
+        }
+    }
 }
-
-
-

@@ -40,6 +40,8 @@ namespace RPG.MotionSystem
         {
             Input.Update();
             AI.Update();
+            
+            
         }
 
         public void FixedUpdate()
@@ -48,7 +50,12 @@ namespace RPG.MotionSystem
             Anim.EvaluateGraph(Time.fixedDeltaTime);
             RootMotion.RecordAndSchedule(0, Model);
             
-            RootMotion.CompleteAndApply((index, deltaPos, deltaRot) => { Motor.ApplyRootMotion(deltaPos, deltaRot);});
+            RootMotion.CompleteAndApply((index, deltaPos, deltaRot) =>
+            {
+                Motor.ApplyRootMotion(deltaPos, deltaRot);
+            });
+            Debug.Log("Evaluate: " + Time.fixedDeltaTime);
+
         }
 
         public void Stop()
