@@ -123,41 +123,36 @@ namespace RPG.AnimationSystem
         /// </summary>
         private void ComputeWeights(Vector2 pointer)
         {
-            // 1) 让 ComputeShader 写出 raw outputs
+            // 1) Dispatch ComputeShader
             _computeShader.SetFloat(_pointerXId, pointer.x);
             _computeShader.SetFloat(_pointerYId, pointer.y);
             _computeBuffer.SetData(_dataArray);
-
             int groups = Mathf.CeilToInt(_clipCount / 16f);
             _computeShader.Dispatch(_kernel, groups, 1, 1);
             _computeBuffer.GetData(_dataArray);
 
-            // 2) 找到 output 值最顶的三个索引
-            //    我们先把 (index, output) 收集到列表里：
+            // 2) 把 (索引, output) 收集到列表，按 output 降序排序
             var list = new List<(int idx, float val)>(_clipCount);
             for (int i = 0; i < _clipCount; i++)
                 list.Add((i, _dataArray[i].output));
+            list.Sort((a, b) => b.val.CompareTo(a.val));
 
-            // 排一下，降序
-            list.Sort((a,b) => b.val.CompareTo(a.val));
-
-            // 取前三（如果少于3，就取全部）
-            int take = Math.Min(3, _clipCount);
-            var topIndices = new HashSet<int>();
+            // 3) 只取前两个 highest 输出
+            int take = Math.Min(2, _clipCount);
+            var top2 = new HashSet<int>();
             for (int i = 0; i < take; i++)
-                topIndices.Add(list[i].idx);
+                top2.Add(list[i].idx);
 
-            // 3) 清零其它通道的 raw output，并计算 these 三个的总和
+            // 4) 清除其它通道的 output，并累加 Top2 的总和
             float sum = 0f;
             for (int i = 0; i < _clipCount; i++)
             {
-                if (topIndices.Contains(i))
-                    sum += _dataArray[i].output;
-                else
+                if (!top2.Contains(i))
                     _dataArray[i].output = 0f;
+                sum += _dataArray[i].output;
             }
 
-            // 4) 最后归一化，只对三条通道赋权重
+            // 5) 最后对这两个通道做归一化赋给 _targetWeights
             for (int i = 0; i < _clipCount; i++)
                 _targetWeights[i] = (sum > 0f && _dataArray[i].output > 0f)
                     ? _dataArray[i].output / sum
