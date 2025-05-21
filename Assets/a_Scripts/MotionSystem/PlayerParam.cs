@@ -11,6 +11,7 @@ namespace RPG.MotionSystem
     {
         public Vector2 moveInput;
         public bool run;
+        public bool isLocked;
     }
 }
 

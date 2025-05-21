@@ -27,12 +27,12 @@ namespace RPG.MotionSystem
             _mixer = new Mixer(_graph);
             _animStateIndex = new Dictionary<string, int>();
             
-            var idleAnim = new IdleAnim(_graph,setting.GetParam("Idle"));
-            AddState("Idle",idleAnim);
+            var idleAnim = new IdleAnim(_graph,setting.GetParam(StringConstants.AnimName.Idle));
+            AddState(StringConstants.AnimName.Idle,idleAnim);
             
             
-            _moveAnim = new BlendTree2D(_graph,setting.GetParam("Move"));
-            AddState("Move",_moveAnim);
+            _moveAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.Move));
+            AddState(StringConstants.AnimName.Move,_moveAnim);
             
             
             
@@ -51,8 +51,6 @@ namespace RPG.MotionSystem
         public void TransitionTo(string name)
         {
            _mixer.TransitionTo(_animStateIndex[name]); 
-           
-           
         }
 
         public void SetMoveAnim(float x, float y)
@@ -70,7 +68,7 @@ namespace RPG.MotionSystem
         public void EvaluateGraph(float deltaTime)
         {
             _graph.Evaluate(deltaTime); 
-            Debug.Log($"[Anim] EvaluateGraph called with deltaTime = {deltaTime} at time = {Time.time}");
+            // Debug.Log($"[Anim] EvaluateGraph called with deltaTime = {deltaTime} at time = {Time.time}");
         }
 
         

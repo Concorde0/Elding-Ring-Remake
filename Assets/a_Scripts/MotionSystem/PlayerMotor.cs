@@ -26,12 +26,24 @@ namespace RPG.MotionSystem
         }
         public void Idle()
         {
-            _anim.TransitionTo("Idle");
+            _anim.TransitionTo(StringConstants.AnimName.Idle);
         }
 
         public void Move(Vector2 input)
         {
-            _anim.TransitionTo("Move");
+            if (_param.isLocked)
+            {
+                _anim.TransitionTo(StringConstants.AnimName.LockedMove);
+            }
+            else if(_param.run)
+            {
+                _anim.TransitionTo(StringConstants.AnimName.Run);
+            }
+            else
+            {
+                _anim.TransitionTo(StringConstants.AnimName.Move);
+            }
+            
             _anim.SetMoveAnim(input.x, input.y);
         }
         

@@ -38,7 +38,7 @@ namespace RPG.MotionSystem
 
         public void Update()
         {
-            Input.Update();
+            // Input.Update();
             AI.Update();
             
             
@@ -54,7 +54,7 @@ namespace RPG.MotionSystem
             {
                 Motor.ApplyRootMotion(deltaPos, deltaRot);
             });
-            Debug.Log("Evaluate: " + Time.fixedDeltaTime);
+            // Debug.Log("Evaluate: " + Time.fixedDeltaTime);
 
         }
 
