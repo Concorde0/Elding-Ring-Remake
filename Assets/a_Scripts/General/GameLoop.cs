@@ -8,8 +8,7 @@ public class GameLoop : MonoBehaviour
 {
     public Transform playerModel;
     public AnimSetting animSetting;
-    
-    
+    public CameraResources camera;
     public static GameLoop Instance;
     
     private PlayerMotion _player;
@@ -26,7 +25,7 @@ public class GameLoop : MonoBehaviour
 
     private void Start()
     {
-        _player = new PlayerMotion(playerModel,animSetting);   
+        _player = new PlayerMotion(playerModel, animSetting, camera);   
         _player.Start();
     }
 

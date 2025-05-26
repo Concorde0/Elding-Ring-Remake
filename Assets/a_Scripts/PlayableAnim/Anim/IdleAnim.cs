@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Playables;
 
 
-
 namespace RPG.MotionSystem
 {
     public class IdleAnim : AnimBehaviour

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using JobSystem;
 using RPG.AnimationSystem;
+using RPG.CameraSystem;
+using RPG.InputSystem;
 using UnityEngine;
 
 namespace RPG.MotionSystem
@@ -9,16 +12,17 @@ namespace RPG.MotionSystem
     //核心编排层
     public class PlayerMotion
     {
-        public PlayerInputController Input{get;private set;}
+        public PlayerInputController Input{ get; private set; }
         public PlayerAI AI { get; private set; }
         public PlayerParam Param { get; private set; }
         public PlayerMotor Motor { get; private set; }
         public PlayerAnim Anim { get; private set; }
         public Transform Model { get; private set; }
+        public PlayerCamera Camera { get; private set; }
         
         public RootMotionJobHandler RootMotion { get; private set; }
 
-        public PlayerMotion(Transform model, AnimSetting setting)
+        public PlayerMotion(Transform model, AnimSetting setting, CameraResources camera)
         {
             Model = model;
             Param = new PlayerParam();
@@ -28,11 +32,13 @@ namespace RPG.MotionSystem
             AI = new PlayerAI(this);
             //TODO：这里RootMotion的参数代表了需要处理几个角色的根运动，目前只有Player所以简单记作 1
             RootMotion = new RootMotionJobHandler(1);
+            Camera = new PlayerCamera(camera, Param);
         }
 
         public void Start()
         {
             Input.Enable();
+            Camera.Start();
         }
         
 
@@ -40,7 +46,7 @@ namespace RPG.MotionSystem
         {
             // Input.Update();
             AI.Update();
-            
+            Camera.Update();
             
         }
 
@@ -54,7 +60,7 @@ namespace RPG.MotionSystem
             {
                 Motor.ApplyRootMotion(deltaPos, deltaRot);
             });
-            // Debug.Log("Evaluate: " + Time.fixedDeltaTime);
+           
 
         }
 
