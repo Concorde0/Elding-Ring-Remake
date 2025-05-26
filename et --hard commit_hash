@@ -1,0 +1,28 @@
+[33m31a199c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m feat:初步完成了CamreaSystem
+[33me2f3e0c[m feat: 新增了字符串变量化的脚本，给几个基础的移动做了定义
+[33m63ae5f2[m fix:fix multiple
+[33m249ec10[m feat:Changing BlendTree2D's mixing logic for multiple inputs
+[33m8e4557b[m feat: Add weight adjustment logic for animations in blnendTree2D,fix animation playback speed anomalies
+[33mf8168d7[m fix:Finished jobsystem manual calculation of deltapostion
+[33mcd7ed68[m add-install Collections to use Job
+[33m19fd5b3[m delete CompoundCondition,Use of old FSMCondition
+[33mcb80a25[m fix-fixed playable,BlendTree2D and fixed the state entry condition of move and Idle,add CompoundCondition
+[33m3888b50[m fix-rename compute
+[33mecc0880[m add-Add compute to use the GPU to compute the parameters in BlendTree2D
+[33m125772d[m add-An AnimSetting is created to manage the animation parameters.
+[33m4140249[m add-AnimSetting and BlendTree2D, the MotionSystem is working
+[33m4177047[m add- idle test about MotionSystem
+[33m7429322[m add-Start MotionSystem
+[33m43fbbbe[m add- FSM is done
+[33meffc2ab[m add-EventSystem
+[33ma299bdc[m add- new inputsystem base
+[33m787ae40[m delete- abandon PlayerInputSystem
+[33m643cbe1[m ADD-add comboKey to inputsystem
+[33mdb973e1[m add-Inputsystem and GameLoop
+[33m0b2e1e8[m add-playable is Done,Start FSM
+[33m3e98121[m add-bsice Playable framework
+[33m192b493[m study-playable studying2
+[33m2f2bf43[m add-Studying playable
+[33m98ba187[m add-install playable visual graph
+[33mb1dfc77[m add-packageManager and some Arts
+[33mba23144[m Initial commit
