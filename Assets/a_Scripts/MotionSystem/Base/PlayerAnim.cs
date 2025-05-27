@@ -17,7 +17,9 @@ namespace RPG.MotionSystem
         private readonly Mixer _mixer;
         //这个字典是把状态名切换成索引值，才能让mixer切换动画
         private readonly Dictionary<string,int> _animStateIndex;
+        private BlendTree2D _lockedMoveAnim;
         private BlendTree2D _moveAnim;
+        private BlendTree2D _runAnim;
         
         public PlayerAnim(PlayerMotion motion, AnimSetting setting)
         {
@@ -31,8 +33,14 @@ namespace RPG.MotionSystem
             AddState(StringConstants.AnimName.Idle,idleAnim);
             
             
+            _lockedMoveAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.LockedMove));
+            AddState(StringConstants.AnimName.LockedMove,_lockedMoveAnim);
+            
             _moveAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.Move));
             AddState(StringConstants.AnimName.Move,_moveAnim);
+            
+            _runAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.Run));
+            AddState(StringConstants.AnimName.Run,_runAnim);
             
             
             
@@ -55,7 +63,9 @@ namespace RPG.MotionSystem
 
         public void SetMoveAnim(float x, float y)
         {
+            _lockedMoveAnim.SetPointer(x,y);
             _moveAnim.SetPointer(x,y);
+            _runAnim.SetPointer(x,y);
         }
         
 
