@@ -32,6 +32,7 @@ namespace RPG.InputSystem
             _input.GamePlay.Lock.performed += _ => _param.isLocked = !_param.isLocked;
         
             //TODO：这里把翻滚状态设为true之后，需要在对应的单独clip中播放完动画后把isBoil转换为false 
+            //TODO: 翻滚和Run是同一个按键，需要检测按下时间来确定是翻滚还是Run
             _input.GamePlay.Boil.performed += _ => _param.isBoil = true;
         
         }

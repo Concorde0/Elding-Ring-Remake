@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582030511}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07600083, y: 0.000000007429033, z: -5.662495e-10, w: 0.9971078}
+  m_LocalRotation: {x: 0.07600083, y: 0.000000014858066, z: -0.0000000011325, w: 0.9971078}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -537,6 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cinemachineFreeLook: {fileID: 636811659}
+  cameraTransform: {fileID: 963194228}
 --- !u!4 &770556801
 Transform:
   m_ObjectHideFlags: 0
@@ -2737,7 +2738,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850529936}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16730522, y: 0.0000000103297015, z: -0.0000000017529193, w: 0.9859052}
+  m_LocalRotation: {x: 0.16730519, y: -0.000000013851006, z: 0.0000000023504756, w: 0.9859052}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2764,7 +2765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerModel: {fileID: 1414545971}
   animSetting: {fileID: 11400000, guid: 1fefaba27d3916042bad6da4cb3bd8f2, type: 2}
-  camera: {fileID: 770556800}
+  cameraResources: {fileID: 770556800}
 --- !u!136 &1985486121
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2886,7 +2887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043854603}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1883344, y: -0.000000011785363, z: 0.0000000022600335, w: 0.98210496}
+  m_LocalRotation: {x: 0.18833442, y: -0.000000011331952, z: 0.0000000021730848, w: 0.98210496}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

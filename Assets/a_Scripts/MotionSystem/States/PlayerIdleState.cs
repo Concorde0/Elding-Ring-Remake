@@ -9,8 +9,7 @@ namespace RPG.MotionSystem.States
     {
         public override void OnEnter(PlayerMotion owner)
         {
-            base.OnEnter(owner);
-            
+            owner.Motor.Idle();
         }
     }
 }

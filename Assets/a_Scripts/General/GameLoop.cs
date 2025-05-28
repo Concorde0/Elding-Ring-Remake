@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using RPG.AnimationSystem;
 using RPG.MotionSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 public class GameLoop : MonoBehaviour
 {
     public Transform playerModel;
     public AnimSetting animSetting;
-    public CameraResources camera;
+    public CameraResources cameraResources;
     public static GameLoop Instance;
     
     private PlayerMotion _player;
@@ -25,7 +27,7 @@ public class GameLoop : MonoBehaviour
 
     private void Start()
     {
-        _player = new PlayerMotion(playerModel, animSetting, camera);   
+        _player = new PlayerMotion(playerModel, animSetting, cameraResources);   
         _player.Start();
     }
 

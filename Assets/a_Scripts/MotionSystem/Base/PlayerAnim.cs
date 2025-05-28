@@ -24,6 +24,7 @@ namespace RPG.MotionSystem
         public PlayerAnim(PlayerMotion motion, AnimSetting setting)
         {
             
+            //TODO:分离这里的所有注册方法，简化写法
             _graph = PlayableGraph.Create();
             
             _mixer = new Mixer(_graph);
@@ -31,7 +32,6 @@ namespace RPG.MotionSystem
             
             var idleAnim = new IdleAnim(_graph,setting.GetParam(StringConstants.AnimName.Idle));
             AddState(StringConstants.AnimName.Idle,idleAnim);
-            
             
             _lockedMoveAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.LockedMove));
             AddState(StringConstants.AnimName.LockedMove,_lockedMoveAnim);
@@ -49,8 +49,8 @@ namespace RPG.MotionSystem
         }
         
         
-
-
+        
+        
         public void Stop()
         {
             _graph.Destroy();
