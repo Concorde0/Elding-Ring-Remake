@@ -24,6 +24,10 @@ namespace RPG.MotionSystem
             var move = new PlayerMoveState();
             _fsm.AddState(StringConstants.AnimName.Move,move);
             
+            var stop = new PlayerStopState();
+            _fsm.AddState(StringConstants.AnimName.MoveStop,stop);
+            
+            
             FSMCondition<PlayerMotion> enterMove = 
                 new FSMCondition<PlayerMotion>(m => m.Param.moveInput.sqrMagnitude >= 0.1f);
             FSMCondition<PlayerMotion> exitMove = 
@@ -32,6 +36,7 @@ namespace RPG.MotionSystem
             // 绑定到状态
             idle.AddCondition(enterMove, StringConstants.AnimName.Move);
             move.AddCondition(exitMove, StringConstants.AnimName.Idle);
+            // stop.AddCondition();
             
         }
 

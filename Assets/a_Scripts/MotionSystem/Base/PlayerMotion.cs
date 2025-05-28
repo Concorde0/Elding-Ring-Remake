@@ -44,7 +44,6 @@ namespace RPG.MotionSystem
 
         public void Update()
         {
-            // Input.Update();
             AI.Update();
             Camera.Update();
             

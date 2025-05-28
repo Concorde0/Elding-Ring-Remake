@@ -20,6 +20,7 @@ namespace RPG.MotionSystem
         private BlendTree2D _lockedMoveAnim;
         private BlendTree2D _moveAnim;
         private BlendTree2D _runAnim;
+        private BlendTree2D _lockedMoveStopAnim;
         
         public PlayerAnim(PlayerMotion motion, AnimSetting setting)
         {
@@ -41,7 +42,15 @@ namespace RPG.MotionSystem
             
             _runAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.Run));
             AddState(StringConstants.AnimName.Run,_runAnim);
+
+            var moveStopAnim = new MoveStopAnim(_graph,setting.GetParam(StringConstants.AnimName.MoveStop));
+            AddState(StringConstants.AnimName.MoveStop,moveStopAnim);
             
+            var runStopAnim = new MoveStopAnim(_graph,setting.GetParam(StringConstants.AnimName.RunStop));
+            AddState(StringConstants.AnimName.RunStop, runStopAnim);
+            
+            _lockedMoveStopAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.LockedMoveStop));
+            AddState(StringConstants.AnimName.LockedMoveStop,_lockedMoveStopAnim);
             
             
             AnimHelper.SetOutput(_graph, motion.Model.GetComponent<Animator>(),_mixer);
@@ -58,7 +67,7 @@ namespace RPG.MotionSystem
         
         public void TransitionTo(string name)
         {
-           _mixer.TransitionTo(_animStateIndex[name]); 
+            _mixer.TransitionTo(_animStateIndex[name]); 
         }
 
         public void SetMoveAnim(float x, float y)

@@ -11,6 +11,8 @@ public class StringConstants : Singleton<StringConstants>
         public const string LockedMove = "LockedMove";
         public const string Run = "Run";
         public const string RunStop = "RunStop";
+        public const string MoveStop = "MoveStop";
+        public const string LockedMoveStop = "LockedMoveStop";
         public const string RunTurn = "RunTurn";
         public const string Jump = "Jump";
         public const string JumpBackward = "JumpBackward";

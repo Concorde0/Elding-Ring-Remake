@@ -41,6 +41,7 @@ namespace RPG.MotionSystem
         
         public void Move(Vector2 input)
         {
+            
             if (_param.isLocked)
             {
                 _anim.TransitionTo(StringConstants.AnimName.LockedMove);
@@ -55,6 +56,13 @@ namespace RPG.MotionSystem
             }
             
             _anim.SetMoveAnim(input.x, input.y);
+        }
+
+        public void Stop()
+        {
+            _anim.TransitionTo(StringConstants.AnimName.MoveStop);
+            _anim.TransitionTo(StringConstants.AnimName.RunStop);
+            _anim.TransitionTo(StringConstants.AnimName.LockedMoveStop);
         }
         
         
@@ -85,11 +93,7 @@ namespace RPG.MotionSystem
                     if (moveDir.sqrMagnitude > 0.01f)
                     {
                         Quaternion targetRot = Quaternion.LookRotation(moveDir);
-                        _model.rotation = Quaternion.Slerp(
-                            _model.rotation,
-                            targetRot,
-                            Time.deltaTime * _param.rotateSpeed
-                        );
+                        _model.rotation = Quaternion.Slerp(_model.rotation, targetRot,Time.deltaTime * _param.rotateSpeed);
                     }
                     break;
                 }

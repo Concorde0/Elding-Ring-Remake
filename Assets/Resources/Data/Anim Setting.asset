@@ -54,3 +54,12 @@ MonoBehaviour:
     blendClip:
     - clip: {fileID: 1827226128182048838, guid: d31e547880c93b44799d2cf3f9952625, type: 3}
       pos: {x: 0, y: 1}
+  - name: MoveStop
+    type: 0
+    enterTime: 0.2
+    clip: {fileID: 1827226128182048838, guid: 057ab4fec403dfb43adde52d8773b8d5, type: 3}
+    clipGroup: []
+    infoGroup: []
+    blendClip:
+    - clip: {fileID: 1827226128182048838, guid: d31e547880c93b44799d2cf3f9952625, type: 3}
+      pos: {x: 0, y: 1}
