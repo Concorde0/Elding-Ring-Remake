@@ -15,4 +15,10 @@ public class PlayerStopState : FSMState<PlayerMotion>
     {
         base.OnUpdate(owner);
     }
+    
+    public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
+    {
+            
+    }
+    
 }

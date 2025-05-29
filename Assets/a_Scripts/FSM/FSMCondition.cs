@@ -27,6 +27,8 @@ namespace RPG.FSM
         {
             return _conditionHandle != null && _conditionHandle.Invoke(owner);
         }
+
+       
         
         //运算符重载 ！ | &
 

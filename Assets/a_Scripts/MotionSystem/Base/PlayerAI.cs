@@ -17,26 +17,18 @@ namespace RPG.MotionSystem
         {
             _fsm = new BaseFSM<PlayerMotion>(motion);
             
-            var idle = new PlayerIdleState();
-            _fsm.AddState(StringConstants.AnimName.Idle,idle);
+            
+            _fsm.AddState(StringConstants.AnimName.Idle, new PlayerIdleState());
+            _fsm.AddState(StringConstants.AnimName.Move, new PlayerMoveState());
+            _fsm.AddState(StringConstants.AnimName.MoveStop, new PlayerStopState());
+            
             _fsm.SetDefault(StringConstants.AnimName.Idle);
-
-            var move = new PlayerMoveState();
-            _fsm.AddState(StringConstants.AnimName.Move,move);
+            //TODO:Condition的逻辑切换
             
-            var stop = new PlayerStopState();
-            _fsm.AddState(StringConstants.AnimName.MoveStop,stop);
-            
-            
-            FSMCondition<PlayerMotion> enterMove = 
-                new FSMCondition<PlayerMotion>(m => m.Param.moveInput.sqrMagnitude >= 0.1f);
-            FSMCondition<PlayerMotion> exitMove = 
-                new FSMCondition<PlayerMotion>(m => m.Param.moveInput.sqrMagnitude < 0.05f);
+           
 
             // 绑定到状态
-            idle.AddCondition(enterMove, StringConstants.AnimName.Move);
-            move.AddCondition(exitMove, StringConstants.AnimName.Idle);
-            // stop.AddCondition();
+            
             
         }
 

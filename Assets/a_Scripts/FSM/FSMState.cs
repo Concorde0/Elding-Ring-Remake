@@ -8,7 +8,7 @@ namespace RPG.FSM
 {
     public class FSMState<T>
     {
-        private Dictionary<FSMCondition<T>, string> _conditionMaps;
+        private Dictionary<FSMCondition<T>, string> _conditionMaps = new();
         
         private Action<T> _enterHandle;
         private Action<T> _updateHandle;
@@ -94,6 +94,11 @@ namespace RPG.FSM
             {
                 _exitHandle(owner);
             }
+        }
+        
+        public virtual void RegisterTransitions(BaseFSM<T> fsm)
+        {
+            
         }
     }
 }

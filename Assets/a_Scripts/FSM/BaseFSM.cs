@@ -55,6 +55,7 @@ namespace RPG.FSM
                 return;
             }
             _states.Add(stateName, state);
+            state.RegisterTransitions(this);
         }
 
         private void Init()
