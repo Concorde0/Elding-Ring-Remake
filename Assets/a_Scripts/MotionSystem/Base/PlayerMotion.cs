@@ -5,6 +5,7 @@ using JobSystem;
 using RPG.AnimationSystem;
 using RPG.CameraSystem;
 using RPG.InputSystem;
+using RPG.Timer;
 using UnityEngine;
 
 namespace RPG.MotionSystem
@@ -19,8 +20,8 @@ namespace RPG.MotionSystem
         public PlayerAnim Anim { get; private set; }
         public Transform Model { get; private set; }
         public PlayerCamera Camera { get; private set; }
-        
         public RootMotionJobHandler RootMotion { get; private set; }
+        public TimerManager Timer { get; private set; }
 
         public PlayerMotion(Transform model, AnimSetting setting, CameraResources camera)
         {
@@ -33,6 +34,7 @@ namespace RPG.MotionSystem
             //TODO：这里RootMotion的参数代表了需要处理几个角色的根运动，目前只有Player所以简单记作 1
             RootMotion = new RootMotionJobHandler(1);
             Camera = new PlayerCamera(camera, Param);
+            Timer = new TimerManager();
         }
 
         public void Start()

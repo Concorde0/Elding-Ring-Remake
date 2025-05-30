@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Timer;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -23,6 +24,7 @@ namespace RPG.MotionSystem
         private Transform _model;
         private PlayerParam _param;
         private Transform _camera;
+        private TimerManager _timer;
         
 
         public PlayerMotor(PlayerMotion motion,CameraResources cameraResources)
@@ -31,6 +33,7 @@ namespace RPG.MotionSystem
             _param = motion.Param;
             _model = motion.Model;
             _camera = cameraResources.cameraTransform;
+            _timer = new TimerManager();
 
         }
         //TODO:如果逻辑复杂，需要分离这里的逻辑切换
@@ -41,20 +44,26 @@ namespace RPG.MotionSystem
         
         public void Move(Vector2 input)
         {
+            const float debounceTime = 0.2f;
             
             if (_param.isLocked)
             {
-                _anim.TransitionTo(StringConstants.AnimName.LockedMove);
+                if (_timer.IsCooldownReady("LockedMove", debounceTime))
+                    _anim.TransitionTo(StringConstants.AnimName.LockedMove);
             }
-            else if(_param.run)
+           
+            else if (_param.run)
             {
-                _anim.TransitionTo(StringConstants.AnimName.Run);
-            }
-            else
-            {
-                _anim.TransitionTo(StringConstants.AnimName.Move);
+                if (_timer.IsCooldownReady("Run", debounceTime))
+                    _anim.TransitionTo(StringConstants.AnimName.Run);
             }
             
+            else
+            {
+                if (_timer.IsCooldownReady("Move", debounceTime))
+                    _anim.TransitionTo(StringConstants.AnimName.Move);
+            }
+
             _anim.SetMoveAnim(input.x, input.y);
         }
 
