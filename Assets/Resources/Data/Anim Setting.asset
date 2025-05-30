@@ -72,18 +72,3 @@ MonoBehaviour:
     blendClip:
     - clip: {fileID: 1827226128182048838, guid: d31e547880c93b44799d2cf3f9952625, type: 3}
       pos: {x: 0, y: 1}
-  - name: LockedMoveStop
-    type: 3
-    enterTime: 0.2
-    clip: {fileID: 1827226128182048838, guid: e96e48b1671b59747b9a1dc1cd355e13, type: 3}
-    clipGroup: []
-    infoGroup: []
-    blendClip:
-    - clip: {fileID: 1827226128182048838, guid: 057ab4fec403dfb43adde52d8773b8d5, type: 3}
-      pos: {x: 0, y: 1}
-    - clip: {fileID: 1827226128182048838, guid: a6d7461d115795047bd7c826c5dc18e8, type: 3}
-      pos: {x: 0, y: -1}
-    - clip: {fileID: 1827226128182048838, guid: f01c874277b0b6141b532f145aa29ed8, type: 3}
-      pos: {x: -1, y: 0}
-    - clip: {fileID: 1827226128182048838, guid: 623f184093786b740b66f0ffcc508f56, type: 3}
-      pos: {x: 1, y: 0}

@@ -69,9 +69,14 @@ namespace RPG.MotionSystem
 
         public void Stop()
         {
-            _anim.TransitionTo(StringConstants.AnimName.MoveStop);
-            _anim.TransitionTo(StringConstants.AnimName.RunStop);
-            _anim.TransitionTo(StringConstants.AnimName.LockedMoveStop);
+            if (_param.run)
+            {
+                _anim.TransitionTo(StringConstants.AnimName.RunStop);
+            }
+            else
+            {
+                _anim.TransitionTo(StringConstants.AnimName.MoveStop);
+            }
         }
         
         

@@ -49,8 +49,6 @@ namespace RPG.MotionSystem
             var runStopAnim = new MoveStopAnim(_graph,setting.GetParam(StringConstants.AnimName.RunStop));
             AddState(StringConstants.AnimName.RunStop, runStopAnim);
             
-            _lockedMoveStopAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.LockedMoveStop));
-            AddState(StringConstants.AnimName.LockedMoveStop,_lockedMoveStopAnim);
             
             
             AnimHelper.SetOutput(_graph, motion.Model.GetComponent<Animator>(),_mixer);

@@ -27,7 +27,7 @@ public class GameLoop : MonoBehaviour
 
     private void Start()
     {
-        _player = new PlayerMotion(playerModel, animSetting, cameraResources);   
+        _player = new PlayerMotion(playerModel, animSetting, cameraResources);
         _player.Start();
     }
 
