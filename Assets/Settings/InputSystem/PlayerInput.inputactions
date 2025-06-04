@@ -40,15 +40,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Boil",
-                    "type": "Button",
-                    "id": "ba38debd-997c-4bed-86e6-25b791b8437e",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -236,17 +227,6 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Lock",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6b35a6d9-5cd0-40b1-9b5a-cf2d6755c6d1",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Boil",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

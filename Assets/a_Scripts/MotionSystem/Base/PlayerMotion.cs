@@ -29,7 +29,7 @@ namespace RPG.MotionSystem
         {
             Model = model;
             Param = new PlayerParam();
-            Input = new PlayerInputController(Param);
+            Input = new PlayerInputController(Param, Timer);
             Anim = new PlayerAnim(this, setting);
             Motor = new PlayerMotor(this, camera);
             AI = new PlayerAI(this);
@@ -50,6 +50,7 @@ namespace RPG.MotionSystem
         {
             AI.Update();
             Camera.Update();
+            Input.Update();
             
         }
 
@@ -71,7 +72,7 @@ namespace RPG.MotionSystem
             RootMotion.RecordAndSchedule(0, Model);
             RootMotion.CompleteAndApply((index, deltaPos, deltaRot) =>
             {
-                Motor.ApplyRootMotion(deltaPos, deltaRot, Param.isLocked ? RotationMode.UseRootMotion : RotationMode.UseDeltaPos);
+                Motor.ApplyRootMotion(deltaPos, deltaRot, Param.IsLocked ? RotationMode.UseRootMotion : RotationMode.UseDeltaPos);
             }); 
         }
     }

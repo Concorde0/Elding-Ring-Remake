@@ -10,15 +10,16 @@ namespace RPG.MotionSystem
     //动画配置层
     public class PlayerParam
     {
-        public Vector2 moveInput;
-        public Vector2 lookInput;
-        public bool run;
-        public bool isLocked;
-        public bool isBoil;
+        public Vector2 MoveInput;
+        public Vector2 LookInput;
+        public bool Run;
+        public bool IsLocked;
+        public bool Boil;
+        public bool JumpBackward;
         
         //TODO:之后做完camera的敌人锁定之后，把敌人的position写到parma中，激活这个函数
         // public Transform lockedTarget;  // 锁定的目标
-        public float rotateSpeed = 10f;
+        public readonly float RotateSpeed = 10f;
         
     }
 }

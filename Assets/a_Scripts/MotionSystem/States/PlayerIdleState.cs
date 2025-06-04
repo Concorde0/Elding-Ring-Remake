@@ -21,7 +21,7 @@ namespace RPG.MotionSystem.States
 
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
-            var moveInput = new FSMCondition<PlayerMotion>(m => m.Param.moveInput.sqrMagnitude >= 0.1f);
+            var moveInput = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1f);
             AddCondition(moveInput, StringConstants.AnimName.Move);
         }
     }

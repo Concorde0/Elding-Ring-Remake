@@ -23,7 +23,7 @@ namespace RPG.CameraSystem
         
         public void Tick(float deltaTime)
         {
-            Vector2 look = _param.lookInput;
+            Vector2 look = _param.LookInput;
             _camera.m_XAxis.Value += look.x * _xSensitivity * deltaTime;
             _camera.m_YAxis.Value += look.y * _ySensitivity * deltaTime;
         }

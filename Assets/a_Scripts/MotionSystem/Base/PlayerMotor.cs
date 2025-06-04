@@ -46,13 +46,13 @@ namespace RPG.MotionSystem
         {
             const float debounceTime = 0.2f;
             
-            if (_param.isLocked)
+            if (_param.IsLocked)
             {
                 if (_timer.IsCooldownReady(StringConstants.AnimName.LockedMove, debounceTime))
                     _anim.TransitionTo(StringConstants.AnimName.LockedMove);
             }
            
-            else if (_param.run)
+            else if (_param.Run)
             {
                 if (_timer.IsCooldownReady(StringConstants.AnimName.Run, debounceTime))
                     _anim.TransitionTo(StringConstants.AnimName.Run);
@@ -69,7 +69,7 @@ namespace RPG.MotionSystem
 
         public void Stop()
         {
-            if (_param.run)
+            if (_param.Run)
             {
                 _anim.TransitionTo(StringConstants.AnimName.RunStop);
             }
@@ -93,7 +93,7 @@ namespace RPG.MotionSystem
 
                 case RotationMode.UseDeltaPos:
                 {
-                    Vector2 input = _param.moveInput;
+                    Vector2 input = _param.MoveInput;
 
                     Vector3 camForward = _camera.forward;
                     Vector3 camRight = _camera.right;
@@ -107,7 +107,7 @@ namespace RPG.MotionSystem
                     if (moveDir.sqrMagnitude > 0.01f)
                     {
                         Quaternion targetRot = Quaternion.LookRotation(moveDir);
-                        _model.rotation = Quaternion.Slerp(_model.rotation, targetRot,Time.deltaTime * _param.rotateSpeed);
+                        _model.rotation = Quaternion.Slerp(_model.rotation, targetRot,Time.deltaTime * _param.RotateSpeed);
                     }
                     break;
                 }

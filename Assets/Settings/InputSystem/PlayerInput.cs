@@ -62,15 +62,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Boil"",
-                    ""type"": ""Button"",
-                    ""id"": ""ba38debd-997c-4bed-86e6-25b791b8437e"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -258,17 +249,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Lock"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6b35a6d9-5cd0-40b1-9b5a-cf2d6755c6d1"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Boil"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -860,7 +840,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_GamePlay_Look = m_GamePlay.FindAction("Look", throwIfNotFound: true);
         m_GamePlay_Space = m_GamePlay.FindAction("Space", throwIfNotFound: true);
         m_GamePlay_Lock = m_GamePlay.FindAction("Lock", throwIfNotFound: true);
-        m_GamePlay_Boil = m_GamePlay.FindAction("Boil", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -944,7 +923,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Look;
     private readonly InputAction m_GamePlay_Space;
     private readonly InputAction m_GamePlay_Lock;
-    private readonly InputAction m_GamePlay_Boil;
     public struct GamePlayActions
     {
         private @PlayerInput m_Wrapper;
@@ -953,7 +931,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_GamePlay_Look;
         public InputAction @Space => m_Wrapper.m_GamePlay_Space;
         public InputAction @Lock => m_Wrapper.m_GamePlay_Lock;
-        public InputAction @Boil => m_Wrapper.m_GamePlay_Boil;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -975,9 +952,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Lock.started += instance.OnLock;
             @Lock.performed += instance.OnLock;
             @Lock.canceled += instance.OnLock;
-            @Boil.started += instance.OnBoil;
-            @Boil.performed += instance.OnBoil;
-            @Boil.canceled += instance.OnBoil;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -994,9 +968,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Lock.started -= instance.OnLock;
             @Lock.performed -= instance.OnLock;
             @Lock.canceled -= instance.OnLock;
-            @Boil.started -= instance.OnBoil;
-            @Boil.performed -= instance.OnBoil;
-            @Boil.canceled -= instance.OnBoil;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1183,7 +1154,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnSpace(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
-        void OnBoil(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

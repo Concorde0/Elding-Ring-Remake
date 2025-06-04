@@ -29,4 +29,11 @@ public class StringConstants : Singleton<StringConstants>
         public const string LightAttack3 = "LightAttack3";
         
     }
+
+    public class TimerName
+    {
+        public const string MoveToStop = "MoveToStop";
+        public const string MoveDelayTransition = "MoveDelayTransition";
+        public const string SpacePerform = "SpacePerform";
+    }
 }

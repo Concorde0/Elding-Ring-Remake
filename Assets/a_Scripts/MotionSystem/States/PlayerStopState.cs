@@ -6,11 +6,10 @@ using UnityEngine;
 
 public class PlayerStopState : FSMState<PlayerMotion>
 {
-    private readonly float _animTime = 0.3f;
     private bool _animFinished;
     public override void OnEnter(PlayerMotion owner)
     {
-        owner.Timer.Start(StringConstants.AnimName.MoveStop,_animTime);
+        owner.Timer.Start(StringConstants.AnimName.MoveStop,0.3f);
         _animFinished = false;
     }
 
@@ -25,9 +24,9 @@ public class PlayerStopState : FSMState<PlayerMotion>
     
     public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
     {
-        var idleAnim = new FSMCondition<PlayerMotion>(m => _animFinished && m.Param.moveInput.sqrMagnitude < 0.05f);
+        var idleAnim = new FSMCondition<PlayerMotion>(m => _animFinished && m.Param.MoveInput.sqrMagnitude < 0.05f);
         AddCondition(idleAnim, StringConstants.AnimName.Idle);
-        var moveAnim = new FSMCondition<PlayerMotion>(m => _animFinished && m.Param.moveInput.sqrMagnitude >= 0.1);
+        var moveAnim = new FSMCondition<PlayerMotion>(m => _animFinished && m.Param.MoveInput.sqrMagnitude >= 0.1);
         AddCondition(moveAnim, StringConstants.AnimName.Move);
     }
     
