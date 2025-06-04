@@ -46,7 +46,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Run"",
+                    ""name"": ""Space"",
                     ""type"": ""Button"",
                     ""id"": ""a9932047-0a5f-433f-a333-4f57eb62d9cf"",
                     ""expectedControlType"": """",
@@ -246,7 +246,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Run"",
+                    ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -858,7 +858,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_Look = m_GamePlay.FindAction("Look", throwIfNotFound: true);
-        m_GamePlay_Run = m_GamePlay.FindAction("Run", throwIfNotFound: true);
+        m_GamePlay_Space = m_GamePlay.FindAction("Space", throwIfNotFound: true);
         m_GamePlay_Lock = m_GamePlay.FindAction("Lock", throwIfNotFound: true);
         m_GamePlay_Boil = m_GamePlay.FindAction("Boil", throwIfNotFound: true);
         // UI
@@ -942,7 +942,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_Look;
-    private readonly InputAction m_GamePlay_Run;
+    private readonly InputAction m_GamePlay_Space;
     private readonly InputAction m_GamePlay_Lock;
     private readonly InputAction m_GamePlay_Boil;
     public struct GamePlayActions
@@ -951,7 +951,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public GamePlayActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @Look => m_Wrapper.m_GamePlay_Look;
-        public InputAction @Run => m_Wrapper.m_GamePlay_Run;
+        public InputAction @Space => m_Wrapper.m_GamePlay_Space;
         public InputAction @Lock => m_Wrapper.m_GamePlay_Lock;
         public InputAction @Boil => m_Wrapper.m_GamePlay_Boil;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
@@ -969,9 +969,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @Run.started += instance.OnRun;
-            @Run.performed += instance.OnRun;
-            @Run.canceled += instance.OnRun;
+            @Space.started += instance.OnSpace;
+            @Space.performed += instance.OnSpace;
+            @Space.canceled += instance.OnSpace;
             @Lock.started += instance.OnLock;
             @Lock.performed += instance.OnLock;
             @Lock.canceled += instance.OnLock;
@@ -988,9 +988,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @Run.started -= instance.OnRun;
-            @Run.performed -= instance.OnRun;
-            @Run.canceled -= instance.OnRun;
+            @Space.started -= instance.OnSpace;
+            @Space.performed -= instance.OnSpace;
+            @Space.canceled -= instance.OnSpace;
             @Lock.started -= instance.OnLock;
             @Lock.performed -= instance.OnLock;
             @Lock.canceled -= instance.OnLock;
@@ -1181,7 +1181,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
+        void OnSpace(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
         void OnBoil(InputAction.CallbackContext context);
     }

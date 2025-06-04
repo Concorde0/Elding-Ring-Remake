@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Run",
+                    "name": "Space",
                     "type": "Button",
                     "id": "a9932047-0a5f-433f-a333-4f57eb62d9cf",
                     "expectedControlType": "",
@@ -224,7 +224,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Run",
+                    "action": "Space",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
