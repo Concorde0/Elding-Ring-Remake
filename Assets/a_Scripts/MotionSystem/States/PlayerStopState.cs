@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class PlayerStopState : FSMState<PlayerMotion>
 {
-    private float animTime = 0.15f;
-    private bool animFinished;
+    private readonly float _animTime = 0.3f;
+    private bool _animFinished;
     public override void OnEnter(PlayerMotion owner)
     {
-        owner.Timer.Start(StringConstants.AnimName.MoveStop,animTime);
-        animFinished = false;
+        owner.Timer.Start(StringConstants.AnimName.MoveStop,_animTime);
+        _animFinished = false;
     }
 
     public override void OnUpdate(PlayerMotion owner)
@@ -19,14 +19,16 @@ public class PlayerStopState : FSMState<PlayerMotion>
         owner.Motor.Stop();
         if (owner.Timer.IsFinished(StringConstants.AnimName.MoveStop))
         {
-            animFinished = true;
+            _animFinished = true;
         }
     }
     
     public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
     {
-        var idleAnim = new FSMCondition<PlayerMotion>(m => animFinished);
-        AddCondition(idleAnim,StringConstants.AnimName.Idle);
+        var idleAnim = new FSMCondition<PlayerMotion>(m => _animFinished && m.Param.moveInput.sqrMagnitude < 0.05f);
+        AddCondition(idleAnim, StringConstants.AnimName.Idle);
+        var moveAnim = new FSMCondition<PlayerMotion>(m => _animFinished && m.Param.moveInput.sqrMagnitude >= 0.1);
+        AddCondition(moveAnim, StringConstants.AnimName.Move);
     }
     
 }

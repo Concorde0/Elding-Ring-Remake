@@ -7,10 +7,11 @@ namespace RPG.FSM
 {
     public class BaseFSM<T>
     {
-        public string currentStateName;
 
         private readonly T _owner;
         private readonly Dictionary<string, FSMState<T>> _states;
+        public StateTracker Tracker { get; private set; } = new StateTracker();
+        public StateCache Cache { get; private set; } = new StateCache();
         
         private FSMState<T> _defaultState;
         private FSMState<T> _currentState;
@@ -33,18 +34,16 @@ namespace RPG.FSM
                 if (_currentState.CheckCondition(_owner, out string stateName))
                 {
                     ChangeState(stateName);
-                    currentStateName = stateName;
                 }
             }
         }
 
         public void SetDefault(string stateName)
         {
-            if (_states.ContainsKey(stateName))
+            if (_states.TryGetValue(stateName, out var state))
             {
-                _defaultState = _states[stateName];
+                _defaultState = state;
                 _currentState = _defaultState;
-                currentStateName = stateName;
             }
         }
 
@@ -69,11 +68,12 @@ namespace RPG.FSM
 
         private void ChangeState(string stateName)
         {
-            if (_states.TryGetValue(stateName, out FSMState<T> state))
+            if (_states.TryGetValue(stateName, out FSMState<T> newState))
             {
-                _currentState.OnExit(_owner);
-                state.OnEnter(_owner);
-                _currentState = state;
+                _currentState?.OnExit(_owner);
+                _currentState = newState;
+                _currentState.OnEnter(_owner);
+                Tracker.SetState(stateName);
             }
         }
     }

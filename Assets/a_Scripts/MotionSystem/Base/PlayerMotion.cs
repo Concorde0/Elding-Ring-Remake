@@ -4,6 +4,7 @@ using Cinemachine;
 using JobSystem;
 using RPG.AnimationSystem;
 using RPG.CameraSystem;
+using RPG.FSM;
 using RPG.InputSystem;
 using RPG.Timer;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace RPG.MotionSystem
     //核心编排层
     public class PlayerMotion
     {
+        //TODO: 某些Class需要换位置，后期优化
         public PlayerInputController Input{ get; private set; }
         public PlayerAI AI { get; private set; }
         public PlayerParam Param { get; private set; }

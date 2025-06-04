@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.FSM;
 using RPG.Timer;
 using Unity.Mathematics;
 using UnityEngine;
@@ -20,11 +21,10 @@ namespace RPG.MotionSystem
     {
         
         private readonly PlayerAnim _anim;
-
-        private Transform _model;
-        private PlayerParam _param;
-        private Transform _camera;
-        private TimerManager _timer;
+        private readonly Transform _model;
+        private readonly PlayerParam _param;
+        private readonly Transform _camera;
+        private readonly TimerManager _timer;
         
 
         public PlayerMotor(PlayerMotion motion,CameraResources cameraResources)
@@ -36,7 +36,7 @@ namespace RPG.MotionSystem
             _timer = new TimerManager();
 
         }
-        //TODO:如果逻辑复杂，需要分离这里的逻辑切换
+        //TODO:如果逻辑复杂，需要分离这里的逻辑切换(目前就要拆分了，因为关于move的急停有很多东西需要处理)
         public void Idle()
         {
             _anim.TransitionTo(StringConstants.AnimName.Idle);
@@ -48,19 +48,19 @@ namespace RPG.MotionSystem
             
             if (_param.isLocked)
             {
-                if (_timer.IsCooldownReady("LockedMove", debounceTime))
+                if (_timer.IsCooldownReady(StringConstants.AnimName.LockedMove, debounceTime))
                     _anim.TransitionTo(StringConstants.AnimName.LockedMove);
             }
            
             else if (_param.run)
             {
-                if (_timer.IsCooldownReady("Run", debounceTime))
+                if (_timer.IsCooldownReady(StringConstants.AnimName.Run, debounceTime))
                     _anim.TransitionTo(StringConstants.AnimName.Run);
             }
             
             else
             {
-                if (_timer.IsCooldownReady("Move", debounceTime))
+                if (_timer.IsCooldownReady(StringConstants.AnimName.Move, debounceTime))
                     _anim.TransitionTo(StringConstants.AnimName.Move);
             }
 

@@ -29,6 +29,8 @@ namespace RPG.FSM
             _exitHandle = action;
         }
 
+        
+
         public void AddCondition(FSMCondition<T> condition, string stateName)
         {
             if (condition == null || string.IsNullOrEmpty(stateName))

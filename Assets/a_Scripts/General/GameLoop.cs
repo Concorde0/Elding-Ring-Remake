@@ -21,8 +21,6 @@ public class GameLoop : MonoBehaviour
         {
             Instance = this;
         }
-        
-      
     }
 
     private void Start()

@@ -28,6 +28,7 @@ namespace RPG.MotionSystem.States
             }
         }
         
+        //TODO: 目前，方向突变的时候，input会相互抵消，导致触发stop动画，也许需要状态缓存来解决许多问题
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
             var stopAnim = new FSMCondition<PlayerMotion>(m => m.Param.moveInput.sqrMagnitude < 0.05f && _canStop);

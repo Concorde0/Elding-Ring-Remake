@@ -11,12 +11,10 @@ namespace RPG.MotionSystem
     public class PlayerAI
     {
         private readonly BaseFSM<PlayerMotion> _fsm;
-        
         //TODO:把AddState和AddCondition放在FSMState里面让他自己注册
         public PlayerAI(PlayerMotion motion)
         {
             _fsm = new BaseFSM<PlayerMotion>(motion);
-            
             
             _fsm.AddState(StringConstants.AnimName.Idle, new PlayerIdleState());
             _fsm.AddState(StringConstants.AnimName.Move, new PlayerMoveState());
