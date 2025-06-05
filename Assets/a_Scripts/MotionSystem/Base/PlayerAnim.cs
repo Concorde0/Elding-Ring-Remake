@@ -18,6 +18,7 @@ namespace RPG.MotionSystem
         //这个字典是把状态名切换成索引值，才能让mixer切换动画
         private readonly Dictionary<string,int> _animStateIndex;
         private BlendTree2D _lockedMoveAnim;
+        private BlendTree2D _boilAnim;
         private BlendTree2D _moveAnim;
         private BlendTree2D _runAnim;
         private BlendTree2D _lockedMoveStopAnim;
@@ -42,6 +43,12 @@ namespace RPG.MotionSystem
             
             _runAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.Run));
             AddState(StringConstants.AnimName.Run,_runAnim);
+
+            var boilAnim = new MoveAnim(_graph, setting.GetParam(StringConstants.AnimName.BoilForward));
+            AddState(StringConstants.AnimName.BoilForward,boilAnim);
+            
+            var jumpBackward = new MoveAnim(_graph, setting.GetParam(StringConstants.AnimName.JumpBackward));
+            AddState(StringConstants.AnimName.JumpBackward,jumpBackward);
 
             var moveStopAnim = new MoveStopAnim(_graph,setting.GetParam(StringConstants.AnimName.MoveStop));
             AddState(StringConstants.AnimName.MoveStop,moveStopAnim);
@@ -71,8 +78,8 @@ namespace RPG.MotionSystem
         public void SetMoveAnim(float x, float y)
         {
             _lockedMoveAnim.SetPointer(x,y);
-            _moveAnim.SetPointer(x,y);
-            _runAnim.SetPointer(x,y);
+            // _moveAnim.SetPointer(x,y);
+            // _runAnim.SetPointer(x,y);
         }
         
 

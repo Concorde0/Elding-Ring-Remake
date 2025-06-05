@@ -39,36 +39,46 @@ MonoBehaviour:
   - name: Move
     type: 3
     enterTime: 0.2
-    clip: {fileID: 0}
+    clip: {fileID: 1827226128182048838, guid: a243e1dd992688845b2e34930c244250, type: 3}
     clipGroup: []
     infoGroup: []
     blendClip:
     - clip: {fileID: 1827226128182048838, guid: a243e1dd992688845b2e34930c244250, type: 3}
-      pos: {x: 0, y: 1}
+      pos: {x: 0, y: 0}
   - name: Run
     type: 3
     enterTime: 0.2
-    clip: {fileID: 0}
+    clip: {fileID: 1827226128182048838, guid: d31e547880c93b44799d2cf3f9952625, type: 3}
     clipGroup: []
     infoGroup: []
     blendClip:
     - clip: {fileID: 1827226128182048838, guid: d31e547880c93b44799d2cf3f9952625, type: 3}
-      pos: {x: 0, y: 1}
+      pos: {x: 0, y: 0}
   - name: MoveStop
     type: 0
     enterTime: 0.2
     clip: {fileID: 1827226128182048838, guid: 057ab4fec403dfb43adde52d8773b8d5, type: 3}
     clipGroup: []
     infoGroup: []
-    blendClip:
-    - clip: {fileID: 1827226128182048838, guid: d31e547880c93b44799d2cf3f9952625, type: 3}
-      pos: {x: 0, y: 1}
+    blendClip: []
   - name: RunStop
     type: 0
     enterTime: 0.2
     clip: {fileID: 1827226128182048838, guid: e96e48b1671b59747b9a1dc1cd355e13, type: 3}
     clipGroup: []
     infoGroup: []
-    blendClip:
-    - clip: {fileID: 1827226128182048838, guid: d31e547880c93b44799d2cf3f9952625, type: 3}
-      pos: {x: 0, y: 1}
+    blendClip: []
+  - name: BoilForward
+    type: 0
+    enterTime: 0.2
+    clip: {fileID: 1827226128182048838, guid: 318d68260ee1bf04ab0fc0856762b90e, type: 3}
+    clipGroup: []
+    infoGroup: []
+    blendClip: []
+  - name: JumpBackward
+    type: 0
+    enterTime: 0.2
+    clip: {fileID: 1827226128182048838, guid: f901b644a56f46b40b03e5b2a21108db, type: 3}
+    clipGroup: []
+    infoGroup: []
+    blendClip: []

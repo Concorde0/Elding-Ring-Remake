@@ -41,7 +41,6 @@ namespace RPG.MotionSystem
         {
             _anim.TransitionTo(StringConstants.AnimName.Idle);
         }
-        
         public void Move(Vector2 input)
         {
             const float debounceTime = 0.2f;
@@ -66,7 +65,6 @@ namespace RPG.MotionSystem
 
             _anim.SetMoveAnim(input.x, input.y);
         }
-
         public void Stop()
         {
             if (_param.Run)
@@ -76,6 +74,18 @@ namespace RPG.MotionSystem
             else
             {
                 _anim.TransitionTo(StringConstants.AnimName.MoveStop);
+            }
+        }
+
+        public void Boil()
+        {
+            if (_param.Boil)
+            {
+                _anim.TransitionTo(StringConstants.AnimName.BoilForward);
+            }
+            else if (_param.JumpBackward)
+            {
+                _anim.TransitionTo(StringConstants.AnimName.JumpBackward);
             }
         }
         

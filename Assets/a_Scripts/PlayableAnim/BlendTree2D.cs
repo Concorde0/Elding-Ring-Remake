@@ -34,8 +34,7 @@ namespace RPG.AnimationSystem
         private struct DataPair { public float x, y, output; }
         private DataPair[] _dataArray;
 
-        public BlendTree2D(PlayableGraph graph, BlendClip2D[] clips, float enterTime = 0f)
-            : base(graph, enterTime)
+        public BlendTree2D(PlayableGraph graph, BlendClip2D[] clips, float enterTime = 0f) : base(graph, enterTime)
         {
             _clipCount = clips.Length;
 
@@ -162,7 +161,10 @@ namespace RPG.AnimationSystem
         private void ApplyWeights(float[] weights)
         {
             for (int i = 0; i < _clipCount; i++)
+            {
                 _mixer.SetInputWeight(i, weights[i]);
+            }
+                
         }
 
         public override void Stop()

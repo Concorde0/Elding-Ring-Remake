@@ -46,9 +46,25 @@ namespace RPG.InputSystem
             _timerManager.Start(StringConstants.TimerName.SpacePerform, 0.5f);
             _isPerformedSpace = true;
         }
+        //TODO: 这里的param的bool值要在动画播放完之后变为false
         private void SpaceClear(InputAction.CallbackContext obj)
         {
             _isPerformedSpace = false;
+            _param.Run = false;
+            if (!_timerManager.IsFinished(StringConstants.TimerName.SpacePerform))
+            {
+                if (_param.MoveInput == Vector2.zero)
+                {
+                    _param.JumpBackward = true;
+                    Debug.Log("Jump backward");
+                }
+                else
+                {
+                    _param.Boil = true;
+                    Debug.Log("Boil");
+                }
+            }
+            
         }
         
         
@@ -77,20 +93,6 @@ namespace RPG.InputSystem
                 {
                     _param.Run = true;
                 }
-                else if(_param.MoveInput == Vector2.zero)
-                {
-                    _param.JumpBackward = true;
-                }
-                else
-                {
-                    _param.Boil = true;
-                }
-            }
-            else
-            {
-                _param.Run = false;
-                _param.JumpBackward = false;
-                _param.Boil = false;
             }
         }
 
