@@ -82,10 +82,12 @@ namespace RPG.MotionSystem
             if (_param.Boil)
             {
                 _anim.TransitionTo(StringConstants.AnimName.BoilForward);
+                Debug.Log("Boil Anim");
             }
             else if (_param.JumpBackward)
             {
                 _anim.TransitionTo(StringConstants.AnimName.JumpBackward);
+                Debug.Log("jump Anim");
             }
         }
         

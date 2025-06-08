@@ -18,10 +18,8 @@ namespace RPG.MotionSystem
         //这个字典是把状态名切换成索引值，才能让mixer切换动画
         private readonly Dictionary<string,int> _animStateIndex;
         private BlendTree2D _lockedMoveAnim;
-        private BlendTree2D _boilAnim;
         private BlendTree2D _moveAnim;
         private BlendTree2D _runAnim;
-        private BlendTree2D _lockedMoveStopAnim;
         
         public PlayerAnim(PlayerMotion motion, AnimSetting setting)
         {

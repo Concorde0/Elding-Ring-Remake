@@ -56,12 +56,10 @@ namespace RPG.InputSystem
                 if (_param.MoveInput == Vector2.zero)
                 {
                     _param.JumpBackward = true;
-                    Debug.Log("Jump backward");
                 }
                 else
                 {
                     _param.Boil = true;
-                    Debug.Log("Boil");
                 }
             }
             

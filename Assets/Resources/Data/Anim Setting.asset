@@ -72,13 +72,15 @@ MonoBehaviour:
     type: 0
     enterTime: 0.2
     clip: {fileID: 1827226128182048838, guid: 318d68260ee1bf04ab0fc0856762b90e, type: 3}
-    clipGroup: []
+    clipGroup:
+    - {fileID: 1827226128182048838, guid: 318d68260ee1bf04ab0fc0856762b90e, type: 3}
     infoGroup: []
     blendClip: []
   - name: JumpBackward
     type: 0
     enterTime: 0.2
     clip: {fileID: 1827226128182048838, guid: f901b644a56f46b40b03e5b2a21108db, type: 3}
-    clipGroup: []
+    clipGroup:
+    - {fileID: 1827226128182048838, guid: f901b644a56f46b40b03e5b2a21108db, type: 3}
     infoGroup: []
     blendClip: []
