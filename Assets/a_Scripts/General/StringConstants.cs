@@ -35,5 +35,7 @@ public class StringConstants : Singleton<StringConstants>
         public const string MoveToStop = "MoveToStop";
         public const string MoveDelayTransition = "MoveDelayTransition";
         public const string SpacePerform = "SpacePerform";
+        public const string BoilTime = "BoilTime";
+        public const string JumpBackwardTime = "JumpBackwardTime";
     }
 }
