@@ -31,9 +31,6 @@ namespace RPG.MotionSystem
             _mixer = new Mixer(_graph);
             _animStateIndex = new Dictionary<string, int>();
             
-            var idleAnim = new IdleAnim(_graph,setting.GetParam(StringConstants.AnimName.Idle));
-            AddState(StringConstants.AnimName.Idle,idleAnim);
-            
             _lockedMoveAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.LockedMove));
             AddState(StringConstants.AnimName.LockedMove,_lockedMoveAnim);
             
@@ -42,17 +39,20 @@ namespace RPG.MotionSystem
             
             _runAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.Run));
             AddState(StringConstants.AnimName.Run,_runAnim);
-
-            _boilAnim = new BlendTree2D(_graph, setting.GetParam(StringConstants.AnimName.BoilForward));
-            AddState(StringConstants.AnimName.BoilForward,_boilAnim);
             
-            var jumpBackward = new MoveAnim(_graph, setting.GetParam(StringConstants.AnimName.JumpBackward));
+            var idleAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.Idle));
+            AddState(StringConstants.AnimName.Idle,idleAnim);
+
+            var boilAnim = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.BoilForward));
+            AddState(StringConstants.AnimName.BoilForward,boilAnim);
+            
+            var jumpBackward = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.JumpBackward));
             AddState(StringConstants.AnimName.JumpBackward,jumpBackward);
 
-            var moveStopAnim = new MoveStopAnim(_graph,setting.GetParam(StringConstants.AnimName.MoveStop));
+            var moveStopAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.MoveStop));
             AddState(StringConstants.AnimName.MoveStop,moveStopAnim);
             
-            var runStopAnim = new MoveStopAnim(_graph,setting.GetParam(StringConstants.AnimName.RunStop));
+            var runStopAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.RunStop));
             AddState(StringConstants.AnimName.RunStop, runStopAnim);
             
             

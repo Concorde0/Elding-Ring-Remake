@@ -6,10 +6,10 @@ using UnityEngine.Playables;
 
 namespace RPG.AnimationSystem
 {
-    public class MoveAnim : AnimBehaviour
+    public class SingleAnim : AnimBehaviour
     {
         private readonly Mixer _mixer;
-        public MoveAnim(PlayableGraph graph, float enterTime, AnimationClip clips) : base(graph, enterTime)
+        public SingleAnim(PlayableGraph graph, float enterTime, AnimationClip clips) : base(graph, enterTime)
         {
             _mixer = new Mixer(graph);
             _adapterPlayable.AddInput(_mixer.GetAnimAdapterPlayable(), 0, 1f);
@@ -18,7 +18,7 @@ namespace RPG.AnimationSystem
             _mixer.AddInput(moveAnim);
         }
     
-        public MoveAnim(PlayableGraph graph, AnimParam param) : this(graph, param.enterTime, param.clip)
+        public SingleAnim(PlayableGraph graph, AnimParam param) : this(graph, param.enterTime, param.clip)
         {
             
         }
