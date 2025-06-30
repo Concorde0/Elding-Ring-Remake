@@ -39,6 +39,11 @@ public class GameLoop : MonoBehaviour
         _player.FixedUpdate();
     }
 
+    private void LateUpdate()
+    {
+        _player.LateUpdate();
+    }
+
     private void OnEnable()
     {
         

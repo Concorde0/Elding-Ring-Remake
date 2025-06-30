@@ -6,7 +6,7 @@ namespace RPG.CameraSystem
 {
     public interface ICameraState 
     {
-        public void Tick(float deltaTime);
+        public void Tick();
         void Enter();
         void Exit();
     }

@@ -13,7 +13,6 @@ namespace RPG.CameraSystem
         private ICameraState _currentState;
         
         private readonly FreeLookCameraController _freeLook;
-        // private PlayerParam _param;
         
         public PlayerCamera(CameraResources camera, PlayerParam param) 
         {
@@ -21,9 +20,15 @@ namespace RPG.CameraSystem
             _currentState = _freeLook;
         }
         
-        public void Tick(float deltaTime) => _currentState?.Tick(deltaTime);
-        
-        public void SwitchToFreeLook() => _currentState = _freeLook;
+        public void Tick()
+        {
+            _currentState?.Tick();
+        }
+
+        public void SwitchToFreeLook()
+        {
+            _currentState = _freeLook;
+        } 
 
         public void Start()
         {

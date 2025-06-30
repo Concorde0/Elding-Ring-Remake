@@ -10,8 +10,6 @@ namespace RPG.CameraSystem
     {
         private CinemachineFreeLook _camera;
         private PlayerParam _param;
-        private float _xSensitivity = 300f;
-        private float _ySensitivity = 2f;
         public FreeLookCameraController(CameraResources camera, PlayerParam param)
         {
             _camera = camera.cinemachineFreeLook;
@@ -21,11 +19,8 @@ namespace RPG.CameraSystem
             camera.cinemachineFreeLook.m_YAxis.m_InputAxisName = "";
         }
         
-        public void Tick(float deltaTime)
+        public void Tick()
         {
-            Vector2 look = _param.LookInput;
-            _camera.m_XAxis.Value += look.x * _xSensitivity * deltaTime;
-            _camera.m_YAxis.Value += look.y * _ySensitivity * deltaTime;
         }
 
         public void Enter()

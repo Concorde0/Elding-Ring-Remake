@@ -59,6 +59,11 @@ namespace RPG.MotionSystem
             RootCalculate();
         }
 
+        public void LateUpdate()
+        {
+            Camera.Tick();
+        }
+
         public void Stop()
         {
             Anim.Stop();
