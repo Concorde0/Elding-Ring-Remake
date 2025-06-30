@@ -68,9 +68,8 @@ namespace RPG.AnimationSystem
                 AnimHelper.Enable(_mixer,0);
             }
             _mixer.SetTime(0f);
-            _mixer.Play();
             _adapterPlayable.SetTime(0f);
-            _adapterPlayable.Play();
+            // _adapterPlayable.Play();
             
             _mixer.SetInputWeight(0,1f);
 
@@ -161,15 +160,19 @@ namespace RPG.AnimationSystem
             {
                 if(index == _currentIndex) return;
             }
-            
+
             _targetIndex = index;
             _declinedIndex.Remove(_targetIndex);
+
+            // 核心：递归设置所有时间归0，禁止回弹
+            ResetAllTimeAndWeight(_targetIndex);
+
             AnimHelper.Enable(_mixer,_targetIndex);
-            
+
             _timeToNext = GetTargetEnterTime(_targetIndex) * (1f - GetWeight(_targetIndex));
-            _declinedSpeed = 2f/_timeToNext;
+            _declinedSpeed = 2f / _timeToNext;
             _currentSpeed = GetWeight(_currentIndex) / _timeToNext;
-            
+
             _isTransition = true;
 
         }
@@ -211,6 +214,23 @@ namespace RPG.AnimationSystem
             float weight = Mathf.Clamp01(_mixer.GetInputWeight(index) + delta);
             _mixer.SetInputWeight(index, weight);
             return weight;
+        }
+        
+        private void ResetAllTimeAndWeight(int index)
+        {
+            if (index < 0 || index >= _mixer.GetInputCount()) return;
+
+            var playable = _mixer.GetInput(index);
+            var adapter = (ScriptPlayable<AnimAdapter>)playable;
+            var behaviour = adapter.GetBehaviour();
+
+            // adapter 层归0
+            adapter.SetTime(0);
+
+            // 递归重置子 AnimBehaviour 的时间（如果是 Mixer，会继续传下去）
+            behaviour?.Enable(); // 确保 Enable 内部做了 SetTime(0)
+    
+            _mixer.SetInputWeight(index, Mathf.Epsilon); // 不要立即权重切换
         }
     }
 }

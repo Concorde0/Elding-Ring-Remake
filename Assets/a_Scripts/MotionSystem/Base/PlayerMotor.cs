@@ -97,6 +97,7 @@ namespace RPG.MotionSystem
         public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot, RotationMode rotationMode)
         {
             _model.position += (Vector3)deltaPos;
+            // Debug.Log($"Frame {Time.frameCount} deltaPos: {deltaPos}");
 
             switch (rotationMode)
             {

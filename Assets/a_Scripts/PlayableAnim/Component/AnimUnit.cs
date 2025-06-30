@@ -22,23 +22,16 @@ namespace RPG.AnimationSystem
         public override void Enable()
         {
             base.Enable();
-            _adapterPlayable.Play();
-            _anim.Play();
             _anim.SetTime(0);
+            _anim.Play();
             _adapterPlayable.SetTime(0);
+            _adapterPlayable.Play();
         }
 
         public override void Disable()
         {
             base.Disable();
-            // _adapterPlayable.Pause();
-            // _anim.Pause();
-            
         }
-        
-        
     }
-    
-    
 }
 

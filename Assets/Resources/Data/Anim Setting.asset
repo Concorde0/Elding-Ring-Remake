@@ -80,7 +80,7 @@ MonoBehaviour:
   - name: JumpBackward
     type: 3
     enterTime: 0.2
-    clip: {fileID: 1827226128182048838, guid: c6cdca731f477ec40a1f50b2c879eb2b, type: 3}
+    clip: {fileID: 1827226128182048838, guid: f901b644a56f46b40b03e5b2a21108db, type: 3}
     clipGroup: []
     infoGroup: []
     blendClip: []
