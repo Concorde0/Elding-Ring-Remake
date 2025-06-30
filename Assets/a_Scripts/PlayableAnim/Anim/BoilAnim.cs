@@ -1,0 +1,52 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using JobSystem;
+using RPG.AnimationSystem;
+using UnityEngine;
+using UnityEngine.Playables;
+
+namespace RPG.AnimationSystem
+{
+    public class BoilAnim : AnimBehaviour
+    {
+        private readonly Mixer _mixer;
+        
+        public BoilAnim(PlayableGraph graph, float enterTime, AnimationClip clips) : base(graph, enterTime)
+        {
+            _mixer = new Mixer(graph);
+            _adapterPlayable.AddInput(_mixer.GetAnimAdapterPlayable(), 0, 1f);
+        
+            var moveAnim = new AnimUnit(graph, clips, 0.5f);
+            _mixer.AddInput(moveAnim);
+           
+           
+        }
+    
+        public BoilAnim(PlayableGraph graph, AnimParam param) : this(graph, param.enterTime,param.clip)
+        {
+            
+        }
+        
+        public override void Execute(Playable playable, FrameData info)
+        {
+            base.Execute(playable, info);
+        }
+
+        public override void Enable()
+        {
+            base.Enable();
+            // _adapterPlayable.SetTime(0f);
+            _adapterPlayable.Play();
+            _mixer.Enable();
+        }
+
+        public override void Disable()
+        {
+            base.Disable();
+            // _adapterPlayable.Pause();
+            // _mixer.Disable();
+        }
+    
+    }
+}

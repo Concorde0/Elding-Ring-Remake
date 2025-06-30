@@ -13,11 +13,11 @@ namespace RPG.MotionSystem.States
             owner.Motor.Boil();
             if (owner.Param.Boil)
             {
-                owner.Timer.Start(StringConstants.TimerName.BoilTime,0.8f);
+                owner.Timer.Start(StringConstants.TimerName.BoilTime,1f);
             }
             else if (owner.Param.JumpBackward)
             {
-                owner.Timer.Start(StringConstants.TimerName.JumpBackwardTime,0.6f);
+                owner.Timer.Start(StringConstants.TimerName.JumpBackwardTime,0.8f);
             }
 
             _canTransition = false;
@@ -25,7 +25,6 @@ namespace RPG.MotionSystem.States
 
         public override void OnUpdate(PlayerMotion owner)
         {
-            Debug.Log("BoilState");
             if (owner.Param.Boil)
             {
                 if (owner.Timer.IsFinished(StringConstants.TimerName.BoilTime))

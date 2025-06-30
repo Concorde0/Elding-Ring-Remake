@@ -69,18 +69,18 @@ MonoBehaviour:
     infoGroup: []
     blendClip: []
   - name: BoilForward
-    type: 0
+    type: 3
     enterTime: 0.2
     clip: {fileID: 1827226128182048838, guid: 318d68260ee1bf04ab0fc0856762b90e, type: 3}
-    clipGroup:
-    - {fileID: 1827226128182048838, guid: 318d68260ee1bf04ab0fc0856762b90e, type: 3}
+    clipGroup: []
     infoGroup: []
-    blendClip: []
+    blendClip:
+    - clip: {fileID: 1827226128182048838, guid: 318d68260ee1bf04ab0fc0856762b90e, type: 3}
+      pos: {x: 0, y: 0}
   - name: JumpBackward
-    type: 0
+    type: 3
     enterTime: 0.2
-    clip: {fileID: 1827226128182048838, guid: f901b644a56f46b40b03e5b2a21108db, type: 3}
-    clipGroup:
-    - {fileID: 1827226128182048838, guid: f901b644a56f46b40b03e5b2a21108db, type: 3}
+    clip: {fileID: 1827226128182048838, guid: c6cdca731f477ec40a1f50b2c879eb2b, type: 3}
+    clipGroup: []
     infoGroup: []
     blendClip: []

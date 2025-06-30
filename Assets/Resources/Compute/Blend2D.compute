@@ -15,7 +15,6 @@ RWStructuredBuffer<DataPair> dataBuffer;
 float mdistance(DataPair data)
 {
     return abs(pointerX - data.x) + abs(pointerY - data.y) + eps;
-    
 }
 
 [numthreads(16,1,1)]

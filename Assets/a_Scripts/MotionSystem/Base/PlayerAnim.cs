@@ -20,6 +20,7 @@ namespace RPG.MotionSystem
         private BlendTree2D _lockedMoveAnim;
         private BlendTree2D _moveAnim;
         private BlendTree2D _runAnim;
+        private BlendTree2D _boilAnim;
         
         public PlayerAnim(PlayerMotion motion, AnimSetting setting)
         {
@@ -42,8 +43,8 @@ namespace RPG.MotionSystem
             _runAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.Run));
             AddState(StringConstants.AnimName.Run,_runAnim);
 
-            var boilAnim = new MoveAnim(_graph, setting.GetParam(StringConstants.AnimName.BoilForward));
-            AddState(StringConstants.AnimName.BoilForward,boilAnim);
+            _boilAnim = new BlendTree2D(_graph, setting.GetParam(StringConstants.AnimName.BoilForward));
+            AddState(StringConstants.AnimName.BoilForward,_boilAnim);
             
             var jumpBackward = new MoveAnim(_graph, setting.GetParam(StringConstants.AnimName.JumpBackward));
             AddState(StringConstants.AnimName.JumpBackward,jumpBackward);

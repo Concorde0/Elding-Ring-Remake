@@ -87,8 +87,8 @@ namespace RPG.AnimationSystem
                 AnimHelper.Disable(_mixer,i);
             }
             
-            _mixer.Pause();
-            _adapterPlayable.Pause();
+            // _mixer.Pause();
+            // _adapterPlayable.Pause();
         }
         
         

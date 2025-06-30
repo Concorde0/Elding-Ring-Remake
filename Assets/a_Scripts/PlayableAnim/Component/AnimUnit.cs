@@ -31,8 +31,8 @@ namespace RPG.AnimationSystem
         public override void Disable()
         {
             base.Disable();
-            _adapterPlayable.Pause();
-            _anim.Pause();
+            // _adapterPlayable.Pause();
+            // _anim.Pause();
             
         }
         

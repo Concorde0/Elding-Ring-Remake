@@ -40,7 +40,7 @@ namespace RPG.AnimationSystem
         public virtual void Disable()
         {
             if (!enable) return;
-            enable = false; 
+            enable = false;
         }
         
         public virtual void Stop() { }

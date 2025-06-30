@@ -32,7 +32,6 @@ namespace RPG.MotionSystem
         public override void Enable()
         {
             base.Enable();
-            
             _adapterPlayable.SetTime(0f);
             _adapterPlayable.Play();
             _mixer.Enable();

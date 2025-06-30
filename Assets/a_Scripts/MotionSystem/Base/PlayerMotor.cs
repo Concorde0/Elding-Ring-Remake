@@ -22,9 +22,10 @@ namespace RPG.MotionSystem
         
         private readonly PlayerAnim _anim;
         private readonly Transform _model;
-        private readonly PlayerParam _param;
         private readonly Transform _camera;
+        private readonly PlayerParam _param;
         private readonly TimerManager _timer;
+        private readonly PlayerMotion _motion;
         
 
         public PlayerMotor(PlayerMotion motion,CameraResources cameraResources)
@@ -32,6 +33,7 @@ namespace RPG.MotionSystem
             _anim = motion.Anim;
             _param = motion.Param;
             _model = motion.Model;
+            _motion = motion;
             _camera = cameraResources.cameraTransform;
             _timer = new TimerManager();
 
@@ -82,15 +84,14 @@ namespace RPG.MotionSystem
             if (_param.Boil)
             {
                 _anim.TransitionTo(StringConstants.AnimName.BoilForward);
-                Debug.Log("Boil Anim");
+                
             }
             else if (_param.JumpBackward)
             {
                 _anim.TransitionTo(StringConstants.AnimName.JumpBackward);
-                Debug.Log("jump Anim");
+                
             }
         }
-        
         
         
         public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot, RotationMode rotationMode)
@@ -100,7 +101,7 @@ namespace RPG.MotionSystem
             switch (rotationMode)
             {
                 case RotationMode.UseRootMotion:
-                    _model.rotation = math.mul(_model.rotation, deltaRot);
+                    _model.rotation = math.mul(deltaRot, _model.rotation);
                     break;
 
                 case RotationMode.UseDeltaPos:
@@ -115,6 +116,7 @@ namespace RPG.MotionSystem
                     camRight.Normalize();
 
                     Vector3 moveDir = camForward * input.y + camRight * input.x;
+                    Debug.DrawRay(_model.position, moveDir.normalized * 2f, Color.green);
 
                     if (moveDir.sqrMagnitude > 0.01f)
                     {
@@ -133,18 +135,13 @@ namespace RPG.MotionSystem
                 //         if (toTarget.sqrMagnitude > 0.001f)
                 //         {
                 //             Quaternion targetRot = Quaternion.LookRotation(toTarget.normalized);
-                //             _model.rotation = Quaternion.Slerp(
-                //                 _model.rotation,
-                //                 targetRot,
-                //                 Time.deltaTime * _param.rotateSpeed
-                //             );
+                //             _model.rotation = Quaternion.Slerp(_model.rotation, targetRot, Time.deltaTime * _param.rotateSpeed);
                 //         }
                 //     }
                 //     break;
 
                 case RotationMode.None:
                 default:
-                    // 什么也不做
                     break;
             }
         }

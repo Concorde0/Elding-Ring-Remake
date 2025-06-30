@@ -67,13 +67,13 @@ namespace RPG.MotionSystem
 
         private void RootCalculate()
         {
-            RootMotion.RecordPrevious(0, Model);
             Anim.EvaluateGraph(Time.fixedDeltaTime);
             RootMotion.RecordAndSchedule(0, Model);
             RootMotion.CompleteAndApply((index, deltaPos, deltaRot) =>
             {
                 Motor.ApplyRootMotion(deltaPos, deltaRot, Param.IsLocked ? RotationMode.UseRootMotion : RotationMode.UseDeltaPos);
             }); 
+            RootMotion.RecordPrevious(0, Model);
         }
     }
 }
