@@ -25,6 +25,7 @@ namespace RPG.MotionSystem.States
 
         public override void OnUpdate(PlayerMotion owner)
         {
+            Debug.Log("Player Boil State");
             if (owner.Param.Boil)
             {
                 if (owner.Timer.IsFinished(StringConstants.TimerName.BoilTime))
@@ -51,9 +52,11 @@ namespace RPG.MotionSystem.States
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
             var idleAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude < 0.05f && _canTransition);
-            AddCondition(idleAnim, StringConstants.AnimName.Idle);
             var moveAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1 && _canTransition);
+            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.canAttack && _canTransition);
+            AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(moveAnim, StringConstants.AnimName.Move);
+            AddCondition(attackAnim, StringConstants.AnimName.LightAttack1);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 
 namespace RPG.AnimationSystem
@@ -41,6 +42,7 @@ namespace RPG.AnimationSystem
         {
             return animParams.Find(p => p.name == name);
         }
+        
     }
 }
 

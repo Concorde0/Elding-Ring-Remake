@@ -22,6 +22,8 @@ namespace RPG.InputSystem
             _timerManager = timerManager;
         
             _input = new PlayerInput();
+
+            _input.GamePlay.Attack.performed += OnAttackPerformed;
             
             _input.GamePlay.Look.performed += ctx => _param.LookInput = ctx.ReadValue<Vector2>();
             _input.GamePlay.Look.canceled += ctx => _param.LookInput = Vector2.zero;
@@ -40,13 +42,15 @@ namespace RPG.InputSystem
         
         }
 
+       
+
 
         private void SpaceJudgement(InputAction.CallbackContext obj)
         {
             _timerManager.Start(StringConstants.TimerName.SpacePerform, 0.5f);
             _isPerformedSpace = true;
         }
-        //TODO: 这里的param的bool值要在动画播放完之后变为false
+        
         private void SpaceClear(InputAction.CallbackContext obj)
         {
             _isPerformedSpace = false;
@@ -64,9 +68,6 @@ namespace RPG.InputSystem
             }
             
         }
-        
-        
-
 
         public void Enable()
         {
@@ -93,10 +94,13 @@ namespace RPG.InputSystem
                 }
             }
         }
-
-        private void GetMoveInput()
+        private void OnAttackPerformed(InputAction.CallbackContext obj)
         {
-        
+            if (_param.canAttack)
+            {
+                _param.PushAttack();
+            }
+            
         }
     }
 }

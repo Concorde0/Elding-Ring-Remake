@@ -53,7 +53,10 @@ namespace RPG.MotionSystem
             AddState(StringConstants.AnimName.MoveStop,moveStopAnim);
             
             var runStopAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.RunStop));
-            AddState(StringConstants.AnimName.RunStop, runStopAnim);
+            AddState(StringConstants.AnimName.RunStop,runStopAnim);
+
+            var AttackAnim = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.LightAttack1));
+            AddState(StringConstants.AnimName.LightAttack1,AttackAnim);
             
             
             

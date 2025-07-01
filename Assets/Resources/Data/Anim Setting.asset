@@ -82,3 +82,13 @@ MonoBehaviour:
     clipGroup: []
     infoGroup: []
     blendClip: []
+  - name: LightAttack1
+    type: 1
+    enterTime: 0.2
+    clip: {fileID: 0}
+    clipGroup:
+    - {fileID: 1827226128182048838, guid: 74966c6ff0ebae5478d6ae4f47e539f8, type: 3}
+    - {fileID: 1827226128182048838, guid: a92ccadce6edb72459ce5b372c301f26, type: 3}
+    - {fileID: 1827226128182048838, guid: c6cdca731f477ec40a1f50b2c879eb2b, type: 3}
+    infoGroup: []
+    blendClip: []

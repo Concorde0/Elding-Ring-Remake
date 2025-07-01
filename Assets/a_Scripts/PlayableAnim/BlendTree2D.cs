@@ -46,7 +46,7 @@ namespace RPG.AnimationSystem
 
             // 初始化 ComputeShader
             _computeShader = AnimHelper.GetComputer("Blend2D");
-            _computeBuffer = new ComputeBuffer(_clipCount, sizeof(float)*3);
+            _computeBuffer = new ComputeBuffer(_clipCount, sizeof(float) * 3);
             _kernel = _computeShader.FindKernel("Compute");
             _pointerXId = Shader.PropertyToID("pointerX");
             _pointerYId = Shader.PropertyToID("pointerY");

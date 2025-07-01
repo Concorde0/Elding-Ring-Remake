@@ -6,6 +6,7 @@ using UnityEngine;
 namespace RPG.MotionSystem.States
 {
     //TODO: 这些个bool值有朝一日会把他们优化的，而且目前这个延迟切换动画的问题很多，得抠细节
+    //TODO: 这个_canBoil简直就是个屎山
     public class PlayerMoveState : FSMState<PlayerMotion>
     {
         private bool _canStop;
@@ -27,8 +28,8 @@ namespace RPG.MotionSystem.States
 
         public override void OnUpdate(PlayerMotion owner)
         {
+            Debug.Log("Player Move State");
             owner.Motor.Move(owner.Param.MoveInput);
-
             if (owner.Param.Boil || owner.Param.JumpBackward)
             {
                 _canTransition = true;
@@ -61,12 +62,14 @@ namespace RPG.MotionSystem.States
         }
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
-            var stopAnim = new FSMCondition<PlayerMotion>(m =>  _canStop && _canTransition && !_canBoil);
-            var idleAnim = new FSMCondition<PlayerMotion>(m =>  !_canStop && _canTransition && !_canBoil);
+            var stopAnim = new FSMCondition<PlayerMotion>(m =>  _canStop && _canTransition && !m.Param.Boil);
+            var idleAnim = new FSMCondition<PlayerMotion>(m =>  !_canStop && _canTransition && !m.Param.Boil);
             var boilAnim = new FSMCondition<PlayerMotion>(m => _canBoil && _canTransition);
+            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.canAttack && _canTransition && !m.Param.Boil);
             AddCondition(boilAnim, StringConstants.AnimName.BoilForward);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(stopAnim, StringConstants.AnimName.MoveStop);
+            AddCondition(attackAnim, StringConstants.AnimName.LightAttack1);
         }
         
     }
