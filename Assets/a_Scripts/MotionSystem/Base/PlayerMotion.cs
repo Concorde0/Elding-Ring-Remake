@@ -57,6 +57,7 @@ namespace RPG.MotionSystem
         public void FixedUpdate()
         {
             RootCalculate();
+            Motor.HandleInputRotation();
         }
 
         public void LateUpdate()
@@ -76,7 +77,7 @@ namespace RPG.MotionSystem
             RootMotion.RecordAndSchedule(0, Model);
             RootMotion.CompleteAndApply((index, deltaPos, deltaRot) =>
             {
-                Motor.ApplyRootMotion(deltaPos, deltaRot, Param.IsLocked ? RotationMode.UseRootMotion : RotationMode.UseDeltaPos);
+                Motor.ApplyRootMotion(deltaPos, deltaRot);
             }); 
             RootMotion.RecordPrevious(0, Model);
         }

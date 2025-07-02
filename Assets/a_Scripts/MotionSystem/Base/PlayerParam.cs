@@ -18,6 +18,7 @@ namespace RPG.MotionSystem
         public bool Boil;
         public bool JumpBackward;
         
+        public bool UseInputRotation = true;
         public readonly float RotateSpeed = 10f;
         public readonly TriggerParam AttackTrigger = new TriggerParam();
         public readonly TriggerParam TurnTrigger = new TriggerParam();

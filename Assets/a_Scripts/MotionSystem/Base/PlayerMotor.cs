@@ -113,59 +113,40 @@ namespace RPG.MotionSystem
         }
         
         
-        public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot, RotationMode rotationMode)
+        /// <summary>
+        /// 仅处理根运动（位置＋动画自身的旋转）
+        /// </summary>
+        public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot)
         {
             _model.position += (Vector3)deltaPos;
-            // Debug.Log($"Frame {Time.frameCount} deltaPos: {deltaPos}");
+            _model.rotation = math.mul(deltaRot, _model.rotation);
+        }
 
-            switch (rotationMode)
+        /// <summary>
+        /// 如果允许，用输入方向（相对于摄像机）来平滑旋转角色朝向
+        /// </summary>
+        public void HandleInputRotation()
+        {
+            if (!_param.UseInputRotation) return;
+
+            Vector2 input = _param.MoveInput;
+            if (input.sqrMagnitude <= 0.01f) return;
+
+            Vector3 camF = _camera.forward; camF.y = 0; camF.Normalize();
+            Vector3 camR = _camera.right;   camR.y = 0; camR.Normalize();
+
+            Vector3 moveDir = camF * input.y + camR * input.x;
+            if (moveDir.sqrMagnitude > 0.01f)
             {
-                case RotationMode.UseRootMotion:
-                    _model.rotation = math.mul(deltaRot, _model.rotation);
-                    break;
-
-                case RotationMode.UseDeltaPos:
-                {
-                    Vector2 input = _param.MoveInput;
-
-                    Vector3 camForward = _camera.forward;
-                    Vector3 camRight = _camera.right;
-                    camForward.y = 0;
-                    camRight.y = 0;
-                    camForward.Normalize();
-                    camRight.Normalize();
-
-                    Vector3 moveDir = camForward * input.y + camRight * input.x;
-                    Debug.DrawRay(_model.position, moveDir.normalized * 2f, Color.green);
-
-                    if (moveDir.sqrMagnitude > 0.01f)
-                    {
-                        Quaternion targetRot = Quaternion.LookRotation(moveDir);
-                        _model.rotation = Quaternion.Slerp(_model.rotation, targetRot,Time.deltaTime * _param.RotateSpeed);
-                    }
-                    break;
-                }
-                //TODO:之后做完camera的敌人锁定之后，把敌人的position写到parma中，激活这个函数
-
-                // case RotationMode.UseLookAtTarget:
-                //     if (_param.lockedTarget != null)
-                //     {
-                //         Vector3 toTarget = _param.lockedTarget.position - _model.position;
-                //         toTarget.y = 0;
-                //         if (toTarget.sqrMagnitude > 0.001f)
-                //         {
-                //             Quaternion targetRot = Quaternion.LookRotation(toTarget.normalized);
-                //             _model.rotation = Quaternion.Slerp(_model.rotation, targetRot, Time.deltaTime * _param.rotateSpeed);
-                //         }
-                //     }
-                //     break;
-
-                case RotationMode.None:
-                default:
-                    break;
+                Quaternion target = Quaternion.LookRotation(moveDir);
+                _model.rotation = Quaternion.Slerp(
+                    _model.rotation,
+                    target,
+                    Time.deltaTime * _param.RotateSpeed
+                );
             }
         }
-        
     }
 }
+
 
