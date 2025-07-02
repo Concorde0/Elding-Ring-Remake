@@ -37,7 +37,7 @@ namespace RPG.MotionSystem.States
             {
                 if (owner.Timer.IsFinished(StringConstants.TimerName.JumpBackwardTime))
                 {
-                    _canTransition = true;
+                    _canTransition = true; 
                 }
             }
             
@@ -47,13 +47,14 @@ namespace RPG.MotionSystem.States
         {
             owner.Param.Boil = false;
             owner.Param.JumpBackward = false;
+            owner.Timer.CleanupFinished();
         }
         
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
             var idleAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude < 0.05f && _canTransition);
             var moveAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1 && _canTransition);
-            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.canAttack && _canTransition);
+            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.Attack && _canTransition);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(moveAnim, StringConstants.AnimName.Move);
             AddCondition(attackAnim, StringConstants.AnimName.LightAttack1);

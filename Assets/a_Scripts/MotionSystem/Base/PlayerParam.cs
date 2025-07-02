@@ -17,46 +17,15 @@ namespace RPG.MotionSystem
         public bool IsLocked;
         public bool Boil;
         public bool JumpBackward;
-        public bool canAttack = true;
+        public bool Attack;
         
         public readonly float RotateSpeed = 10f;
-        private readonly Queue<AttackCommand> attackQueue = new();
+        public readonly TriggerParam AttackTrigger = new TriggerParam();
         
 
-        public void PushAttack()
-        {
-            attackQueue.Enqueue(new AttackCommand());
-        }
 
-        public bool TryConsumeAttack()
-        {
-            if (attackQueue.Count > 0)
-            {
-                attackQueue.Dequeue();
-                return true;
-            }
 
-            return false;
-        }
 
-        public void ClearQueue()
-        {
-            attackQueue.Clear();
-        }
-
-        public int GetQueueCount()
-        {
-            return attackQueue.Count;
-        }
-        
-        public class AttackCommand
-        {
-            public float time;
-            public AttackCommand()
-            {
-                time = Time.time;
-            }
-        }
 
         //TODO:之后做完camera的敌人锁定之后，把敌人的position写到parma中，激活这个函数
         // public Transform lockedTarget;  // 锁定的目标

@@ -47,6 +47,16 @@ namespace RPG.Timer
         {
             return _timers.TryGetValue(key, out var timer) && timer.IsFinished;
         }
+
+        public bool IsElapsedInRange(string key, float minTime, float maxTime)
+        {
+            if (_timers.TryGetValue(key, out var timer))
+            {
+                float elapsed = timer.Elapsed;
+                return elapsed >= minTime && elapsed <= maxTime;
+            }
+            return false;
+        }
     
         public float GetElapsed(string key)
         {
@@ -70,6 +80,21 @@ namespace RPG.Timer
         {
             return _timers.ContainsKey(key);
         }
+        
+        public void CleanupFinished()
+        {
+            var keysToRemove = new List<string>();
+            foreach (var pair in _timers)
+            {
+                if (pair.Value.IsFinished)
+                    keysToRemove.Add(pair.Key);
+            }
+            foreach (var key in keysToRemove)
+            {
+                _timers.Remove(key);
+            }
+        }
+        
     
     }
 }

@@ -95,7 +95,7 @@ namespace RPG.MotionSystem
 
         public void LightAttack(int comboIndex)
         {
-            if (_param.canAttack)
+            if (_param.Attack)
             {
                 switch (comboIndex)
                 {

@@ -96,11 +96,7 @@ namespace RPG.InputSystem
         }
         private void OnAttackPerformed(InputAction.CallbackContext obj)
         {
-            if (_param.canAttack)
-            {
-                _param.PushAttack();
-            }
-            
+            _param.AttackTrigger.Set();
         }
     }
 }

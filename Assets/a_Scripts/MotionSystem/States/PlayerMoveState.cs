@@ -13,10 +13,7 @@ namespace RPG.MotionSystem.States
         private bool _canTransition;
         private bool _waitingForStop;
         private bool _canBoil;
-        public PlayerMoveState()
-        {
-            
-        }
+        
         public override void OnEnter(PlayerMotion owner)
         {
             owner.Timer.Start(StringConstants.TimerName.MoveToStop, 0.5f);
@@ -60,12 +57,19 @@ namespace RPG.MotionSystem.States
                 _canStop = true;
             }
         }
+
+        public override void OnExit(PlayerMotion owner)
+        {
+            base.OnExit(owner);
+            owner.Timer.CleanupFinished();
+        }
+
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
-            var stopAnim = new FSMCondition<PlayerMotion>(m =>  _canStop && _canTransition && !m.Param.Boil);
-            var idleAnim = new FSMCondition<PlayerMotion>(m =>  !_canStop && _canTransition && !m.Param.Boil);
+            var stopAnim = new FSMCondition<PlayerMotion>(m =>  _canStop && _canTransition && !_canBoil);
+            var idleAnim = new FSMCondition<PlayerMotion>(m =>  !_canStop && _canTransition && !_canBoil);
             var boilAnim = new FSMCondition<PlayerMotion>(m => _canBoil && _canTransition);
-            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.canAttack && _canTransition && !m.Param.Boil);
+            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.Attack);
             AddCondition(boilAnim, StringConstants.AnimName.BoilForward);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(stopAnim, StringConstants.AnimName.MoveStop);
