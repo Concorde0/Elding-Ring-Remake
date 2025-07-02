@@ -95,15 +95,12 @@ namespace RPG.MotionSystem
 
         public void LightAttack(int comboIndex)
         {
-            if (_param.Attack)
+            switch (comboIndex)
             {
-                switch (comboIndex)
-                {
-                    case 0: _anim.TransitionTo(StringConstants.AnimName.LightAttack1); break;
-                    case 1: _anim.TransitionTo(StringConstants.AnimName.LightAttack2); break;
-                    case 2: _anim.TransitionTo(StringConstants.AnimName.LightAttack3); break;
-                    default: _anim.TransitionTo(StringConstants.AnimName.LightAttack1); break;
-                }
+                case 0: _anim.TransitionTo(StringConstants.AnimName.LightAttack1); break;
+                case 1: _anim.TransitionTo(StringConstants.AnimName.LightAttack2); break;
+                case 2: _anim.TransitionTo(StringConstants.AnimName.LightAttack3); break;
+                default: _anim.TransitionTo(StringConstants.AnimName.LightAttack1); break;
             }
         }
         

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TriggerParam : MonoBehaviour
 {
-    private bool _isTriggered;
     private float _triggerTime = -1f;
     private readonly float _validDuration;
     public TriggerParam(float validDuration = 0.05f)

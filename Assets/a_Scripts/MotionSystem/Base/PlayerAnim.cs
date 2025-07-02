@@ -55,8 +55,14 @@ namespace RPG.MotionSystem
             var runStopAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.RunStop));
             AddState(StringConstants.AnimName.RunStop,runStopAnim);
 
-            var attackAnim = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.LightAttack1));
-            AddState(StringConstants.AnimName.LightAttack1,attackAnim);
+            var attack1Anim = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.LightAttack1));
+            AddState(StringConstants.AnimName.LightAttack1,attack1Anim);
+            
+            var attack2Anim = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.LightAttack2));
+            AddState(StringConstants.AnimName.LightAttack2,attack2Anim);
+            
+            var attack3Anim = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.LightAttack3));
+            AddState(StringConstants.AnimName.LightAttack3,attack3Anim);
             
             
             

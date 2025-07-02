@@ -54,7 +54,7 @@ namespace RPG.MotionSystem.States
         {
             var idleAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude < 0.05f && _canTransition);
             var moveAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1 && _canTransition);
-            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.Attack && _canTransition);
+            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek() && _canTransition);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(moveAnim, StringConstants.AnimName.Move);
             AddCondition(attackAnim, StringConstants.AnimName.LightAttack1);

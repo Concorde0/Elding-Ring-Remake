@@ -22,7 +22,7 @@ namespace RPG.MotionSystem.States
         {
             var moveInput = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1f);
             var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.Boil || m.Param.JumpBackward);
-            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.Attack);
+            var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek());
             AddCondition(boilAnim,StringConstants.AnimName.BoilForward);
             AddCondition(moveInput, StringConstants.AnimName.Move);
             AddCondition(attackAnim, StringConstants.AnimName.LightAttack1);
