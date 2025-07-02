@@ -18,7 +18,7 @@ namespace RPG.MotionSystem.States
             _isFinished = false;
             _canTransition = false;
             _lastTriggeredComboIndex = -1;
-            owner.Timer.Start(StringConstants.TimerName.LightAttackTime1,1f);
+            owner.Timer.Start(StringConstants.TimerName.LightAttackTime1,2f);
             owner.Motor.LightAttack(_comboIndex);
         }
 
@@ -26,23 +26,23 @@ namespace RPG.MotionSystem.States
         {
             Debug.Log("Attack State");
             //何时点击可以进行下一阶段
-            if (_comboIndex == 0 && _lastTriggeredComboIndex < 0 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 0.5f, 1f) && owner.Param.AttackTrigger.Consume())
+            if (_comboIndex == 0 && _lastTriggeredComboIndex < 0 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 1f, 1.3f) && owner.Param.AttackTrigger.Consume())
             {
                 Debug.Log("into Attack2");
                 _comboIndex++;
                 _lastTriggeredComboIndex = 0;
                 _canTransition = false;
                 owner.Motor.LightAttack(_comboIndex);
-                owner.Timer.Start(StringConstants.TimerName.LightAttackTime2,1f);
+                owner.Timer.Start(StringConstants.TimerName.LightAttackTime2,2f);
             }
-            else if (_comboIndex == 1 && _lastTriggeredComboIndex < 1 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime2, 0.5f, 1f) && owner.Param.AttackTrigger.Consume())
+            else if (_comboIndex == 1 && _lastTriggeredComboIndex < 1 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime2, 1.2f, 1.5f) && owner.Param.AttackTrigger.Consume())
             {
                 Debug.Log("into Attack3");
                 _comboIndex++;
                 _lastTriggeredComboIndex = 1;
                 _canTransition = false;
                 owner.Motor.LightAttack(_comboIndex);
-                owner.Timer.Start(StringConstants.TimerName.LightAttackTime3,1f);
+                owner.Timer.Start(StringConstants.TimerName.LightAttackTime3,2.5f);
             }
             
             //如果没有再次输出，Attack播放到动画结束
