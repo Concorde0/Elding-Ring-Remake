@@ -12,15 +12,15 @@ namespace RPG.InputSystem
     public class PlayerInputController
     {
         private readonly PlayerInput _input;
-        private PlayerParam _param { get; set; }
-        private TimerManager _timerManager {get; set;}
+        private readonly PlayerParam _param;
+        private readonly TimerManager _timerManager;
+        private readonly InputBuffer _inputBuffer = new InputBuffer();
 
         private bool _isPerformedSpace;
         public PlayerInputController(PlayerParam param, TimerManager timerManager)
         {
             _param = param;
             _timerManager = timerManager;
-        
             _input = new PlayerInput();
 
             _input.GamePlay.Attack.performed += OnAttackPerformed;
@@ -81,6 +81,7 @@ namespace RPG.InputSystem
 
         public void Update()
         {
+            _inputBuffer.Update(_param.MoveInput, _param);
             SpaceConditions();
         }
 

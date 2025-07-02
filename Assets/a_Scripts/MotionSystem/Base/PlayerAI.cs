@@ -21,6 +21,7 @@ namespace RPG.MotionSystem
             _fsm.AddState(StringConstants.AnimName.MoveStop, new PlayerStopState());
             _fsm.AddState(StringConstants.AnimName.BoilForward, new PlayerBoilState());
             _fsm.AddState(StringConstants.AnimName.LightAttack1, new PlayerAttackState());
+            _fsm.AddState(StringConstants.AnimName.RunTurn,new PlayerRunTurnState());
             _fsm.SetDefault(StringConstants.AnimName.Idle);
             //TODO:Condition的逻辑切换
             

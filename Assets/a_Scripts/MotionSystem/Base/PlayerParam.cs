@@ -20,6 +20,7 @@ namespace RPG.MotionSystem
         
         public readonly float RotateSpeed = 10f;
         public readonly TriggerParam AttackTrigger = new TriggerParam();
+        public readonly TriggerParam TurnTrigger = new TriggerParam();
         
 
 

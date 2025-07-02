@@ -64,6 +64,9 @@ namespace RPG.MotionSystem
             var attack3Anim = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.LightAttack3));
             AddState(StringConstants.AnimName.LightAttack3,attack3Anim);
             
+            var runTurn = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.RunTurn));
+            AddState(StringConstants.AnimName.RunTurn,runTurn);
+            
             
             
             AnimHelper.SetOutput(_graph, motion.Model.GetComponent<Animator>(),_mixer);

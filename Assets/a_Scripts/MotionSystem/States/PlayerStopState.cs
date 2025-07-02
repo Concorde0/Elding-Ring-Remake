@@ -23,6 +23,8 @@ namespace RPG.MotionSystem.States
             {
                 _canTransition = true;
             }
+            
+            
         }
     
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)

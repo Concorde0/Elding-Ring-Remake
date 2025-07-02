@@ -66,10 +66,12 @@ namespace RPG.MotionSystem.States
 
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
+            var runTurn = new FSMCondition<PlayerMotion>(m => m.Param.Run && m.Param.TurnTrigger.Peek() && _canStop);
             var stopAnim = new FSMCondition<PlayerMotion>(m =>  _canStop && _canTransition && !_canBoil);
             var idleAnim = new FSMCondition<PlayerMotion>(m =>  !_canStop && _canTransition && !_canBoil);
             var boilAnim = new FSMCondition<PlayerMotion>(m => _canBoil && _canTransition);
             var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek());
+            AddCondition(runTurn, StringConstants.AnimName.RunTurn);
             AddCondition(boilAnim, StringConstants.AnimName.BoilForward);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(stopAnim, StringConstants.AnimName.MoveStop);

@@ -79,6 +79,14 @@ namespace RPG.MotionSystem
             }
         }
 
+        public void RunTurn()
+        {
+            if(_param.TurnTrigger.Consume())
+            {
+                _anim.TransitionTo(StringConstants.AnimName.RunTurn);
+            }
+        }
+
         public void Boil()
         {
             if (_param.Boil)

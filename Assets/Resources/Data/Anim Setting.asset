@@ -103,3 +103,10 @@ MonoBehaviour:
     clipGroup: []
     infoGroup: []
     blendClip: []
+  - name: RunTurn
+    type: 0
+    enterTime: 0.2
+    clip: {fileID: 1827226128182048838, guid: 63d0431060614c547a431a39401473e3, type: 3}
+    clipGroup: []
+    infoGroup: []
+    blendClip: []
