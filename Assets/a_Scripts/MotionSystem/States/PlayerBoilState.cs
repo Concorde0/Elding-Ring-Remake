@@ -13,7 +13,7 @@ namespace RPG.MotionSystem.States
             owner.Motor.Boil();
             if (owner.Param.BoilTrigger.Peek())
             {
-                owner.Timer.Start(StringConstants.TimerName.BoilTime,0.8f);
+                owner.Timer.Start(StringConstants.TimerName.BoilTime,0.85f);
             }
             else if (owner.Param.JumpBackwardTrigger.Peek())
             {

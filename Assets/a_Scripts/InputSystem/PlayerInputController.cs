@@ -16,8 +16,7 @@ namespace RPG.InputSystem
         private readonly TimerManager _timerManager;
         private readonly InputBuffer _inputBuffer = new InputBuffer();
 
-        
-        private bool _spaceHeld;
+        private bool _isHoldSpace;
         public PlayerInputController(PlayerParam param, TimerManager timerManager)
         {
             _param = param;
@@ -56,10 +55,33 @@ namespace RPG.InputSystem
         public void Update()
         {
             _inputBuffer.Update(_param.MoveInput, _param);
-            
-            if (_spaceHeld && _timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
+            if (_isHoldSpace && _timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
             {
                 _param.Run = true;
+            }
+            
+            
+            if (_isHoldSpace && _param.MoveInput == Vector2.zero && _timerManager.IsFinished(StringConstants.TimerName.BoilTimeHold))
+            {
+                _param.JumpBackwardTrigger.Set();
+                _timerManager.CleanupFinished();
+            }
+
+            if (!_isHoldSpace 
+                && _param.MoveInput == Vector2.zero 
+                && _timerManager.Exists(StringConstants.TimerName.SpaceHold) 
+                && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
+            {
+                _param.JumpBackwardTrigger.Set();
+                _timerManager.CleanupFinished();
+            }
+            else if (!_isHoldSpace
+                     && _param.MoveInput.sqrMagnitude > 0.1f
+                     && _timerManager.Exists(StringConstants.TimerName.SpaceHold)
+                     && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
+            {
+                _param.BoilTrigger.Set();
+                _timerManager.CleanupFinished();
             }
         }
        
@@ -67,27 +89,16 @@ namespace RPG.InputSystem
 
         private void OnSpacePressed(InputAction.CallbackContext ctx)
         {
-            _spaceHeld = true;
-            _timerManager.Start(StringConstants.TimerName.SpaceHold, 0.5f);
+            _isHoldSpace = true;
+            _timerManager.Start(StringConstants.TimerName.SpaceHold,0.5f);
+            _timerManager.Start(StringConstants.TimerName.BoilTimeHold,0.1f);
+            
         }
 
         private void OnSpaceReleased(InputAction.CallbackContext ctx)
         {
-            bool longPress = _timerManager.IsFinished(StringConstants.TimerName.SpaceHold);
-            _timerManager.CleanupFinished();
-            _spaceHeld = false;
-
-            if (longPress)
-            {
-                _param.Run = false;
-            }
-            else
-            {
-                if (_param.MoveInput.sqrMagnitude <= 0.01f)
-                    _param.JumpBackwardTrigger.Set();
-                else
-                    _param.BoilTrigger.Set();
-            }
+            _isHoldSpace = false;
+            _param.Run = false;
         }
         
         private void OnAttackPerformed(InputAction.CallbackContext obj)

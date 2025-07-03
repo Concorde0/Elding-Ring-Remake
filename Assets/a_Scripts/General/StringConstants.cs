@@ -34,7 +34,6 @@ public class StringConstants : Singleton<StringConstants>
     {
         public const string MoveToStop = "MoveToStop";
         public const string MoveDelayTransition = "MoveDelayTransition";
-        public const string SpacePerform = "SpacePerform";
         public const string BoilTime = "BoilTime";
         public const string RunTurnDuration = "RunTurnDuration";
         public const string JumpBackwardTime = "JumpBackwardTime";
@@ -42,5 +41,6 @@ public class StringConstants : Singleton<StringConstants>
         public const string LightAttackTime2 = "LightAttackTime2";
         public const string LightAttackTime3 = "LightAttackTime3";
         public const string SpaceHold = "SpaceHold";
+        public const string BoilTimeHold = "JumpBackwardTimeHold";
     }
 }
