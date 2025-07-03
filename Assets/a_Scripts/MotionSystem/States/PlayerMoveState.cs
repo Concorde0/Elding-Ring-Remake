@@ -26,6 +26,11 @@ namespace RPG.MotionSystem.States
         public override void OnUpdate(PlayerMotion owner)
         {
             Debug.Log("Player Move State");
+            if (!owner.Param.IsLocked)
+            {
+                owner.Motor.HandleInputRotation();
+            }
+            
             owner.Motor.Move(owner.Param.MoveInput);
             if (owner.Param.Boil || owner.Param.JumpBackward)
             {

@@ -57,7 +57,7 @@ namespace RPG.MotionSystem
         public void FixedUpdate()
         {
             RootCalculate();
-            Motor.HandleInputRotation();
+            // Motor.HandleInputRotation();
         }
 
         public void LateUpdate()

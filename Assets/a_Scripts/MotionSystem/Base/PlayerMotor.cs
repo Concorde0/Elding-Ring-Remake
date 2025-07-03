@@ -9,13 +9,6 @@ using UnityEngine.Playables;
 
 namespace RPG.MotionSystem
 {
-    public enum RotationMode
-    {
-        UseRootMotion,     // 完全使用动画旋转（默认）
-        UseDeltaPos,       // 从 deltaPos 推导方向
-        UseLookAtTarget,   // 朝向锁定目标
-        None               // 不旋转（保留当前朝向）
-    }
     //运动执行层
     public class PlayerMotor
     {
