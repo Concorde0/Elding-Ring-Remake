@@ -85,7 +85,6 @@ namespace RPG.MotionSystem
             if (_param.BoilTrigger.Peek())
             {
                 _anim.TransitionTo(StringConstants.AnimName.BoilForward);
-                
             }
             else if (_param.JumpBackwardTrigger.Peek())
             {

@@ -41,6 +41,6 @@ public class StringConstants : Singleton<StringConstants>
         public const string LightAttackTime1 = "LightAttackTime1";
         public const string LightAttackTime2 = "LightAttackTime2";
         public const string LightAttackTime3 = "LightAttackTime3";
-       
+        public const string SpaceHold = "SpaceHold";
     }
 }

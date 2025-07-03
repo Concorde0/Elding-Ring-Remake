@@ -16,7 +16,8 @@ namespace RPG.InputSystem
         private readonly TimerManager _timerManager;
         private readonly InputBuffer _inputBuffer = new InputBuffer();
 
-        private bool _isPerformedSpace;
+        
+        private bool _spaceHeld;
         public PlayerInputController(PlayerParam param, TimerManager timerManager)
         {
             _param = param;
@@ -31,8 +32,8 @@ namespace RPG.InputSystem
             _input.GamePlay.Move.performed += ctx => _param.MoveInput = ctx.ReadValue<Vector2>();
             _input.GamePlay.Move.canceled += ctx => _param.MoveInput = Vector2.zero;
 
-            _input.GamePlay.Space.performed += SpaceJudgement;
-            _input.GamePlay.Space.canceled += SpaceClear;
+            _input.GamePlay.Space.performed += OnSpacePressed;
+            _input.GamePlay.Space.canceled += OnSpaceReleased;
         
             //TODO: 加入检测可锁定目标时，再让isLocked的bool改变，以及可锁定目标消失时，isLocked变为false
             _param.IsLocked = false;
@@ -55,42 +56,40 @@ namespace RPG.InputSystem
         public void Update()
         {
             _inputBuffer.Update(_param.MoveInput, _param);
-            SpaceConditions();
+            
+            if (_spaceHeld && _timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
+            {
+                _param.Run = true;
+            }
         }
        
 
 
-        private void SpaceJudgement(InputAction.CallbackContext obj)
+        private void OnSpacePressed(InputAction.CallbackContext ctx)
         {
-            _timerManager.Start(StringConstants.TimerName.SpacePerform, 0.5f);
-            _isPerformedSpace = true;
-            if (_param.MoveInput == Vector2.zero)
+            _spaceHeld = true;
+            _timerManager.Start(StringConstants.TimerName.SpaceHold, 0.5f);
+        }
+
+        private void OnSpaceReleased(InputAction.CallbackContext ctx)
+        {
+            bool longPress = _timerManager.IsFinished(StringConstants.TimerName.SpaceHold);
+            _timerManager.CleanupFinished();
+            _spaceHeld = false;
+
+            if (longPress)
             {
-                _param.JumpBackwardTrigger.Set();
+                _param.Run = false;
             }
             else
             {
-                _param.BoilTrigger.Set();
-            }
-        }
-        private void SpaceClear(InputAction.CallbackContext obj)
-        {
-            _isPerformedSpace = false;
-            _param.Run = false;
-        }
-        private void SpaceConditions()
-        {
-            if (_isPerformedSpace)
-            {
-                if (_timerManager.IsFinished(StringConstants.TimerName.SpacePerform))
-                {
-                    _param.Run = true;
-                }
+                if (_param.MoveInput.sqrMagnitude <= 0.01f)
+                    _param.JumpBackwardTrigger.Set();
+                else
+                    _param.BoilTrigger.Set();
             }
         }
         
-
-
         private void OnAttackPerformed(InputAction.CallbackContext obj)
         {
             _param.AttackTrigger.Set();
