@@ -32,7 +32,7 @@ namespace RPG.MotionSystem.States
             }
             
             owner.Motor.Move(owner.Param.MoveInput);
-            if (owner.Param.Boil || owner.Param.JumpBackward)
+            if (owner.Param.BoilTrigger.Peek() || owner.Param.JumpBackwardTrigger.Peek())
             {
                 _canTransition = true;
                 _canBoil = true;

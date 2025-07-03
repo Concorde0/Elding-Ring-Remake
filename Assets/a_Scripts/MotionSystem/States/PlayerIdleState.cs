@@ -21,7 +21,7 @@ namespace RPG.MotionSystem.States
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
             var moveInput = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1f);
-            var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.Boil || m.Param.JumpBackward);
+            var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.BoilTrigger.Peek() || m.Param.JumpBackwardTrigger.Peek());
             var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek());
             AddCondition(boilAnim,StringConstants.AnimName.BoilForward);
             AddCondition(moveInput, StringConstants.AnimName.Move);

@@ -31,7 +31,7 @@ namespace RPG.MotionSystem.States
         {
             var idleAnim = new FSMCondition<PlayerMotion>(m => _canTransition && m.Param.MoveInput.sqrMagnitude < 0.05f);
             var moveAnim = new FSMCondition<PlayerMotion>(m => _canTransition && m.Param.MoveInput.sqrMagnitude >= 0.1);
-            var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.Boil || m.Param.JumpBackward);
+            var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.BoilTrigger.Peek() || m.Param.JumpBackwardTrigger.Peek());
             var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek());
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(moveAnim, StringConstants.AnimName.Move);

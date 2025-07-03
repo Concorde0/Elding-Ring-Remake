@@ -11,11 +11,11 @@ namespace RPG.MotionSystem.States
         public override void OnEnter(PlayerMotion owner)
         {
             owner.Motor.Boil();
-            if (owner.Param.Boil)
+            if (owner.Param.BoilTrigger.Peek())
             {
-                owner.Timer.Start(StringConstants.TimerName.BoilTime,1f);
+                owner.Timer.Start(StringConstants.TimerName.BoilTime,0.8f);
             }
-            else if (owner.Param.JumpBackward)
+            else if (owner.Param.JumpBackwardTrigger.Peek())
             {
                 owner.Timer.Start(StringConstants.TimerName.JumpBackwardTime,0.8f);
             }
@@ -26,27 +26,23 @@ namespace RPG.MotionSystem.States
         public override void OnUpdate(PlayerMotion owner)
         {
             Debug.Log("Player Boil State");
-            if (owner.Param.Boil)
+            
+            if (owner.Timer.IsFinished(StringConstants.TimerName.BoilTime))
             {
-                if (owner.Timer.IsFinished(StringConstants.TimerName.BoilTime))
-                {
-                    _canTransition = true;
-                }
+                _canTransition = true;
             }
-            else if (owner.Param.JumpBackward)
+            
+            if (owner.Timer.IsFinished(StringConstants.TimerName.JumpBackwardTime))
             {
-                if (owner.Timer.IsFinished(StringConstants.TimerName.JumpBackwardTime))
-                {
-                    _canTransition = true; 
-                }
+                _canTransition = true; 
             }
             
         }
         
         public override void OnExit(PlayerMotion owner)
         {
-            owner.Param.Boil = false;
-            owner.Param.JumpBackward = false;
+            // owner.Param.BoilTrigger = false;
+            // owner.Param.JumpBackward = false;
             owner.Timer.CleanupFinished();
         }
         

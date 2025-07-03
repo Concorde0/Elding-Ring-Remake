@@ -42,33 +42,6 @@ namespace RPG.InputSystem
         
         }
 
-       
-
-
-        private void SpaceJudgement(InputAction.CallbackContext obj)
-        {
-            _timerManager.Start(StringConstants.TimerName.SpacePerform, 0.5f);
-            _isPerformedSpace = true;
-        }
-        
-        private void SpaceClear(InputAction.CallbackContext obj)
-        {
-            _isPerformedSpace = false;
-            _param.Run = false;
-            if (!_timerManager.IsFinished(StringConstants.TimerName.SpacePerform))
-            {
-                if (_param.MoveInput == Vector2.zero)
-                {
-                    _param.JumpBackward = true;
-                }
-                else
-                {
-                    _param.Boil = true;
-                }
-            }
-            
-        }
-
         public void Enable()
         {
             _input.Enable();
@@ -84,7 +57,27 @@ namespace RPG.InputSystem
             _inputBuffer.Update(_param.MoveInput, _param);
             SpaceConditions();
         }
+       
 
+
+        private void SpaceJudgement(InputAction.CallbackContext obj)
+        {
+            _timerManager.Start(StringConstants.TimerName.SpacePerform, 0.5f);
+            _isPerformedSpace = true;
+            if (_param.MoveInput == Vector2.zero)
+            {
+                _param.JumpBackwardTrigger.Set();
+            }
+            else
+            {
+                _param.BoilTrigger.Set();
+            }
+        }
+        private void SpaceClear(InputAction.CallbackContext obj)
+        {
+            _isPerformedSpace = false;
+            _param.Run = false;
+        }
         private void SpaceConditions()
         {
             if (_isPerformedSpace)
@@ -95,6 +88,9 @@ namespace RPG.InputSystem
                 }
             }
         }
+        
+
+
         private void OnAttackPerformed(InputAction.CallbackContext obj)
         {
             _param.AttackTrigger.Set();

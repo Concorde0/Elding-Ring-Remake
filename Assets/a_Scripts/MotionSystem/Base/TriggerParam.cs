@@ -9,7 +9,7 @@ namespace RPG.MotionSystem
     {
         private float _triggerTime = -1f;
         private readonly float _validDuration;
-        public TriggerParam(float validDuration = 0.05f)
+        public TriggerParam(float validDuration = 0.1f)
         {
             _validDuration = validDuration;
         }

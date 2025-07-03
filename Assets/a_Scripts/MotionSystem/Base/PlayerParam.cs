@@ -15,11 +15,10 @@ namespace RPG.MotionSystem
         public Vector2 LookInput;
         public bool Run;
         public bool IsLocked;
-        public bool Boil;
-        public bool JumpBackward;
-        
         public bool UseInputRotation = true;
         public readonly float RotateSpeed = 10f;
+        public readonly TriggerParam JumpBackwardTrigger = new TriggerParam();
+        public readonly TriggerParam BoilTrigger = new TriggerParam();
         public readonly TriggerParam AttackTrigger = new TriggerParam();
         public readonly TriggerParam TurnTrigger = new TriggerParam();
         
