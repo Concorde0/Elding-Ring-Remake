@@ -18,7 +18,6 @@ namespace RPG.MotionSystem
         private readonly Transform _camera;
         private readonly PlayerParam _param;
         private readonly TimerManager _timer;
-        private readonly PlayerMotion _motion;
         
 
         public PlayerMotor(PlayerMotion motion,CameraResources cameraResources)
@@ -26,12 +25,11 @@ namespace RPG.MotionSystem
             _anim = motion.Anim;
             _param = motion.Param;
             _model = motion.Model;
-            _motion = motion;
             _camera = cameraResources.cameraTransform;
-            _timer = new TimerManager();
+            _timer = motion.Timer;
 
         }
-        //TODO:如果逻辑复杂，需要分离这里的逻辑切换(目前就要拆分了，因为关于move的急停有很多东西需要处理)
+        //TODO:如果逻辑复杂，需要分离这里的逻辑切换
         public void Idle()
         {
             _anim.TransitionTo(StringConstants.AnimName.Idle);

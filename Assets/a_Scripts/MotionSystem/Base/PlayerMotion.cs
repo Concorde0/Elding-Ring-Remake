@@ -27,6 +27,7 @@ namespace RPG.MotionSystem
 
         public PlayerMotion(Transform model, AnimSetting setting, CameraResources camera)
         {
+            Timer = new TimerManager();
             Model = model;
             Param = new PlayerParam();
             Anim = new PlayerAnim(this, setting);
@@ -34,7 +35,6 @@ namespace RPG.MotionSystem
             AI = new PlayerAI(this);
             //TODO：这里RootMotion的参数代表了需要处理几个角色的根运动，目前只有Player所以简单记作 1
             RootMotion = new RootMotionJobHandler(1);
-            Timer = new TimerManager();
             Input = new PlayerInputController(Param, Timer);
             Camera = new PlayerCamera(camera, Param);
         }

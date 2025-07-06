@@ -10,10 +10,11 @@ namespace RPG.MotionSystem.States
         private bool _canTransition;
         public override void OnEnter(PlayerMotion owner)
         {
+            owner.Param.IsInBoil = true;
             owner.Motor.Boil();
             if (owner.Param.BoilTrigger.Peek())
             {
-                owner.Timer.Start(StringConstants.TimerName.BoilTime,0.85f);
+                owner.Timer.Start(StringConstants.TimerName.BoilTime,0.9f);
             }
             else if (owner.Param.JumpBackwardTrigger.Peek())
             {
@@ -41,9 +42,8 @@ namespace RPG.MotionSystem.States
         
         public override void OnExit(PlayerMotion owner)
         {
-            // owner.Param.BoilTrigger = false;
-            // owner.Param.JumpBackward = false;
             owner.Timer.CleanupFinished();
+            owner.Param.IsInBoil = false;
         }
         
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)

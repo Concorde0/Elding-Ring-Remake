@@ -9,7 +9,7 @@ public class PlayerRunTurnState : FSMState<PlayerMotion>
     private bool _canTransition;
     public override void OnEnter(PlayerMotion owner)
     {
-        owner.Timer.Start(StringConstants.TimerName.RunTurnDuration,0.35f);
+        owner.Timer.Start(StringConstants.TimerName.RunTurnDuration,1f);
         _canTransition = false;
     }
 

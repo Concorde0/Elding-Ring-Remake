@@ -55,34 +55,7 @@ namespace RPG.InputSystem
         public void Update()
         {
             _inputBuffer.Update(_param.MoveInput, _param);
-            if (_isHoldSpace && _timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
-            {
-                _param.Run = true;
-            }
-            
-            
-            if (_isHoldSpace && _param.MoveInput == Vector2.zero && _timerManager.IsFinished(StringConstants.TimerName.BoilTimeHold))
-            {
-                _param.JumpBackwardTrigger.Set();
-                _timerManager.CleanupFinished();
-            }
-
-            if (!_isHoldSpace 
-                && _param.MoveInput == Vector2.zero 
-                && _timerManager.Exists(StringConstants.TimerName.SpaceHold) 
-                && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
-            {
-                _param.JumpBackwardTrigger.Set();
-                _timerManager.CleanupFinished();
-            }
-            else if (!_isHoldSpace
-                     && _param.MoveInput.sqrMagnitude > 0.1f
-                     && _timerManager.Exists(StringConstants.TimerName.SpaceHold)
-                     && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
-            {
-                _param.BoilTrigger.Set();
-                _timerManager.CleanupFinished();
-            }
+            SpaceLogic();
         }
        
 
@@ -104,6 +77,46 @@ namespace RPG.InputSystem
         private void OnAttackPerformed(InputAction.CallbackContext obj)
         {
             _param.AttackTrigger.Set();
+        }
+
+        private void SpaceLogic()
+        {
+            if (_isHoldSpace && _timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
+            {
+                _param.Run = true;
+            }
+            
+            
+            if (_isHoldSpace 
+                && !_param.IsInBoil
+                && _param.MoveInput == Vector2.zero 
+                && _timerManager.IsFinished(StringConstants.TimerName.BoilTimeHold) 
+                && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
+            {
+                Debug.Log("JumpBackward Auto");
+                _param.JumpBackwardTrigger.Set();
+                _timerManager.CleanupFinished();
+            }
+
+            if (!_isHoldSpace
+                && !_param.IsInBoil
+                && _param.MoveInput == Vector2.zero 
+                && _timerManager.Exists(StringConstants.TimerName.SpaceHold) 
+                && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
+            {
+                Debug.Log("JumpBackward Pressed");
+                _param.JumpBackwardTrigger.Set();
+                _timerManager.CleanupFinished();
+            }
+            else if (!_isHoldSpace
+                     && !_param.IsInBoil
+                     && _param.MoveInput.sqrMagnitude > 0.1f
+                     && _timerManager.Exists(StringConstants.TimerName.SpaceHold)
+                     && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
+            {
+                _param.BoilTrigger.Set();
+                _timerManager.CleanupFinished();
+            }
         }
     }
 }
