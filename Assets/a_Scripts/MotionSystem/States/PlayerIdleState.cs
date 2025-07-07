@@ -11,7 +11,10 @@ namespace RPG.MotionSystem.States
         public override void OnEnter(PlayerMotion owner)
         {
             owner.Motor.Idle();
-            owner.AI.GetLastStateName();
+            if (owner.AI.GetLastStateName() == StringConstants.AnimName.RunTurn)
+            {
+                Debug.Log("666666");
+            } 
         }
 
         public override void OnUpdate(PlayerMotion owner)

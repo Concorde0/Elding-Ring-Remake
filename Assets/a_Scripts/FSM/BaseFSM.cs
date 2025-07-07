@@ -82,15 +82,15 @@ namespace RPG.FSM
         {
             if (_states.TryGetValue(stateName, out FSMState<T> newState))
             {
+                
                 string oldState = GetStateKey(_currentState);
                 
                 _currentState?.OnExit(_owner);
                 _currentState = newState;
+                OnStateChanged?.Invoke(oldState, stateName);
                 _currentState.OnEnter(_owner);
-                
                 Debug.Log($"：{oldState} -> {stateName}");
                 
-                OnStateChanged?.Invoke(oldState, stateName);
             }
         }
         
