@@ -93,7 +93,6 @@ namespace RPG.InputSystem
                 && _timerManager.IsFinished(StringConstants.TimerName.BoilTimeHold) 
                 && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
             {
-                Debug.Log("JumpBackward Auto");
                 _param.JumpBackwardTrigger.Set();
                 _timerManager.CleanupFinished();
             }
@@ -104,7 +103,6 @@ namespace RPG.InputSystem
                 && _timerManager.Exists(StringConstants.TimerName.SpaceHold) 
                 && !_timerManager.IsFinished(StringConstants.TimerName.SpaceHold))
             {
-                Debug.Log("JumpBackward Pressed");
                 _param.JumpBackwardTrigger.Set();
                 _timerManager.CleanupFinished();
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StringConstants : Singleton<StringConstants>
 {
-    public class  AnimName
+    public class AnimName
     {
         public const string Idle = "Idle";
         public const string Move = "Move";
@@ -43,4 +43,6 @@ public class StringConstants : Singleton<StringConstants>
         public const string SpaceHold = "SpaceHold";
         public const string BoilTimeHold = "JumpBackwardTimeHold";
     }
+    
+    
 }

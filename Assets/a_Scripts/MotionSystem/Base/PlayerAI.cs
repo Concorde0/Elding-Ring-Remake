@@ -11,6 +11,7 @@ namespace RPG.MotionSystem
     public class PlayerAI
     {
         private readonly BaseFSM<PlayerMotion> _fsm;
+        private readonly FSMStateTracker _tracker;
         //TODO:把AddState和AddCondition放在FSMState里面让他自己注册
         public PlayerAI(PlayerMotion motion)
         {
@@ -25,16 +26,18 @@ namespace RPG.MotionSystem
             _fsm.SetDefault(StringConstants.AnimName.Idle);
             //TODO:Condition的逻辑切换
             
-           
-
-            // 绑定到状态
-            
-            
+            _tracker = new FSMStateTracker();
+            _tracker.AttachTo(_fsm);
         }
 
         public void Update()
         {
             _fsm.Update();
+        }
+
+        public string GetLastStateName()
+        {
+            return _tracker.Previous;
         }
 
        

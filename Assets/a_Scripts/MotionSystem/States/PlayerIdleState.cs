@@ -11,6 +11,7 @@ namespace RPG.MotionSystem.States
         public override void OnEnter(PlayerMotion owner)
         {
             owner.Motor.Idle();
+            owner.AI.GetLastStateName();
         }
 
         public override void OnUpdate(PlayerMotion owner)

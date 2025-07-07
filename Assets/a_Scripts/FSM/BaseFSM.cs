@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 namespace RPG.FSM
@@ -10,13 +12,13 @@ namespace RPG.FSM
 
         private readonly T _owner;
         private readonly Dictionary<string, FSMState<T>> _states;
-        public StateTracker Tracker { get; private set; } = new StateTracker();
-        public StateCache Cache { get; private set; } = new StateCache();
-        
         private FSMState<T> _defaultState;
         private FSMState<T> _currentState;
+        private FSMState<T> _previousState;
 
         private bool _isInit = false;
+        
+        public event Action<string, string> OnStateChanged;
 
         public BaseFSM(T owner)
         {
@@ -65,17 +67,33 @@ namespace RPG.FSM
                 _isInit = true;
             }
         }
+        
+        private string GetStateKey(FSMState<T> state)
+        {
+            foreach (var pair in _states)
+            {
+                if (pair.Value == state)
+                    return pair.Key;
+            }
+            return null;
+        }
 
         private void ChangeState(string stateName)
         {
             if (_states.TryGetValue(stateName, out FSMState<T> newState))
             {
+                string oldState = GetStateKey(_currentState);
+                
                 _currentState?.OnExit(_owner);
                 _currentState = newState;
                 _currentState.OnEnter(_owner);
-                Tracker.SetState(stateName);
+                
+                Debug.Log($"：{oldState} -> {stateName}");
+                
+                OnStateChanged?.Invoke(oldState, stateName);
             }
         }
+        
     }
 }
 
