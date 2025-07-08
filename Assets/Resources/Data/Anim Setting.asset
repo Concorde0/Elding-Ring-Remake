@@ -23,7 +23,7 @@ MonoBehaviour:
   - name: IdleBack
     type: 0
     enterTime: 0.2
-    clip: {fileID: 1827226128182048838, guid: b930363eebefb2d4e81d23dde8a113aa, type: 3}
+    clip: {fileID: 1827226128182048838, guid: f6ae79036d2239640a17bc14df11d8c5, type: 3}
     clipGroup: []
     infoGroup: []
     blendClip: []
