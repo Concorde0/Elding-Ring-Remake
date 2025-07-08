@@ -42,6 +42,9 @@ namespace RPG.MotionSystem
             
             var idleAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.Idle));
             AddState(StringConstants.AnimName.Idle,idleAnim);
+            
+            var idleBackAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.Idle));
+            AddState(StringConstants.AnimName.IdleBack,idleBackAnim);
 
             var boilAnim = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.BoilForward));
             AddState(StringConstants.AnimName.BoilForward,boilAnim);

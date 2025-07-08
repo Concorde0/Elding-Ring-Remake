@@ -32,7 +32,15 @@ namespace RPG.MotionSystem
         //TODO:如果逻辑复杂，需要分离这里的逻辑切换
         public void Idle()
         {
-            _anim.TransitionTo(StringConstants.AnimName.Idle);
+            if (_param.IsIdleBack)
+            {
+                _anim.TransitionTo(StringConstants.AnimName.IdleBack);
+            }
+            else
+            {
+                _anim.TransitionTo(StringConstants.AnimName.Idle);
+            }
+            
         }
         public void Move(Vector2 input)
         {
@@ -117,8 +125,6 @@ namespace RPG.MotionSystem
         /// </summary>
         public void HandleInputRotation()
         {
-            if (!_param.UseInputRotation) return;
-
             Vector2 input = _param.MoveInput;
             if (input.sqrMagnitude <= 0.01f) return;
 

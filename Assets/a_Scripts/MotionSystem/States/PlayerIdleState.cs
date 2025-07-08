@@ -10,16 +10,22 @@ namespace RPG.MotionSystem.States
     {
         public override void OnEnter(PlayerMotion owner)
         {
-            owner.Motor.Idle();
             if (owner.AI.GetLastStateName() == StringConstants.AnimName.RunTurn)
             {
-                Debug.Log("666666");
+                owner.Param.IsIdleBack = true;
+                Debug.Log("Idle Back");    
             } 
+            owner.Motor.Idle();
         }
 
         public override void OnUpdate(PlayerMotion owner)
         {
            Debug.Log("Player Idle State");
+        }
+
+        public override void OnExit(PlayerMotion owner)
+        {
+            owner.Param.IsIdleBack = false;
         }
 
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)

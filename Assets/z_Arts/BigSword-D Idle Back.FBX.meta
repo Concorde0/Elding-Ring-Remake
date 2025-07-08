@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9308426cf84547d48ba71a3019f01484
+guid: b930363eebefb2d4e81d23dde8a113aa
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: BigSword-D Idle
+      name: BigSword-D Idle Back
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
@@ -46,10 +46,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 1
+      loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 1
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0

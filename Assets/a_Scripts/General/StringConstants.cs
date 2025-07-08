@@ -7,6 +7,7 @@ public class StringConstants : Singleton<StringConstants>
     public class AnimName
     {
         public const string Idle = "Idle";
+        public const string IdleBack = "IdleBack";
         public const string Move = "Move";
         public const string LockedMove = "LockedMove";
         public const string Run = "Run";

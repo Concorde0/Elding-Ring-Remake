@@ -17,8 +17,14 @@ MonoBehaviour:
     type: 0
     enterTime: 0.5
     clip: {fileID: 1827226128182048838, guid: 9308426cf84547d48ba71a3019f01484, type: 3}
-    clipGroup:
-    - {fileID: 1827226128182048838, guid: 9308426cf84547d48ba71a3019f01484, type: 3}
+    clipGroup: []
+    infoGroup: []
+    blendClip: []
+  - name: IdleBack
+    type: 0
+    enterTime: 0.2
+    clip: {fileID: 1827226128182048838, guid: b930363eebefb2d4e81d23dde8a113aa, type: 3}
+    clipGroup: []
     infoGroup: []
     blendClip: []
   - name: LockedMove
