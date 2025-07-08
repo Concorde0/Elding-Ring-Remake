@@ -13,7 +13,6 @@ namespace RPG.MotionSystem.States
             if (owner.AI.GetLastStateName() == StringConstants.AnimName.RunTurn)
             {
                 owner.Param.IsIdleBack = true;
-                Debug.Log("Idle Back");    
             } 
             owner.Motor.Idle();
         }

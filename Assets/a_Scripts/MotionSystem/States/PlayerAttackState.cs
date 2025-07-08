@@ -25,7 +25,7 @@ namespace RPG.MotionSystem.States
         public override void OnUpdate(PlayerMotion owner)
         {
             //何时点击可以进行下一阶段
-            if (_comboIndex == 0 && _lastTriggeredComboIndex < 0 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 0.83f, 1f) && owner.Param.AttackTrigger.Consume())
+            if (_comboIndex == 0 && _lastTriggeredComboIndex < 0 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 0.95f, 1.4f) && owner.Param.AttackTrigger.Consume())
             {
                 _comboIndex++;
                 _lastTriggeredComboIndex = 0;
@@ -33,7 +33,7 @@ namespace RPG.MotionSystem.States
                 owner.Motor.LightAttack(_comboIndex);
                 owner.Timer.Start(StringConstants.TimerName.LightAttackTime2,2.2f);
             }
-            else if (_comboIndex == 1 && _lastTriggeredComboIndex < 1 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime2, 0.9f, 1.16f) && owner.Param.AttackTrigger.Consume())
+            else if (_comboIndex == 1 && _lastTriggeredComboIndex < 1 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime2, 1f, 1.3f) && owner.Param.AttackTrigger.Consume())
             {
                 _comboIndex++;
                 _lastTriggeredComboIndex = 1;
@@ -57,15 +57,15 @@ namespace RPG.MotionSystem.States
             }
             
             //何时可以打断攻击（这里应该和连击时间的最后时间段一样？这个我还得进游戏确认一下）
-            if (owner.Timer.GetElapsed(StringConstants.TimerName.LightAttackTime1) >=  1.16f && _comboIndex == 0)
+            if (owner.Timer.GetElapsed(StringConstants.TimerName.LightAttackTime1) >=  1.3f && _comboIndex == 0)
             {
                 _canTransition = true;
             }
-            else if (owner.Timer.GetElapsed(StringConstants.TimerName.LightAttackTime2) >= 1.16f && _comboIndex == 1)
+            else if (owner.Timer.GetElapsed(StringConstants.TimerName.LightAttackTime2) >= 1.3f && _comboIndex == 1)
             {
                 _canTransition = true;
             }
-            else if (owner.Timer.GetElapsed(StringConstants.TimerName.LightAttackTime3) >= 1.6f && _comboIndex == 2)
+            else if (owner.Timer.GetElapsed(StringConstants.TimerName.LightAttackTime3) >= 1.8f && _comboIndex == 2)
             {
                 _canTransition = true;
             }
@@ -79,7 +79,7 @@ namespace RPG.MotionSystem.States
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
             var idleAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude < 0.05f && _isFinished);
-            var moveAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1 && _isFinished);
+            var moveAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1 && _canTransition);
             var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.BoilTrigger.Peek() && _canTransition);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(moveAnim, StringConstants.AnimName.Move);

@@ -14,8 +14,9 @@ namespace RPG.AnimationSystem
             _mixer = new Mixer(graph);
             _adapterPlayable.AddInput(_mixer.GetAnimAdapterPlayable(), 0, 1f);
         
-            var moveAnim = new AnimUnit(graph, clips, 0.5f);
-            _mixer.AddInput(moveAnim);
+            var singleAnim = new AnimUnit(graph, clips, 0.5f);
+            _mixer.AddInput(singleAnim);
+            _animLength = clips.length;
         }
     
         public SingleAnim(PlayableGraph graph, AnimParam param) : this(graph, param.enterTime, param.clip)
@@ -42,6 +43,11 @@ namespace RPG.AnimationSystem
             base.Disable();
             _adapterPlayable.Pause();
             _mixer.Disable();
+        }
+
+        public override float GetAnimLength()
+        {
+            return _animLength;
         }
     
     }

@@ -17,6 +17,7 @@ namespace RPG.MotionSystem
         private readonly Mixer _mixer;
         //这个字典是把状态名切换成索引值，才能让mixer切换动画
         private readonly Dictionary<string,int> _animStateIndex;
+        private readonly Dictionary<string, float> _animLengths;
         private BlendTree2D _lockedMoveAnim;
         private BlendTree2D _moveAnim;
         private BlendTree2D _runAnim;
@@ -30,6 +31,7 @@ namespace RPG.MotionSystem
             
             _mixer = new Mixer(_graph);
             _animStateIndex = new Dictionary<string, int>();
+            _animLengths = new Dictionary<string, float>();
             
             _lockedMoveAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.LockedMove));
             AddState(StringConstants.AnimName.LockedMove,_lockedMoveAnim);
@@ -41,7 +43,7 @@ namespace RPG.MotionSystem
             AddState(StringConstants.AnimName.Run,_runAnim);
             
             var idleAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.Idle));
-            AddState(StringConstants.AnimName.Idle,idleAnim);
+            AddState(StringConstants.AnimName.Idle, idleAnim);
             
             var idleBackAnim = new SingleAnim(_graph,setting.GetParam(StringConstants.AnimName.IdleBack));
             AddState(StringConstants.AnimName.IdleBack,idleBackAnim);
@@ -101,12 +103,23 @@ namespace RPG.MotionSystem
         {
             _mixer.AddInput(anim);
             _animStateIndex.Add(name,_mixer.inputCount - 1);
+
+            _animLengths[name] = anim.GetAnimLength();
         }
         
         public void EvaluateGraph(float deltaTime)
         {
             _graph.Evaluate(deltaTime); 
             // Debug.Log($"[Anim] EvaluateGraph called with deltaTime = {deltaTime} at time = {Time.time}");
+        }
+
+        public float GetAnimLength(string stateName)
+        {
+            if (_animLengths.TryGetValue(stateName, out float length))
+            {
+                return length;
+            }
+            return 0f;
         }
 
         

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace JobSystem
 {
-    /// <summary>
+/// <summary>
 /// 非 MonoBehaviour 类，负责收集 Root 变换、调度 RootMotionComputeJob，并由外部统一管理生命周期
 /// </summary>
 public class RootMotionJobHandler
