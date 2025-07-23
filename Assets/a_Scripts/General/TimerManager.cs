@@ -9,8 +9,6 @@ namespace RPG.Timer
     {
         public float Duration{ get; private set; }
         public float StartTime{ get; private set; }
-        public bool IsRunning => Time.time >= StartTime + Duration;
-    
         public Timer(float duration)
         {
             Duration = duration;
@@ -26,10 +24,33 @@ namespace RPG.Timer
         public float Elapsed => Time.time - StartTime;
         public bool IsFinished => Elapsed >= Duration;
     }
+
+    public class FrameTimer
+    {
+        public int MaxFrames { get; private set; }
+        public int StartFrame { get; private set; }
+        public int ElapsedFrames => Time.frameCount - StartFrame;
+        public bool IsFinished => ElapsedFrames >= MaxFrames;
+        public FrameTimer(int maxFrames)
+        {
+            MaxFrames = maxFrames;
+            StartFrame = Time.frameCount;
+        }
+        
+        public void ReStart(int? newMaxFrames = null)
+        {
+            MaxFrames = newMaxFrames ?? MaxFrames;
+            StartFrame = Time.frameCount;
+        }
+        
+    }
     
     public class TimerManager
     {
         private Dictionary<string, Timer> _timers = new();
+        private Dictionary<string, FrameTimer> _frameTimers = new();
+        
+        // --- Time-based API ---
     
         public void Start(string key, float duration)
         {
@@ -70,29 +91,70 @@ namespace RPG.Timer
                 timer.ReStart(null);
             }
         }
+        // --- Frame-based API ---
+        public void Start(string key, int maxFrames)
+        {
+            if (_frameTimers.ContainsKey(key))
+                _frameTimers[key].ReStart(maxFrames);
+            else
+                _frameTimers[key] = new FrameTimer(maxFrames);
+        }
+        public bool IsFrameFinished(string key)
+        {
+            return _frameTimers.TryGetValue(key, out var frameTimer) && frameTimer.IsFinished;
+        }
+
+        public bool IsFrameInRange(string key, int minFrames, int maxFrames)
+        {
+            if (_frameTimers.TryGetValue(key, out var frameTimer))
+            {
+                int elapsed = frameTimer.ElapsedFrames;
+                return elapsed >= minFrames && elapsed <= maxFrames;
+            }
+            return false;
+        }
+
+        public int GetElapsedFrames(string key)
+        {
+            return _frameTimers.TryGetValue(key, out var frameTimer) ? frameTimer.ElapsedFrames : 0;
+        }
+
+        public void RestartFrame(string key)
+        {
+            if (_frameTimers.TryGetValue(key, out var frameTimer))
+                frameTimer.ReStart(null);
+        }
     
+        // --- Common Utilities ---
+        
         public void Remove(string key)
         {
             _timers.Remove(key);
+            _frameTimers.Remove(key);
         }
     
         public bool Exists(string key)
         {
-            return _timers.ContainsKey(key);
+            return _timers.ContainsKey(key) || _frameTimers.ContainsKey(key);
         }
         
         public void CleanupFinished()
         {
-            var keysToRemove = new List<string>();
-            foreach (var pair in _timers)
-            {
-                if (pair.Value.IsFinished)
-                    keysToRemove.Add(pair.Key);
-            }
-            foreach (var key in keysToRemove)
-            {
+            var toRemove = new List<string>();
+            // Cleanup time-based
+            foreach (var kvp in _timers)
+                if (kvp.Value.IsFinished)
+                    toRemove.Add(kvp.Key);
+            foreach (var key in toRemove)
                 _timers.Remove(key);
-            }
+
+            // Cleanup frame-based
+            toRemove.Clear();
+            foreach (var kvp in _frameTimers)
+                if (kvp.Value.IsFinished)
+                    toRemove.Add(kvp.Key);
+            foreach (var key in toRemove)
+                _frameTimers.Remove(key);
         }
         
     

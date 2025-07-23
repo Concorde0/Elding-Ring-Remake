@@ -115,11 +115,8 @@ namespace RPG.MotionSystem
 
         public float GetAnimLength(string stateName)
         {
-            if (_animLengths.TryGetValue(stateName, out float length))
-            {
-                return length;
-            }
-            return 0f;
+            //很新颖的方法啊
+            return _animLengths.GetValueOrDefault(stateName, 0f);
         }
 
         
