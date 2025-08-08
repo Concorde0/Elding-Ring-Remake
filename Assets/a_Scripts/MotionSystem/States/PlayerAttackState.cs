@@ -11,6 +11,10 @@ namespace RPG.MotionSystem.States
         private bool _isFinished;
         private bool _canTransition;
         private int _lastTriggeredComboIndex = -1;
+        
+        // Debug fields
+        private int _expectedFrameDuration;
+        private int _frameStartCount;
 
         public override void OnEnter(PlayerMotion owner)
         {
@@ -19,7 +23,12 @@ namespace RPG.MotionSystem.States
             _canTransition = false;
             _lastTriggeredComboIndex = -1;
             owner.Timer.Start(StringConstants.TimerName.LightAttackTime1,2.3f);
+            _expectedFrameDuration = Mathf.CeilToInt(owner.Anim.GetAnimLength(StringConstants.TimerName.LightAttackTimeFrame1));
+            _frameStartCount = Time.frameCount;
+            owner.Timer.Start(StringConstants.TimerName.LightAttackTimeFrame1, _expectedFrameDuration);
             owner.Motor.LightAttack(_comboIndex);
+            
+            Debug.Log($"[Debug] FrameTimer '{StringConstants.TimerName.LightAttackTimeFrame1}' started at frame {_frameStartCount}, duration {_expectedFrameDuration} frames");
         }
 
         public override void OnUpdate(PlayerMotion owner)

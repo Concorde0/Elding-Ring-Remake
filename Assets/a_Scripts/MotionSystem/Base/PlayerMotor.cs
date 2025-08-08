@@ -19,6 +19,9 @@ namespace RPG.MotionSystem
         private readonly PlayerParam _param;
         private readonly TimerManager _timer;
         
+        private Quaternion _targetRotation = Quaternion.identity;
+        private bool _isRotating = false;
+        
 
         public PlayerMotor(PlayerMotion motion,CameraResources cameraResources)
         {
@@ -123,23 +126,44 @@ namespace RPG.MotionSystem
         /// <summary>
         /// 如果允许，用输入方向（相对于摄像机）来平滑旋转角色朝向
         /// </summary>
+        
         public void HandleInputRotation()
         {
             Vector2 input = _param.MoveInput;
-            if (input.sqrMagnitude <= 0.01f) return;
 
-            Vector3 camF = _camera.forward; camF.y = 0; camF.Normalize();
-            Vector3 camR = _camera.right;   camR.y = 0; camR.Normalize();
-
-            Vector3 moveDir = camF * input.y + camR * input.x;
-            if (moveDir.sqrMagnitude > 0.01f)
+            // 读取并设置target（按下方向就设）
+            if (input.sqrMagnitude > 0.01f)
             {
-                Quaternion target = Quaternion.LookRotation(moveDir);
-                _model.rotation = Quaternion.Slerp(
-                    _model.rotation,
-                    target,
-                    Time.deltaTime * _param.RotateSpeed
-                );
+                Vector3 camF = _camera.forward; camF.y = 0f; camF.Normalize();
+                Vector3 camR = _camera.right;   camR.y = 0f; camR.Normalize();
+
+                Vector3 moveDir = camF * input.y + camR * input.x;
+                if (moveDir.sqrMagnitude > 0.01f)
+                {
+                    Quaternion newTarget = Quaternion.LookRotation(moveDir);
+                    // 只有当新目标与当前目标有明显差别才替换（避免微抖）
+                    if (!_isRotating || Quaternion.Angle(_targetRotation, newTarget) > 0.5f)
+                    {
+                        _targetRotation = newTarget;
+                        _isRotating = true;
+                    }
+                }
+            }
+
+            // 平滑朝向目标（如果有）
+            if (_isRotating)
+            {
+                // 用指数阻尼得到与帧率无关的平滑（k = _param.RotateSpeed）
+                float k = Mathf.Max(0.0f, _param.RotateSpeed); // 确保非负
+                float t = 1f - Mathf.Exp(-k * Time.deltaTime); // 0..1
+                _model.rotation = Quaternion.Slerp(_model.rotation, _targetRotation, t);
+
+                // 是否到达阈值判断
+                if (Quaternion.Angle(_model.rotation, _targetRotation) <= 1)
+                {
+                    _model.rotation = _targetRotation;
+                    _isRotating = false;
+                }
             }
         }
     }

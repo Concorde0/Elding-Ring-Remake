@@ -27,10 +27,7 @@ namespace RPG.FSM
         {
             return _conditionHandle != null && _conditionHandle.Invoke(owner);
         }
-
-       
         
-        //运算符重载 ！ | &
 
         public static FSMCondition<T> operator &(FSMCondition<T> condition1, FSMCondition<T> condition2)
         {
