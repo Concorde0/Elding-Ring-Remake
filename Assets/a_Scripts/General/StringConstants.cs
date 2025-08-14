@@ -45,6 +45,10 @@ public class StringConstants : Singleton<StringConstants>
         public const string SpaceHold = "SpaceHold";
         public const string BoilTimeHold = "JumpBackwardTimeHold";
     }
-    
-    
+
+    public class WindowId
+    {
+        public const string MainMenu = "MainMenu";
+        public const string Settings = "Settings";
+    }
 }
