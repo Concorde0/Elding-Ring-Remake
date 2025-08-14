@@ -23,8 +23,7 @@ namespace RPG.MotionSystem
         public readonly TriggerParam AttackTrigger = new TriggerParam();
         public readonly TriggerParam TurnTrigger = new TriggerParam();
         
-
-
+       
         
 
     }

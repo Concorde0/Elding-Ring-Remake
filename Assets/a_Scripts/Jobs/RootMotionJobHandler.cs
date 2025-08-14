@@ -52,8 +52,7 @@ public class RootMotionJobHandler
     /// <param name="transform">该实例的根节点 Transform</param>
     public void RecordAndSchedule(int index, Transform transform)
     {
-        currTransforms[index] = float4x4.TRS(transform.position, transform.rotation, new float3(1,1,1)
-        );
+        currTransforms[index] = float4x4.TRS(transform.position, transform.rotation, new float3(1,1,1));
 
         // 如果是最后一个实例，调度整个 Job
         if (index == count - 1)
