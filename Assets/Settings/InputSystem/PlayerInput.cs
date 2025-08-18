@@ -71,6 +71,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""b0680174-1a31-4865-b761-8537aeeed2f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -269,6 +278,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf6cacd7-da93-41c3-bba6-689704ef9932"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -861,6 +881,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_GamePlay_Space = m_GamePlay.FindAction("Space", throwIfNotFound: true);
         m_GamePlay_Lock = m_GamePlay.FindAction("Lock", throwIfNotFound: true);
         m_GamePlay_Attack = m_GamePlay.FindAction("Attack", throwIfNotFound: true);
+        m_GamePlay_Inventory = m_GamePlay.FindAction("Inventory", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -945,6 +966,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Space;
     private readonly InputAction m_GamePlay_Lock;
     private readonly InputAction m_GamePlay_Attack;
+    private readonly InputAction m_GamePlay_Inventory;
     public struct GamePlayActions
     {
         private @PlayerInput m_Wrapper;
@@ -954,6 +976,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Space => m_Wrapper.m_GamePlay_Space;
         public InputAction @Lock => m_Wrapper.m_GamePlay_Lock;
         public InputAction @Attack => m_Wrapper.m_GamePlay_Attack;
+        public InputAction @Inventory => m_Wrapper.m_GamePlay_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -978,6 +1001,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -997,6 +1023,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1184,6 +1213,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSpace(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

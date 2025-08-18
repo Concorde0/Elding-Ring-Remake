@@ -8,8 +8,8 @@ namespace RPG.UI
     {
         private static readonly Dictionary<string, string> _paths = new()
         {
-            { StringConstants.WindowId.MainMenu, "UI/MainMenuWindow" },
-            { StringConstants.WindowId.Settings, "UI/SettingsPanel" },
+            { StringConstants.WindowId.MainWindow, "Prefab/UI/MainWindow" },
+            { StringConstants.WindowId.Inventory, "Prefab/UI/InventoryWindow" },
         };
 
         public static string GetPath(string windowId)

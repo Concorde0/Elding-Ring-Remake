@@ -21,6 +21,7 @@ namespace RPG.UI
             var prefabPath = UIWindowRegistry.GetPath(windowId);
             var prefab = Resources.Load<GameObject>(prefabPath);
             var instance = GameObject.Instantiate(prefab);
+            
 
             var view = instance.GetComponent<TView>();
             var viewModel = new TViewModel();
@@ -55,6 +56,17 @@ namespace RPG.UI
         {
             foreach (var window in _windows.Values)
                 window.ViewModel.Update(deltaTime);
+        }
+        
+        //TODO:这里的IsOpen可以放在PlayerParam中
+        public bool IsOpen(string windowId) => _windows.ContainsKey(windowId);
+        
+        public void Toggle(string windowId)
+        {
+            if (IsOpen(windowId))
+                Close(windowId);
+            else
+                Show<InventoryWindowView, InventoryWindowViewModel>(windowId);
         }
     }
 }

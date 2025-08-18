@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c382f963bebf4340b9a7cfc40933304
+guid: cc57b59383e1b0a4187eea9590e29ba2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SB_BigRunes_0
+      name: "\u6B66\u5668"
       rect:
         serializedVersion: 2
-        x: 196
-        y: 95
-        width: 170
-        height: 169
+        x: 557
+        y: 440
+        width: 104
+        height: 131
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53f3828b5fb8ccd44bb05b4d1d76064d
-      internalID: 804298385
+      spriteID: f7b79ff4d960e9f428520e81e5fc5a42
+      internalID: 809130586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u9632\u5177"
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 447
+        width: 104
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cac356aa11fe98d4b83793a300bae933
+      internalID: 2099326426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u62A4\u7B26"
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 263
+        width: 128
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b1f3b5287f1b464a841320c0069bd57
+      internalID: -567748137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u6742\u9879"
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 30
+        width: 128
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4a57e07e158d1540953954f240aba5f
+      internalID: -750825109
       vertices: []
       indices: 
       edges: []
@@ -120,7 +183,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0729fc64cd8b722469a81ffe549d6249
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -128,7 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SB_BigRunes_0: 804298385
+      "\u62A4\u7B26": -567748137
+      "\u6742\u9879": -750825109
+      "\u6B66\u5668": 809130586
+      "\u9632\u5177": 2099326426
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

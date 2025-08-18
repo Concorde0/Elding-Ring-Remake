@@ -33,6 +33,8 @@ namespace RPG.InputSystem
 
             _input.GamePlay.Space.performed += OnSpacePressed;
             _input.GamePlay.Space.canceled += OnSpaceReleased;
+            
+            _input.GamePlay.Inventory.performed += ctx => { };
         
             //TODO: 加入检测可锁定目标时，再让isLocked的bool改变，以及可锁定目标消失时，isLocked变为false
             _param.IsLocked = false;
@@ -41,7 +43,9 @@ namespace RPG.InputSystem
             //TODO：这里把翻滚状态设为true之后，需要在对应的单独clip中播放完动画后把isBoil转换为false 
         
         }
-
+        
+        
+        public PlayerInput Input => _input;
         public void Enable()
         {
             _input.Enable();
@@ -57,6 +61,7 @@ namespace RPG.InputSystem
             _inputBuffer.Update(_param.MoveInput, _param);
             SpaceLogic();
         }
+        
        
 
 
