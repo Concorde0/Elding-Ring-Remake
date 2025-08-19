@@ -14,9 +14,9 @@ namespace RPG.CameraSystem
         
         private readonly FreeLookCameraController _freeLook;
         
-        public PlayerCamera(CameraResources camera, PlayerParam param) 
+        public PlayerCamera(CameraResources camera) 
         {
-            _freeLook = new FreeLookCameraController(camera, param);
+            _freeLook = new FreeLookCameraController(camera);
             _currentState = _freeLook;
         }
         

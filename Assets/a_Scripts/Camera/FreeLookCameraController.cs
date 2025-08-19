@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using RPG.CameraSystem;
 using RPG.MotionSystem;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-namespace RPG.CameraSystem
-{
-    public class FreeLookCameraController : ICameraState
+
+public class FreeLookCameraController : ICameraState
     {
         private CinemachineFreeLook _camera;
-        private PlayerParam _param;
-        public FreeLookCameraController(CameraResources camera, PlayerParam param)
+        public FreeLookCameraController(CameraResources camera)
         {
             _camera = camera.cinemachineFreeLook;
-            _param = param;
             
             camera.cinemachineFreeLook.m_XAxis.m_InputAxisName = "";
             camera.cinemachineFreeLook.m_YAxis.m_InputAxisName = "";
@@ -21,6 +21,7 @@ namespace RPG.CameraSystem
         
         public void Tick()
         {
+           
         }
 
         public void Enter()
@@ -33,5 +34,4 @@ namespace RPG.CameraSystem
             _camera.gameObject.SetActive(false);
         }
     }
-}
 

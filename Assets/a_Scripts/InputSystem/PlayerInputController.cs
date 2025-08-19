@@ -25,9 +25,6 @@ namespace RPG.InputSystem
 
             _input.GamePlay.Attack.performed += OnAttackPerformed;
             
-            _input.GamePlay.Look.performed += ctx => _param.LookInput = ctx.ReadValue<Vector2>();
-            _input.GamePlay.Look.canceled += ctx => _param.LookInput = Vector2.zero;
-            
             _input.GamePlay.Move.performed += ctx => _param.MoveInput = ctx.ReadValue<Vector2>();
             _input.GamePlay.Move.canceled += ctx => _param.MoveInput = Vector2.zero;
 
@@ -58,6 +55,7 @@ namespace RPG.InputSystem
 
         public void Update()
         {
+            
             _inputBuffer.Update(_param.MoveInput, _param);
             SpaceLogic();
         }

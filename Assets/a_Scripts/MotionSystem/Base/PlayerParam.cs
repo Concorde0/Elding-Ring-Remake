@@ -12,7 +12,6 @@ namespace RPG.MotionSystem
     public class PlayerParam
     {
         public Vector2 MoveInput;
-        public Vector2 LookInput;
         public bool Run;
         public bool IsLocked;
         public bool IsInBoil;
