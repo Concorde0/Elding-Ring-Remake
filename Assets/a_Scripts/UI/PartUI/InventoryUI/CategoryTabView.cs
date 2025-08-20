@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace RPG.UI
 {
@@ -11,22 +7,17 @@ namespace RPG.UI
         private InventoryWindowViewModel vm;
         private int index;
 
-        /// <summary>
-        /// 注入 ViewModel 与本 Tab 的索引
-        /// </summary>
-        public void Initialize(InventoryWindowViewModel viewModel, int tabIndex)
+        public void Initialize(InventoryWindowViewModel viewModel, int tabIndex, HoverClickable hoverClickable)
         {
-            vm    = viewModel;
+            vm = viewModel;
             index = tabIndex;
-        }
 
-        /// <summary>
-        /// 点击时切换到对应分类
-        /// </summary>
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            vm?.SwitchCategory(index);
+            // 绑定左键点击事件
+            if (hoverClickable != null)
+            {
+                hoverClickable.OnLeftClick.RemoveAllListeners(); // 避免重复绑定
+                hoverClickable.OnLeftClick.AddListener(() => vm?.SwitchCategory(index));
+            }
         }
     }
 }
-

@@ -80,6 +80,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerStats"",
+                    ""type"": ""Button"",
+                    ""id"": ""211be3de-2402-4fc5-badd-f01befb17e30"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5dfab6e-e280-4586-8336-59ab112621ea"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerStats"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -882,6 +902,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_GamePlay_Lock = m_GamePlay.FindAction("Lock", throwIfNotFound: true);
         m_GamePlay_Attack = m_GamePlay.FindAction("Attack", throwIfNotFound: true);
         m_GamePlay_Inventory = m_GamePlay.FindAction("Inventory", throwIfNotFound: true);
+        m_GamePlay_PlayerStats = m_GamePlay.FindAction("PlayerStats", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -967,6 +988,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Lock;
     private readonly InputAction m_GamePlay_Attack;
     private readonly InputAction m_GamePlay_Inventory;
+    private readonly InputAction m_GamePlay_PlayerStats;
     public struct GamePlayActions
     {
         private @PlayerInput m_Wrapper;
@@ -977,6 +999,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Lock => m_Wrapper.m_GamePlay_Lock;
         public InputAction @Attack => m_Wrapper.m_GamePlay_Attack;
         public InputAction @Inventory => m_Wrapper.m_GamePlay_Inventory;
+        public InputAction @PlayerStats => m_Wrapper.m_GamePlay_PlayerStats;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1004,6 +1027,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @PlayerStats.started += instance.OnPlayerStats;
+            @PlayerStats.performed += instance.OnPlayerStats;
+            @PlayerStats.canceled += instance.OnPlayerStats;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1026,6 +1052,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @PlayerStats.started -= instance.OnPlayerStats;
+            @PlayerStats.performed -= instance.OnPlayerStats;
+            @PlayerStats.canceled -= instance.OnPlayerStats;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1214,6 +1243,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnLock(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnPlayerStats(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -51,6 +51,6 @@ public class StringConstants : Singleton<StringConstants>
         public const string MainWindow = "MainWindow";
         public const string Settings = "Settings";
         public const string Inventory = "Inventory";
-        public const string CharacterStats = "CharacterStats";
+        public const string PlayerStats = "CharacterStats";
     }
 }

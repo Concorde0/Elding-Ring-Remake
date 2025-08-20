@@ -9,7 +9,8 @@ namespace RPG.UI
         private static readonly Dictionary<string, string> _paths = new()
         {
             { StringConstants.WindowId.MainWindow, "Prefab/UI/MainWindow" },
-            { StringConstants.WindowId.Inventory, "Prefab/UI/InventoryWindow" },
+            { StringConstants.WindowId.Inventory, "Prefab/UI/InventoryWindow" }, 
+            { StringConstants.WindowId.PlayerStats, "Prefab/UI/PlayerStatsWindow" },
         };
 
         public static string GetPath(string windowId)

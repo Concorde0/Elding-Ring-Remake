@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,29 +26,27 @@ namespace RPG.UI
 
         protected override void OnInitialized()
         {
-            // 注入 ViewModel 与 索引
             for (int i = 0; i < categoryTabs.Count; i++)
             {
-                categoryTabs[i].Initialize(VM, i);
+                var hover = categoryTabs[i].GetComponent<HoverClickable>();
+                categoryTabs[i].Initialize(VM, i, hover);
             }
         }
+
 
         protected override void OnShow()
         {
             base.OnShow();
-            // 根据当前索引刷新一次
             HandleCategoryChanged(VM.CurrentCategory);
         }
 
+        /// <summary>
+        /// 根据分类索引切换显示的面板（同时就是格子容器）
+        /// </summary>
         private void HandleCategoryChanged(int newIndex)
         {
             for (int i = 0; i < categoryPanels.Count; i++)
-            {
-                // 只激活当前分类对应的面板
                 categoryPanels[i].SetActive(i == newIndex);
-            }
         }
     }
 }
-
-

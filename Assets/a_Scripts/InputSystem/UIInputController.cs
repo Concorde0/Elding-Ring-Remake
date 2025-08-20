@@ -16,8 +16,9 @@ namespace RPG.InputSystem
             _uiManager = uiManager;
 
             // 绑定输入事件到 UI 管理器的窗口切换方法
-            _input.GamePlay.Inventory.performed += _ =>
-                _uiManager.Toggle(StringConstants.WindowId.Inventory);
+            _input.GamePlay.Inventory.performed += _ => _uiManager.Toggle<InventoryWindowView, InventoryWindowViewModel>(StringConstants.WindowId.Inventory);
+
+            _input.GamePlay.PlayerStats.performed += _ => _uiManager.Toggle<PlayerStatsWindowView, PlayerStatsWindowViewModel>(StringConstants.WindowId.PlayerStats);
         }
 
         public void Enable()  => _input.Enable();
