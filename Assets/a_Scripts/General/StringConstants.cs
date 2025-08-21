@@ -49,7 +49,7 @@ public class StringConstants : Singleton<StringConstants>
     public class WindowId
     {
         public const string MainWindow = "MainWindow";
-        public const string Settings = "Settings";
+        public const string SelectUI = "SelectUI";
         public const string Inventory = "Inventory";
         public const string PlayerStats = "CharacterStats";
     }

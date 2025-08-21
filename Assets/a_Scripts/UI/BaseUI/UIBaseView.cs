@@ -17,8 +17,14 @@ namespace RPG.UI
             OnInitialized();
         }
         
+        
         protected abstract void BindEvents();
         protected abstract void UnbindEvents();
+        
+        public T GetViewModel<T>() where T : UIBaseViewModel
+        {
+            return ViewModel as T;
+        }
         
         public virtual void Show()
         {
@@ -35,6 +41,7 @@ namespace RPG.UI
         protected virtual void OnInitialized() { }
         protected virtual void OnShow() { }
         protected virtual void OnHide() { }
+        
 
         private void OnDestroy()
         {

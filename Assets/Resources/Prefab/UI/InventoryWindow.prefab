@@ -3646,6 +3646,8 @@ MonoBehaviour:
   - {fileID: 7163491414773873228}
   - {fileID: 1950801167845382488}
   - {fileID: 8815467884111680955}
+  parentCanvas: {fileID: 1895771901492918882}
+  selectPrefab: {fileID: 7070868052965386976, guid: f37473e9d58541f468090162ee0009fe, type: 3}
 --- !u!1 &8568887626356008294
 GameObject:
   m_ObjectHideFlags: 0

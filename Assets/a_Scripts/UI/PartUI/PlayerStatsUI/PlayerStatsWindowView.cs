@@ -6,36 +6,43 @@ namespace RPG.UI
     {
         private PlayerStatsWindowViewModel VM => ViewModel as PlayerStatsWindowViewModel;
 
+        [Header("References")]
+        [SerializeField] private Canvas parentCanvas;       // UI所在Canvas
+        [SerializeField] private SelectUIView selectPrefab; // SelectUI预制体
+
         protected override void BindEvents()
         {
             VM.OnStatsUpdated += RefreshStatsUI;
-        }
 
+            SelectUIEvent();
+            
+            
+        }
         protected override void UnbindEvents()
         {
             if (VM != null)
                 VM.OnStatsUpdated -= RefreshStatsUI;
         }
 
-        protected override void OnInitialized()
-        {
-            // 如果有初始化 UI 逻辑，可以写在这里
-        }
-
-        protected override void OnShow()
-        {
-            base.OnShow();
-            RefreshStatsUI();
-        }
-
-        /// <summary>
-        /// 刷新 UI 显示玩家属性
-        /// </summary>
         private void RefreshStatsUI()
         {
-            // TODO: 根据 VM 的数据更新 UI
-            // 例如：strengthText.text = VM.Strength.ToString();
-            //       agilityText.text = VM.Agility.ToString();
+            // TODO: 刷新属性UI
+        }
+
+        private void SelectUIEvent()
+        {
+            var clickables = GetComponentsInChildren<HoverClickable>(true);
+
+            foreach (var clickable in clickables)
+            {
+                clickable.OnLeftClick.RemoveAllListeners();
+                clickable.OnLeftClick.AddListener(() =>
+                {
+                    Vector2 mousePos = Input.mousePosition;
+                    var instance = Instantiate(selectPrefab, parentCanvas.transform);
+                    instance.SetPosition(mousePos, parentCanvas);
+                });
+            }
         }
     }
 }
