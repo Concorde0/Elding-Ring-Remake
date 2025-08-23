@@ -21,7 +21,7 @@ namespace RPG.UI
 
         [Header("SelectUI & Canvas")]
         [SerializeField] private SelectUIView selectPrefab;
-        [SerializeField] private Canvas        parentCanvas;
+        [SerializeField] private Canvas parentCanvas;
 
         private InventoryWindowViewModel VM => ViewModel as InventoryWindowViewModel;
         private bool _eventsBound;
@@ -35,11 +35,11 @@ namespace RPG.UI
         {
             for (int i = 0; i < categoryTabs.Count; i++)
             {
-                int idx = i;
+                int index = i;
                 var click = categoryTabs[i].GetComponent<HoverClickable>();
                 click.OnLeftClick.AddListener(() =>
                 {
-                    VM.SwitchCategory(idx);
+                    VM.SwitchCategory(index);
                 });
             }
         }
@@ -48,6 +48,8 @@ namespace RPG.UI
         {
             if (_eventsBound || VM == null) return;
             VM.OnCategoryChanged += HandleCategoryChanged;
+            VM.OnItemChanged -= RefreshItemUI;
+            VM.OnItemChanged += RefreshItemUI;
             _eventsBound = true;
         }
 
@@ -55,6 +57,7 @@ namespace RPG.UI
         {
             if (!_eventsBound || VM == null) return;
             VM.OnCategoryChanged -= HandleCategoryChanged;
+            VM.OnItemChanged -= RefreshItemUI;
             _eventsBound = false;
         }
 
@@ -69,7 +72,7 @@ namespace RPG.UI
                 categoryPanels[i].SetActive(i == newIndex);
 
             PopulateCategory(newIndex);
-            ClearItemPreview();
+            ClearItemUI();
         }
 
         private void PopulateCategory(int categoryIndex)
@@ -81,9 +84,12 @@ namespace RPG.UI
                 Debug.LogError($"找不到 SlotContainer in {panel.name}");
                 return;
             }
-            
+
             foreach (Transform child in container)
+            {
                 Destroy(child.gameObject);
+            }
+                
 
             var items = VM.GetItemsByCategory(categoryIndex);
             for (int slotIndex = 0; slotIndex < items.Count; slotIndex++)
@@ -99,30 +105,35 @@ namespace RPG.UI
                 ctrl.OnHoverEnter += slotCtx =>
                 {
                     if (slotCtx.ItemData is ItemData item)
-                        RefreshItemPreview(item);
+                    {
+                        RefreshItemUI();
+                    }
+                        
                 };
                 ctrl.OnHoverExit += _ =>
                 {
-                    ClearItemPreview();
+                    ClearItemUI();
                 };
                 
                 ctrl.OnLeftClick += slotCtx =>
                 {
                     var pos = (Vector2)Input.mousePosition;
-                    var inst = Instantiate(selectPrefab, parentCanvas.transform);
-                    inst.SetPosition(pos, parentCanvas);
+                    var instantiate = Instantiate(selectPrefab, parentCanvas.transform);
+                    instantiate.SetPosition(pos, parentCanvas);
                 };
             }
         }
 
-        private void RefreshItemPreview(ItemData data)
+        private void RefreshItemUI()
         {
+            var data = VM.CurrentItemData;
+            
             detailBinder?.SetModel(data);
             sumBinder?.SetModel(data);
             countBinder?.SetModel(data);
         }
 
-        private void ClearItemPreview()
+        private void ClearItemUI()
         {
             detailBinder?.SetModel(null);
             sumBinder?.SetModel(null);

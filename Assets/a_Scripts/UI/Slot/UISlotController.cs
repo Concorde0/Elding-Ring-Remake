@@ -28,50 +28,41 @@ namespace RPG.UI
         {
             context = ctx;
             view.SetIcon(context.ItemData?.Icon);
-
-            // 清掉所有旧的监听器
+            
             clickable.OnHoverEnter.RemoveAllListeners();
             clickable.OnHoverExit .RemoveAllListeners();
             clickable.OnLeftClick  .RemoveAllListeners();
             clickable.OnRightClick .RemoveAllListeners();
-
-            // Hover Enter
+            
             clickable.OnHoverEnter.AddListener(() =>
             {
                 OnHoverEnter?.Invoke(CreateContext());
             });
-
-            // Hover Exit
+            
             clickable.OnHoverExit.AddListener(() =>
             {
                 OnHoverExit?.Invoke(CreateContext());
             });
-
-            // 左键
+            
             clickable.OnLeftClick.AddListener(() =>
             {
                 OnLeftClick?.Invoke(CreateContext());
             });
-
-            // 右键
+            
             clickable.OnRightClick.AddListener(() =>
             {
                 OnRightClick?.Invoke(CreateContext());
             });
         }
-
-        /// <summary>
-        /// 外部如果需要刷新同一个槽位的 Icon 或 ItemData，可以调用此方法
-        /// </summary>
+        
+        // 外部如果需要刷新同一个槽位的 Icon 或 ItemData，可以调用此方法
         public void Refresh(SlotContext newContext)
         {
             context = newContext;
             view.SetIcon(context.ItemData?.Icon);
         }
 
-        /// <summary>
-        /// 把最新的鼠标位置也封装进新的 SlotContext 返回
-        /// </summary>
+       
         private SlotContext CreateContext()
         {
             return new SlotContext(

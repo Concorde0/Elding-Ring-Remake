@@ -24,7 +24,6 @@ namespace RPG.UI
 
         public void SetEquipmentById(string equipId)
         {
-            
             var data = GameDataProvider.GetEquipmentById(equipId);
             if (data == null)
             {

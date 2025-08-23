@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "NewItemData", menuName = "Game Data/Item Data")]
-public class ItemData : ScriptableObject
+public class ItemData : ScriptableObject,IItemSlotData
 {
     [Header("基础信息")]
     public string Id;
@@ -12,15 +12,20 @@ public class ItemData : ScriptableObject
     public int 共有数;
     public int 持有数;
     public int 消耗专注值;
-    public int 重量;
-    
+    public string 重量;
+
     [TextArea]
     public string 道具使用;
-    
+
     [Header("能力加成")]
     public string 力气;
     public string 灵巧;
     public string 智力;
     public string 信仰;
     public string 感应;
+
+    // ----- 实现 IItemSlotData 接口 -----
+    string IItemSlotData.Id   => Id;
+    string IItemSlotData.DisplayName => 名字;
+    Sprite IItemSlotData.Icon => 物品图标;
 }
