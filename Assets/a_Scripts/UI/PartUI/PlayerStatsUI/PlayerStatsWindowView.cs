@@ -1,13 +1,11 @@
+using System;
 using UnityEngine;
 
 namespace RPG.UI
 {
-    /// <summary>
-    /// 装备信息面板 View，负责将 ViewModel 的数据分发给各个 Binder
-    /// </summary>
     public class PlayerStatsWindowView : UIBaseView
     {
-        private PlayerStatsWindowViewModel VM => ViewModel as PlayerStatsWindowViewModel;
+        public PlayerStatsWindowViewModel VM => ViewModel as PlayerStatsWindowViewModel;
 
         [Header("Equipment UI Binders")]
         [SerializeField] private EquipmentDetailBinder detailBinder;
@@ -19,33 +17,52 @@ namespace RPG.UI
 
         [Header("Other References")]
         [SerializeField] private Canvas parentCanvas;       
-        [SerializeField] private SelectUIView selectPrefab; 
-
+        [SerializeField] private SelectUIView selectPrefab;
+        
+        private bool _eventsBound = false;
         
         protected override void BindEvents()
         {
-            
-            if (VM != null)
+            if (VM == null)
             {
-                VM.OnEquipmentChanged += RefreshEquipmentUI;
+                _eventsBound = false;
+                return;
             }
-            
-            SelectUIEvent();
+
+            if (_eventsBound)
+            {
+                return;
+            }
+
+            // 先移除再添加，防止重复订阅
+            VM.OnEquipmentChanged -= RefreshEquipmentUI;
+            VM.OnEquipmentChanged += RefreshEquipmentUI;
+            RegisterSelectEvents();
+
+            _eventsBound = true;
+            RefreshEquipmentUI();
         }
 
         protected override void UnbindEvents()
         {
-            if (VM != null)
-                VM.OnEquipmentChanged -= RefreshEquipmentUI;
-        }
+            if (! _eventsBound)
+                return;
 
-        /// <summary>
-        /// 刷新所有装备信息 Binder
-        /// </summary>
+            if (VM != null)
+            {
+                VM.OnEquipmentChanged -= RefreshEquipmentUI;
+            }
+            _eventsBound = false;
+        }
+        
         private void RefreshEquipmentUI()
         {
+            if (VM == null)
+            {
+                return;
+            }
             var data = VM.CurrentEquipmentData;
-
+            
             if (data == null) 
             {
                 detailBinder?.SetModel(null);
@@ -56,7 +73,7 @@ namespace RPG.UI
                 sumBinder?.SetModel(null);
                 return;
             }
-
+            
             detailBinder?.SetModel(data);
             effectBinder?.SetModel(data);
             iconBinder?.SetModel(data);
@@ -65,22 +82,20 @@ namespace RPG.UI
             sumBinder?.SetModel(data);
         }
 
-        /// <summary>
-        /// 为所有 HoverClickable 绑定打开 SelectUI 的事件
-        /// </summary>
-        private void SelectUIEvent()
+        private void RegisterSelectEvents()
         {
             var clickables = GetComponentsInChildren<HoverClickable>(true);
-            foreach (var clickable in clickables)
+            foreach (var c in clickables)
             {
-                clickable.OnLeftClick.RemoveAllListeners();
-                clickable.OnLeftClick.AddListener(() =>
+                c.OnLeftClick.RemoveAllListeners();
+                c.OnLeftClick.AddListener(() =>
                 {
-                    Vector2 mousePos = Input.mousePosition;
-                    var instance = Instantiate(selectPrefab, parentCanvas.transform);
-                    instance.SetPosition(mousePos, parentCanvas);
+                    var pos = (Vector2)Input.mousePosition;
+                    var inst = Instantiate(selectPrefab, parentCanvas.transform);
+                    inst.SetPosition(pos, parentCanvas);
                 });
             }
         }
+        
     }
 }

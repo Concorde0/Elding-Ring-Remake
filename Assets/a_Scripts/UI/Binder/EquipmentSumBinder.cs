@@ -18,8 +18,8 @@
             
             itemName.text = data?.名字 ?? string.Empty;
             
-            amplifyValue.text = data != null ? $"增幅: {data.增幅}" : string.Empty;
+            amplifyValue.text = data != null ? $" {data.增幅}" : string.Empty;
             
-            itemType.text = data != null ? $"类型: {data.攻击类型}" : string.Empty;
+            itemType.text = data != null ? $"{data.攻击类型}" : string.Empty;
         }
     }

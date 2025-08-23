@@ -27,11 +27,11 @@ public class EquipmentData : ScriptableObject
     public int 防御强度;
     
     [Header("能力加成")]
-    public int 力气;
-    public int 灵巧;
-    public int 智力;
-    public int 信仰;
-    public int 感应;
+    public string 力气;
+    public string 灵巧;
+    public string 智力;
+    public string 信仰;
+    public string 感应;
     
     [Header("必须能力值")]
     public int m力气;
@@ -45,6 +45,4 @@ public class EquipmentData : ScriptableObject
     public string 附加效果2;
     public string 附加效果3;
     
-    [TextArea]
-    public string Description;
 }

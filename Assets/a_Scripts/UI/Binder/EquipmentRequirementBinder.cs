@@ -19,18 +19,26 @@ public class EquipmentRequirementBinder : MonoBehaviour
 
     public void SetModel(EquipmentData data)
     {
+        if (data == null)
+        {
+            // 清空显示，避免 null 崩溃
+            strength.text = agility.text = intelligence.text = faith.text = perception.text = "-";
+            Mstrength.text = Magility.text = Mintelligence.text = Mfaith.text = Mperception.text = "-";
+            return;
+        }
+
         // 能力加成
-        strength.text     = data.力气.ToString();
-        agility.text      = data.灵巧.ToString();
-        intelligence.text = data.智力.ToString();
-        faith.text        = data.信仰.ToString();
-        perception.text   = data.感应.ToString();
+        strength.text     = data != null ? $"力气 {data.力气}" : "-";
+        agility.text      = data != null ? $"灵巧 {data.灵巧}" : "-";
+        intelligence.text = data != null ? $"智力 {data.智力}" : "-";
+        faith.text        = data != null ? $"信仰 {data.信仰}" : "-";
+        perception.text   = data != null ? $"感应 {data.感应}" : "-";
 
         // 必须能力值
-        Mstrength.text     = data.m力气.ToString();
-        Magility.text      = data.m灵巧.ToString();
-        Mintelligence.text = data.m智力.ToString();
-        Mfaith.text        = data.m信仰.ToString();
-        Mperception.text   = data.m感应.ToString();
+        Mstrength.text     = data != null ? $"力气 {data.m力气}" : "-";
+        Magility.text      = data != null ? $"灵巧 {data.m灵巧}" : "-";
+        Mintelligence.text = data != null ? $"智力 {data.m智力}" : "-";
+        Mfaith.text        = data != null ? $"信仰 {data.m信仰}" : "-";
+        Mperception.text   = data != null ? $"感应 {data.m感应}" : "-";
     }
 }

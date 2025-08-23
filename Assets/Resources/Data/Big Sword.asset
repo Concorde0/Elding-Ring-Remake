@@ -29,19 +29,19 @@ MonoBehaviour:
   "d\u9B54\u529B": 50
   "d\u706B": 50
   "\u9632\u5FA1\u5F3A\u5EA6": 58
-  "\u529B\u6C14": 1
-  "\u7075\u5DE7": 1
-  "\u667A\u529B": 11
-  "\u4FE1\u4EF0": 1
-  "\u611F\u5E94": 1
+  "\u529B\u6C14": B
+  "\u7075\u5DE7": '-'
+  "\u667A\u529B": '-'
+  "\u4FE1\u4EF0": '-'
+  "\u611F\u5E94": '-'
   "m\u529B\u6C14": 31
   "m\u7075\u5DE7": 12
-  "m\u667A\u529B": 1
-  "m\u4FE1\u4EF0": 1
-  "m\u611F\u5E94": 1
-  "\u9644\u52A0\u6548\u679C1": 
-  "\u9644\u52A0\u6548\u679C2": 
-  "\u9644\u52A0\u6548\u679C3": 
+  "m\u667A\u529B": 0
+  "m\u4FE1\u4EF0": 0
+  "m\u611F\u5E94": 0
+  "\u9644\u52A0\u6548\u679C1": 1
+  "\u9644\u52A0\u6548\u679C2": 23
+  "\u9644\u52A0\u6548\u679C3": 3
   Description: 'bigggggggggggggg Sword
 
 '

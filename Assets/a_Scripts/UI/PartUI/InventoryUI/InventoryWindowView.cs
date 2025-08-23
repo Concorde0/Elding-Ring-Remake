@@ -1,54 +1,65 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.UI
 {
+    
     public class InventoryWindowView : UIBaseView
     {
-        [Header("四个分类按钮")] 
+        [Header("Category Tabs & Panels")]
         [SerializeField] private List<CategoryTabView> categoryTabs;
-
-        [Header("四个分类面板")] 
         [SerializeField] private List<GameObject> categoryPanels;
 
-        [Header("References")] 
-        [SerializeField] private Canvas parentCanvas;
-        [SerializeField] private SelectUIView selectPrefab;
-
-        [Header("Prefabs")] 
+        [Header("Slot Prefab")]
         [SerializeField] private GameObject slotPrefab;
 
-        [Header("右侧详情 ViewModel 引用")] 
-        [SerializeField] private PlayerStatsWindowViewModel equipmentVM;
+        [Header("Item Preview Binders")]
+        [SerializeField] private InventorySumBinder   sumBinder;
+        [SerializeField] private InventoryCountBinder countBinder;
+        [SerializeField] private InventoryDetailBinder detailBinder;
+
+        [Header("SelectUI & Canvas")]
+        [SerializeField] private SelectUIView selectPrefab;
+        [SerializeField] private Canvas        parentCanvas;
 
         private InventoryWindowViewModel VM => ViewModel as InventoryWindowViewModel;
+        private bool _eventsBound;
 
-        protected override void BindEvents()
+        private void OnDestroy()
         {
-            if (VM != null)
-                VM.OnCategoryChanged += HandleCategoryChanged;
-
-            SelectUIEvent();
-        }
-
-        protected override void UnbindEvents()
-        {
-            if (VM != null)
-                VM.OnCategoryChanged -= HandleCategoryChanged;
+            UnbindEvents();
         }
 
         protected override void OnInitialized()
         {
             for (int i = 0; i < categoryTabs.Count; i++)
             {
-                var hover = categoryTabs[i].GetComponent<HoverClickable>();
-                categoryTabs[i].Initialize(VM, i, hover);
+                int idx = i;
+                var click = categoryTabs[i].GetComponent<HoverClickable>();
+                click.OnLeftClick.AddListener(() =>
+                {
+                    VM.SwitchCategory(idx);
+                });
             }
+        }
+
+        protected override void BindEvents()
+        {
+            if (_eventsBound || VM == null) return;
+            VM.OnCategoryChanged += HandleCategoryChanged;
+            _eventsBound = true;
+        }
+
+        protected override void UnbindEvents()
+        {
+            if (!_eventsBound || VM == null) return;
+            VM.OnCategoryChanged -= HandleCategoryChanged;
+            _eventsBound = false;
         }
 
         protected override void OnShow()
         {
-            base.OnShow();
             HandleCategoryChanged(VM.CurrentCategory);
         }
 
@@ -58,51 +69,64 @@ namespace RPG.UI
                 categoryPanels[i].SetActive(i == newIndex);
 
             PopulateCategory(newIndex);
+            ClearItemPreview();
         }
 
         private void PopulateCategory(int categoryIndex)
         {
-            // 找到专门用来装槽位的容器
             var panel = categoryPanels[categoryIndex];
             var container = panel.transform.Find("SlotContainer");
-
-            // 先清空旧槽位（只删 Container 下的子物体）
+            if (container == null)
+            {
+                Debug.LogError($"找不到 SlotContainer in {panel.name}");
+                return;
+            }
+            
             foreach (Transform child in container)
                 Destroy(child.gameObject);
 
-            // 获取要显示的数据列表
             var items = VM.GetItemsByCategory(categoryIndex);
-
-            // 在 Container 下面实例化新的槽位
-            for (int i = 0; i < items.Count; i++)
+            for (int slotIndex = 0; slotIndex < items.Count; slotIndex++)
             {
-                var slotGO = Instantiate(
-                    slotPrefab,
-                    container,        // 父节点设为 Container
-                    worldPositionStays: false
-                );
-
-                // 初始化 slot
-                var controller = slotGO.GetComponent<UISlotController>();
-                var rect = slotGO.GetComponent<RectTransform>();
-                var ctx = new SlotContext(i, items[i], Vector2.zero, rect);
-                controller.Initialize(ctx, equipmentVM);
+                var data = items[slotIndex];
+                var go   = Instantiate(slotPrefab, container, false);
+                var ctrl = go.GetComponent<UISlotController>();
+                
+                var rect = go.GetComponent<RectTransform>();
+                var ctx  = new SlotContext(slotIndex, data, Vector2.zero, rect);
+                ctrl.Initialize(ctx,null);
+                
+                ctrl.OnHoverEnter += slotCtx =>
+                {
+                    if (slotCtx.ItemData is ItemData item)
+                        RefreshItemPreview(item);
+                };
+                ctrl.OnHoverExit += _ =>
+                {
+                    ClearItemPreview();
+                };
+                
+                ctrl.OnLeftClick += slotCtx =>
+                {
+                    var pos = (Vector2)Input.mousePosition;
+                    var inst = Instantiate(selectPrefab, parentCanvas.transform);
+                    inst.SetPosition(pos, parentCanvas);
+                };
             }
         }
-        
-        private void SelectUIEvent()
+
+        private void RefreshItemPreview(ItemData data)
         {
-            var clickables = GetComponentsInChildren<HoverClickable>(true);
-            foreach (var clickable in clickables)
-            {
-                clickable.OnLeftClick.RemoveAllListeners();
-                clickable.OnLeftClick.AddListener(() =>
-                {
-                    Vector2 mousePos = Input.mousePosition;
-                    var instance = Instantiate(selectPrefab, parentCanvas.transform);
-                    instance.SetPosition(mousePos, parentCanvas);
-                });
-            }
+            detailBinder?.SetModel(data);
+            sumBinder?.SetModel(data);
+            countBinder?.SetModel(data);
+        }
+
+        private void ClearItemPreview()
+        {
+            detailBinder?.SetModel(null);
+            sumBinder?.SetModel(null);
+            countBinder?.SetModel(null);
         }
     }
 }

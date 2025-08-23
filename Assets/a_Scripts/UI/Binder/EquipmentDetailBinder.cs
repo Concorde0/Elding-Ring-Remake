@@ -26,19 +26,19 @@ public class EquipmentDetailBinder : MonoBehaviour
             return;
         }
         // 攻击属性
-        physicalAttackText.text   = data.a物理.ToString();
-        magicAttackText.text      = data.a魔力.ToString();
-        fireAttackText.text       = data.a火.ToString();
-        criticalAttackText.text   = data.致命一击.ToString();
+        physicalAttackText.text   = data != null ? $"物理 {data.a物理}" : "-";
+        magicAttackText.text      = data != null ? $"魔力 {data.a魔力}" : "-";
+        fireAttackText.text       = data != null ? $"火 {data.a火}" : "-";
+        criticalAttackText.text   = data != null ? $"致命一击 {data.致命一击}" : "-";
 
         // 防御属性
-        physicalDefenseText.text  = data.d物理.ToString();
-        magicDefenseText.text     = data.d魔力.ToString();
-        fireDefenseText.text      = data.d火.ToString();
-        poiseText.text            = data.防御强度.ToString();
+        physicalDefenseText.text  = data != null ? $"物理 {data.d物理}" : "-";
+        magicDefenseText.text     = data != null ? $"魔力 {data.d魔力}" : "-";
+        fireDefenseText.text      = data != null ? $"火 {data.d火}" : "-";
+        poiseText.text            = data != null ? $"防御强度 {data.防御强度}" : "-";
 
         // 其他属性
-        weightText.text           = data.重量.ToString();
+        weightText.text           = data != null ? $"重量 {data.重量}" : "-";
     }
     
     private void ClearUI()

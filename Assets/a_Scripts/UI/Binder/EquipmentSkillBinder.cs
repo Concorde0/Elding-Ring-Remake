@@ -12,9 +12,14 @@ public class EquipmentSkillBinder : MonoBehaviour
 
     public void SetModel(EquipmentData data)
     {
-        skillIcon.sprite = data?.战技图标;
-        skillName.text = data?.战技 ?? "无战技";
-        fpCost.text = $"消耗专注值: {data.消耗专注值}";
+        if (skillIcon != null)
+            skillIcon.sprite = data?.战技图标;
+
+        if (skillName != null)
+            skillName.text = data?.战技 ?? "无战技";
+
+        if (fpCost != null)
+            fpCost.text = data != null ? $"消耗专注值 {data.消耗专注值}" : "消耗专注值: -";
     }
 }
 
