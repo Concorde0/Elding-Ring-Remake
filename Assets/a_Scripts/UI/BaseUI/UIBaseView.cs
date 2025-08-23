@@ -21,11 +21,6 @@ namespace RPG.UI
         protected abstract void BindEvents();
         protected abstract void UnbindEvents();
         
-        public T GetViewModel<T>() where T : UIBaseViewModel
-        {
-            return ViewModel as T;
-        }
-        
         public virtual void Show()
         {
             gameObject.SetActive(true);

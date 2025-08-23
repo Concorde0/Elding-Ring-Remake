@@ -4,23 +4,35 @@ namespace RPG.UI
 {
     public class PlayerStatsWindowViewModel : UIBaseViewModel
     {
-        public event Action OnStatsUpdated;
         
+        public PlayerStatsWindowViewModel() 
+        {
+            _model = new PlayerStatsModel();
+        }
+        
+        public event Action OnEquipmentChanged;
+        private readonly PlayerStatsModel _model;
+        public EquipmentData CurrentEquipmentData => _model.Equipment;
+        
+
+        public PlayerStatsWindowViewModel(PlayerStatsModel model)
+        {
+            _model = model;
+        }
 
         public override void Initialize()
         {
-            LoadPlayerStats();
+            if (_model.Equipment == null)
+            {
+                _model.SetEquipment(new EquipmentData());
+            }
+            OnEquipmentChanged?.Invoke();
         }
 
-        private void LoadPlayerStats()
+        public void SetEquipment(EquipmentData data)
         {
-            OnStatsUpdated?.Invoke();
-        }
-
-        // 外部调用：当属性变化时刷新 UI
-        public void UpdateStats(int str, int agi, int intel)
-        {
-            OnStatsUpdated?.Invoke();
+            _model.SetEquipment(data);
+            OnEquipmentChanged?.Invoke();
         }
     }
 }

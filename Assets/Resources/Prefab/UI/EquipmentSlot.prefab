@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 4163985129947479062}
   - component: {fileID: 2333166927538358573}
   - component: {fileID: 7115400765344012727}
+  - component: {fileID: 1534857072868880648}
   m_Layer: 5
   m_Name: EquipmentSlot
   m_TagString: Untagged
@@ -245,6 +246,19 @@ MonoBehaviour:
   OnRightClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1534857072868880648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608207498010685362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1675a1e29a9b6734696e41fdd6b1c915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 488551463103511373}
 --- !u!1 &5822382802935482857
 GameObject:
   m_ObjectHideFlags: 0

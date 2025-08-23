@@ -8,7 +8,7 @@ namespace RPG.UI
         IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         [Header("Highlight Target")]
-        [SerializeField] private GameObject highlightObject; // 高亮的 Image 
+        [SerializeField] private GameObject highlightObject;
 
         [Header("Events")]
         public UnityEvent OnHoverEnter;

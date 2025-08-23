@@ -2,37 +2,75 @@ using UnityEngine;
 
 namespace RPG.UI
 {
+    /// <summary>
+    /// 装备信息面板 View，负责将 ViewModel 的数据分发给各个 Binder
+    /// </summary>
     public class PlayerStatsWindowView : UIBaseView
     {
         private PlayerStatsWindowViewModel VM => ViewModel as PlayerStatsWindowViewModel;
 
-        [Header("References")]
-        [SerializeField] private Canvas parentCanvas;       // UI所在Canvas
-        [SerializeField] private SelectUIView selectPrefab; // SelectUI预制体
+        [Header("Equipment UI Binders")]
+        [SerializeField] private EquipmentDetailBinder detailBinder;
+        [SerializeField] private EquipmentEffectBinder effectBinder;
+        [SerializeField] private EquipmentIconBinder iconBinder;
+        [SerializeField] private EquipmentRequirementBinder requirementBinder;
+        [SerializeField] private EquipmentSkillBinder skillBinder;
+        [SerializeField] private EquipmentSumBinder sumBinder;
 
+        [Header("Other References")]
+        [SerializeField] private Canvas parentCanvas;       
+        [SerializeField] private SelectUIView selectPrefab; 
+
+        
         protected override void BindEvents()
         {
-            VM.OnStatsUpdated += RefreshStatsUI;
-
+            
+            if (VM != null)
+            {
+                VM.OnEquipmentChanged += RefreshEquipmentUI;
+            }
+            
             SelectUIEvent();
-            
-            
         }
+
         protected override void UnbindEvents()
         {
             if (VM != null)
-                VM.OnStatsUpdated -= RefreshStatsUI;
+                VM.OnEquipmentChanged -= RefreshEquipmentUI;
         }
 
-        private void RefreshStatsUI()
+        /// <summary>
+        /// 刷新所有装备信息 Binder
+        /// </summary>
+        private void RefreshEquipmentUI()
         {
-            // TODO: 刷新属性UI
+            var data = VM.CurrentEquipmentData;
+
+            if (data == null) 
+            {
+                detailBinder?.SetModel(null);
+                effectBinder?.SetModel(null);
+                iconBinder?.SetModel(null);
+                requirementBinder?.SetModel(null);
+                skillBinder?.SetModel(null);
+                sumBinder?.SetModel(null);
+                return;
+            }
+
+            detailBinder?.SetModel(data);
+            effectBinder?.SetModel(data);
+            iconBinder?.SetModel(data);
+            requirementBinder?.SetModel(data);
+            skillBinder?.SetModel(data);
+            sumBinder?.SetModel(data);
         }
 
+        /// <summary>
+        /// 为所有 HoverClickable 绑定打开 SelectUI 的事件
+        /// </summary>
         private void SelectUIEvent()
         {
             var clickables = GetComponentsInChildren<HoverClickable>(true);
-
             foreach (var clickable in clickables)
             {
                 clickable.OnLeftClick.RemoveAllListeners();

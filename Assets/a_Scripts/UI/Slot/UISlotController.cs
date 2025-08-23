@@ -6,33 +6,76 @@ namespace RPG.UI
     public class UISlotController : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private HoverClickable clickable; // 新增引用
+        [SerializeField] private HoverClickable clickable;
         [SerializeField] private UISlotView view;
 
         private SlotContext context;
+        private PlayerStatsWindowViewModel targetVM;
 
-        public event Action<SlotContext> OnHoverEnter;
-        public event Action<SlotContext> OnHoverExit;
         public event Action<SlotContext> OnLeftClick;
         public event Action<SlotContext> OnRightClick;
+        public event Action<SlotContext> OnHoverEnter;
+        public event Action<SlotContext> OnHoverExit;
 
-        public void Initialize(SlotContext ctx)
+        public void Initialize(SlotContext ctx, PlayerStatsWindowViewModel vm)
         {
             context = ctx;
+            targetVM = vm;
 
-            // 先解绑避免重复订阅
+            view.SetIcon(context.ItemData?.Icon);
+
             clickable.OnHoverEnter.RemoveAllListeners();
             clickable.OnHoverExit.RemoveAllListeners();
             clickable.OnLeftClick.RemoveAllListeners();
             clickable.OnRightClick.RemoveAllListeners();
 
-            // 事件转发，并带上下文
-            clickable.OnHoverEnter.AddListener(() => OnHoverEnter?.Invoke(context));
-            clickable.OnHoverExit.AddListener(() => OnHoverExit?.Invoke(context));
-            clickable.OnLeftClick.AddListener(() => OnLeftClick?.Invoke(context));
-            clickable.OnRightClick.AddListener(() => OnRightClick?.Invoke(context));
-            
-            
+            // 悬停：联动装备详情 + 向外转发
+            clickable.OnHoverEnter.AddListener(() =>
+            {
+                if (context.ItemData is EquipmentData equipData)
+                    targetVM?.SetEquipment(equipData);
+
+                OnHoverEnter?.Invoke(new SlotContext(
+                    context.SlotIndex,
+                    context.ItemData,
+                    Input.mousePosition,
+                    context.SlotRect
+                ));
+            });
+
+            clickable.OnHoverExit.AddListener(() =>
+            {
+                OnHoverExit?.Invoke(context);
+            });
+
+            // 左键
+            clickable.OnLeftClick.AddListener(() =>
+            {
+                var updated = new SlotContext(
+                    context.SlotIndex,
+                    context.ItemData,
+                    Input.mousePosition,
+                    context.SlotRect
+                );
+                OnLeftClick?.Invoke(updated);
+            });
+
+            // 右键
+            clickable.OnRightClick.AddListener(() =>
+            {
+                var updated = new SlotContext(
+                    context.SlotIndex,
+                    context.ItemData,
+                    Input.mousePosition,
+                    context.SlotRect
+                );
+                OnRightClick?.Invoke(updated);
+            });
+        }
+
+        public void Refresh()
+        {
+            view.SetIcon(context.ItemData?.Icon);
         }
     }
 }
