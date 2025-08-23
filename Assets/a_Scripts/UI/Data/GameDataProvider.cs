@@ -33,7 +33,21 @@ public static class GameDataProvider
             return _itemDb;
         }
     }
-    
+
+    private static CharacterData _characterData;
+    public static CharacterData GetCharacterData
+    {
+        get
+        {
+            if (_characterData == null)
+            {
+                _characterData = Resources.Load<CharacterData>("Data/CharacterData");
+                if (_characterData == null)
+                    Debug.LogError("加载 CharacterData 失败！");
+            }
+            return _characterData;
+        }
+    }
 
     public static EquipmentData GetEquipmentById(string id)
     {
