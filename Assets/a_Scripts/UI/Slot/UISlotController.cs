@@ -51,6 +51,7 @@ namespace RPG.UI
             // 左键
             clickable.OnLeftClick.AddListener(() =>
             {
+                Debug.Log($"[UISlotController] Slot {ctx.SlotIndex} clicked");
                 var updated = new SlotContext(
                     context.SlotIndex,
                     context.ItemData,
