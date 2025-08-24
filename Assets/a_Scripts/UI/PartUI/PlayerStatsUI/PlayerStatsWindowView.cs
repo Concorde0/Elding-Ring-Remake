@@ -19,6 +19,8 @@ namespace RPG.UI
         [SerializeField] private Canvas parentCanvas;       
         [SerializeField] private SelectUIView selectPrefab;
         
+        private SelectUIView currentSelectUIView;
+        
         private bool _eventsBound = false;
         
         protected override void BindEvents()
@@ -88,13 +90,21 @@ namespace RPG.UI
             foreach (var c in clickables)
             {
                 c.OnLeftClick.RemoveAllListeners();
-                c.OnLeftClick.AddListener(() =>
-                {
-                    var pos = (Vector2)Input.mousePosition;
-                    var inst = Instantiate(selectPrefab, parentCanvas.transform);
-                    inst.SetPosition(pos, parentCanvas);
-                });
+                c.OnLeftClick.AddListener(ShowOrRefreshSelectUI);
             }
+        }
+        
+        private void ShowOrRefreshSelectUI()
+        {
+            Vector2 pos = Input.mousePosition;
+
+            if (currentSelectUIView != null)
+            {
+                Destroy(currentSelectUIView.gameObject);
+            }
+
+            currentSelectUIView = Instantiate(selectPrefab, parentCanvas.transform);
+            currentSelectUIView.SetPosition(pos, parentCanvas);
         }
         
     }

@@ -22,6 +22,8 @@ namespace RPG.UI
         [Header("SelectUI & Canvas")]
         [SerializeField] private SelectUIView selectPrefab;
         [SerializeField] private Canvas parentCanvas;
+        
+        private SelectUIView currentSelectUIView;
 
         private InventoryWindowViewModel VM => ViewModel as InventoryWindowViewModel;
         private bool _eventsBound;
@@ -102,27 +104,34 @@ namespace RPG.UI
                 var ctx  = new SlotContext(slotIndex, data, Vector2.zero, rect);
                 ctrl.Initialize(ctx,null);
                 
-                ctrl.OnHoverEnter += slotCtx =>
-                {
-                    if (slotCtx.ItemData is ItemData item)
-                    {
-                        RefreshItemUI();
-                    }
-                        
-                };
-                ctrl.OnHoverExit += _ =>
-                {
-                    ClearItemUI();
-                };
+                ctrl.OnHoverEnter += _ => RefreshItemUI();
+                ctrl.OnHoverExit  += _ => ClearItemUI();
                 
-                ctrl.OnLeftClick += slotCtx =>
-                {
-                    var pos = (Vector2)Input.mousePosition;
-                    var instantiate = Instantiate(selectPrefab, parentCanvas.transform);
-                    instantiate.SetPosition(pos, parentCanvas);
+                ctrl.OnLeftClick += _ => {
+                    Vector2 pos = Input.mousePosition;
+                    ShowOrRefreshSelectUI(pos, ctx);
                 };
             }
         }
+        
+        private void ShowOrRefreshSelectUI(Vector2 screenPos, SlotContext ctx)
+        {
+            CloseSelectUI();
+            currentSelectUIView = Instantiate(selectPrefab, parentCanvas.transform);
+            currentSelectUIView.SetPosition(screenPos, parentCanvas);
+            
+        }
+        
+        private void CloseSelectUI()
+        {
+            if (currentSelectUIView != null)
+            {
+                Destroy(currentSelectUIView.gameObject);
+                currentSelectUIView = null;
+            }
+        }
+        
+        
 
         private void RefreshItemUI()
         {
