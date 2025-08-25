@@ -2168,7 +2168,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 13821277117008906}
-  - component: {fileID: 2440336230564253715}
   m_Layer: 5
   m_Name: Sum
   m_TagString: Untagged
@@ -2199,22 +2198,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2440336230564253715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3369778274415722116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6563c980e7f4a2c4398c84f0868eebe1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemIcon: {fileID: 3953587010465552096}
-  itemName: {fileID: 4102027802905338502}
-  amplifyValue: {fileID: 1579554030956427356}
-  itemType: {fileID: 2470169016478636779}
 --- !u!1 &3626247177324705158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,7 +2207,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2101956904982916853}
-  - component: {fileID: 4179737375242340444}
   m_Layer: 5
   m_Name: Details
   m_TagString: Untagged
@@ -2260,27 +2242,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4179737375242340444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3626247177324705158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abde1f678da36b449ac5e34c7de662de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  physicalAttackText: {fileID: 8470027663449048937}
-  magicAttackText: {fileID: 5999560344285301849}
-  fireAttackText: {fileID: 4382008205863354010}
-  criticalAttackText: {fileID: 3810427563381100268}
-  physicalDefenseText: {fileID: 6694534777531665362}
-  magicDefenseText: {fileID: 1889087552886308473}
-  fireDefenseText: {fileID: 1998818240088074691}
-  poiseText: {fileID: 5247672818138447627}
-  weightText: {fileID: 2702989978424234757}
 --- !u!1 &3717823361512211107
 GameObject:
   m_ObjectHideFlags: 0
@@ -2661,7 +2622,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7718063415429620334}
-  - component: {fileID: 7401244726447358006}
   m_Layer: 5
   m_Name: Requirement
   m_TagString: Untagged
@@ -2698,28 +2658,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7401244726447358006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033532951048943376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931d6e667cb127d4ea3c75b88b7e4cfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strength: {fileID: 2519657802455354771}
-  agility: {fileID: 5251237147206732544}
-  intelligence: {fileID: 5613507468505856520}
-  faith: {fileID: 5744009527978777905}
-  perception: {fileID: 2643682177768698097}
-  Mstrength: {fileID: 7177209957643013320}
-  Magility: {fileID: 3164227390934903967}
-  Mintelligence: {fileID: 1589658263374864489}
-  Mfaith: {fileID: 4063207555866284864}
-  Mperception: {fileID: 2068208359237828594}
 --- !u!1 &4370260831311445467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2953,7 +2891,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4848594102016345370}
-  - component: {fileID: 7846214291988849924}
   m_Layer: 5
   m_Name: Skills
   m_TagString: Untagged
@@ -2983,21 +2920,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7846214291988849924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4568100669962031912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7498076317c2fec42adb5ffb46f0ea1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillIcon: {fileID: 6798636950530483588}
-  skillName: {fileID: 67696777126628653}
-  fpCost: {fileID: 5193854172014839809}
 --- !u!1 &4792046471032879070
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,7 +2932,6 @@ GameObject:
   - component: {fileID: 3328792282785404462}
   - component: {fileID: 4153746522238908647}
   - component: {fileID: 7379711501211268935}
-  - component: {fileID: 4053306584439274734}
   m_Layer: 5
   m_Name: PlayerStatsWindow
   m_TagString: Untagged
@@ -3105,26 +3026,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4053306584439274734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4792046471032879070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41ffabc499c3b864aa08268607c0c7b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detailBinder: {fileID: 4179737375242340444}
-  effectBinder: {fileID: 2617031950595269562}
-  iconBinder: {fileID: 1534857072868880648, guid: c70271a88204123409c57743e8fd3a3d, type: 3}
-  requirementBinder: {fileID: 7401244726447358006}
-  skillBinder: {fileID: 7846214291988849924}
-  sumBinder: {fileID: 2440336230564253715}
-  parentCanvas: {fileID: 3328792282785404462}
-  selectPrefab: {fileID: 7070868052965386976, guid: f37473e9d58541f468090162ee0009fe, type: 3}
 --- !u!1 &4895594369695517800
 GameObject:
   m_ObjectHideFlags: 0
@@ -4801,7 +4702,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5354895555323995787}
-  - component: {fileID: 2617031950595269562}
   m_Layer: 5
   m_Name: Effect
   m_TagString: Untagged
@@ -4830,20 +4730,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2617031950595269562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7382195345774325657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b55b1ec5eb84bfe419f0136977d18cf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectText1: {fileID: 2476749527111125652}
-  effectText2: {fileID: 7151042404852068882}
 --- !u!1 &7383182054599275701
 GameObject:
   m_ObjectHideFlags: 0

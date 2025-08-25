@@ -277,7 +277,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5300021016919370919}
-  - component: {fileID: 1845713169190718113}
   m_Layer: 5
   m_Name: Binder
   m_TagString: Untagged
@@ -322,36 +321,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1845713169190718113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628062802975050457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a08008e023342429b1b3f9a74ddabf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "\u7B49\u7EA7": {fileID: 4464095809448726318}
-  "\u6301\u6709\u5362\u6069": {fileID: 456328880457972073}
-  "\u751F\u547D\u529B": {fileID: 118704683637663947}
-  "\u96C6\u4E2D\u529B": {fileID: 8927837537143939450}
-  "\u8010\u529B": {fileID: 510846998657239095}
-  "\u529B\u6C14": {fileID: 4977307896589605487}
-  "\u7075\u5DE7": {fileID: 1686395193126428382}
-  "\u667A\u529B": {fileID: 793111892342804209}
-  "\u4FE1\u4EF0": {fileID: 5824357222400534360}
-  "\u611F\u5E94": {fileID: 1002177115139651075}
-  currentHP: {fileID: 2451343494887041088}
-  maxHP: {fileID: 5390791016737032595}
-  currentFP: {fileID: 5142466760810831577}
-  maxFP: {fileID: 2009135003938856792}
-  "current\u7CBE\u529B": {fileID: 8460967860050916700}
-  "max\u7CBE\u529B": {fileID: 4007317781632672421}
-  "current\u8D1F\u91CD": {fileID: 1810431589748410200}
-  "max\u8D1F\u91CD": {fileID: 2782383225458788491}
 --- !u!1 &3861226268058895385
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +333,6 @@ GameObject:
   - component: {fileID: 5224498031605321282}
   - component: {fileID: 4061372623838869066}
   - component: {fileID: 7026675474987627633}
-  - component: {fileID: 7282294495752351472}
   m_Layer: 5
   m_Name: CharacterDataWindow
   m_TagString: Untagged
@@ -455,19 +423,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7282294495752351472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3861226268058895385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11988b63bbb639441ac23b1090e569b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterBinder: {fileID: 1845713169190718113}
 --- !u!1 &4161728692563395765
 GameObject:
   m_ObjectHideFlags: 0

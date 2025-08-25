@@ -7,7 +7,6 @@ using RPG.CameraSystem;
 using RPG.FSM;
 using RPG.InputSystem;
 using RPG.Timer;
-using RPG.UI;
 using UnityEngine;
 
 namespace RPG.MotionSystem
@@ -25,9 +24,8 @@ namespace RPG.MotionSystem
         public PlayerCamera Camera { get; private set; }
         public RootMotionJobHandler RootMotion { get; private set; }
         public TimerManager Timer { get; private set; }
-        public UIManager UIManager { get;private set; }
 
-        public PlayerMotion(Transform model, AnimSetting setting, CameraResources camera, UIManager uiManager)
+        public PlayerMotion(Transform model, AnimSetting setting, CameraResources camera)
         {
             Timer = new TimerManager();
             Model = model;

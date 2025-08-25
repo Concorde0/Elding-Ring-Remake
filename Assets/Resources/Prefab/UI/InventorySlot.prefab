@@ -11,10 +11,6 @@ GameObject:
   - component: {fileID: 453753090570976191}
   - component: {fileID: 561339406862506517}
   - component: {fileID: 1021654511788969252}
-  - component: {fileID: 2075831662986580104}
-  - component: {fileID: 1228946645673851528}
-  - component: {fileID: 3026725700790188668}
-  - component: {fileID: 7988459375525801423}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -81,72 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2075831662986580104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 870630205351194516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4973b8764118646857c515ed450da3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickable: {fileID: 3026725700790188668}
-  view: {fileID: 1228946645673851528}
---- !u!114 &1228946645673851528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 870630205351194516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eead59550ddf14a4085e2dbe00833964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconImage: {fileID: 4419179847502235461}
-  highlight: {fileID: 6216936557459424182}
---- !u!114 &3026725700790188668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 870630205351194516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f381bc93ab920944beca265dcf839c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highlightObject: {fileID: 6216936557459424182}
-  OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHoverExit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLeftClick:
-    m_PersistentCalls:
-      m_Calls: []
-  OnRightClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &7988459375525801423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 870630205351194516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1675a1e29a9b6734696e41fdd6b1c915, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 4419179847502235461}
 --- !u!1 &6216936557459424182
 GameObject:
   m_ObjectHideFlags: 0
