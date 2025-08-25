@@ -1,6 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+[Serializable]
+public enum Catrgory
+{
+    Accessories = 0,
+    Item = 1,
+    Weapon = 2,
+    Armor = 3,
+}
+
+
 [CreateAssetMenu(fileName = "NewItemData", menuName = "Game Data/Item Data")]
 public class ItemData : ScriptableObject,IItemSlotData
 {
@@ -13,6 +26,7 @@ public class ItemData : ScriptableObject,IItemSlotData
     public int 持有数;
     public int 消耗专注值;
     public string 重量;
+    public Catrgory catrgory;
 
     [TextArea]
     public string 道具使用;

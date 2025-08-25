@@ -1,17 +1,18 @@
 using System;
+using RPG.UI;
 using UnityEngine;
 
 namespace RPG.UI
 {
     /// <summary>
-    /// 最笨实现：不区分 EquipmentData / ItemData，
-    /// 只负责显示图标、捕获鼠标事件并原样抛出 SlotContext
+    /// 负责把 SlotContext（包含 IItemSlotData）与 UISlotView 连接起来，
+    /// 并把 SlotContext 原样抛出给上层（InventoryWindowView）。
+    /// 现在支持 ItemSlot 实例（带 StackCount/InstanceId）。
     /// </summary>
     public class UISlotController : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private HoverClickable clickable;
-        [SerializeField] private UISlotView    view;
+        [SerializeField] private UISlotView view;
 
         private SlotContext context;
 
@@ -20,57 +21,82 @@ namespace RPG.UI
         public event Action<SlotContext> OnHoverEnter;
         public event Action<SlotContext> OnHoverExit;
 
-        /// <summary>
-        /// 初始化时只传 SlotContext 即可，
-        /// context.ItemData 可以是 EquipmentData 或 ItemData
-        /// </summary>
-        public void Initialize(SlotContext ctx, object unknown)
+        private void Awake()
         {
+            if (view == null)
+                view = GetComponentInChildren<UISlotView>(true);
+        }
+
+        public void Initialize(SlotContext ctx, object unused = null)
+        {
+            BindView(ctx);
+        }
+
+        private void BindView(SlotContext ctx)
+        {
+            UnbindView();
+
             context = ctx;
             view.SetIcon(context.ItemData?.Icon);
-            
-            clickable.OnHoverEnter.RemoveAllListeners();
-            clickable.OnHoverExit .RemoveAllListeners();
-            clickable.OnLeftClick  .RemoveAllListeners();
-            clickable.OnRightClick .RemoveAllListeners();
-            
-            clickable.OnHoverEnter.AddListener(() =>
-            {
-                OnHoverEnter?.Invoke(CreateContext());
-            });
-            
-            clickable.OnHoverExit.AddListener(() =>
-            {
-                OnHoverExit?.Invoke(CreateContext());
-            });
-            
-            clickable.OnLeftClick.AddListener(() =>
-            {
-                OnLeftClick?.Invoke(CreateContext());
-            });
-            
-            clickable.OnRightClick.AddListener(() =>
-            {
-                OnRightClick?.Invoke(CreateContext());
-            });
+            view.SetHighlight(false);
+
+            view.OnLeftClick  += OnViewLeftClick;
+            view.OnRightClick += OnViewRightClick;
+            view.OnHoverEnter += OnViewHoverEnter;
+            view.OnHoverExit  += OnViewHoverExit;
         }
-        
-        // 外部如果需要刷新同一个槽位的 Icon 或 ItemData，可以调用此方法
+
         public void Refresh(SlotContext newContext)
         {
+            // 更新 context 并刷新显示（例如图标）
             context = newContext;
             view.SetIcon(context.ItemData?.Icon);
         }
 
-       
-        private SlotContext CreateContext()
+        private void UnbindView()
+        {
+            if (view == null) return;
+            view.OnLeftClick  -= OnViewLeftClick;
+            view.OnRightClick -= OnViewRightClick;
+            view.OnHoverEnter -= OnViewHoverEnter;
+            view.OnHoverExit  -= OnViewHoverExit;
+        }
+
+        private void OnViewLeftClick(UnityEngine.Vector2 mousePos)
+        {
+            OnLeftClick?.Invoke(CreateContext(mousePos));
+        }
+
+        private void OnViewRightClick(UnityEngine.Vector2 mousePos)
+        {
+            OnRightClick?.Invoke(CreateContext(mousePos));
+        }
+
+        private void OnViewHoverEnter()
+        {
+            view.SetHighlight(true);
+            OnHoverEnter?.Invoke(CreateContext(UnityEngine.Input.mousePosition));
+        }
+
+        private void OnViewHoverExit()
+        {
+            view.SetHighlight(false);
+            OnHoverExit?.Invoke(CreateContext(UnityEngine.Input.mousePosition));
+        }
+
+        private SlotContext CreateContext(UnityEngine.Vector2 mousePos)
         {
             return new SlotContext(
                 context.SlotIndex,
                 context.ItemData,
-                Input.mousePosition,
+                mousePos,
                 context.SlotRect
             );
+        }
+
+        private void OnDestroy()
+        {
+            UnbindView();
         }
     }
 }

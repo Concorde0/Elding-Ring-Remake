@@ -13,13 +13,25 @@ namespace RPG.UI
         [SerializeField] private TextMeshProUGUI totalCountText;
         [SerializeField] private TextMeshProUGUI heldCountText;
         [SerializeField] private TextMeshProUGUI focusCostText;
-
+        
         public void SetModel(ItemData data)
         {
             useCountText.text    = data != null ? data.使用次数 : string.Empty;
             totalCountText.text  = data != null ? data.共有数.ToString() : string.Empty;
             heldCountText.text   = data != null ? data.持有数.ToString() : string.Empty;
             focusCostText.text   = data != null ? data.消耗专注值.ToString() : string.Empty;
+        }
+        
+        public void SetModel(ItemSlot slot)
+        {
+            if (slot == null)
+            {
+                SetModel((ItemData)null);
+                return;
+            }
+            SetModel(slot.Template);
+            heldCountText.text = slot.StackCount.ToString();
+            
         }
     }
 }

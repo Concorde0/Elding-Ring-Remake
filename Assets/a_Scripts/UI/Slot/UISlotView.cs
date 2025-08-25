@@ -1,22 +1,21 @@
 using System;
-using RPG.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
-public class UISlotView : UIBaseView, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class UISlotView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image iconImage;
     [SerializeField] private GameObject highlight;
 
+    // 注意：左/右点击会传入屏幕坐标（方便弹窗）
     public event Action<Vector2> OnLeftClick;
     public event Action<Vector2> OnRightClick;
     public event Action OnHoverEnter;
     public event Action OnHoverExit;
 
-    protected override void BindEvents() { }
-    protected override void UnbindEvents()
+    private void OnDestroy()
     {
         OnLeftClick = null;
         OnRightClick = null;

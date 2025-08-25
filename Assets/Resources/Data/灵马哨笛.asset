@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 2001
   "\u540D\u5B57": "\u7075\u9A6C\u54E8\u7B1B"
-  "\u7269\u54C1\u56FE\u6807": {fileID: -404838156, guid: c05deaf50ef4ce84e8e998e5f58a900f, type: 3}
+  "\u7269\u54C1\u56FE\u6807": {fileID: -431301469, guid: 294e7acc38365cf47bc364d80eb05dc6, type: 3}
   "\u4F7F\u7528\u6B21\u6570": "\u65E0\u9650\u6B21"
   "\u5171\u6709\u6570": 1
   "\u6301\u6709\u6570": 1
   "\u6D88\u8017\u4E13\u6CE8\u503C": 0
+  "\u91CD\u91CF": 
   "\u9053\u5177\u4F7F\u7528": "\u53EC\u5524\u51FA\u7075\u9A6C"
   "\u529B\u6C14": '-'
   "\u7075\u5DE7": '-'

@@ -39,6 +39,7 @@ namespace RPG.UI
             {
                 int index = i;
                 var click = categoryTabs[i].GetComponent<HoverClickable>();
+                click.OnLeftClick.RemoveAllListeners();
                 click.OnLeftClick.AddListener(() =>
                 {
                     VM.SwitchCategory(index);
@@ -65,6 +66,7 @@ namespace RPG.UI
 
         protected override void OnShow()
         {
+            VM.ReassignSlotsByTemplateCategory();
             HandleCategoryChanged(VM.CurrentCategory);
         }
 
@@ -81,36 +83,44 @@ namespace RPG.UI
         {
             var panel = categoryPanels[categoryIndex];
             var container = panel.transform.Find("SlotContainer");
-            if (container == null)
-            {
-                Debug.LogError($"找不到 SlotContainer in {panel.name}");
-                return;
-            }
 
             foreach (Transform child in container)
-            {
                 Destroy(child.gameObject);
-            }
-                
 
             var items = VM.GetItemsByCategory(categoryIndex);
+
             for (int slotIndex = 0; slotIndex < items.Count; slotIndex++)
             {
-                var data = items[slotIndex];
+                int sIdx = slotIndex;
+                IItemSlotData data = items[sIdx]; // 可能为 null
+
                 var go   = Instantiate(slotPrefab, container, false);
                 var ctrl = go.GetComponent<UISlotController>();
-                
+
                 var rect = go.GetComponent<RectTransform>();
-                var ctx  = new SlotContext(slotIndex, data, Vector2.zero, rect);
-                ctrl.Initialize(ctx,null);
+                var ctx  = new SlotContext(sIdx, data, Vector2.zero, rect);
+
+                ctrl.Initialize(ctx, null);
                 
-                ctrl.OnHoverEnter += _ => RefreshItemUI();
-                ctrl.OnHoverExit  += _ => ClearItemUI();
-                
-                ctrl.OnLeftClick += _ => {
-                    Vector2 pos = Input.mousePosition;
-                    ShowOrRefreshSelectUI(pos, ctx);
+                ctrl.OnHoverEnter += (slotCtx) =>
+                {
+                    VM.SelectSlot(slotCtx.ItemData);
                 };
+
+                ctrl.OnHoverExit += (slotCtx) =>
+                {
+                    VM.ClearSelection();
+                    ClearItemUI();
+                };
+
+                ctrl.OnLeftClick += (slotCtx) =>
+                {
+                    VM.SelectSlot(slotCtx.ItemData);
+                    Vector2 pos = slotCtx.MouseScreenPos;
+                    ShowOrRefreshSelectUI(pos, slotCtx);
+                };
+                
+               
             }
         }
         
@@ -132,21 +142,28 @@ namespace RPG.UI
         }
         
         
-
         private void RefreshItemUI()
         {
-            var data = VM.CurrentItemData;
+            var slot = VM.CurrentItemSlot;  
+            var template = VM.CurrentItemData;
             
-            detailBinder?.SetModel(data);
-            sumBinder?.SetModel(data);
-            countBinder?.SetModel(data);
+            sumBinder?.SetModel(template);
+            countBinder?.SetModel(template);
+            detailBinder?.SetModel(template);
+            
+            if (slot is ItemSlot itemSlot)
+            {
+                sumBinder?.SetModel(itemSlot);  
+                countBinder?.SetModel(itemSlot); 
+                detailBinder?.SetModel(itemSlot);
+            }
         }
 
         private void ClearItemUI()
         {
-            detailBinder?.SetModel(null);
-            sumBinder?.SetModel(null);
-            countBinder?.SetModel(null);
+            detailBinder?.SetModel((ItemSlot)null);
+            sumBinder?.SetModel((ItemSlot)null);
+            countBinder?.SetModel((ItemSlot)null);
         }
     }
 }
