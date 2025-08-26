@@ -9,8 +9,7 @@ public class InventoryData_SO : ScriptableObject
     public void AddItem(ItemData_SO newItemData, int amount)
     {
         bool found = false;
-
-        //判断它是否可堆叠，如果可堆叠的话循环列表，看看是否有相同物品，如果有，则在原有的数量上加上捡起的数量
+        
         if (newItemData.stackable)
         {
             foreach (var item in items)
@@ -23,18 +22,41 @@ public class InventoryData_SO : ScriptableObject
                 }
             }
         }
-        //如果不可堆叠，或者没有相同的物品时，放入
+        
+        if (!found)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].itemData == null)
+                {
+                    items[i].itemData = newItemData;
+                    items[i].amount = amount;
+                    found = true;
+                    break;
+                }
+            }
+        }
+        
+    }
+
+    public void RemoveItem(ItemData_SO itemData, int amount)
+    {
         for (int i = 0; i < items.Count; i++)
         {
-            if (items[i].itemData == null && !found)
+            if (items[i].itemData == itemData)
             {
-                items[i].itemData = newItemData;
-                items[i].amount += amount;
+                items[i].amount -= amount;
+                if (items[i].amount <= 0)
+                {
+                    items[i].itemData = null;
+                    items[i].amount = 0;
+                }
                 break;
             }
         }
     }
 }
+
 [System.Serializable]
 public class InventoryItem
 {

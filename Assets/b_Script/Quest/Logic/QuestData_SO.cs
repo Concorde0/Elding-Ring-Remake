@@ -68,7 +68,7 @@ public class QuestData_SO : ScriptableObject
             }
             else
             {
-                InventoryManager.Instance.inventoryData.AddItem(reward.itemData,reward.amount);
+                InventoryManager.Instance.AddItem(reward.itemData,reward.amount);
             }
             
             InventoryManager.Instance.inventoryUI.RefreshUI();

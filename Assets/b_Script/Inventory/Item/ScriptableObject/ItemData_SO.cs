@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public enum ItemType
 {
-    Usable,Weapon,Armor
+    Weapon,Armor,Accessories,Others,Head,Chest,Legs,Hands
 }
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item Data")]
@@ -16,9 +16,11 @@ public class ItemData_SO : ScriptableObject
     public string itemName;
     public Sprite itemIcon;
     public int itemAmount;
+    public GameObject itemPrefab;
     [TextArea]
     public string description = "";
     public bool stackable;
+    public bool useAble;
     
     [FormerlySerializedAs("itemData")] [Header("Useable Items")]
     public UseableItemData_SO useableData;

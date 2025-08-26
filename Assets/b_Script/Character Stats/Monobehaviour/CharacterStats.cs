@@ -7,8 +7,13 @@ public class CharacterStats : MonoBehaviour
 {
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
-    private RuntimeAnimatorController baseAnimator;
     
+    public ItemData_SO EquippedWeapon;
+    public ItemData_SO EquippedHead;
+    public ItemData_SO EquippedChest;
+    public ItemData_SO EquippedHands;
+    public ItemData_SO EquippedLegs;
+    public ItemData_SO EquippedAccessories;
     
     [Header(("Weapon"))]
     public Transform weaponSlot;
@@ -17,7 +22,7 @@ public class CharacterStats : MonoBehaviour
 
     private void Awake()
     {
-        baseAnimator = GetComponent<Animator>().runtimeAnimatorController;
+        
     }
 
     #region Read from Data_SO
@@ -50,7 +55,7 @@ public class CharacterStats : MonoBehaviour
 
         if (attacker.isCritical)
         {
-            defener.GetComponent<Animator>().SetTrigger("Hit");
+            //TODO:触发受伤动画
         }
 
         if (CurrentHealth <= 0)
@@ -62,14 +67,9 @@ public class CharacterStats : MonoBehaviour
 
     private int CurrentDamage()
     {
-        float coreDamage = UnityEngine.Random.Range(attackData.minDamage,attackData.maxDamage);
-
-        if (isCritical)
-        {
-            coreDamage *= attackData.criticalMultiplier;
-            Debug.Log("暴击！" + coreDamage);
-        }
-        return (int)coreDamage;
+        float Damage = attackData.Damage;
+        
+        return (int)Damage;
     }
 
     #endregion
@@ -83,7 +83,7 @@ public class CharacterStats : MonoBehaviour
             Instantiate(weapon.weaponPrefab, weaponSlot);
         }
         attackData.ApplyWeaponData(weapon.weaponData);
-        GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimator;
+        // GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimator;
         
     }
 
@@ -97,7 +97,7 @@ public class CharacterStats : MonoBehaviour
             }
         }
         // attackData.ApplyWeaponData(baseAttackData);
-        GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
+        // GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
     }
     
     #endregion

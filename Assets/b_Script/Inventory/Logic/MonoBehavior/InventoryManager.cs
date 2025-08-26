@@ -8,14 +8,6 @@ using UnityEngine.UI;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
-    //嵌套类，用来存储原始背包数据以及背包格位置。这里的数据在DragItems中一一赋值了
-    //另外，这里的嵌套类应迁移到DragItem中，嵌套类最好在类内使用，不对外开放，这里的嵌套类的实际使用是在DragItem中
-    public class DragData
-    {
-        public SlotHolder originalHolder;
-        public RectTransform originalParent;
-    }
-    
     //手动拖入相对应的DATA，直接去调用SO中的唯一数据
     [Header("Inventory Data")]
     public InventoryData_SO inventoryData;
@@ -27,11 +19,6 @@ public class InventoryManager : Singleton<InventoryManager>
     public ContainerUI inventoryUI;
     public ContainerUI actionUI;
     public ContainerUI equipmentUI;
-    
-    
-    [Header("Drag Canvases")]
-    public Canvas dragCanvas;
-    public DragData currentDrag;
     
     
     [Header("UI Panels")]
@@ -46,81 +33,86 @@ public class InventoryManager : Singleton<InventoryManager>
     
     [Header("Tooltips")]
     public ItemToolTip tooltip;
+    
+    [Header("物品")]
+    public InventoryRouter router;
+
+    [Header("共享UI")]
+    public ContainerUI bagUI;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        router.Init();
+        bagUI.BindData(router.accessoriesData);
+    }
 
     private void Start()
     {
         inventoryUI.RefreshUI();
-        actionUI.RefreshUI();
-        equipmentUI.RefreshUI();
+        // actionUI.RefreshUI();
+        // equipmentUI.RefreshUI();
     }
     private void Update()
     {
-        //开关背包
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            isOpen = !isOpen;
-            bagPanel.SetActive(isOpen);
-            statsPanel.SetActive(isOpen);
-        }
-        //传入三个数据用来展示人物面板的人物数据
-        UpdateStatsText(
-            GameManager.Instance.playerStats.MaxHealth,
-            GameManager.Instance.playerStats.attackData.minDamage,
-            GameManager.Instance.playerStats.attackData.maxDamage);
+        // 开关背包
+         if (Input.GetKeyDown(KeyCode.B))
+         {
+             isOpen = !isOpen;
+             bagPanel.SetActive(isOpen);
+             statsPanel.SetActive(isOpen);
+         }
+         //传入三个数据用来展示人物面板的人物数据
+         // UpdateStatsText(
+         //     GameManager.Instance.playerStats.MaxHealth,
+         //     GameManager.Instance.playerStats.attackData.Damage);
     }
 
-    private void UpdateStatsText(int health , int min,int max)
+    private void UpdateStatsText(int health , int damage)
     {
         healthText.text = health.ToString();
-        attackText.text = min + "/" + max;
-    }
-
-    
-    #region 检查拖拽物品是否在每一个Slot范围内
-
-    public bool CheckInInventoryUI(Vector3 position)
-    {
-        for (int i = 0; i < inventoryUI.slotHolders.Length; i++)
-        {
-            var t = inventoryUI.slotHolders[i].transform as RectTransform;
-            
-            if (RectTransformUtility.RectangleContainsScreenPoint(t, position))
-            {
-                return true;
-            }
-        }
-        return false;
+        attackText.text = damage.ToString();
     }
     
-    public bool CheckInActionUI(Vector3 position)
-    {
-        foreach (var t1 in inventoryUI.slotHolders)
-        {
-            var t = t1.transform as RectTransform;
-            
-            if (RectTransformUtility.RectangleContainsScreenPoint(t, position))
-            {
-                return true;
-            }
-        }
+    #region UI切页
+    public void OnWeaponTabClicked() => bagUI.BindData(router.weaponData);
+    public void OnArmorTabClicked() => bagUI.BindData(router.armorData);
+    public void OnAccessoriesTabClicked() => bagUI.BindData(router.accessoriesData);
+    public void OnOthersTabClicked() => bagUI.BindData(router.othersData);
+    #endregion
 
-        return false;
+    #region 物品操作
+    public void AddItem(ItemData_SO item, int amount = 1)
+    {
+        if (item == null || router == null) return;
+
+        var targetData = router.GetDataForItem(item);
+        if (targetData != null)
+        {
+            Debug.Log("ADD");
+            targetData.AddItem(item, amount);
+            if (bagUI.inventoryData == targetData)
+            {
+                bagUI.RefreshUI();
+            }
+                
+        }
+    }
+
+    public void RemoveItem(ItemData_SO item, int amount = 1)
+    {
+        if (item == null || router == null) return;
+
+        var targetData = router.GetDataForItem(item);
+        if (targetData != null)
+        {
+            targetData.RemoveItem(item, amount);
+            if (bagUI.inventoryData == targetData)
+                bagUI.RefreshUI();
+        }
     }
     
-    public bool CheckInEquipmentUI(Vector3 position)
-    {
-        foreach (var t1 in inventoryUI.slotHolders)
-        {
-            var t = t1.transform as RectTransform;
-            
-            if (RectTransformUtility.RectangleContainsScreenPoint(t, position))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    
     #endregion
 
     #region 检测任务物品
