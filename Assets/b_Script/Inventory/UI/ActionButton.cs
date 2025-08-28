@@ -15,9 +15,9 @@ public class ActionButton : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(actionKey) && currentSlotHolder.itemUI.GetItem())
-        {
-            currentSlotHolder.UseItem();
-        }
+        // if (Input.GetKeyDown(actionKey) && currentSlotHolder.itemUI.GetItem())
+        // {
+        //     currentSlotHolder.UseItem();
+        // }
     }
 }

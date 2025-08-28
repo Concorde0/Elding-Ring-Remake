@@ -6,4 +6,6 @@ using UnityEngine;
 public class UseableItemData_SO : ScriptableObject
 {
     public int healthPoint;
+    public int amount;
+    public int cooldown;
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,7 +13,7 @@ public enum EquipmentSlot
 {
     None,
     Weapon,
-    Head,  
+    Head,
     Chest,
     Hands,
     Legs,
@@ -33,25 +30,19 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (eventData.clickCount >= 2)
-            {
-                UseItem();
-                return;
-            }
-            if (InventoryContextMenu.Instance != null)
-                InventoryContextMenu.Instance.Open(this, eventData.position);
+            InventoryContextMenu.Instance?.Open(this, eventData.position);
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (itemUI.GetItem() != null)
+        var item = itemUI.GetItem();
+        if (item != null)
         {
             if (itemUI.lightBackGround != null)
                 itemUI.lightBackGround.SetActive(true);
-
-            InventoryManager.Instance.tooltip.SetupTooltip(itemUI.GetItem());
-            InventoryManager.Instance.tooltip.gameObject.SetActive(true);
+            
+            ToolTipUI.Instance?.Show(item);
         }
     }
 
@@ -60,27 +51,7 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         if (itemUI.lightBackGround != null)
             itemUI.lightBackGround.SetActive(false);
 
-        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
-    }
-
-    public void UseItem()
-    {
-        if (itemUI.GetItem() != null)
-        {
-            if (itemUI.GetItem().useAble && itemUI.Bag.items[itemUI.Index].amount > 0)
-            {
-                GameManager.Instance.playerStats.ApplyHealth(itemUI.GetItem().useableData.healthPoint);
-                itemUI.Bag.items[itemUI.Index].amount -= 1;
-
-                QuestManager.Instance.UpdateQuestProgress(itemUI.GetItem().itemName, -1);
-            }
-            UpdateItem();
-        }
+        ToolTipUI.Instance?.Hide();
     }
 
     public void UpdateItem()
@@ -104,11 +75,16 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
         var entry = bag.items[itemUI.Index];
 
-        //装备槽过滤逻辑
-        if (slotType == SlotType.Equipment && entry.itemData != null && !IsItemAllowed(entry.itemData))
+        //直接把数据也清掉
+        if (slotType == SlotType.Equipment)
         {
-            itemUI.SetupItemUI(null, 0);
-            return;
+            if (entry.itemData == null || entry.itemData.allowedSlot != equipmentSlot)
+            {
+                bag.items[itemUI.Index].itemData = null;
+                bag.items[itemUI.Index].amount = 0;
+                itemUI.SetupItemUI(null, 0);
+                return;
+            }
         }
 
         itemUI.SetupItemUI(entry.itemData, entry.amount);
@@ -117,23 +93,6 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     private bool IsItemAllowed(ItemData_SO itemData)
     {
         if (slotType != SlotType.Equipment) return true;
-
-        switch (equipmentSlot)
-        {
-            case EquipmentSlot.Weapon:
-                return itemData.itemType == ItemType.Weapon;
-            case EquipmentSlot.Head:
-                return itemData.itemType == ItemType.Head;
-            case EquipmentSlot.Chest:
-                return itemData.itemType == ItemType.Chest;
-            case EquipmentSlot.Hands:
-                return itemData.itemType == ItemType.Hands;
-            case EquipmentSlot.Legs:
-                return itemData.itemType == ItemType.Legs;
-            case EquipmentSlot.Accessories:
-                return itemData.itemType == ItemType.Accessories;
-            default:
-                return false;
-        }
+        return itemData.allowedSlot == equipmentSlot;
     }
 }

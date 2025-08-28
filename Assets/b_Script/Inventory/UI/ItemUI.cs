@@ -17,30 +17,32 @@ public class ItemUI : MonoBehaviour
 
     public void SetupItemUI(ItemData_SO item, int itemAmount)
     {
-        if (itemAmount == 0)
+        if (Bag == null || Index < 0 || Index >= Bag.items.Count)
         {
-            Bag.items[Index].itemData = null;
-            icon.gameObject.SetActive(false);
+            if (icon != null) icon.gameObject.SetActive(false);
+            if (amount != null) amount.text = "";
+            if (lightBackGround != null) lightBackGround.SetActive(false);
             return;
         }
-
-        if (itemAmount < 0)
+        
+        if (itemAmount < 0) itemAmount = 0;
+        if (item == null || itemAmount == 0)
         {
-            item = null;
+            currentItemData = null;
+            if (icon != null) icon.gameObject.SetActive(false);
+            if (amount != null) amount.text = "";
+            if (lightBackGround != null) lightBackGround.SetActive(false);
+            return;
         }
         
-        if (item != null)
+        currentItemData = item;
+        if (icon != null)
         {
-            currentItemData = item;
             icon.sprite = item.itemIcon;
-            amount.text = itemAmount.ToString();
             icon.gameObject.SetActive(true);
         }
-        else
-        {
-            icon.gameObject.SetActive(false);
-            lightBackGround.SetActive(false);
-        }
+        if (amount != null)
+            amount.text = itemAmount.ToString();
     }
 
     public ItemData_SO GetItem()

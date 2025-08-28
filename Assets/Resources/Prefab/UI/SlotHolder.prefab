@@ -168,6 +168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotType: 0
   itemUI: {fileID: 1677620151840206648}
+  equipmentSlot: 0
+  itemData: {fileID: 0}
+  panelRect: {fileID: 890743171422269900, guid: b0c85f42d6d76f243943d88ddde3c836, type: 3}
 --- !u!1 &3870811721231310647
 GameObject:
   m_ObjectHideFlags: 0

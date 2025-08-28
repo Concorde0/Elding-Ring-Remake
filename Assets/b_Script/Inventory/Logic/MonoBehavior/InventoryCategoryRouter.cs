@@ -17,10 +17,16 @@ public class InventoryRouter
     {
         typeToData = new Dictionary<ItemType, InventoryData_SO>
         {
-            { ItemType.Weapon, weaponData },
-            { ItemType.Armor, armorData },
+            { ItemType.Weapon,      weaponData },
+            { ItemType.Armor,       armorData },
+            
+            { ItemType.Head,        armorData },
+            { ItemType.Chest,       armorData },
+            { ItemType.Hands,       armorData },
+            { ItemType.Legs,        armorData },
+
             { ItemType.Accessories, accessoriesData },
-            { ItemType.Others, othersData }
+            { ItemType.Others,      othersData }
         };
     }
 
@@ -30,3 +36,4 @@ public class InventoryRouter
         return typeToData.TryGetValue(item.itemType, out var data) ? data : null;
     }
 }
+

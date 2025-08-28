@@ -9,7 +9,6 @@ public class QuestUI : Singleton<QuestUI>
 {
     [Header("Elements")]
     public GameObject questPanel;
-    public ItemToolTip tooltip;
     private bool isOpen;
     
     [Header("Quest Name")]
@@ -37,10 +36,6 @@ public class QuestUI : Singleton<QuestUI>
             questContentText.text = "";
 
             SetupQuestList();
-            if (!isOpen)
-            {
-                tooltip.gameObject.SetActive(false);
-            }
         }
     }
 

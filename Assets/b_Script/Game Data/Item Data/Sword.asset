@@ -12,26 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97851792cd4d27340a6f4b4728a1c7e0, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemType: 0
-  itemName: Sword
+  itemType: 4
+  itemName: "\u539A\u91CD\u5DE8\u5251"
   itemIcon: {fileID: -404838156, guid: c05deaf50ef4ce84e8e998e5f58a900f, type: 3}
+  itemIcon2: {fileID: 594014520, guid: 97b8106ee7a909a47843313f69fed536, type: 3}
   itemAmount: 1
   itemPrefab: {fileID: 5518885154706774473, guid: 28913c20a61e27e4180562c52e492f25, type: 3}
-  description: '1
-
-    1
-
-    1
-
-    1
-
-    1
-
-    1
-
-'
   stackable: 0
   useAble: 1
+  isConsumable: 0
+  allowedSlot: 2
+  t1: "\u7279\u5927\u5251"
+  t2: "\u666E\u901A/\u7A81\u523A"
+  t3: 20
+  t4: "\u72EE\u5B50\u65A9"
+  a1: 240
+  a2: 0
+  a3: 0
+  a4: 100
+  d1: 84
+  d2: 50
+  d3: 50
+  d4: 58
+  c1: B
+  c2: '-'
+  c3: '-'
+  c4: '-'
+  c5: '-'
+  m1: 31
+  m2: 12
+  m3: 0
+  m4: 0
+  m5: 0
+  description: 
   useableData: {fileID: 0}
   weaponPrefab: {fileID: 5518885154706774473, guid: 28913c20a61e27e4180562c52e492f25, type: 3}
   weaponData: {fileID: 11400000, guid: 2ec207d9d4b04094183653e558394a40, type: 2}

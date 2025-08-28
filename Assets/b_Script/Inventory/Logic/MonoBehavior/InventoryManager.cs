@@ -8,13 +8,12 @@ using UnityEngine.UI;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
-    //手动拖入相对应的DATA，直接去调用SO中的唯一数据
     [Header("Inventory Data")]
     public InventoryData_SO inventoryData;
     public InventoryData_SO actionData;
     public InventoryData_SO equipmentData;
 
-    //手动拖入每个相关的UI组件，用ContainerUI中的refresh进行刷新物品格信息，或是可以通过ContainerUI去访问相对应的Slot信息，对应到每个格
+  
     [Header("Containers")] 
     public ContainerUI inventoryUI;
     public ContainerUI actionUI;
@@ -25,14 +24,8 @@ public class InventoryManager : Singleton<InventoryManager>
     public GameObject bagPanel;
     public GameObject statsPanel;
     
-    private bool isOpen = false;
-    
-    [Header("Stats Texts")]
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI attackText;
-    
-    [Header("Tooltips")]
-    public ItemToolTip tooltip;
+    private bool isBagOpen = false;
+    private bool isStatsOpen = false;
     
     [Header("物品")]
     public InventoryRouter router;
@@ -49,29 +42,29 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Start()
     {
+        if (equipmentUI != null && equipmentData != null)
+            equipmentUI.BindData(equipmentData);
         inventoryUI.RefreshUI();
+        equipmentUI.RefreshUI();
         // actionUI.RefreshUI();
-        // equipmentUI.RefreshUI();
     }
     private void Update()
     {
-        // 开关背包
-         if (Input.GetKeyDown(KeyCode.B))
-         {
-             isOpen = !isOpen;
-             bagPanel.SetActive(isOpen);
-             statsPanel.SetActive(isOpen);
-         }
-         //传入三个数据用来展示人物面板的人物数据
-         // UpdateStatsText(
-         //     GameManager.Instance.playerStats.MaxHealth,
-         //     GameManager.Instance.playerStats.attackData.Damage);
-    }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            isBagOpen = !isBagOpen;
+            isStatsOpen = false;
+            bagPanel.SetActive(isBagOpen);
+            statsPanel.SetActive(false);
+        }
 
-    private void UpdateStatsText(int health , int damage)
-    {
-        healthText.text = health.ToString();
-        attackText.text = damage.ToString();
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            isStatsOpen = !isStatsOpen;
+            isBagOpen = false;
+            statsPanel.SetActive(isStatsOpen);
+            bagPanel.SetActive(false);
+        }
     }
     
     #region UI切页
@@ -98,19 +91,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 
         }
     }
-
-    public void RemoveItem(ItemData_SO item, int amount = 1)
-    {
-        if (item == null || router == null) return;
-
-        var targetData = router.GetDataForItem(item);
-        if (targetData != null)
-        {
-            targetData.RemoveItem(item, amount);
-            if (bagUI.inventoryData == targetData)
-                bagUI.RefreshUI();
-        }
-    }
+    
     
     
     #endregion
