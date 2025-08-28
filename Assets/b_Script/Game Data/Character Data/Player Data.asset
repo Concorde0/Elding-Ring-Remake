@@ -12,13 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e96e5d3a177aa48be1bea3d4bcdf97, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
-  baseDefense: 2
-  currentDefense: 2
-  killPoint: 0
-  currentLevel: 2
-  maxLevel: 30
-  baseExp: 63
-  currentExp: 30
-  levelBuff: 0.1
+  currentLevel: 76
+  lun: 123455
+  vitality: 34
+  focus: 13
+  endurance: 28
+  strength: 55
+  dexterity: 20
+  intelligence: 9
+  faith: 8
+  induction: 8
+  maxHealth: 1170
+  currentHealth: 1170
+  currentFocus: 88
+  maxFocus: 88
+  energy: 126
+  currentWeight: 45
+  maxWeight: 75
+  maxLevel: 225

@@ -89,10 +89,5 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
         itemUI.SetupItemUI(entry.itemData, entry.amount);
     }
-
-    private bool IsItemAllowed(ItemData_SO itemData)
-    {
-        if (slotType != SlotType.Equipment) return true;
-        return itemData.allowedSlot == equipmentSlot;
-    }
+    
 }

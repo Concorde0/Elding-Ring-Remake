@@ -46,6 +46,7 @@ public class InventoryManager : Singleton<InventoryManager>
             equipmentUI.BindData(equipmentData);
         inventoryUI.RefreshUI();
         equipmentUI.RefreshUI();
+        CharacterPanelUI.Instance.SetCharacter(GameManager.Instance.playerStats);
         // actionUI.RefreshUI();
     }
     private void Update()
@@ -54,16 +55,22 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             isBagOpen = !isBagOpen;
             isStatsOpen = false;
-            bagPanel.SetActive(isBagOpen);
-            statsPanel.SetActive(false);
-        }
 
+            bagPanel.SetActive(isBagOpen);
+            statsPanel.SetActive(isStatsOpen);
+            
+            CharacterPanelUI.Instance.gameObject.SetActive(isBagOpen || isStatsOpen);
+        }
+        
         if (Input.GetKeyDown(KeyCode.I))
         {
             isStatsOpen = !isStatsOpen;
             isBagOpen = false;
+
             statsPanel.SetActive(isStatsOpen);
-            bagPanel.SetActive(false);
+            bagPanel.SetActive(isBagOpen);
+
+            CharacterPanelUI.Instance.gameObject.SetActive(isBagOpen || isStatsOpen);
         }
     }
     

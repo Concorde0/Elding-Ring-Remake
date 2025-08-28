@@ -1,47 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New Data", menuName = "Character Stats/Data")]
 public class CharacterData_SO : ScriptableObject
 {
     [Header("Stats Info")]
+    public int currentLevel;
+    public int lun;  
+    
+    public int vitality;
+    public int focus;
+    public int endurance;
+    public int strength;
+    public int dexterity;
+    public int intelligence;
+    public int faith;
+    public int induction;
+    
+    
     public int maxHealth;
     public int currentHealth;
-    public int baseDefense;
-    public int currentDefense;
     
-    [Header("Kill")]
-    public int killPoint;
+    public int currentFocus;
+    public int maxFocus;
+    public int energy;
     
-    [Header("Level")]
-    public int currentLevel;
-    public int maxLevel;
-    public int baseExp;
-    public int currentExp;
-    public float levelBuff;
+    public int currentWeight;
+    public int maxWeight;
+    
+    public int maxLevel = 225;
+    
+    
 
-    private float LevelMultiplier
-    {
-        get{ return 1 + (currentLevel -1) * levelBuff;}
-    }
-
-    public void UpdateExp(int point)
-    {
-        currentExp += point;
-
-        if (currentExp >= baseExp)
-        {
-            LeveUp();
-        }
-    }
-
-    private void LeveUp()
-    {
-        currentLevel = Mathf.Clamp(currentLevel + 1, 0, maxLevel);
-        baseExp += (int)(baseExp * LevelMultiplier);
-        maxHealth = (int)(maxHealth * LevelMultiplier);
-        currentHealth = maxHealth;
-        Debug.Log("LEVEL UP!" + currentLevel + "Max Health:" + maxHealth);
-    }
+ 
 }

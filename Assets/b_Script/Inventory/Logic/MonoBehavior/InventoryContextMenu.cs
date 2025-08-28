@@ -214,18 +214,4 @@ public class InventoryContextMenu : MonoBehaviour
                 item.itemType == ItemType.Legs ||
                 item.itemType == ItemType.Accessories);
     }
-
-    private EquipmentSlot MapItemTypeToSlot(ItemType type)
-    {
-        switch (type)
-        {
-            case ItemType.Weapon: return EquipmentSlot.Weapon;
-            case ItemType.Head: return EquipmentSlot.Head;
-            case ItemType.Chest: return EquipmentSlot.Chest;
-            case ItemType.Hands: return EquipmentSlot.Hands;
-            case ItemType.Legs: return EquipmentSlot.Legs;
-            case ItemType.Accessories: return EquipmentSlot.Accessories;
-            default: return EquipmentSlot.None;
-        }
-    }
 }
