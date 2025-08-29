@@ -64,43 +64,45 @@ public class ToolTipUI : MonoBehaviour
         {
             return;
         }
-        
+
         root.SetActive(true);
 
-        
         icon.sprite = item.itemIcon;
         icon2.sprite = item.itemIcon2;
         itemName.text = item.itemName;
-        // itemAmount.text = "x" + item.itemAmount;
-        
-        t1.text = item.t1;
-        t2.text = item.t2;
-        t3.text = item.t3;
-        t4.text = item.t4;
-    
 
-        a1.text = item.a1.ToString();
-        a2.text = item.a2.ToString();
-        a3.text = item.a3.ToString();
-        a4.text = item.a4.ToString();
-        
-        d1.text = item.d1.ToString();
-        d2.text = item.d2.ToString();
-        d3.text = item.d3.ToString();
-        d4.text = item.d4.ToString();
-        
-        c1.text = item.c1;
-        c2.text = item.c2;
-        c3.text = item.c3;
-        c4.text = item.c4;
-        c5.text = item.c5;
-        
-        m1.text = item.m1.ToString();
-        m2.text = item.m2.ToString();
-        m3.text = item.m3.ToString();
-        m4.text = item.m4.ToString();
-        m5.text = item.m5.ToString();
-        
+        // Details
+        t1.text = $"{item.t1}";
+        t2.text = $"{item.t2}";
+        t3.text = $"{item.t3}";
+        t4.text = $"重量   {item.t4}";
+
+        // Attack
+        a1.text = $"物理   {item.a1}";
+        a2.text = $"魔力   {item.a2}";
+        a3.text = $"火   {item.a3}";
+        a4.text = $"致命一击   {item.a4}";
+
+        // Defense
+        d1.text = $"物理   {item.d1}";
+        d2.text = $"魔力   {item.d2}";
+        d3.text = $"火   {item.d3}";
+        d4.text = $"防御强度   {item.d4}";
+
+        // Ability Buffs
+        c1.text = $"力气   {item.c1}";
+        c2.text = $"灵巧   {item.c2}";
+        c3.text = $"智力   {item.c3}";
+        c4.text = $"信仰   {item.c4}";
+        c5.text = $"感应   {item.c5}";
+
+        // Requirements
+        m1.text = $"力气   {item.m1}";
+        m2.text = $"灵巧   {item.m2}";
+        m3.text = $"智力   {item.m3}";
+        m4.text = $"信仰   {item.m4}";
+        m5.text = $"感应   {item.m5}";
+
         description.text = item.description;
     }
 

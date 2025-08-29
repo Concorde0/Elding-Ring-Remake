@@ -24,8 +24,8 @@ MonoBehaviour:
   allowedSlot: 2
   t1: "\u7279\u5927\u5251"
   t2: "\u666E\u901A/\u7A81\u523A"
-  t3: 20
-  t4: "\u72EE\u5B50\u65A9"
+  t3: "\u72EE\u5B50\u65A9"
+  t4: 23
   a1: 240
   a2: 0
   a3: 0
