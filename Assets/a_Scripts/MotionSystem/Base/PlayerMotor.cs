@@ -22,6 +22,8 @@ namespace RPG.MotionSystem
         private Quaternion _targetRotation = Quaternion.identity;
         private bool _isRotating = false;
         
+        private Transform _lockTarget;
+        
 
         public PlayerMotor(PlayerMotion motion,CameraResources cameraResources)
         {
@@ -32,6 +34,12 @@ namespace RPG.MotionSystem
             _timer = motion.Timer;
 
         }
+        
+        public void OnLockTargetChanged(Transform target)
+        {
+            _lockTarget = target;
+        }
+        
         //TODO:如果逻辑复杂，需要分离这里的逻辑切换
         public void Idle()
         {
@@ -120,7 +128,6 @@ namespace RPG.MotionSystem
         public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot)
         {
             _model.position += (Vector3)deltaPos;
-            _model.rotation = math.mul(deltaRot, _model.rotation);
         }
 
         /// <summary>
@@ -131,38 +138,59 @@ namespace RPG.MotionSystem
         {
             Vector2 input = _param.MoveInput;
 
-            // 读取并设置target（按下方向就设）
-            if (input.sqrMagnitude > 0.01f)
+            if (_param.IsLocked && _lockTarget != null)
             {
-                Vector3 camF = _camera.forward; camF.y = 0f; camF.Normalize();
-                Vector3 camR = _camera.right;   camR.y = 0f; camR.Normalize();
-
-                Vector3 moveDir = camF * input.y + camR * input.x;
-                if (moveDir.sqrMagnitude > 0.01f)
+                //锁定模式
+                Vector3 toTarget = _lockTarget.position - _model.position;
+                toTarget.y = 0f;
+                if (toTarget.sqrMagnitude > 0.01f)
                 {
-                    Quaternion newTarget = Quaternion.LookRotation(moveDir);
-                    // 只有当新目标与当前目标有明显差别才替换（避免微抖）
-                    if (!_isRotating || Quaternion.Angle(_targetRotation, newTarget) > 0.5f)
-                    {
-                        _targetRotation = newTarget;
-                        _isRotating = true;
-                    }
+                    Quaternion targetRot = Quaternion.LookRotation(toTarget);
+                    float k = Mathf.Max(0.0f, _param.RotateSpeed);
+                    float t = 1f - Mathf.Exp(-k * Time.deltaTime);
+                    _model.rotation = Quaternion.Slerp(_model.rotation, targetRot, t);
+
+                    // 横向/纵向输入，用于动画
+                    Vector3 forward = toTarget.normalized;
+                    Vector3 right = Vector3.Cross(Vector3.up, forward);
+                    Vector3 moveDir = forward * input.y + right * input.x;
+
+                    float x = Vector3.Dot(moveDir.normalized, right);
+                    float y = Vector3.Dot(moveDir.normalized, forward);
+                    _anim.SetMoveAnim(x, y);
                 }
             }
-
-            // 平滑朝向目标（如果有）
-            if (_isRotating)
+            else
             {
-                // 用指数阻尼得到与帧率无关的平滑（k = _param.RotateSpeed）
-                float k = Mathf.Max(0.0f, _param.RotateSpeed); // 确保非负
-                float t = 1f - Mathf.Exp(-k * Time.deltaTime); // 0..1
-                _model.rotation = Quaternion.Slerp(_model.rotation, _targetRotation, t);
-
-                // 是否到达阈值判断
-                if (Quaternion.Angle(_model.rotation, _targetRotation) <= 1)
+                //自由模式
+                if (input.sqrMagnitude > 0.01f)
                 {
-                    _model.rotation = _targetRotation;
-                    _isRotating = false;
+                    Vector3 camF = _camera.forward; camF.y = 0f; camF.Normalize();
+                    Vector3 camR = _camera.right; camR.y = 0f; camR.Normalize();
+
+                    Vector3 moveDir = camF * input.y + camR * input.x;
+                    if (moveDir.sqrMagnitude > 0.01f)
+                    {
+                        Quaternion newTarget = Quaternion.LookRotation(moveDir);
+                        if (!_isRotating || Quaternion.Angle(_targetRotation, newTarget) > 0.5f)
+                        {
+                            _targetRotation = newTarget;
+                            _isRotating = true;
+                        }
+                    }
+                }
+
+                if (_isRotating)
+                {
+                    float k = Mathf.Max(0.0f, _param.RotateSpeed);
+                    float t = 1f - Mathf.Exp(-k * Time.deltaTime);
+                    _model.rotation = Quaternion.Slerp(_model.rotation, _targetRotation, t);
+
+                    if (Quaternion.Angle(_model.rotation, _targetRotation) <= 1f)
+                    {
+                        _model.rotation = _targetRotation;
+                        _isRotating = false;
+                    }
                 }
             }
         }

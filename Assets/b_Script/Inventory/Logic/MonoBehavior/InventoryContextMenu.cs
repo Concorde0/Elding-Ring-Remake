@@ -52,7 +52,7 @@ public class InventoryContextMenu : MonoBehaviour
         {
             menuRect.pivot = new Vector2(0f, 1f);
             Canvas rootCanvas = menuRoot.GetComponentInParent<Canvas>();
-            Camera cam = (rootCanvas != null && rootCanvas.renderMode != RenderMode.ScreenSpaceOverlay) ? rootCanvas.worldCamera : null;
+            Camera cam = rootCanvas.worldCamera;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, screenPosition, cam, out var localPoint);
             menuRect.anchoredPosition = localPoint;
         }

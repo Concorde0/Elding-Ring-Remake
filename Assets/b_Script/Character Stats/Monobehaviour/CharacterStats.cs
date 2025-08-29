@@ -7,7 +7,6 @@ public class CharacterStats : MonoBehaviour
 {
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
-    public PlayerBarController playerBarController;
     
     [Header(("Weapon"))]
     public Transform weaponSlot;
