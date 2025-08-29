@@ -17,7 +17,8 @@ public enum EquipmentSlot
     Chest,
     Hands,
     Legs,
-    Accessories
+    Accessories,
+    Others
 }
 
 public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler

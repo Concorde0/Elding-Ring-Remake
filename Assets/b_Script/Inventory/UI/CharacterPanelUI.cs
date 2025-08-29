@@ -73,7 +73,7 @@ public class CharacterPanelUI : MonoBehaviour
         intelligenceText.text = $"智力: {data.intelligence}";
         faithText.text = $"信仰: {data.faith}";
         inductionText.text = $"感应: {data.induction}";
-        energyText.text = $"体力: {data.energy}";
+        energyText.text = $"体力: {data.maxEnergy}";
     }
     
     //打开面板时刷新数据

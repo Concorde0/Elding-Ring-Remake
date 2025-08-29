@@ -7,6 +7,7 @@ public class CharacterStats : MonoBehaviour
 {
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
+    public PlayerBarController playerBarController;
     
     [Header(("Weapon"))]
     public Transform weaponSlot;
@@ -29,6 +30,26 @@ public class CharacterStats : MonoBehaviour
         set { characterData.currentHealth = value; }
     }
     
+    public int MaxFocus{
+        get { if(characterData != null) return characterData.maxFocus;else return 0; }
+        set { characterData.maxFocus = value; }
+    }
+    
+    public int CurrentFocus{
+        get { if(characterData != null) return characterData.currentFocus;else return 0; }
+        set { characterData.currentFocus = value; }
+    }
+    
+    public int MaxEnergy{
+        get { if(characterData != null) return characterData.maxEnergy;else return 0; }
+        set { characterData.maxEnergy = value; }
+    }
+    
+    public int CurrentEnergy{
+        get { if(characterData != null) return characterData.currentEnergy;else return 0; }
+        set { characterData.currentEnergy = value; }
+    }
+    
     #endregion
     
     #region Character Combat
@@ -41,9 +62,9 @@ public class CharacterStats : MonoBehaviour
         {
             //TODO:触发受伤动画
         }
-        
             
     }
+    
 
     private int CurrentDamage()
     {
@@ -66,6 +87,18 @@ public class CharacterStats : MonoBehaviour
         else
         {
             CurrentHealth = MaxHealth;
+        }
+    }
+    
+    public void ApplyFocus(int amount)
+    {
+        if (CurrentFocus + amount <= MaxFocus)
+        {
+            CurrentFocus += amount;
+        }
+        else
+        {
+            CurrentFocus = MaxFocus;
         }
     }
     

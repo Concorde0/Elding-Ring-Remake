@@ -120,6 +120,7 @@ public class InventoryContextMenu : MonoBehaviour
             case ItemType.Hands:       candidateIndices = new int[]{ 12 }; break;
             case ItemType.Legs:        candidateIndices = new int[]{ 13 }; break;
             case ItemType.Accessories: candidateIndices = new int[]{ 15, 16, 17 }; break;
+            case ItemType.Others:      candidateIndices = new int[]{ 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 }; break;
             default:                   candidateIndices = new int[0]; break;
         }
 
@@ -152,8 +153,17 @@ public class InventoryContextMenu : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.playerStats != null)
         {
-            if (item.useableData != null)
+            if (item.useableData != null && item.useableData.healthPoint != 0)
+            {
                 GameManager.Instance.playerStats.ApplyHealth(item.useableData.healthPoint);
+            }
+
+            if (item.useableData != null && item.useableData.magicPoint != 0)
+            {
+                GameManager.Instance.playerStats.ApplyFocus(item.useableData.magicPoint);
+            }
+            
+            //TODO:播放动画
         }
 
         bag.items[idx].amount--;
@@ -212,6 +222,7 @@ public class InventoryContextMenu : MonoBehaviour
                 item.itemType == ItemType.Chest ||
                 item.itemType == ItemType.Hands ||
                 item.itemType == ItemType.Legs ||
-                item.itemType == ItemType.Accessories);
+                item.itemType == ItemType.Accessories||
+                item.itemType == ItemType.Others);
     }
 }

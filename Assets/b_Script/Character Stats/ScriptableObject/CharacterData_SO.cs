@@ -25,7 +25,9 @@ public class CharacterData_SO : ScriptableObject
     
     public int currentFocus;
     public int maxFocus;
-    public int energy;
+    public int maxEnergy;
+    
+    public int currentEnergy;
     
     public int currentWeight;
     public int maxWeight;

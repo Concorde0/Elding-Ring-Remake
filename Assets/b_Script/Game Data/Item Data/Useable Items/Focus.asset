@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97851792cd4d27340a6f4b4728a1c7e0, type: 3}
+  m_Name: Focus
+  m_EditorClassIdentifier: 
+  itemType: 3
+  itemName: "\u84DD\u74F6"
+  itemIcon: {fileID: -117204816, guid: d0b2cbfbd43803d42a423fea27aaff55, type: 3}
+  itemIcon2: {fileID: 0}
+  itemAmount: 3
+  itemPrefab: {fileID: 5518885154706774473, guid: 28913c20a61e27e4180562c52e492f25, type: 3}
+  stackable: 1
+  useAble: 0
+  isConsumable: 0
+  allowedSlot: 7
+  t1: 
+  t2: 
+  t3: 
+  t4: 
+  a1: 0
+  a2: 0
+  a3: 0
+  a4: 0
+  d1: 0
+  d2: 0
+  d3: 0
+  d4: 0
+  c1: 
+  c2: 
+  c3: 
+  c4: 
+  c5: 
+  m1: 0
+  m2: 0
+  m3: 0
+  m4: 0
+  m5: 0
+  description: "\u84DD"
+  useableData: {fileID: 11400000, guid: ad55c0e62fbb6d444a60bd5274fe01e7, type: 2}
+  weaponPrefab: {fileID: 0}
+  weaponData: {fileID: 0}
+  weaponAnimator: {fileID: 0}

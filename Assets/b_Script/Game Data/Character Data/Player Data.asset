@@ -22,11 +22,12 @@ MonoBehaviour:
   intelligence: 9
   faith: 8
   induction: 8
-  maxHealth: 1170
-  currentHealth: 1170
+  maxHealth: 500
+  currentHealth: 500
   currentFocus: 88
   maxFocus: 88
-  energy: 126
+  maxEnergy: 300
+  currentEnergy: 300
   currentWeight: 45
   maxWeight: 75
   maxLevel: 225
