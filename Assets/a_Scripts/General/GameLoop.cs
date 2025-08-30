@@ -12,6 +12,7 @@ public class GameLoop : MonoBehaviour
     public Transform playerModel;
     public AnimSetting animSetting;
     public CameraResources cameraResources;
+    public PlayerCameraManager cameraManager;
     public static GameLoop Instance;
     
     private PlayerMotion _player;
@@ -29,6 +30,9 @@ public class GameLoop : MonoBehaviour
     {
         _player = new PlayerMotion(playerModel, animSetting, cameraResources);
         _player.Start();
+        
+        cameraManager = FindObjectOfType<PlayerCameraManager>();
+        cameraManager.OnLockTargetChanged += _player.OnLockTargetChanged;
         
     }
 

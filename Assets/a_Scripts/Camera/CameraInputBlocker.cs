@@ -6,21 +6,18 @@ public class CameraInputBlocker : MonoBehaviour
 {
     private CinemachineInputProvider _provider;
 
-    void Awake()
+    private void Awake()
     {
         _provider = GetComponent<CinemachineInputProvider>();
         if (_provider == null)
             Debug.LogError("CameraInputBlocker: Missing InputSystemInputProvider.");
     }
 
-    void Update()
+    private void Update()
     {
         if (_provider == null) return;
 
-        bool isOverUI = EventSystem.current != null &&
-                        EventSystem.current.IsPointerOverGameObject();
-
-        // 启用或禁用输入
+        bool isOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
         _provider.enabled = !isOverUI;
 
     }

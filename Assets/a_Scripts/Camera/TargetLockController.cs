@@ -20,28 +20,14 @@ public class TargetLockController : MonoBehaviour
 
     private void Update()
     {
-        // 例：按 Tab 尝试锁定/解锁（你可以替换为 InputSystem 调用）
+        //TODO:接入inputsystem
         if (Input.GetMouseButtonDown(2))
         {
-            // 在外部调用 PlayerCameraManager.ToggleLock()
             var mgr = GetComponent<PlayerCameraManager>();
             if (mgr != null) mgr.ToggleLock();
         }
-
-        // Q/E 切目标示例
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            var mgr = GetComponent<PlayerCameraManager>();
-            if (mgr != null) mgr.CycleTarget(-1);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            var mgr = GetComponent<PlayerCameraManager>();
-            if (mgr != null) mgr.CycleTarget(1);
-        }
     }
-
-    // 获取候选目标并排序（角度优先，再距离）
+    
     public List<Transform> GetCandidateTargets()
     {
         var list = new List<Transform>();
@@ -50,14 +36,14 @@ public class TargetLockController : MonoBehaviour
         {
             if (go == null) continue;
             var t = go.transform;
-            float d = Vector3.Distance(player.position, t.position);
+            float d = Vector3.Distance(mainCam.transform.position, t.position);
             if (d > maxLockDistance) continue;
             if (!IsInFrontOfCamera(t)) continue;
             if (!IsVisible(t)) continue;
             list.Add(t);
         }
 
-        // 排序：角度越小优先，再近的
+        //排序，角度越小优先，再近的
         list = list.OrderBy(t =>
         {
             float angle = Vector3.Angle(mainCam.transform.forward, (t.position - mainCam.transform.position).normalized);

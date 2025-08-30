@@ -88,6 +88,12 @@ namespace RPG.MotionSystem
             }); 
             RootMotion.RecordPrevious(0, Model);
         }
+        
+        public void OnLockTargetChanged(Transform t)
+        {
+            Motor.OnLockTargetChanged(t);
+        }
+        
     }
 }
 

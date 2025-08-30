@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using RPG.CameraSystem;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class PlayerCameraManager : MonoBehaviour
     private ICameraState currentState;
 
     private TargetLockController targetLockController;
+    
+    public event Action<Transform> OnLockTargetChanged;
 
     private void Awake()
     {
@@ -56,22 +59,6 @@ public class PlayerCameraManager : MonoBehaviour
         }
     }
 
-    public void CycleTarget(int direction = 1)
-    {
-        var cand = targetLockController.GetCandidateTargets();
-        if (cand.Count == 0) return;
-        var current = lockState.GetCurrentTarget();
-        if (current == null)
-        {
-            LockTo(cand[0]);
-            return;
-        }
-        int idx = cand.IndexOf(current);
-        if (idx < 0) { LockTo(cand[0]); return; }
-        int next = (idx + direction + cand.Count) % cand.Count;
-        LockTo(cand[next]);
-    }
-
     public void LockTo(Transform t)
     {
         if (t == null) return;
@@ -79,7 +66,9 @@ public class PlayerCameraManager : MonoBehaviour
         lockState.LockTo(t);
         currentState = lockState;
         
-        SendMessage("OnLockTargetChanged", t, SendMessageOptions.DontRequireReceiver);
+        OnLockTargetChanged?.Invoke(t);
+        
+        FaceTargetImmediately(t);
     }
 
     public void Unlock()
@@ -87,7 +76,20 @@ public class PlayerCameraManager : MonoBehaviour
         lockState.Unlock();
         currentState = freeLookState;
 
-        SendMessage("OnLockTargetChanged", null, SendMessageOptions.DontRequireReceiver);
+        OnLockTargetChanged?.Invoke(null);
+    }
+    
+    private void FaceTargetImmediately(Transform target)
+    {
+        var player = GameLoop.Instance?.playerModel; 
+        if (player == null || target == null) return;
+
+        Vector3 dir = target.position - player.position;
+        dir.y = 0f;
+        if (dir.sqrMagnitude > 0.001f)
+        {
+            player.rotation = Quaternion.LookRotation(dir);
+        }
     }
     
     public void ForceLockTo(Transform t) => LockTo(t);

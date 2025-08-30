@@ -9,192 +9,165 @@ using UnityEngine.Playables;
 
 namespace RPG.MotionSystem
 {
-    //运动执行层
+    // 运动执行层：增加最小化的锁定移动逻辑
     public class PlayerMotor
     {
-        
         private readonly PlayerAnim _anim;
         private readonly Transform _model;
         private readonly Transform _camera;
         private readonly PlayerParam _param;
         private readonly TimerManager _timer;
-        
-        private Quaternion _targetRotation = Quaternion.identity;
-        private bool _isRotating = false;
-        
-        private Transform _lockTarget;
-        
 
-        public PlayerMotor(PlayerMotion motion,CameraResources cameraResources)
+        private Transform _lockTarget;
+
+
+        public PlayerMotor(PlayerMotion motion, CameraResources cameraResources)
         {
             _anim = motion.Anim;
             _param = motion.Param;
             _model = motion.Model;
             _camera = cameraResources.cameraTransform;
             _timer = motion.Timer;
-
         }
-        
+
         public void OnLockTargetChanged(Transform target)
         {
             _lockTarget = target;
         }
-        
-        //TODO:如果逻辑复杂，需要分离这里的逻辑切换
+
+        // === 原有接口（大体不变） ===
         public void Idle()
         {
-            if (_param.IsIdleBack)
-            {
-                _anim.TransitionTo(StringConstants.AnimName.IdleBack);
-            }
-            else
-            {
-                _anim.TransitionTo(StringConstants.AnimName.Idle);
-            }
-            
+            if (_param.IsIdleBack) _anim.TransitionTo(StringConstants.AnimName.IdleBack);
+            else _anim.TransitionTo(StringConstants.AnimName.Idle);
         }
+
         public void Move(Vector2 input)
         {
             const float debounceTime = 0.2f;
-            
+
             if (_param.IsLocked)
             {
                 if (_timer.IsCooldownReady(StringConstants.AnimName.LockedMove, debounceTime))
                     _anim.TransitionTo(StringConstants.AnimName.LockedMove);
             }
-           
-            else if (_param.Run)
-            {
-                if (_timer.IsCooldownReady(StringConstants.AnimName.Run, debounceTime))
-                    _anim.TransitionTo(StringConstants.AnimName.Run);
-            }
-            
             else
             {
-                if (_timer.IsCooldownReady(StringConstants.AnimName.Move, debounceTime))
-                    _anim.TransitionTo(StringConstants.AnimName.Move);
+                if (_param.Run)
+                {
+                    if (_timer.IsCooldownReady(StringConstants.AnimName.Run, debounceTime))
+                        _anim.TransitionTo(StringConstants.AnimName.Run);
+                }
+                else
+                {
+                    if (_timer.IsCooldownReady(StringConstants.AnimName.Move, debounceTime))
+                        _anim.TransitionTo(StringConstants.AnimName.Move);
+                }
             }
 
+            // 依旧把输入传给动画（四向 Blend），动画决定视觉播放
             _anim.SetMoveAnim(input.x, input.y);
         }
+
         public void Stop()
         {
-            if (_param.Run)
-            {
-                _anim.TransitionTo(StringConstants.AnimName.RunStop);
-            }
-            else
-            {
-                _anim.TransitionTo(StringConstants.AnimName.MoveStop);
-            }
+            if (_param.Run) _anim.TransitionTo(StringConstants.AnimName.RunStop);
+            else _anim.TransitionTo(StringConstants.AnimName.MoveStop);
         }
 
         public void RunTurn()
         {
-            if(_param.TurnTrigger.Consume())
-            {
-                _anim.TransitionTo(StringConstants.AnimName.RunTurn);
-            }
+            if (_param.TurnTrigger.Consume()) _anim.TransitionTo(StringConstants.AnimName.RunTurn);
         }
 
         public void Boil()
         {
-            if (_param.BoilTrigger.Peek())
-            {
-                _anim.TransitionTo(StringConstants.AnimName.BoilForward);
-            }
-            else if (_param.JumpBackwardTrigger.Peek())
-            {
-                _anim.TransitionTo(StringConstants.AnimName.JumpBackward);
-                
-            }
+            if (_param.BoilTrigger.Peek()) _anim.TransitionTo(StringConstants.AnimName.BoilForward);
+            else if (_param.JumpBackwardTrigger.Peek()) _anim.TransitionTo(StringConstants.AnimName.JumpBackward);
         }
 
         public void LightAttack(int comboIndex)
         {
             switch (comboIndex)
             {
-                case 0: _anim.TransitionTo(StringConstants.AnimName.LightAttack1); break;
-                case 1: _anim.TransitionTo(StringConstants.AnimName.LightAttack2); break;
-                case 2: _anim.TransitionTo(StringConstants.AnimName.LightAttack3); break;
-                default: _anim.TransitionTo(StringConstants.AnimName.LightAttack1); break;
+                case 0:
+                    _anim.TransitionTo(StringConstants.AnimName.LightAttack1);
+                    break;
+                case 1:
+                    _anim.TransitionTo(StringConstants.AnimName.LightAttack2);
+                    break;
+                case 2:
+                    _anim.TransitionTo(StringConstants.AnimName.LightAttack3);
+                    break;
+                default:
+                    _anim.TransitionTo(StringConstants.AnimName.LightAttack1);
+                    break;
             }
         }
-        
-        
+
         /// <summary>
-        /// 仅处理根运动（位置＋动画自身的旋转）
+        /// 处理 Animator 的 root motion 位移。注意：锁定时不应用动画位移（避免与 ManualLockMove 冲突）。
         /// </summary>
         public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot)
         {
-            _model.position += (Vector3)deltaPos;
+            if (!_param.IsLocked)
+            {
+                _model.position += (Vector3)deltaPos;
+            }
+            // 不应用 deltaRot：旋转由 HandleInputRotation（或锁定逻辑）控制
         }
 
         /// <summary>
-        /// 如果允许，用输入方向（相对于摄像机）来平滑旋转角色朝向
+        /// 自由移动时使用的旋转控制（你保留的那块）。这个方法保持给 LateUpdate 调用以覆盖 Animator。
         /// </summary>
-        
         public void HandleInputRotation()
         {
             Vector2 input = _param.MoveInput;
+            if (input.sqrMagnitude <= 0.01f) return;
 
-            if (_param.IsLocked && _lockTarget != null)
+            Vector3 camF = _camera.forward;
+            camF.y = 0;
+            camF.Normalize();
+            Vector3 camR = _camera.right;
+            camR.y = 0;
+            camR.Normalize();
+
+            Vector3 moveDir = camF * input.y + camR * input.x;
+            if (moveDir.sqrMagnitude > 0.01f)
             {
-                //锁定模式
-                Vector3 toTarget = _lockTarget.position - _model.position;
-                toTarget.y = 0f;
-                if (toTarget.sqrMagnitude > 0.01f)
-                {
-                    Quaternion targetRot = Quaternion.LookRotation(toTarget);
-                    float k = Mathf.Max(0.0f, _param.RotateSpeed);
-                    float t = 1f - Mathf.Exp(-k * Time.deltaTime);
-                    _model.rotation = Quaternion.Slerp(_model.rotation, targetRot, t);
-
-                    // 横向/纵向输入，用于动画
-                    Vector3 forward = toTarget.normalized;
-                    Vector3 right = Vector3.Cross(Vector3.up, forward);
-                    Vector3 moveDir = forward * input.y + right * input.x;
-
-                    float x = Vector3.Dot(moveDir.normalized, right);
-                    float y = Vector3.Dot(moveDir.normalized, forward);
-                    _anim.SetMoveAnim(x, y);
-                }
+                Quaternion target = Quaternion.LookRotation(moveDir);
+                _model.rotation = Quaternion.Slerp(
+                    _model.rotation,
+                    target,
+                    Time.deltaTime * _param.RotateSpeed
+                );
             }
-            else
+        }
+
+        // ====================== 新：锁定时的移动实现 ======================
+        public void HandleLockRotation()
+        {
+
+            if (_lockTarget == null)
             {
-                //自由模式
-                if (input.sqrMagnitude > 0.01f)
-                {
-                    Vector3 camF = _camera.forward; camF.y = 0f; camF.Normalize();
-                    Vector3 camR = _camera.right; camR.y = 0f; camR.Normalize();
+                Debug.LogWarning("HandleLockRotation called but lock target is null.");
+                return;
+            }
 
-                    Vector3 moveDir = camF * input.y + camR * input.x;
-                    if (moveDir.sqrMagnitude > 0.01f)
-                    {
-                        Quaternion newTarget = Quaternion.LookRotation(moveDir);
-                        if (!_isRotating || Quaternion.Angle(_targetRotation, newTarget) > 0.5f)
-                        {
-                            _targetRotation = newTarget;
-                            _isRotating = true;
-                        }
-                    }
-                }
+            Vector3 moveDir = _lockTarget.position - _model.position;
+            moveDir.y = 0f; // 保持水平朝向
 
-                if (_isRotating)
-                {
-                    float k = Mathf.Max(0.0f, _param.RotateSpeed);
-                    float t = 1f - Mathf.Exp(-k * Time.deltaTime);
-                    _model.rotation = Quaternion.Slerp(_model.rotation, _targetRotation, t);
-
-                    if (Quaternion.Angle(_model.rotation, _targetRotation) <= 1f)
-                    {
-                        _model.rotation = _targetRotation;
-                        _isRotating = false;
-                    }
-                }
+            if (moveDir.sqrMagnitude > 0.0001f)
+            {
+                Debug.Log("Handle Lock Rotation");
+                Quaternion want = Quaternion.LookRotation(moveDir);
+                Debug.Log($"Current: {_model.rotation.eulerAngles}, Want: {want.eulerAngles}");
+                _model.rotation = Quaternion.Slerp(
+                    _model.rotation,
+                    want,
+                    Time.deltaTime * _param.RotateSpeed
+                );
             }
         }
     }
 }
-
-

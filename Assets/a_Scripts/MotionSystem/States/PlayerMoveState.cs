@@ -31,6 +31,10 @@ namespace RPG.MotionSystem.States
             {
                 owner.Motor.HandleInputRotation();
             }
+            else
+            {
+                owner.Motor.HandleLockRotation();
+            }
             
             owner.Motor.Move(owner.Param.MoveInput);
             
