@@ -14,7 +14,7 @@ public class ItemPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Enter trigger");
-            // keyDownUI.SetActive(true);
+            keyDownUI.SetActive(true);
         }
     }
     
@@ -22,11 +22,15 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            InventoryManager.Instance.AddItem(itemData,itemData.itemAmount);
-            InventoryManager.Instance.inventoryUI.RefreshUI();
-            QuestManager.Instance.UpdateQuestProgress(itemData.itemName,itemData.itemAmount);
-            // keyDownUI.SetActive(false);
-            Destroy(gameObject);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                InventoryManager.Instance.AddItem(itemData,itemData.itemAmount);
+                InventoryManager.Instance.inventoryUI.RefreshUI();
+                QuestManager.Instance.UpdateQuestProgress(itemData.itemName,itemData.itemAmount);
+                keyDownUI.SetActive(false);
+                Destroy(gameObject);
+            }
+            
         }
     }
 
@@ -34,7 +38,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // keyDownUI.SetActive(false);
+            keyDownUI.SetActive(false);
         }
     }
 
