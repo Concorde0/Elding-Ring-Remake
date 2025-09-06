@@ -10,7 +10,6 @@ public class BD_CanSeeTarget : Conditional {
     public Transform eye; // 可空
 
     public override TaskStatus OnUpdate() {
-        Debug.Log($"[CanSeeTarget] target={target.Value}, dist={Vector3.Distance(transform.position, target.Value.position)}");
         if (target.Value == null) return TaskStatus.Failure;
 
         Vector3 origin = eye ? eye.position : transform.position + Vector3.up * 1.6f;
