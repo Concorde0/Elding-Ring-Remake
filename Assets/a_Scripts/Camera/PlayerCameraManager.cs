@@ -22,7 +22,6 @@ public class PlayerCameraManager : MonoBehaviour
 
     private void Awake()
     {
-        if (cameraResources == null) Debug.LogError("CameraResources 未赋值！");
         freeLookState = new FreeLookCameraController(cameraResources);
         lockState = new LockOnCameraState(cameraResources.lockVirtualCamera, cameraResources.cinemachineFreeLook, cameraFollowPoint, lockCamPriority, freeLookPriority);
 
