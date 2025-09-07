@@ -15,7 +15,6 @@ public class BD_MoveToTarget : Action
     public override void OnStart()
     {
         animator = GetComponent<Animator>();
-        animator.applyRootMotion = true;
         isMoving = true;
         animator.SetBool("Walk", true);
     }
@@ -54,16 +53,7 @@ public class BD_MoveToTarget : Action
     {
         if (!isMoving) return;
         animator.SetBool("Walk" , false);
-        animator.applyRootMotion = false;
         isMoving = false;
     }
-
-    // 把动画根运动量应用到 Transform
-    private void OnAnimatorMove()
-    {
-        if (animator.applyRootMotion)
-        {
-            transform.position += animator.deltaPosition;
-        }
-    }
+    
 }

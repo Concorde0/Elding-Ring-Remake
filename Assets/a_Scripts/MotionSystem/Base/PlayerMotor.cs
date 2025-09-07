@@ -144,7 +144,7 @@ namespace RPG.MotionSystem
             }
         }
 
-        // ====================== 新：锁定时的移动实现 ======================
+        // ====================== 锁定时的移动实现 ======================
         public void HandleLockRotation()
         {
 
@@ -159,9 +159,7 @@ namespace RPG.MotionSystem
 
             if (moveDir.sqrMagnitude > 0.0001f)
             {
-                Debug.Log("Handle Lock Rotation");
                 Quaternion want = Quaternion.LookRotation(moveDir);
-                Debug.Log($"Current: {_model.rotation.eulerAngles}, Want: {want.eulerAngles}");
                 _model.rotation = Quaternion.Slerp(
                     _model.rotation,
                     want,

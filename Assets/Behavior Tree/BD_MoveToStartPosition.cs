@@ -21,7 +21,6 @@ public class BD_MoveToStartPosition : Action
 
     public override void OnStart()
     {
-        animator.applyRootMotion = true;
         isMoving = true;
         animator.SetBool("Walk", true);
     }
@@ -56,15 +55,7 @@ public class BD_MoveToStartPosition : Action
     {
         if (!isMoving) return;
         animator.SetBool("Walk", false);
-        animator.applyRootMotion = false;
         isMoving = false;
     }
-
-    private void OnAnimatorMove()
-    {
-        if (animator.applyRootMotion)
-        {
-            transform.position += animator.deltaPosition;
-        }
-    }
+    
 }
