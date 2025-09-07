@@ -19,10 +19,10 @@ public struct ComboStep
 public class BD_ComboAttack : Action
 {
     public SharedTransform target;
-    public float turnSpeed = 720f;
+    public float turnSpeed = 500f;
     public List<ComboStep> steps = new List<ComboStep>()
     {
-        new ComboStep { triggerName="Attack1", fullDuration=3.96f, interruptTime=1.23f, minDistance=-1f,   maxDistance=2.0f },
+        new ComboStep { triggerName="Attack1", fullDuration=3.96f, interruptTime=1.1f, minDistance=-1f,   maxDistance=2.0f },
         new ComboStep { triggerName="Attack2", fullDuration=3.13f, interruptTime=1.96f, minDistance=-1f,   maxDistance=1.5f },
         new ComboStep { triggerName="Attack3", fullDuration=3.13f, interruptTime=0f,   minDistance=0.5f, maxDistance=1.2f },
     };
@@ -48,7 +48,7 @@ public class BD_ComboAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        Debug.Log($"Step {stepIndex}, Timer: {timer:F2}, State: {state}, hasAdvanced: {hasAdvanced}");
+        
         if (target.Value == null)
             return TaskStatus.Failure;
 
@@ -104,6 +104,7 @@ public class BD_ComboAttack : Action
                     float nextDist = Vector3.Distance(transform.position, target.Value.position);
                     if (nextDist >= next.minDistance && nextDist <= next.maxDistance)
                     {
+                        Debug.Log("Try Advance");
                         stepIndex++;
                         state = State.Facing;
                         hasAdvanced = true;
@@ -117,6 +118,7 @@ public class BD_ComboAttack : Action
                 {
                     if (!isLast)
                     {
+                        Debug.Log("fullDuration Advance");
                         stepIndex++;
                         state = State.Facing;
                         hasAdvanced = true;
@@ -131,10 +133,16 @@ public class BD_ComboAttack : Action
         return TaskStatus.Running;
     }
 
+    public override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+    }
+
     public override void OnEnd()
     {
         hasAdvanced = false;
         isTriggered = false;
+        timer = 0f;
     }
     
   
