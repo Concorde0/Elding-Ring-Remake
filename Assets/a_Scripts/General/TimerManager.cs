@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace RPG.Timer
 {
     public class Timer
     {
-        public float Duration{ get; private set; }
-        public float StartTime{ get; private set; }
+        public float Duration { get; private set; }
+        public float StartTime { get; private set; }
+        
         public Timer(float duration)
         {
             Duration = duration;
@@ -29,8 +29,14 @@ namespace RPG.Timer
     {
         public int MaxFrames { get; private set; }
         public int StartFrame { get; private set; }
+        
         public int ElapsedFrames => Time.frameCount - StartFrame;
         public bool IsFinished => ElapsedFrames >= MaxFrames;
+        
+        // 帧计时转换为秒。
+        public float ElapsedTime => ElapsedFrames * Time.deltaTime;
+        public float DurationTime => MaxFrames * Time.deltaTime;
+
         public FrameTimer(int maxFrames)
         {
             MaxFrames = maxFrames;
@@ -42,7 +48,6 @@ namespace RPG.Timer
             MaxFrames = newMaxFrames ?? MaxFrames;
             StartFrame = Time.frameCount;
         }
-        
     }
     
     public class TimerManager
@@ -55,13 +60,9 @@ namespace RPG.Timer
         public void Start(string key, float duration)
         {
             if (_timers.ContainsKey(key))
-            {
                 _timers[key].ReStart(duration);
-            }
             else
-            {
                 _timers[key] = new Timer(duration);
-            }
         }
     
         public bool IsFinished(string key)
@@ -87,10 +88,9 @@ namespace RPG.Timer
         public void Restart(string key)
         {
             if (_timers.TryGetValue(key, out var timer))
-            {
                 timer.ReStart(null);
-            }
         }
+
         // --- Frame-based API ---
         public void Start(string key, int maxFrames)
         {
@@ -99,6 +99,7 @@ namespace RPG.Timer
             else
                 _frameTimers[key] = new FrameTimer(maxFrames);
         }
+
         public bool IsFrameFinished(string key)
         {
             return _frameTimers.TryGetValue(key, out var frameTimer) && frameTimer.IsFinished;
@@ -117,6 +118,16 @@ namespace RPG.Timer
         public int GetElapsedFrames(string key)
         {
             return _frameTimers.TryGetValue(key, out var frameTimer) ? frameTimer.ElapsedFrames : 0;
+        }
+
+        public float GetElapsedTimeFromFrames(string key)
+        {
+            return _frameTimers.TryGetValue(key, out var frameTimer) ? frameTimer.ElapsedTime : 0f;
+        }
+
+        public float GetDurationTimeFromFrames(string key)
+        {
+            return _frameTimers.TryGetValue(key, out var frameTimer) ? frameTimer.DurationTime : 0f;
         }
 
         public void RestartFrame(string key)
@@ -156,7 +167,5 @@ namespace RPG.Timer
             foreach (var key in toRemove)
                 _frameTimers.Remove(key);
         }
-        
-    
     }
 }
