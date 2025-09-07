@@ -9,13 +9,11 @@ public class BD_AttackSingle : Action
     public SharedTransform target;
     public string triggerName;
     public float fullDuration;
-    public float turnSpeed = 500f;
+    public float turnSpeed = 750f;
 
     public float minDistance = -1f;
     public float maxDistance = 999f;
 
-    // requireInRangeToStart: 是否要求在范围内才能进入这个 Action（用于 Sequence 的早期失败）
-    // requireInRangeToTrigger: 是否要求在范围内才能真正触发动画（从 Facing -> Triggered）
     public bool requireInRangeToStart = true;
     public bool requireInRangeToTrigger = true;
 
@@ -24,22 +22,27 @@ public class BD_AttackSingle : Action
     public float nextMaxDistance = 999f;
 
     // 两个时间区间
-    //TODO:可以优化成 List 来输入更多组数据
     public float faceStartTime1 = 0f;
-    public float faceEndTime1 = 0.2f;
-    public float faceStartTime2 = 0.5f;
-    public float faceEndTime2 = 0.8f;
+    public float faceEndTime1 = 0f;
+    public float faceStartTime2 = 0f;
+    public float faceEndTime2 = 0f;
+
+    //触发概率
+    [Range(0f, 100f)]
+    public float triggerChance = 0f;
 
     private enum State { Facing, Triggered, Cooling }
     private State state;
     private float timer;
     private Animator animator;
+    private bool chancePassed = false; // 用于记录概率判定
 
     public override void OnStart()
     {
         animator = GetComponent<Animator>();
         state = State.Facing;
         timer = 0f;
+        chancePassed = false;
     }
 
     public override TaskStatus OnUpdate()
@@ -61,7 +64,19 @@ public class BD_AttackSingle : Action
             {
                 bool lowerOk = (minDistance < 0f) || (dist >= minDistance);
                 bool upperOk = (maxDistance < 0f) || (dist <= maxDistance);
-                if (lowerOk && upperOk) state = State.Triggered;
+                if (lowerOk && upperOk) 
+                {
+                    // 概率判定
+                    if (!chancePassed)
+                    {
+                        chancePassed = (triggerChance <= 0f) || (UnityEngine.Random.value * 100f <= triggerChance);
+                    }
+
+                    if (chancePassed)
+                        state = State.Triggered;
+                    else
+                        return TaskStatus.Failure; // 不满足概率直接失败
+                }
             }
             else
             {
