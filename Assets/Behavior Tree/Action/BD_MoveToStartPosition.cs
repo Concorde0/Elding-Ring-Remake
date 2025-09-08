@@ -9,24 +9,50 @@ public class BD_MoveToStartPosition : Action
     public SharedFloat stoppingDistance = 0.1f;
     public float turnSpeed = 720f;
 
+    // 新增：检测玩家（目标）和攻击范围
+    public SharedTransform target;
+    public SharedFloat attackRange;
+
     private Animator animator;
     private bool     isMoving;
 
     public override void OnAwake()
     {
         animator = GetComponent<Animator>();
-        // 记录出生点
+        
+        if (startPosition == null)
+        {
+            startPosition = new SharedVector3();
+        }
         startPosition.Value = transform.position;
     }
 
     public override void OnStart()
     {
+        if (animator == null) animator = GetComponent<Animator>();
+
         isMoving = true;
-        animator.SetBool("Walk", true);
+        if (animator != null) animator.SetBool("Walk", true);
     }
 
     public override TaskStatus OnUpdate()
     {
+        if (target != null && target.Value != null)
+        {
+            float distToTarget = Vector3.Distance(transform.position, target.Value.position);
+            if (distToTarget <= attackRange.Value)
+            {
+                StopMoving();
+                return TaskStatus.Failure;
+            }
+        }
+        
+        if (startPosition == null)
+        {
+            StopMoving();
+            return TaskStatus.Failure;
+        }
+
         Vector3 toStart = startPosition.Value - transform.position;
         toStart.y = 0;
         float dist = toStart.magnitude;
@@ -54,8 +80,7 @@ public class BD_MoveToStartPosition : Action
     private void StopMoving()
     {
         if (!isMoving) return;
-        animator.SetBool("Walk", false);
+        if (animator != null) animator.SetBool("Walk", false);
         isMoving = false;
     }
-    
 }
