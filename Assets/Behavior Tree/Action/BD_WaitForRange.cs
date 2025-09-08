@@ -5,9 +5,9 @@ using UnityEngine;
 public class BD_WaitForRange : Action
 {
     public SharedTransform target;
-    public float minRange = 7f;
+    public float minRange = 6f;
     public float maxRange = 10f;
-    public float timeout = 1.5f;
+    public float timeout = 1f;
 
     private float timer;
 
