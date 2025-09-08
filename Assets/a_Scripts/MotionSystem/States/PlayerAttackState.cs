@@ -28,7 +28,6 @@ namespace RPG.MotionSystem.States
             owner.Timer.Start(StringConstants.TimerName.LightAttackTimeFrame1, _expectedFrameDuration);
             owner.Motor.LightAttack(_comboIndex);
             
-            Debug.Log($"[Debug] FrameTimer '{StringConstants.TimerName.LightAttackTimeFrame1}' started at frame {_frameStartCount}, duration {_expectedFrameDuration} frames");
         }
 
         public override void OnUpdate(PlayerMotion owner)

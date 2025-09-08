@@ -34,8 +34,7 @@ namespace RPG.MotionSystem
         {
             _lockTarget = target;
         }
-
-        // === 原有接口（大体不变） ===
+        
         public void Idle()
         {
             if (_param.IsIdleBack) _anim.TransitionTo(StringConstants.AnimName.IdleBack);
@@ -82,8 +81,18 @@ namespace RPG.MotionSystem
 
         public void Boil()
         {
-            if (_param.BoilTrigger.Peek()) _anim.TransitionTo(StringConstants.AnimName.BoilForward);
-            else if (_param.JumpBackwardTrigger.Peek()) _anim.TransitionTo(StringConstants.AnimName.JumpBackward);
+            if (_param.IsLocked && _param.BoilTrigger.Peek())
+            {
+                _anim.TransitionTo(StringConstants.AnimName.LockedBoil);
+            }
+            if (!_param.IsLocked && _param.BoilTrigger.Peek())
+            {
+                _anim.TransitionTo(StringConstants.AnimName.BoilForward);
+            }
+            else if (_param.JumpBackwardTrigger.Peek())
+            {
+                _anim.TransitionTo(StringConstants.AnimName.JumpBackward);
+            }
         }
 
         public void LightAttack(int comboIndex)
@@ -144,7 +153,7 @@ namespace RPG.MotionSystem
             }
         }
 
-        // ====================== 锁定时的移动实现 ======================
+        //锁定时的移动实现
         public void HandleLockRotation()
         {
 

@@ -12,11 +12,45 @@ public class CharacterStats : MonoBehaviour
     public Transform weaponSlot;
     [HideInInspector]
     public bool isCritical;
-
+    
+    private float currentPoise = 0f;
+    private float lastHitTime  = -999f;
+    
     private void Awake()
     {
         
     }
+
+    private void Update()
+    {
+        if (Time.time - lastHitTime > characterData.poiseRecoveryTime)
+        {
+            currentPoise = Mathf.MoveTowards(currentPoise, 0f, Time.deltaTime * 10f);
+        }
+    }
+
+    public void AddPoise(float amount)
+    {
+        currentPoise += amount;
+        lastHitTime = Time.time;
+    }
+    
+    public bool CheckStagger()
+    {
+        return currentPoise >= characterData.staggerThreshold && currentPoise < characterData.executionThreshold;
+    }
+
+    public bool CheckExecution()
+    {
+        return currentPoise >= characterData.executionThreshold;
+    }
+
+    public void ResetPoise()
+    {
+        currentPoise = 0f;
+    }
+
+    
 
     #region Read from Data_SO
     public int MaxHealth{
@@ -54,14 +88,27 @@ public class CharacterStats : MonoBehaviour
     #region Character Combat
     public void TakeDamage(CharacterStats attacker)
     {
-        int damage = Mathf.Max(attacker.CurrentDamage());
-        CurrentHealth = Mathf.Max(CurrentHealth - damage);
+        if (characterData == null || attackData == null) return;
 
-        if (attacker.isCritical)
+        // 计算伤害
+        int damage = Mathf.Max(attacker.CurrentDamage(), 0);
+        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+
+        // 加削韧值
+        AddPoise(attacker.attackData.poiseDamage);
+
+        // 判定硬直/处决
+        if (CheckExecution())
         {
-            //TODO:触发受伤动画
+            // 进入待处决状态（行为树 Condition 会检测到）
+            isCritical = true; 
         }
+        else if (CheckStagger())
+        {
             
+        }
+    
+        // TODO: 如果血量 <= 0，则走死亡逻辑
     }
     
 

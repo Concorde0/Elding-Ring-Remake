@@ -116,3 +116,18 @@ MonoBehaviour:
     clipGroup: []
     infoGroup: []
     blendClip: []
+  - name: LockedBoil
+    type: 3
+    enterTime: 0.2
+    clip: {fileID: 0}
+    clipGroup: []
+    infoGroup: []
+    blendClip:
+    - clip: {fileID: 1827226128182048838, guid: 318d68260ee1bf04ab0fc0856762b90e, type: 3}
+      pos: {x: 0, y: 1}
+    - clip: {fileID: 1827226128182048838, guid: 8caf16c345304d343bd4d16fdb0d8ab7, type: 3}
+      pos: {x: 0, y: -1}
+    - clip: {fileID: 1827226128182048838, guid: 1fe96be7976c6484e8cc966265367d31, type: 3}
+      pos: {x: -1, y: 0}
+    - clip: {fileID: 1827226128182048838, guid: b21acfe330c16a54e8f5b290bc7404ab, type: 3}
+      pos: {x: 1, y: 0}

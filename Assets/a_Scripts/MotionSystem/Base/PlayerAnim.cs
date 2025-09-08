@@ -19,6 +19,7 @@ namespace RPG.MotionSystem
         private readonly Dictionary<string,int> _animStateIndex;
         private readonly Dictionary<string, float> _animLengths;
         private BlendTree2D _lockedMoveAnim;
+        private BlendTree2D _lockedBoilAnim;
         private BlendTree2D _moveAnim;
         private BlendTree2D _runAnim;
         private BlendTree2D _boilAnim;
@@ -35,6 +36,9 @@ namespace RPG.MotionSystem
             
             _lockedMoveAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.LockedMove));
             AddState(StringConstants.AnimName.LockedMove,_lockedMoveAnim);
+
+            _lockedBoilAnim = new BlendTree2D(_graph, setting.GetParam(StringConstants.AnimName.LockedBoil));
+            AddState(StringConstants.AnimName.LockedBoil,_lockedBoilAnim);
             
             _moveAnim = new BlendTree2D(_graph,setting.GetParam(StringConstants.AnimName.Move));
             AddState(StringConstants.AnimName.Move,_moveAnim);

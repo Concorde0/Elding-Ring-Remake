@@ -34,6 +34,10 @@ public class CharacterData_SO : ScriptableObject
     
     public int maxLevel = 225;
     
+    public float staggerThreshold = 50f;    // 短硬直阈值
+    public float executionThreshold = 100f; // 处决阈值
+    public float poiseRecoveryTime = 3f;    // 多久没受伤恢复
+    
     
 
  

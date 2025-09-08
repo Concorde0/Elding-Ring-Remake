@@ -16,7 +16,7 @@ namespace RPG.MotionSystem.States
             {
                 owner.Timer.Start(StringConstants.TimerName.BoilTime,0.9f);
             }
-            else if (owner.Param.JumpBackwardTrigger.Peek())
+            else if (owner.Param.JumpBackwardTrigger.Peek() )
             {
                 owner.Timer.Start(StringConstants.TimerName.JumpBackwardTime,0.8f);
             }

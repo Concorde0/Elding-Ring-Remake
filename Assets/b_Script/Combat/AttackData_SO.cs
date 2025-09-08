@@ -6,6 +6,7 @@ using UnityEngine;
 public class AttackData_SO : ScriptableObject
 {
     public int Damage;
+    public int poiseDamage;
 
     public void ApplyWeaponData(AttackData_SO weapon)
     {

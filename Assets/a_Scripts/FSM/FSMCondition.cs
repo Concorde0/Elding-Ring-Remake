@@ -9,7 +9,7 @@ namespace RPG.FSM
     //单参数委托
     public class FSMCondition<T>
     {
-        // ConditionHandler<T> 是一个「类型」，它代表“接收一个 T、返回 bool 的方法
+        // ConditionHandler<T> 是一个类型，它代表接收一个 T、返回 bool的方法
         private Func<T, bool> _conditionHandle;
         
         public FSMCondition() { }

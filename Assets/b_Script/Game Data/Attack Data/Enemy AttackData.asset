@@ -10,12 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b5ab8caa3a381145859f7f62a53be33, type: 3}
-  m_Name: Slime Attack
+  m_Name: Enemy AttackData
   m_EditorClassIdentifier: 
-  attackRange: 2
-  skillRange: 0
-  cooldown: 1
-  minDamage: 2
-  maxDamage: 4
-  criticalMultiplier: 2
-  criticalChance: 0.2
+  Damage: 10
+  poiseDamage: 0

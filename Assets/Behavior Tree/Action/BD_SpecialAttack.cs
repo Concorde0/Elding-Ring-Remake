@@ -26,19 +26,16 @@ public class BD_SpecialAttack : Action
     private float timer;
     private Animator animator;
     private enum State { Started, Playing }
-    private State state;
 
     public override void OnStart()
     {
         animator = GetComponent<Animator>();
         timer = 0f;
-        state = State.Started;
         
         if (animator != null && !string.IsNullOrEmpty(triggerName))
         {
             animator.SetTrigger(triggerName);
         }
-        state = State.Playing;
     }
 
     public override TaskStatus OnUpdate()
@@ -93,6 +90,5 @@ public class BD_SpecialAttack : Action
             animator.ResetTrigger(triggerName);
         }
         timer = 0f;
-        state = State.Started;
     }
 }

@@ -10,6 +10,7 @@ public class StringConstants : Singleton<StringConstants>
         public const string IdleBack = "IdleBack";
         public const string Move = "Move";
         public const string LockedMove = "LockedMove";
+        public const string LockedBoil = "LockedBoil";
         public const string Run = "Run";
         public const string RunStop = "RunStop";
         public const string MoveStop = "MoveStop";
