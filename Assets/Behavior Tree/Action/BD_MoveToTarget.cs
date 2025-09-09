@@ -11,17 +11,25 @@ public class BD_MoveToTarget : Action
 
     private Animator animator;
     private bool     isMoving;
+    private CharacterStats _characterStats;
+
+    public override void OnAwake()
+    {
+        _characterStats = GetComponent<CharacterStats>();
+    }
 
     public override void OnStart()
     {
         animator = GetComponent<Animator>();
         isMoving = true;
         animator.SetBool("Walk", true);
+        _characterStats.ResetStaggerFlag();
     }
 
     public override TaskStatus OnUpdate()
     {
         if (target.Value == null) return TaskStatus.Failure;
+        
 
         Vector3 toTarget = target.Value.position - transform.position;
         toTarget.y = 0;

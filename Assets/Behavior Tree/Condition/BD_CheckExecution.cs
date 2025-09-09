@@ -13,6 +13,6 @@ public class BD_CheckExecution : Conditional
     public override TaskStatus OnUpdate()
     {
         if (stats == null) return TaskStatus.Failure;
-        return stats.isCritical ? TaskStatus.Success : TaskStatus.Failure;
+        return stats.CheckExecution() ? TaskStatus.Success : TaskStatus.Failure;
     }
 }

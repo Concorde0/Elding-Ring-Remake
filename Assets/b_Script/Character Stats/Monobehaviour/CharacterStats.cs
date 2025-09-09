@@ -11,8 +11,11 @@ public class CharacterStats : MonoBehaviour
     
     [Header(("Weapon"))]
     public Transform weaponSlot;
+
     [HideInInspector]
+    public bool hasPlayedStagger = false;
     public bool isCritical;
+    public bool isExecution;
     
     private float currentPoise = 0f;
     private float lastHitTime  = -999f;
@@ -41,7 +44,6 @@ public class CharacterStats : MonoBehaviour
     
     public bool CheckStagger()
     {
-        Debug.Log("Stagger");
         return currentPoise >= characterData.staggerThreshold && currentPoise < characterData.executionThreshold;
     }
 
@@ -53,6 +55,11 @@ public class CharacterStats : MonoBehaviour
     public void ResetPoise()
     {
         currentPoise = 0f;
+    }
+    
+    public void ResetStaggerFlag()
+    {
+        hasPlayedStagger = false;
     }
 
     
@@ -109,11 +116,15 @@ public class CharacterStats : MonoBehaviour
 
         if (CheckExecution())
         {
-            isCritical = true;
+            isExecution = true;
         }
         else if (CheckStagger())
         {
-            // 普通硬直逻辑
+            if (!hasPlayedStagger)
+            {
+                isCritical = true;
+                hasPlayedStagger = true;
+            }
         }
 
         // TODO: 血量 <= 0 时死亡

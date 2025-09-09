@@ -15,10 +15,12 @@ public class BD_MoveToStartPosition : Action
 
     private Animator animator;
     private bool     isMoving;
+    
 
     public override void OnAwake()
     {
         animator = GetComponent<Animator>();
+        
         
         if (startPosition == null)
         {
@@ -33,6 +35,7 @@ public class BD_MoveToStartPosition : Action
 
         isMoving = true;
         if (animator != null) animator.SetBool("Walk", true);
+        
     }
 
     public override TaskStatus OnUpdate()

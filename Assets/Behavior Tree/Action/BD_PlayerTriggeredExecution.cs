@@ -16,15 +16,16 @@ public class BD_PlayerTriggeredExecution : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if (stats == null || !stats.isCritical) return TaskStatus.Failure;
+        if (stats == null || !stats.isExecution) return TaskStatus.Failure;
         if (player.Value == null) return TaskStatus.Failure;
 
         float dist = Vector3.Distance(transform.position, player.Value.position);
         if (dist > executionRange) return TaskStatus.Failure;
         
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            stats.isCritical = false;
+            Debug.Log("Successful Execution Triggered");
+            stats.isExecution = false;
             return TaskStatus.Success;
         }
 

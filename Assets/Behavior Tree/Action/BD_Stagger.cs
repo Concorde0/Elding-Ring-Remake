@@ -19,7 +19,6 @@ public class BD_PlayStagger : Action
     {
         started = true;
         animator.CrossFadeInFixedTime(staggerAnimName, 0.1f);
-        Debug.Log("!11111111111111111111111111111111111111111");
     }
 
     public override TaskStatus OnUpdate()
@@ -28,10 +27,13 @@ public class BD_PlayStagger : Action
 
         var state = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (state.IsName(staggerAnimName) && state.normalizedTime >= 1f)
+        if (state.IsName(staggerAnimName) && state.normalizedTime >= 0.95f)
         {
             animator.CrossFadeInFixedTime(fallbackState, 0.1f, 0);
-            return TaskStatus.Success;
+
+            var stats = GetComponent<CharacterStats>();
+            stats.isCritical = false; // 退出受击状态
+            return TaskStatus.Failure;
         }
 
         return TaskStatus.Running;

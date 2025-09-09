@@ -22,11 +22,21 @@ public class BD_WaitForExecution : Action
 
     public override TaskStatus OnUpdate()
     {
-        //TODO:动画播放完成后Failure
-        if (!stats.isCritical) 
+        // 如果处决状态取消，返回 Success
+        if (!stats.isExecution)
         {
             return TaskStatus.Success;
         }
+
+        var state = animator.GetCurrentAnimatorStateInfo(0);
+
+        if (state.IsName(executionIdleAnim) && state.normalizedTime >= 0.95f)
+        {
+            stats.ResetPoise();
+            return TaskStatus.Failure;
+        }
+
         return TaskStatus.Running;
+
     }
 }

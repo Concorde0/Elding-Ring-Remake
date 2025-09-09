@@ -30,12 +30,21 @@ public class BD_AttackSingle : Action
     private State state;
     private float timer;
     private Animator animator;
+    private CharacterStats enemyStats;
 
+    
+    public override void OnAwake()
+    {
+        enemyStats = GetComponent<CharacterStats>();
+    }
+    
     public override void OnStart()
     {
         animator = GetComponent<Animator>();
         state = State.Facing;
         timer = 0f;
+        enemyStats.ResetStaggerFlag();
+        
     }
 
     public override TaskStatus OnUpdate()
