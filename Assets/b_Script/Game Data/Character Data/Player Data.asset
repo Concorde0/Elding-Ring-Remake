@@ -23,7 +23,7 @@ MonoBehaviour:
   faith: 8
   induction: 8
   maxHealth: 500
-  currentHealth: 490
+  currentHealth: 0
   currentFocus: 88
   maxFocus: 88
   maxEnergy: 300
@@ -31,6 +31,6 @@ MonoBehaviour:
   currentWeight: 45
   maxWeight: 75
   maxLevel: 225
-  staggerThreshold: 50
-  executionThreshold: 100
+  staggerThreshold: 1000
+  executionThreshold: 1000
   poiseRecoveryTime: 3

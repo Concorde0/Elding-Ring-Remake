@@ -41,6 +41,7 @@ public class CharacterStats : MonoBehaviour
     
     public bool CheckStagger()
     {
+        Debug.Log("Stagger");
         return currentPoise >= characterData.staggerThreshold && currentPoise < characterData.executionThreshold;
     }
 
@@ -101,7 +102,6 @@ public class CharacterStats : MonoBehaviour
 
         if (forceSpecial)
         {
-            // 直接进入特殊受伤动画
             Debug.Log("Trigger Special Hurt Animation!");
             _param.IsSpecialHurt = true;
             return;
