@@ -8,6 +8,7 @@ public class BD_WaitForExecution : Action
     private Animator animator;
 
     public string executionIdleAnim = "Fell"; // 敌人待处决待机动画
+    public string fallbackState = "Idle";    // 播放完回Idle
 
     public override void OnAwake()
     {
@@ -32,8 +33,10 @@ public class BD_WaitForExecution : Action
 
         if (state.IsName(executionIdleAnim) && state.normalizedTime >= 0.95f)
         {
+            animator.CrossFadeInFixedTime(fallbackState, 0.1f, 0);
+            
             stats.ResetPoise();
-            return TaskStatus.Failure;
+            return TaskStatus.Success;
         }
 
         return TaskStatus.Running;
