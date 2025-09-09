@@ -107,6 +107,11 @@ namespace RPG.MotionSystem
             }
         }
 
+        public void Execution()
+        {
+            _anim.TransitionTo(StringConstants.AnimName.Execution);
+        }
+
         public void ResetLionSmash()
         {
             _hasPlayedLionSmash = false;

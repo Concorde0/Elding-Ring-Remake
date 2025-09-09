@@ -145,3 +145,10 @@ MonoBehaviour:
     clipGroup: []
     infoGroup: []
     blendClip: []
+  - name: Execution
+    type: 0
+    enterTime: 0.2
+    clip: {fileID: 1827226128182048838, guid: f68240453aa6b37488e84c3930d1a1ed, type: 3}
+    clipGroup: []
+    infoGroup: []
+    blendClip: []

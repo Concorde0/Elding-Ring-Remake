@@ -19,13 +19,12 @@ public class CharacterStats : MonoBehaviour
     
     private float currentPoise = 0f;
     private float lastHitTime  = -999f;
-
-    private PlayerParam _param;
+    public bool shouldPlayExecutionAnim = false;
+    
     public WeaponHitbox weaponHitbox;
     
     private void Awake()
     {
-        _param = new PlayerParam();
     }
 
     private void Update()
@@ -110,7 +109,6 @@ public class CharacterStats : MonoBehaviour
         if (forceSpecial)
         {
             Debug.Log("Trigger Special Hurt Animation!");
-            _param.IsSpecialHurt = true;
             return;
         }
 

@@ -89,6 +89,8 @@ namespace RPG.MotionSystem.States
             var idleAnim = new FSMCondition<PlayerMotion>(m =>  !_canStop && _canTransition && !_canBoil);
             var boilAnim = new FSMCondition<PlayerMotion>(m => _canBoil && _canTransition);
             var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek());
+            var executionAnim = new FSMCondition<PlayerMotion>(m => m.Stats.shouldPlayExecutionAnim);
+            AddCondition(executionAnim,StringConstants.AnimName.Execution);
             AddCondition(hurtAnim,StringConstants.AnimName.SpecialHurt);
             AddCondition(runTurn, StringConstants.AnimName.RunTurn);
             AddCondition(boilAnim, StringConstants.AnimName.BoilForward);

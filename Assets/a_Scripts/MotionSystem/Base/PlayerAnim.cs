@@ -81,6 +81,9 @@ namespace RPG.MotionSystem
 
             var lionSmash = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.LionSmash));
             AddState(StringConstants.AnimName.LionSmash,lionSmash);
+
+            var execution = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.Execution));
+            AddState(StringConstants.AnimName.Execution,execution);
             
             
             

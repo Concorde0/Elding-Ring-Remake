@@ -26,28 +26,35 @@ public class BD_PlayerTriggeredExecution : Conditional
         if (dist > executionRange)
             return TaskStatus.Failure;
 
-        // 开始监听处决按键
         if (!isListening)
         {
             executionTimer = executionWindow;
             isListening = true;
         }
 
-        // 倒计时监听窗口
         if (executionTimer > 0f)
         {
             executionTimer -= Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Debug.Log("Successful Execution Triggered");
+
                 stats.isExecution = false;
                 isListening = false;
+
+                // ✅ 设置玩家动画触发标志
+                var playerStats = player.Value.GetComponent<CharacterStats>();
+                if (playerStats != null)
+                {
+                    playerStats.shouldPlayExecutionAnim = true;
+                }
+
                 return TaskStatus.Success;
             }
+
             return TaskStatus.Running;
         }
 
-        // 超时未触发
         isListening = false;
         return TaskStatus.Failure;
     }

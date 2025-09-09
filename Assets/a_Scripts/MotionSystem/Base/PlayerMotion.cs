@@ -24,6 +24,7 @@ namespace RPG.MotionSystem
         public PlayerCamera Camera { get; private set; }
         public RootMotionJobHandler RootMotion { get; private set; }
         public TimerManager Timer { get; private set; }
+        public CharacterStats Stats { get; private set; }
 
         public PlayerMotion(Transform model, AnimSetting setting, CameraResources camera)
         {
@@ -37,6 +38,7 @@ namespace RPG.MotionSystem
             RootMotion = new RootMotionJobHandler(1);
             Input = new PlayerInputController(Param, Timer);
             Camera = new PlayerCamera(camera);
+            Stats = model.GetComponent<CharacterStats>();
             
         }
 
@@ -58,6 +60,8 @@ namespace RPG.MotionSystem
             AI.Update();
             Camera.Update();
             Input.Update();
+            
+            
             
         }
 

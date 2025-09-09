@@ -33,6 +33,8 @@ namespace RPG.MotionSystem.States
             var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.BoilTrigger.Peek() || m.Param.JumpBackwardTrigger.Peek());
             var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek());
             var hurtAnim = new FSMCondition<PlayerMotion>(m => m.Param.IsSpecialHurt);
+            var executionAnim = new FSMCondition<PlayerMotion>(m => m.Stats.shouldPlayExecutionAnim);
+            AddCondition(executionAnim,StringConstants.AnimName.Execution);
             AddCondition(hurtAnim,StringConstants.AnimName.SpecialHurt);
             AddCondition(boilAnim,StringConstants.AnimName.BoilForward);
             AddCondition(moveInput, StringConstants.AnimName.Move);
