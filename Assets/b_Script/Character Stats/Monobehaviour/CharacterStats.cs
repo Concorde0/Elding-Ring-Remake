@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using RPG.MotionSystem;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
@@ -15,10 +16,13 @@ public class CharacterStats : MonoBehaviour
     
     private float currentPoise = 0f;
     private float lastHitTime  = -999f;
+
+    private PlayerParam _param;
+    public WeaponHitbox weaponHitbox;
     
     private void Awake()
     {
-        
+        _param = new PlayerParam();
     }
 
     private void Update()
@@ -86,30 +90,45 @@ public class CharacterStats : MonoBehaviour
     #endregion
     
     #region Character Combat
-    public void TakeDamage(CharacterStats attacker)
+    public void TakeDamage(CharacterStats attacker, bool forceSpecial = false)
     {
         if (characterData == null || attackData == null) return;
 
-        // 计算伤害
         int damage = Mathf.Max(attacker.CurrentDamage(), 0);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
-        // 加削韧值
         AddPoise(attacker.attackData.poiseDamage);
 
-        // 判定硬直/处决
+        if (forceSpecial)
+        {
+            // 直接进入特殊受伤动画
+            Debug.Log("Trigger Special Hurt Animation!");
+            _param.IsSpecialHurt = true;
+            return;
+        }
+
         if (CheckExecution())
         {
-            // 进入待处决状态（行为树 Condition 会检测到）
-            isCritical = true; 
+            isCritical = true;
         }
         else if (CheckStagger())
         {
-            
+            // 普通硬直逻辑
         }
-    
-        // TODO: 如果血量 <= 0，则走死亡逻辑
+
+        // TODO: 血量 <= 0 时死亡
     }
+
+    public void OpenSpecialHurt()
+    {
+        weaponHitbox.triggerSpecialHurt = true;
+    }
+    
+    public void CloseSpecialHurt()
+    {
+        weaponHitbox.triggerSpecialHurt = false;
+    }
+   
     
 
     private int CurrentDamage()

@@ -27,6 +27,13 @@ namespace RPG.MotionSystem.States
         {
             Debug.Log("Player Move State");
             
+            if (owner.Param.IsSpecialHurt)
+            {
+                _canTransition = true;
+                Debug.Log("HHHHHHHHH");
+                return;
+            }
+            
             if (!owner.Param.IsLocked)
             {
                 owner.Motor.HandleInputRotation();
@@ -77,11 +84,13 @@ namespace RPG.MotionSystem.States
 
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
+            var hurtAnim = new FSMCondition<PlayerMotion>(m => m.Param.IsSpecialHurt && _canTransition);
             var runTurn = new FSMCondition<PlayerMotion>(m => m.Param.Run && m.Param.TurnTrigger.Peek() && _canStop);
             var stopAnim = new FSMCondition<PlayerMotion>(m =>  _canStop && _canTransition && !_canBoil);
             var idleAnim = new FSMCondition<PlayerMotion>(m =>  !_canStop && _canTransition && !_canBoil);
             var boilAnim = new FSMCondition<PlayerMotion>(m => _canBoil && _canTransition);
             var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek());
+            AddCondition(hurtAnim,StringConstants.AnimName.SpecialHurt);
             AddCondition(runTurn, StringConstants.AnimName.RunTurn);
             AddCondition(boilAnim, StringConstants.AnimName.BoilForward);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);

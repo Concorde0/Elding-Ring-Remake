@@ -36,9 +36,11 @@ namespace RPG.InputSystem
             //TODO: 加入检测可锁定目标时，再让isLocked的bool改变，以及可锁定目标消失时，isLocked变为false
             _param.IsLocked = false;
             _input.GamePlay.Lock.performed += _ => _param.IsLocked = !_param.IsLocked;
-        
+
+            _input.GamePlay.Hurt.performed += _ => _param.IsSpecialHurt = true;
+
             //TODO：这里把翻滚状态设为true之后，需要在对应的单独clip中播放完动画后把isBoil转换为false 
-        
+
         }
         
         

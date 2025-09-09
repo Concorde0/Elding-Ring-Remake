@@ -21,8 +21,6 @@ public class PlayerRunTurnState : FSMState<PlayerMotion>
         {
             _canTransition = true;
         }
-            
-            
     }
     
     public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)

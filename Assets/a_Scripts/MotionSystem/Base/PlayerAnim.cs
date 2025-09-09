@@ -75,6 +75,9 @@ namespace RPG.MotionSystem
             
             var runTurn = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.RunTurn));
             AddState(StringConstants.AnimName.RunTurn,runTurn);
+
+            var specialHurt = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.SpecialHurt));
+            AddState(StringConstants.AnimName.SpecialHurt,specialHurt);
             
             
             

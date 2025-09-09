@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Focus Data
   m_EditorClassIdentifier: 
   healthPoint: 0
-  magicPoint: 10
+  magicPoint: 50

@@ -89,6 +89,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hurt"",
+                    ""type"": ""Button"",
+                    ""id"": ""7be60718-a7ed-458c-b7a0-8ac8220c6d5e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -309,6 +318,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PlayerStats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33092f54-1c28-43ae-8e0f-c1df102507c6"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hurt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -903,6 +923,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_GamePlay_Attack = m_GamePlay.FindAction("Attack", throwIfNotFound: true);
         m_GamePlay_Inventory = m_GamePlay.FindAction("Inventory", throwIfNotFound: true);
         m_GamePlay_PlayerStats = m_GamePlay.FindAction("PlayerStats", throwIfNotFound: true);
+        m_GamePlay_Hurt = m_GamePlay.FindAction("Hurt", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -989,6 +1010,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Attack;
     private readonly InputAction m_GamePlay_Inventory;
     private readonly InputAction m_GamePlay_PlayerStats;
+    private readonly InputAction m_GamePlay_Hurt;
     public struct GamePlayActions
     {
         private @PlayerInput m_Wrapper;
@@ -1000,6 +1022,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_GamePlay_Attack;
         public InputAction @Inventory => m_Wrapper.m_GamePlay_Inventory;
         public InputAction @PlayerStats => m_Wrapper.m_GamePlay_PlayerStats;
+        public InputAction @Hurt => m_Wrapper.m_GamePlay_Hurt;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1030,6 +1053,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PlayerStats.started += instance.OnPlayerStats;
             @PlayerStats.performed += instance.OnPlayerStats;
             @PlayerStats.canceled += instance.OnPlayerStats;
+            @Hurt.started += instance.OnHurt;
+            @Hurt.performed += instance.OnHurt;
+            @Hurt.canceled += instance.OnHurt;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1055,6 +1081,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PlayerStats.started -= instance.OnPlayerStats;
             @PlayerStats.performed -= instance.OnPlayerStats;
             @PlayerStats.canceled -= instance.OnPlayerStats;
+            @Hurt.started -= instance.OnHurt;
+            @Hurt.performed -= instance.OnHurt;
+            @Hurt.canceled -= instance.OnHurt;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1244,6 +1273,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnPlayerStats(InputAction.CallbackContext context);
+        void OnHurt(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

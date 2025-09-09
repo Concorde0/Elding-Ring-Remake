@@ -131,3 +131,10 @@ MonoBehaviour:
       pos: {x: -1, y: 0}
     - clip: {fileID: 1827226128182048838, guid: b21acfe330c16a54e8f5b290bc7404ab, type: 3}
       pos: {x: 1, y: 0}
+  - name: SpecialHurt
+    type: 0
+    enterTime: 0.2
+    clip: {fileID: 1827226128182048838, guid: d1e803babed31534b9e8dce29b9433df, type: 3}
+    clipGroup: []
+    infoGroup: []
+    blendClip: []

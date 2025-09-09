@@ -19,7 +19,7 @@ namespace RPG.MotionSystem.States
 
         public override void OnUpdate(PlayerMotion owner)
         {
-           Debug.Log("Player Idle State");
+            
         }
 
         public override void OnExit(PlayerMotion owner)
@@ -32,6 +32,8 @@ namespace RPG.MotionSystem.States
             var moveInput = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1f);
             var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.BoilTrigger.Peek() || m.Param.JumpBackwardTrigger.Peek());
             var attackAnim = new FSMCondition<PlayerMotion>(m => m.Param.AttackTrigger.Peek());
+            var hurtAnim = new FSMCondition<PlayerMotion>(m => m.Param.IsSpecialHurt);
+            AddCondition(hurtAnim,StringConstants.AnimName.SpecialHurt);
             AddCondition(boilAnim,StringConstants.AnimName.BoilForward);
             AddCondition(moveInput, StringConstants.AnimName.Move);
             AddCondition(attackAnim, StringConstants.AnimName.LightAttack1);

@@ -29,7 +29,8 @@ public class StringConstants : Singleton<StringConstants>
         public const string LightAttack1 = "LightAttack1";
         public const string LightAttack2 = "LightAttack2";
         public const string LightAttack3 = "LightAttack3";
-        
+        public const string SpecialHurt = "SpecialHurt";
+
     }
 
     public class TimerName
@@ -45,6 +46,7 @@ public class StringConstants : Singleton<StringConstants>
         public const string LightAttackTime3 = "LightAttackTime3";
         public const string SpaceHold = "SpaceHold";
         public const string BoilTimeHold = "JumpBackwardTimeHold";
+        public const string SpecialHurtTime = "SpecialHurtTime";
     }
 
     public class WindowId

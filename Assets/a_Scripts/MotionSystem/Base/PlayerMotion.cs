@@ -37,7 +37,7 @@ namespace RPG.MotionSystem
             RootMotion = new RootMotionJobHandler(1);
             Input = new PlayerInputController(Param, Timer);
             Camera = new PlayerCamera(camera);
-           
+            
         }
 
         public void Start()

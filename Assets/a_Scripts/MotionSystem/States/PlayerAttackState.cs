@@ -12,9 +12,7 @@ namespace RPG.MotionSystem.States
         private bool _canTransition;
         private int _lastTriggeredComboIndex = -1;
         
-        // Debug fields
         private int _expectedFrameDuration;
-        private int _frameStartCount;
 
         public override void OnEnter(PlayerMotion owner)
         {
@@ -24,7 +22,6 @@ namespace RPG.MotionSystem.States
             _lastTriggeredComboIndex = -1;
             owner.Timer.Start(StringConstants.TimerName.LightAttackTime1,2.3f);
             _expectedFrameDuration = Mathf.CeilToInt(owner.Anim.GetAnimLength(StringConstants.TimerName.LightAttackTimeFrame1));
-            _frameStartCount = Time.frameCount;
             owner.Timer.Start(StringConstants.TimerName.LightAttackTimeFrame1, _expectedFrameDuration);
             owner.Motor.LightAttack(_comboIndex);
             
@@ -32,6 +29,11 @@ namespace RPG.MotionSystem.States
 
         public override void OnUpdate(PlayerMotion owner)
         {
+            if (owner.Param.IsSpecialHurt)
+            {
+                _canTransition = true;
+                return;
+            }
             //何时点击可以进行下一阶段
             if (_comboIndex == 0 && _lastTriggeredComboIndex < 0 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 0.95f, 1.4f) && owner.Param.AttackTrigger.Consume())
             {
@@ -86,9 +88,11 @@ namespace RPG.MotionSystem.States
 
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
+            var hurtAnim = new FSMCondition<PlayerMotion>(m => m.Param.IsSpecialHurt && _canTransition);
             var idleAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude < 0.05f && _isFinished);
             var moveAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1 && _canTransition);
             var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.BoilTrigger.Peek() && _canTransition);
+            AddCondition(hurtAnim,StringConstants.AnimName.SpecialHurt);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(moveAnim, StringConstants.AnimName.Move);
             AddCondition(boilAnim,StringConstants.AnimName.BoilForward);

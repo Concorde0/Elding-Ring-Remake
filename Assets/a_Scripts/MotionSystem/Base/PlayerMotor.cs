@@ -113,7 +113,14 @@ namespace RPG.MotionSystem
                     break;
             }
         }
-
+        
+        public void Hurt()
+        {
+            if (_param.IsSpecialHurt)
+            {
+                _anim.TransitionTo(StringConstants.AnimName.SpecialHurt);
+            }
+        }
         /// <summary>
         /// 处理 Animator 的 root motion 位移。注意：锁定时不应用动画位移（避免与 ManualLockMove 冲突）。
         /// </summary>

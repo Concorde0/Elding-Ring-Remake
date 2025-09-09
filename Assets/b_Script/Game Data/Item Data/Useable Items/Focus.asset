@@ -15,12 +15,12 @@ MonoBehaviour:
   itemType: 3
   itemName: "\u84DD\u74F6"
   itemIcon: {fileID: -117204816, guid: d0b2cbfbd43803d42a423fea27aaff55, type: 3}
-  itemIcon2: {fileID: 0}
+  itemIcon2: {fileID: -1890563696, guid: 0a1ff6047a1121047b47018303b3a81e, type: 3}
   itemAmount: 3
   itemPrefab: {fileID: 5518885154706774473, guid: 28913c20a61e27e4180562c52e492f25, type: 3}
   stackable: 1
-  useAble: 0
-  isConsumable: 0
+  useAble: 1
+  isConsumable: 1
   allowedSlot: 7
   t1: 
   t2: 
