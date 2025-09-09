@@ -30,7 +30,6 @@ namespace RPG.MotionSystem.States
             if (owner.Param.IsSpecialHurt)
             {
                 _canTransition = true;
-                Debug.Log("HHHHHHHHH");
                 return;
             }
             

@@ -37,6 +37,8 @@ namespace RPG.MotionSystem.States
             //何时点击可以进行下一阶段
             if (_comboIndex == 0 && _lastTriggeredComboIndex < 0 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 0.95f, 1.4f) && owner.Param.AttackTrigger.Consume())
             {
+                GameLoop.Instance.Hitbox.SetActive(false);
+                
                 _comboIndex++;
                 _lastTriggeredComboIndex = 0;
                 _canTransition = false;
@@ -45,6 +47,9 @@ namespace RPG.MotionSystem.States
             }
             else if (_comboIndex == 1 && _lastTriggeredComboIndex < 1 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime2, 1f, 1.3f) && owner.Param.AttackTrigger.Consume())
             {
+                
+                GameLoop.Instance.Hitbox.SetActive(false);
+                
                 _comboIndex++;
                 _lastTriggeredComboIndex = 1;
                 _canTransition = false;
@@ -83,7 +88,7 @@ namespace RPG.MotionSystem.States
         }
         public override void OnExit(PlayerMotion owner)
         {
-            
+            GameLoop.Instance.Hitbox.SetActive(false);
         }
 
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)

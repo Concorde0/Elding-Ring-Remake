@@ -16,7 +16,6 @@ public class PlayerHurtState : FSMState<PlayerMotion>
 
     public override void OnUpdate(PlayerMotion owner)
     {
-        Debug.Log("SpecalHurt");
         if (owner.Timer.IsFinished(StringConstants.TimerName.SpecialHurtTime))
         {
             _canTransition = true;

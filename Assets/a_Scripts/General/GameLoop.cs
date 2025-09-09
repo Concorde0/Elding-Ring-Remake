@@ -17,6 +17,8 @@ public class GameLoop : MonoBehaviour
     
     private PlayerMotion _player;
 
+    public GameObject Hitbox;
+
     
     private void Awake()
     {
