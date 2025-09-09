@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player BaseAttackData
   m_EditorClassIdentifier: 
   Damage: 10
-  poiseDamage: 60
+  poiseDamage: 30

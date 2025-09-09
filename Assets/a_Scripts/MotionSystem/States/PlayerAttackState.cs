@@ -49,7 +49,6 @@ namespace RPG.MotionSystem.States
             //何时点击可以进行下一阶段
             if (_comboIndex == 0 && _lastTriggeredComboIndex < 0 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 0.95f, 1.4f) && owner.Param.AttackTrigger.Consume())
             {
-                GameLoop.Instance.Hitbox.SetActive(false);
                 
                 _comboIndex++;
                 _lastTriggeredComboIndex = 0;
@@ -60,7 +59,6 @@ namespace RPG.MotionSystem.States
             else if (_comboIndex == 1 && _lastTriggeredComboIndex < 1 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime2, 1f, 1.3f) && owner.Param.AttackTrigger.Consume())
             {
                 
-                GameLoop.Instance.Hitbox.SetActive(false);
                 
                 _comboIndex++;
                 _lastTriggeredComboIndex = 1;
@@ -83,7 +81,7 @@ namespace RPG.MotionSystem.States
                 _isFinished = true;
             }
             
-            //何时可以打断攻击（这里应该和连击时间的最后时间段一样？这个我还得进游戏确认一下）
+            //何时可以打断攻击
             if (owner.Timer.GetElapsed(StringConstants.TimerName.LightAttackTime1) >=  1.3f && _comboIndex == 0)
             {
                 _canTransition = true;
@@ -95,6 +93,28 @@ namespace RPG.MotionSystem.States
             else if (owner.Timer.GetElapsed(StringConstants.TimerName.LightAttackTime3) >= 1.8f && _comboIndex == 2)
             {
                 _canTransition = true;
+            }
+            
+            // 可造成伤害的时间区间
+            if (owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 0.73f, 0.83f))
+            {
+                GameLoop.Instance.Hitbox.SetActive(true);
+            }
+            else if(owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime2, 0.73f, 0.9f))
+            {
+                GameLoop.Instance.Hitbox.SetActive(true);
+            }
+            else if(owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime3, 0.73f, 0.93f))
+            {
+                GameLoop.Instance.Hitbox.SetActive(true);
+            }
+            else if(owner.Timer.IsElapsedInRange(StringConstants.TimerName.LionSmashTime, 1.6f, 1.8f))
+            {
+                GameLoop.Instance.Hitbox.SetActive(true);
+            }
+            else
+            {
+                GameLoop.Instance.Hitbox.SetActive(false);
             }
             
         }
