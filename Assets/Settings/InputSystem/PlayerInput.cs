@@ -98,6 +98,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LionSmash"",
+                    ""type"": ""Button"",
+                    ""id"": ""43f5870c-bfdd-4fed-8370-85f9a4eb3646"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -324,11 +333,22 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""33092f54-1c28-43ae-8e0f-c1df102507c6"",
-                    ""path"": ""<Keyboard>/n"",
+                    ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Hurt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51a86934-7aeb-44b8-b60c-48aae1f4ea7f"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LionSmash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -924,6 +944,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_GamePlay_Inventory = m_GamePlay.FindAction("Inventory", throwIfNotFound: true);
         m_GamePlay_PlayerStats = m_GamePlay.FindAction("PlayerStats", throwIfNotFound: true);
         m_GamePlay_Hurt = m_GamePlay.FindAction("Hurt", throwIfNotFound: true);
+        m_GamePlay_LionSmash = m_GamePlay.FindAction("LionSmash", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1011,6 +1032,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Inventory;
     private readonly InputAction m_GamePlay_PlayerStats;
     private readonly InputAction m_GamePlay_Hurt;
+    private readonly InputAction m_GamePlay_LionSmash;
     public struct GamePlayActions
     {
         private @PlayerInput m_Wrapper;
@@ -1023,6 +1045,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Inventory => m_Wrapper.m_GamePlay_Inventory;
         public InputAction @PlayerStats => m_Wrapper.m_GamePlay_PlayerStats;
         public InputAction @Hurt => m_Wrapper.m_GamePlay_Hurt;
+        public InputAction @LionSmash => m_Wrapper.m_GamePlay_LionSmash;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1056,6 +1079,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Hurt.started += instance.OnHurt;
             @Hurt.performed += instance.OnHurt;
             @Hurt.canceled += instance.OnHurt;
+            @LionSmash.started += instance.OnLionSmash;
+            @LionSmash.performed += instance.OnLionSmash;
+            @LionSmash.canceled += instance.OnLionSmash;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1084,6 +1110,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Hurt.started -= instance.OnHurt;
             @Hurt.performed -= instance.OnHurt;
             @Hurt.canceled -= instance.OnHurt;
+            @LionSmash.started -= instance.OnLionSmash;
+            @LionSmash.performed -= instance.OnLionSmash;
+            @LionSmash.canceled -= instance.OnLionSmash;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1274,6 +1303,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnPlayerStats(InputAction.CallbackContext context);
         void OnHurt(InputAction.CallbackContext context);
+        void OnLionSmash(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -78,6 +78,9 @@ namespace RPG.MotionSystem
 
             var specialHurt = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.SpecialHurt));
             AddState(StringConstants.AnimName.SpecialHurt,specialHurt);
+
+            var lionSmash = new SingleAnim(_graph, setting.GetParam(StringConstants.AnimName.LionSmash));
+            AddState(StringConstants.AnimName.LionSmash,lionSmash);
             
             
             

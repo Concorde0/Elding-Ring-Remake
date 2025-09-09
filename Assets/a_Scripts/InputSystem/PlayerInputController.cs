@@ -39,6 +39,9 @@ namespace RPG.InputSystem
 
             _input.GamePlay.Hurt.performed += _ => _param.IsSpecialHurt = true;
 
+            _input.GamePlay.LionSmash.performed += _ => _param.IsLion = true;
+
+
             //TODO：这里把翻滚状态设为true之后，需要在对应的单独clip中播放完动画后把isBoil转换为false 
 
         }

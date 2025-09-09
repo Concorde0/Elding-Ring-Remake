@@ -138,3 +138,10 @@ MonoBehaviour:
     clipGroup: []
     infoGroup: []
     blendClip: []
+  - name: LionSmash
+    type: 0
+    enterTime: 0.2
+    clip: {fileID: 1827226128182048838, guid: a222feeedf74c7c43a0fe0e9131b2e6d, type: 3}
+    clipGroup: []
+    infoGroup: []
+    blendClip: []

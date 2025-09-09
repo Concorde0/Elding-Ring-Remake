@@ -15,7 +15,7 @@ public class GameLoop : MonoBehaviour
     public PlayerCameraManager cameraManager;
     public static GameLoop Instance;
     
-    private PlayerMotion _player;
+    public PlayerMotion _player;
 
     public GameObject Hitbox;
 

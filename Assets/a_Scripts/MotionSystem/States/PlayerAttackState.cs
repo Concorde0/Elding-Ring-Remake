@@ -24,6 +24,12 @@ namespace RPG.MotionSystem.States
             _expectedFrameDuration = Mathf.CeilToInt(owner.Anim.GetAnimLength(StringConstants.TimerName.LightAttackTimeFrame1));
             owner.Timer.Start(StringConstants.TimerName.LightAttackTimeFrame1, _expectedFrameDuration);
             owner.Motor.LightAttack(_comboIndex);
+            if (owner.Param.IsLion)
+            {
+                owner.Motor.ResetLionSmash();
+                owner.Motor.LionSmash();
+                owner.Timer.Start(StringConstants.TimerName.LionSmashTime, 4f);
+            }
             
         }
 
@@ -33,6 +39,12 @@ namespace RPG.MotionSystem.States
             {
                 _canTransition = true;
                 return;
+            }
+
+            if (owner.Param.IsLion && owner.Timer.IsFinished(StringConstants.TimerName.LionSmashTime))
+            {
+                owner.Param.IsLion = false;
+                _canTransition = true;
             }
             //何时点击可以进行下一阶段
             if (_comboIndex == 0 && _lastTriggeredComboIndex < 0 && owner.Timer.IsElapsedInRange(StringConstants.TimerName.LightAttackTime1, 0.95f, 1.4f) && owner.Param.AttackTrigger.Consume())
@@ -89,14 +101,20 @@ namespace RPG.MotionSystem.States
         public override void OnExit(PlayerMotion owner)
         {
             GameLoop.Instance.Hitbox.SetActive(false);
+            if (owner.Param.IsLion)
+            {
+                owner.Param.IsLion = false;
+            }
         }
 
         public override void RegisterTransitions(BaseFSM<PlayerMotion> fsm)
         {
+            var lionAnim = new FSMCondition<PlayerMotion>(m => m.Param.IsLion && _canTransition);
             var hurtAnim = new FSMCondition<PlayerMotion>(m => m.Param.IsSpecialHurt && _canTransition);
             var idleAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude < 0.05f && _isFinished);
             var moveAnim = new FSMCondition<PlayerMotion>(m => m.Param.MoveInput.sqrMagnitude >= 0.1 && _canTransition);
             var boilAnim = new FSMCondition<PlayerMotion>(m => m.Param.BoilTrigger.Peek() && _canTransition);
+            AddCondition(lionAnim, StringConstants.AnimName.LionSmash);
             AddCondition(hurtAnim,StringConstants.AnimName.SpecialHurt);
             AddCondition(idleAnim, StringConstants.AnimName.Idle);
             AddCondition(moveAnim, StringConstants.AnimName.Move);

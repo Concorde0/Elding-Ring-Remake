@@ -35,6 +35,13 @@ public class PlayerCameraManager : MonoBehaviour
     private void Update()
     {
         currentState?.Tick();
+
+        // 修正：在锁定状态下保持朝向目标，即使玩家没输入
+        var target = GetCurrentTarget();
+        if (target != null)
+        {
+            GameLoop.Instance?._player?.Motor?.HandleLockRotation();
+        }
     }
 
     public void ToggleLock()

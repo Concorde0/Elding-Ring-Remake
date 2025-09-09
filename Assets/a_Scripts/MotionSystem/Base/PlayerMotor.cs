@@ -19,6 +19,8 @@ namespace RPG.MotionSystem
         private readonly TimerManager _timer;
 
         private Transform _lockTarget;
+        
+        private bool _hasPlayedLionSmash;
 
 
         public PlayerMotor(PlayerMotion motion, CameraResources cameraResources)
@@ -94,7 +96,22 @@ namespace RPG.MotionSystem
                 _anim.TransitionTo(StringConstants.AnimName.JumpBackward);
             }
         }
+        
+        
+        public void LionSmash()
+        {
+            if (_param.IsLion && !_hasPlayedLionSmash)
+            {
+                _anim.TransitionTo(StringConstants.AnimName.LionSmash);
+                _hasPlayedLionSmash = true;
+            }
+        }
 
+        public void ResetLionSmash()
+        {
+            _hasPlayedLionSmash = false;
+        }
+        
         public void LightAttack(int comboIndex)
         {
             switch (comboIndex)

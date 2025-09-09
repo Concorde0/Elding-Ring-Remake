@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LionSmash",
+                    "type": "Button",
+                    "id": "43f5870c-bfdd-4fed-8370-85f9a4eb3646",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -302,11 +311,22 @@
                 {
                     "name": "",
                     "id": "33092f54-1c28-43ae-8e0f-c1df102507c6",
-                    "path": "<Keyboard>/n",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Hurt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51a86934-7aeb-44b8-b60c-48aae1f4ea7f",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LionSmash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
