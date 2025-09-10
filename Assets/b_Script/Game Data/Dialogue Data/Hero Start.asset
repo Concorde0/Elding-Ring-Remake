@@ -14,18 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePieces:
   - id: Piece01
-    image: {fileID: 21300000, guid: 391f97da05cf45240a8ecdec752cd9be, type: 3}
-    text: hello,help me
+    image: {fileID: 585586958, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
+    text: hello,help mehello,help mehello,help mehello,help mehello,help mehello,help
+      mehello,help mehello,help mehello,help mehello,help mehello,help mehello,help
+      mehello,help mehello,help me
     quest: {fileID: 0}
     options:
-    - text: hello,bye
+    - text: NO,bye
       targetID: 
       takeQuest: 0
     - text: ok
       targetID: Piece02
       takeQuest: 0
   - id: Piece02
-    image: {fileID: 0}
+    image: {fileID: -206467691, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
     text: 'shou ji mo gu '
     quest: {fileID: 11400000, guid: f1de9d965ab03ed40aff5790b38a9720, type: 2}
     options:

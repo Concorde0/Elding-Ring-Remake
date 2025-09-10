@@ -72,7 +72,7 @@ public class DialogueUI : Singleton<DialogueUI>
         }
         else
         {
-            // nextButton.gameObject.SetActive(false);
+            nextButton.gameObject.SetActive(false);
             nextButton.interactable = false;
             nextButton.transform.GetChild(0).gameObject.SetActive(false);
         }
