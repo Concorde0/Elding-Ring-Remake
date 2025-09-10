@@ -97,35 +97,33 @@ public class CharacterStats : MonoBehaviour
     #endregion
     
     #region Character Combat
-    public void TakeDamage(CharacterStats attacker, bool forceSpecial = false)
-    {
+    public void TakeDamage(CharacterStats attacker, bool forceSpecial = false) {
         if (characterData == null || attackData == null) return;
 
         int damage = Mathf.Max(attacker.CurrentDamage(), 0);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
-
         AddPoise(attacker.attackData.poiseDamage);
 
-        if (forceSpecial)
-        {
+        if (forceSpecial) {
             Debug.Log("Trigger Special Hurt Animation!");
             return;
         }
 
-        if (CheckExecution())
-        {
+        if (CheckExecution()) {
             isExecution = true;
-        }
-        else if (CheckStagger())
-        {
-            if (!hasPlayedStagger)
-            {
+        } else if (CheckStagger()) {
+            if (!hasPlayedStagger) {
                 isCritical = true;
                 hasPlayedStagger = true;
             }
         }
-
-        // TODO: 血量 <= 0 时死亡
+        
+        if (CurrentHealth <= 0) {
+            var tree = GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
+            if (tree != null) {
+                tree.SetVariableValue("isDead", true);
+            }
+        }
     }
 
     public void OpenSpecialHurt()
