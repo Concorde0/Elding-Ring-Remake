@@ -12,9 +12,12 @@ public class BD_PlayExecution : Action
     private CharacterStats playerStats;
     private Animator animator;
     private bool started;
+    private bool hasAppliedDamage; 
 
     public string executionAnimName = "Execution";
     public string fallbackState = "Idle";
+    
+    public int executionDamage = 50;
 
     public override void OnAwake()
     {
@@ -31,6 +34,7 @@ public class BD_PlayExecution : Action
     {
         started = true;
         animator.CrossFadeInFixedTime(executionAnimName, 0.1f);
+        hasAppliedDamage = false;
 
         if (player != null && player.Value != null)
         {
@@ -50,7 +54,16 @@ public class BD_PlayExecution : Action
             return TaskStatus.Failure;
         }
 
+        
         var state = animator.GetCurrentAnimatorStateInfo(0);
+        if (state.IsName(executionAnimName) && state.normalizedTime >= 0.5f && !hasAppliedDamage)
+        {
+            if (enemyStats != null)
+            {
+                enemyStats.CurrentHealth = Mathf.Max(enemyStats.CurrentHealth - executionDamage, 0);
+                hasAppliedDamage = true;
+            }
+        }
         if (state.IsName(executionAnimName) && state.normalizedTime >= 1f)
         {
             animator.CrossFadeInFixedTime(fallbackState, 0.1f, 0);
