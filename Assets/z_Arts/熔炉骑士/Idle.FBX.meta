@@ -3,7 +3,117 @@ guid: 0652a66b4e595f843a9768460d8067f7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AM_
+    second: {fileID: 2100000, guid: 5c28a16b250f25d49863a9238aa768ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BD_Chain_NH_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BD_NH_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Belt_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LG_
+    second: {fileID: 2100000, guid: 20c3e31540f0e8f4dad5b309e72866d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _00_Weapon_
+    second: {fileID: 2100000, guid: 24c08e2e0f48bed4293ad64835d8e157, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _01_Weapon_
+    second: {fileID: 2100000, guid: 6b3ce7fa6aec52c42ad95551ddad8f09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _10_Add_
+    second: {fileID: 2100000, guid: 66f372b7c39391341b743c27eed8b3dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _12_Add_
+    second: {fileID: 2100000, guid: 3e3581fceafc2d04b89d6d24bcd17630, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _20_BDNH_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _20_BD_N_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _20_BD_N_2_Cloth_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _20_BD_N_3_Cloth_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _20_BD_N_Chain_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _20_BD_N_CloakFur_Cloth_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _20_HD_N_
+    second: {fileID: 2100000, guid: 2b7156377700fc0478d8433510614142, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _20__
+    second: {fileID: 2100000, guid: 2b7156377700fc0478d8433510614142, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _21_BDNH_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _21_BD_H_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _21_BD_H_CloakFur_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _21_BD_H_Cloak_Shell_
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _21__
+    second: {fileID: 2100000, guid: 0c25650510dac1d428f9717ff8876a2d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
