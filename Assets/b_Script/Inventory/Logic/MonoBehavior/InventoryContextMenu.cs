@@ -196,7 +196,7 @@ public class InventoryContextMenu : MonoBehaviour
         if (item.itemPrefab != null && GameManager.Instance != null && GameManager.Instance.playerStats != null)
         {
             Transform playerT = GameManager.Instance.playerStats.transform;
-            Vector3 spawnPos = playerT.position + playerT.forward * 1.2f + Vector3.up * 0.5f;
+            Vector3 spawnPos = playerT.position + playerT.forward * 1.2f + Vector3.up * 0.2f;
             GameObject.Instantiate(item.itemPrefab, spawnPos, Quaternion.identity);
         }
 
