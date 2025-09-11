@@ -29,14 +29,14 @@ public class QuestUI : Singleton<QuestUI>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            isOpen = !isOpen;
-            questPanel.SetActive(isOpen);
-            questContentText.text = "";
-
-            SetupQuestList();
-        }
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     isOpen = !isOpen;
+        //     questPanel.SetActive(isOpen);
+        //     questContentText.text = "";
+        //
+        //     SetupQuestList();
+        // }
     }
 
     private void SetupQuestList()

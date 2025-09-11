@@ -148,12 +148,15 @@ namespace RPG.MotionSystem
         /// </summary>
         public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot)
         {
+            deltaPos += (float3)Physics.gravity * Time.fixedDeltaTime;
             if (!_param.IsLocked)
             {
                 _model.position += (Vector3)deltaPos;
             }
+
             // 不应用 deltaRot：旋转由 HandleInputRotation（或锁定逻辑）控制
         }
+        
 
         /// <summary>
         /// 自由移动时使用的旋转控制（你保留的那块）。这个方法保持给 LateUpdate 调用以覆盖 Animator。
