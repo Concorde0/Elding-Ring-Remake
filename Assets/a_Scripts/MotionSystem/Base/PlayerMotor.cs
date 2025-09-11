@@ -18,6 +18,9 @@ namespace RPG.MotionSystem
         private readonly PlayerParam _param;
         private readonly TimerManager _timer;
 
+        
+        private PlayerGrounder _grounder;
+
         private Transform _lockTarget;
         
         private bool _hasPlayedLionSmash;
@@ -30,6 +33,9 @@ namespace RPG.MotionSystem
             _model = motion.Model;
             _camera = cameraResources.cameraTransform;
             _timer = motion.Timer;
+            
+            _grounder = new PlayerGrounder(_model, LayerMask.GetMask("Ground"));
+            
         }
 
         public void OnLockTargetChanged(Transform target)
@@ -153,6 +159,8 @@ namespace RPG.MotionSystem
             {
                 _model.position += (Vector3)deltaPos;
             }
+            _grounder.ResolveGrounding();
+            _grounder.ResolveStepClimb();
 
             // 不应用 deltaRot：旋转由 HandleInputRotation（或锁定逻辑）控制
         }

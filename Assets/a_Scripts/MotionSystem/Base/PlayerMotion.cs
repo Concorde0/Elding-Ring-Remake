@@ -46,6 +46,8 @@ namespace RPG.MotionSystem
         {
             Input.Enable();
             Camera.Start();
+            
+            RootMotion.RecordPrevious(0, Model);
         }
         
 
