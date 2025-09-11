@@ -23,8 +23,8 @@ MonoBehaviour:
   isConsumable: 0
   allowedSlot: 4
   t1: "\u4EC0\u4E48\u624B\u7532"
-  t2: 0
-  t3: 0
+  t2: 
+  t3: 
   t4: 7
   a1: 0
   a2: 0

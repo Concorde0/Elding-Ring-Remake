@@ -28,6 +28,10 @@ public class BD_Die : Action
         {
             animator.CrossFadeInFixedTime(deathAnimName, 0.1f);
         }
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.UpdateQuestProgress("Enemy", 1);
+        }
     }
 
     public override TaskStatus OnUpdate()
@@ -48,8 +52,10 @@ public class BD_Die : Action
 
             UnityEngine.Object.Destroy(gameObject, destroyDelay);
             destroyed = true;
+            
             return TaskStatus.Success;
         }
+        
 
         return TaskStatus.Running;
     }

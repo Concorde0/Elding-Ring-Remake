@@ -120,9 +120,6 @@ public class CharacterStats : MonoBehaviour
         
         if (CurrentHealth <= 0) {
             var tree = GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
-            if (tree != null) {
-                tree.SetVariableValue("isDead", true);
-            }
         }
     }
 

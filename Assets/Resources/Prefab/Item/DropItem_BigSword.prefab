@@ -75,7 +75,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.33
+  m_Radius: 2.5
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -92,7 +92,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 389f51cadaf96c648bfe713dda98d96d, type: 2}
-  keyDownUI: {fileID: 4802424817147606220, guid: c809c113d86ef8a47a11abafa38def95, type: 3}
 --- !u!1 &6283984952643186615
 GameObject:
   m_ObjectHideFlags: 0

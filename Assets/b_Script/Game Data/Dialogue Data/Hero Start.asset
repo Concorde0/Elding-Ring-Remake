@@ -29,7 +29,7 @@ MonoBehaviour:
   - id: Piece02
     image: {fileID: -206467691, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
     text: 'shou ji mo gu '
-    quest: {fileID: 11400000, guid: f1de9d965ab03ed40aff5790b38a9720, type: 2}
+    quest: {fileID: 11400000, guid: b106d5568894460489a6b6abbe06b94a, type: 2}
     options:
     - text: ok
       targetID: 

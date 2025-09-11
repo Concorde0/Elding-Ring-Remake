@@ -14,6 +14,8 @@ public class QuestData_SO : ScriptableObject
         public int requiredAmount;
         public int currentAmount;
     }
+    public GameObject rewardPrefab;
+    public int rewardAmount = 1;
     
     public string questName;
     [TextArea] 
@@ -34,47 +36,80 @@ public class QuestData_SO : ScriptableObject
         if (isCompleted)
         {
             Debug.Log("任务完成");
+            GiveRewards();
         }
     }
 
+    // public void GiveRewards()
+    // {
+    //     
+    //     foreach (var reward in rewards)
+    //     {
+    //         if (reward.amount < 0)
+    //         {
+    //             int requireCount = Mathf.Abs(reward.amount);
+    //
+    //             if (InventoryManager.Instance.QuestItemInBag(reward.itemData) != null)
+    //             {
+    //                 if (InventoryManager.Instance.QuestItemInBag(reward.itemData).amount <= requireCount)
+    //                 {
+    //                     requireCount -= InventoryManager.Instance.QuestItemInBag(reward.itemData).amount;
+    //                     InventoryManager.Instance.QuestItemInBag(reward.itemData).amount = 0;
+    //                     if (InventoryManager.Instance.QuestItemInAction(reward.itemData) != null)
+    //                     {
+    //                         InventoryManager.Instance.QuestItemInAction(reward.itemData).amount -= requireCount;
+    //                     }
+    //                 }
+    //                 else
+    //                 {
+    //                     InventoryManager.Instance.QuestItemInBag(reward.itemData).amount -= requireCount;
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 InventoryManager.Instance.QuestItemInAction(reward.itemData).amount -= requireCount;
+    //             }
+    //         }
+    //         else
+    //         {
+    //             InventoryManager.Instance.AddItem(reward.itemData,reward.amount);
+    //         }
+    //         
+    //         InventoryManager.Instance.inventoryUI.RefreshUI();
+    //         InventoryManager.Instance.actionUI.RefreshUI();
+    //     }
+    // }
+    
     public void GiveRewards()
     {
-        foreach (var reward in rewards)
+        if (rewardPrefab != null)
         {
-            if (reward.amount < 0)
+            for (int i = 0; i < rewardAmount; i++)
             {
-                int requireCount = Mathf.Abs(reward.amount);
-
-                if (InventoryManager.Instance.QuestItemInBag(reward.itemData) != null)
-                {
-                    if (InventoryManager.Instance.QuestItemInBag(reward.itemData).amount <= requireCount)
-                    {
-                        requireCount -= InventoryManager.Instance.QuestItemInBag(reward.itemData).amount;
-                        InventoryManager.Instance.QuestItemInBag(reward.itemData).amount = 0;
-                        if (InventoryManager.Instance.QuestItemInAction(reward.itemData) != null)
-                        {
-                            InventoryManager.Instance.QuestItemInAction(reward.itemData).amount -= requireCount;
-                        }
-                    }
-                    else
-                    {
-                        InventoryManager.Instance.QuestItemInBag(reward.itemData).amount -= requireCount;
-                    }
-                }
-                else
-                {
-                    InventoryManager.Instance.QuestItemInAction(reward.itemData).amount -= requireCount;
-                }
+                Vector3 spawnPos = GetGroundPosition();
+                Instantiate(rewardPrefab, spawnPos, Quaternion.identity);
             }
-            else
-            {
-                InventoryManager.Instance.AddItem(reward.itemData,reward.amount);
-            }
-            
-            InventoryManager.Instance.inventoryUI.RefreshUI();
-            InventoryManager.Instance.actionUI.RefreshUI();
         }
+        else
+        {
+            Debug.LogWarning("未设置prefab");
+        }
+
+        InventoryManager.Instance.inventoryUI.RefreshUI();
+        InventoryManager.Instance.actionUI.RefreshUI();
     }
+    
+    private Vector3 GetGroundPosition()
+    {
+        Vector3 origin = Camera.main.transform.position + Camera.main.transform.forward * 2f;
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, 10f))
+        {
+            return hit.point + new Vector3(0, 0.02f, 0);
+        }
+        return origin - new Vector3(0, 0.98f, 0);
+    }
+    
+    
     
     //当前任务需要 收集/消灭 的目标名字列表
     public List<string> RequireTargetNames()
