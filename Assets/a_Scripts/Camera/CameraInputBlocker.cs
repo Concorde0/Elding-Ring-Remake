@@ -9,8 +9,6 @@ public class CameraInputBlocker : MonoBehaviour
     private void Awake()
     {
         _provider = GetComponent<CinemachineInputProvider>();
-        if (_provider == null)
-            Debug.LogError("CameraInputBlocker: Missing InputSystemInputProvider.");
     }
 
     private void Update()

@@ -26,7 +26,6 @@ namespace RPG.MotionSystem.States
 
         public override void OnUpdate(PlayerMotion owner)
         {
-            Debug.Log("Player Boil State");
             
             if (owner.Timer.IsFinished(StringConstants.TimerName.BoilTime))
             {
