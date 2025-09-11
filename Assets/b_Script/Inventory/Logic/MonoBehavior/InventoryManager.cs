@@ -89,7 +89,6 @@ public class InventoryManager : Singleton<InventoryManager>
         var targetData = router.GetDataForItem(item);
         if (targetData != null)
         {
-            Debug.Log("ADD");
             targetData.AddItem(item, amount);
             if (bagUI.inventoryData == targetData)
             {
