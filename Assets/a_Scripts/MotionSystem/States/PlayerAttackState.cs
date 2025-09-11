@@ -67,7 +67,7 @@ namespace RPG.MotionSystem.States
                 owner.Timer.Start(StringConstants.TimerName.LightAttackTime3,2.5f);
             }
             
-            //如果没有再次输出，Attack播放到动画结束
+            //如果没有再次输出，Attack 播放到动画结束
             if (owner.Timer.IsFinished(StringConstants.TimerName.LightAttackTime1) && _comboIndex == 0)
             {
                 _isFinished = true;

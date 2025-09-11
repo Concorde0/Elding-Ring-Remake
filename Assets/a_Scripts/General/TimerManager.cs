@@ -55,7 +55,7 @@ namespace RPG.Timer
         private Dictionary<string, Timer> _timers = new();
         private Dictionary<string, FrameTimer> _frameTimers = new();
         
-        // --- Time-based API ---
+        //Time BASE
     
         public void Start(string key, float duration)
         {
@@ -91,7 +91,7 @@ namespace RPG.Timer
                 timer.ReStart(null);
         }
 
-        // --- Frame-based API ---
+        // Frame Base
         public void Start(string key, int maxFrames)
         {
             if (_frameTimers.ContainsKey(key))
@@ -136,7 +136,7 @@ namespace RPG.Timer
                 frameTimer.ReStart(null);
         }
     
-        // --- Common Utilities ---
+        //Utilities
         
         public void Remove(string key)
         {
@@ -152,14 +152,12 @@ namespace RPG.Timer
         public void CleanupFinished()
         {
             var toRemove = new List<string>();
-            // Cleanup time-based
             foreach (var kvp in _timers)
                 if (kvp.Value.IsFinished)
                     toRemove.Add(kvp.Key);
             foreach (var key in toRemove)
                 _timers.Remove(key);
-
-            // Cleanup frame-based
+            
             toRemove.Clear();
             foreach (var kvp in _frameTimers)
                 if (kvp.Value.IsFinished)

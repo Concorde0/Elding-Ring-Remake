@@ -7,8 +7,8 @@ using UnityEngine.Animations;
 namespace RPG.AnimationSystem
 {
     
-    //需要通过 AnimAdapter 来控制 AnimBehaviour 的生命周期和状态，所以要在Enable和Disable中重新调用Behaviour中的方法
-    //保证封装性，封装AnimBehaviour
+    //需要通过 AnimAdapter 来控制 AnimBehaviour 的生命周期和状态，所以要在 Enable 和 Disable 中重新调用 Behaviour 中的方法
+    //保证封装性，封装 AnimBehaviour
     //总结就是 在 AnimAdapter 中加 Enable() / Disable()，是为了 封装 AnimBehaviour 的控制接口，让外部代码只和 Adapter 接触，保持职责清晰。
     public class AnimAdapter : PlayableBehaviour
     {

@@ -23,13 +23,13 @@ namespace RPG.AnimationSystem
             // graph.Play();
         }
         
-        //GetInput(int) return 当前索引的Playable
-        //在AnimHelper重新写的Enable方法和Disable方法的本质就是，在clip被禁/启用的基础上，同时禁/启用AnimAdapter
+        //GetInput(int) return 当前索引的 Playable
+        //在 AnimHelper 重新写的 Enable 方法和 Disable 方法的本质就是，在 clip 被禁/启用的基础上，同时禁/启用 AnimAdapter
         public static void Enable(AnimationMixerPlayable mixer, int index)
         {
             Enable(mixer.GetInput(index));
         }
-        //这里方法重载的目的就是当有一个mixer需要用到Enable/Disable时，不需要再写多余的GetInput(int)来获取到当前索引的Playable，而是直接封装成一个重载的方法，便于利用
+        //这里方法重载的目的就是当有一个 mixer 需要用到 Enable/Disable 时，不需要再写多余的 GetInput(int) 来获取到当前索引的 Playable ，而是直接封装成一个重载的方法，便于利用
         public static void Disable(Playable playable)
         {
             var adapter = GetAdapter(playable);
@@ -44,7 +44,7 @@ namespace RPG.AnimationSystem
             Disable(mixer.GetInput(index));
         }
 
-        //GetAdapter是能够获取到目标是否派生自Adapter，并且能够返回这个Adapter
+        // GetAdapter 是能够获取到目标是否派生自 Adapter，并且能够返回这个 Adapter
         public static AnimAdapter GetAdapter(Playable playable)
         {
             if (typeof(AnimAdapter).IsAssignableFrom(playable.GetPlayableType()))

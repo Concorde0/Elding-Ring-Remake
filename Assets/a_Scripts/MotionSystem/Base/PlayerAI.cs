@@ -12,7 +12,7 @@ namespace RPG.MotionSystem
     {
         private readonly BaseFSM<PlayerMotion> _fsm;
         private readonly FSMStateTracker _tracker;
-        //TODO:把AddState和AddCondition放在FSMState里面让他自己注册
+        //TODO:把 AddState 和 AddCondition 放在 FSMState 里面让他自己注册
         public PlayerAI(PlayerMotion motion)
         {
             _fsm = new BaseFSM<PlayerMotion>(motion);

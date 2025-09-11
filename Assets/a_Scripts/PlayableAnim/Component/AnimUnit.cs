@@ -9,12 +9,12 @@ namespace RPG.AnimationSystem
 {
     public class AnimUnit : AnimBehaviour
     {
-        //为了便于管理，用变量保存这个ClipPlayable
+        //为了便于管理，用变量保存这个 ClipPlayable
         private readonly AnimationClipPlayable _anim;
 
         public AnimUnit(PlayableGraph graph, AnimationClip clip, float enterTime = 0f) : base(graph,enterTime)
         {
-            //将动画片段连接到Adapter上
+            //将动画片段连接到 Adapter 上
             _anim = AnimationClipPlayable.Create(graph, clip);
             _adapterPlayable.AddInput(_anim, 0, 1f);
         }

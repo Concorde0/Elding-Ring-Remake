@@ -17,7 +17,6 @@ namespace RPG.MotionSystem.States
 
         public override void OnUpdate(PlayerMotion owner)
         {
-            Debug.Log("Player Stop State");
             owner.Motor.Stop();
             if (owner.Timer.IsFinished(StringConstants.AnimName.MoveStop))
             {

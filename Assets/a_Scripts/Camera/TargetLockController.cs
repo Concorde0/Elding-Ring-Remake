@@ -20,7 +20,7 @@ public class TargetLockController : MonoBehaviour
 
     private void Update()
     {
-        //TODO:接入inputsystem
+        //TODO:接入 InputSystem
         if (Input.GetMouseButtonDown(2))
         {
             var mgr = GetComponent<PlayerCameraManager>();

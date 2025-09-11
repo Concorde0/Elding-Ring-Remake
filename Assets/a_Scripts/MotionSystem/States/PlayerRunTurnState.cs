@@ -15,7 +15,6 @@ public class PlayerRunTurnState : FSMState<PlayerMotion>
 
     public override void OnUpdate(PlayerMotion owner)
     {
-        Debug.Log("Player RunTurn State");
         owner.Motor.RunTurn();
         if (owner.Timer.IsFinished(StringConstants.TimerName.RunTurnDuration))
         {

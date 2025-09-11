@@ -21,9 +21,9 @@ namespace RPG.AnimationSystem
         public AnimBehaviour(float enterTime = 0f) { _enterTime = enterTime; }
         public AnimBehaviour(PlayableGraph graph, float enterTime = 0f)
         {
-            //保存Adapter的节点在_adapterPlayable中，目的是为了让外部能用统一的 Playable 类型做连接、混合等操作
+            //保存 Adapter 的节点在 _adapterPlayable 中，目的是为了让外部能用统一的 Playable 类型做连接、混合等操作
             _adapterPlayable = ScriptPlayable<AnimAdapter>.Create(graph);
-            //把 _adapterPlayable强制转换成scriptPlayable，实例化之后把AnimBehaviour穿到Adapter中，依赖注入
+            //把 _adapterPlayable 强制转换成 scriptPlayable，实例化之后把 AnimBehaviour 穿到 Adapter 中，依赖注入
             ((ScriptPlayable<AnimAdapter>)_adapterPlayable).GetBehaviour().Init(this);
             
             _enterTime = enterTime;
@@ -58,7 +58,7 @@ namespace RPG.AnimationSystem
         }
         
         
-        //这里在Anim独立脚本中，可以通过AnimUnit在调用这个函数，从而获取到Adapter,以此来绑定output
+        //这里在 Anim 独立脚本中，可以通过 AnimUnit 在调用这个函数，从而获取到 Adapter,以此来绑定 output
         public Playable GetAnimAdapterPlayable()
         {
             return _adapterPlayable;

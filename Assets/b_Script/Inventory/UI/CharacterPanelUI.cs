@@ -76,14 +76,12 @@ public class CharacterPanelUI : MonoBehaviour
         energyText.text = $"体力: {data.maxEnergy}";
     }
     
-    //打开面板时刷新数据
     public void ShowPanel()
     {
         SafeRefreshUI();
         gameObject.SetActive(true);
     }
     
-    // 隐藏面板
     public void HidePanel()
     {
         gameObject.SetActive(false);

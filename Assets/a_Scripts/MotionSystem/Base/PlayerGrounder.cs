@@ -3,10 +3,7 @@ using Unity.Mathematics;
 
 namespace RPG.MotionSystem
 {
-    /// <summary>
-    /// 负责地面检测、斜坡、台阶、滑落、防穿地等。
-    /// 非 MonoBehaviour，作为 PlayerMotor 的辅助类。
-    /// </summary>
+   // 负责地面检测、斜坡、台阶、滑落、防穿地
     public class PlayerGrounder
     {
         private readonly Transform _model;

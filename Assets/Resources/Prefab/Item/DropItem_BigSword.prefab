@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5256122454968815680}
   - component: {fileID: 7939293024137163234}
   - component: {fileID: 3792292323369084866}
+  - component: {fileID: 7805772157387098157}
   m_Layer: 0
   m_Name: DropItem_BigSword
   m_TagString: Untagged
@@ -54,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.30268526, y: 0.09910241, z: 0.4398296}
-  m_Center: {x: -0.0034139156, y: 0.06422361, z: 0.110378385}
+  m_Size: {x: 0.30268526, y: 0.037217766, z: 0.4398296}
+  m_Center: {x: -0.0034139156, y: 0.09516592, z: 0.110378385}
 --- !u!136 &7939293024137163234
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -75,7 +76,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 1.63
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -92,6 +93,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 389f51cadaf96c648bfe713dda98d96d, type: 2}
+--- !u!54 &7805772157387098157
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518885154706774473}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6283984952643186615
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 6283984952643186615}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

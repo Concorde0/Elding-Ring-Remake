@@ -149,9 +149,7 @@ namespace RPG.MotionSystem
                 _anim.TransitionTo(StringConstants.AnimName.SpecialHurt);
             }
         }
-        /// <summary>
-        /// 处理 Animator 的 root motion 位移。注意：锁定时不应用动画位移（避免与 ManualLockMove 冲突）。
-        /// </summary>
+        
         public void ApplyRootMotion(float3 deltaPos, quaternion deltaRot)
         {
             deltaPos += (float3)Physics.gravity * Time.fixedDeltaTime;
@@ -161,14 +159,9 @@ namespace RPG.MotionSystem
             }
             _grounder.ResolveGrounding();
             _grounder.ResolveStepClimb();
-
-            // 不应用 deltaRot：旋转由 HandleInputRotation（或锁定逻辑）控制
+            
         }
         
-
-        /// <summary>
-        /// 自由移动时使用的旋转控制（你保留的那块）。这个方法保持给 LateUpdate 调用以覆盖 Animator。
-        /// </summary>
         public void HandleInputRotation()
         {
             Vector2 input = _param.MoveInput;
@@ -192,14 +185,13 @@ namespace RPG.MotionSystem
                 );
             }
         }
-
-        //锁定时的移动实现
+        
         public void HandleLockRotation()
         {
 
             if (_lockTarget == null)
             {
-                Debug.LogWarning("HandleLockRotation called but lock target is null.");
+                Debug.LogWarning("null");
                 return;
             }
 

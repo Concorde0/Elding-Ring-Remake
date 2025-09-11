@@ -103,12 +103,7 @@ public class CharacterStats : MonoBehaviour
         int damage = Mathf.Max(attacker.CurrentDamage(), 0);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
         AddPoise(attacker.attackData.poiseDamage);
-
-        if (forceSpecial) {
-            Debug.Log("Trigger Special Hurt Animation!");
-            return;
-        }
-
+        
         if (CheckExecution()) {
             isExecution = true;
         } else if (CheckStagger()) {

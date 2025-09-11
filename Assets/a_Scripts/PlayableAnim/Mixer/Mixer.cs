@@ -31,9 +31,9 @@ namespace RPG.AnimationSystem
             //这里为什么要加额外的两个参数呢？
             //第二个参数 0，表示 初始时 Mixer 没有任何输入端口。
             //第三个参数 true，表示 自动归一化权重（保证加起来等于 1），这样你后面就不用手动去 normalize。
-            //我操，第三个参数被unity弃用了
+            //我操，第三个参数被 unity 弃用了
             _mixer = AnimationMixerPlayable.Create(graph,0);
-            //adapter应该是要连接Mixer,再连到addInput的吧？
+            // adapter 应该是要连接 Mixer,再连到 addInput 的吧？
             //把这个 Mixer 挂到外层的 AdapterPlayable 上
             _adapterPlayable.AddInput(_mixer,0,1f);
             
@@ -42,12 +42,12 @@ namespace RPG.AnimationSystem
             _targetIndex = -1;
         }
 
-        //AddInput 的作用是  往 Mixer 里插入你要混合的那些动画
+        // AddInput 的作用是往 Mixer 里插入你要混合的那些动画
         public override void AddInput(Playable playable)
         {
             base.AddInput(playable);
             _mixer.AddInput(playable,0,0f);
-            //这里inputCount++的意思是，每一个动画都必须有一个单独的动画端口，每次addInput就把当前动画端口+1
+            //这里 inputCount++ 的意思是，每一个动画都必须有一个单独的动画端口，每次 addInput 就把当前动画端口+1
             inputCount++;
             //如果当前的端口正好等于1，那就把他的权重设为1，让他播放(应该是可选吧？)
             if (inputCount == 1)
@@ -129,14 +129,14 @@ namespace RPG.AnimationSystem
         }
         
         
-        //index代表想要过度到的下一个动画
-        //targetIndex代表当前动画的想要去的过渡状态，也代表了动画何时转换完毕，如果过渡完毕，targetIndex=index
-        //currentIndex代表当前动画的过渡状态
+        //index 代表想要过度到的下一个动画
+        //targetIndex 代表当前动画的想要去的过渡状态，也代表了动画何时转换完毕，如果过渡完毕，targetIndex=index
+        //currentIndex 代表当前动画的过渡状态
         
         // 我操你妈吧，这还是个倒叙呢
-        // 比如我第一次播放动画，current是走路，target是attack1。
-        // 如果当前的过度状态是走路>attack1，我再次输入attack2，他就会取消attack1转而变成走路过度为attack2
-        // 如果当前的过度状态时走路<attack1，我再次输入attack2，他就会从attack1过渡为attack2
+        // 比如我第一次播放动画，current 是走路，target 是 attack1。
+        // 如果当前的过度状态是走路 > attack1，我再次输入 attack2，他就会取消 attack1 转而变成走路过度为 attack2
+        // 如果当前的过度状态时走路 < attack1，我再次输入 attack2，他就会从 attack1 过渡为 attack2
         public void TransitionTo(int index)
         {  
             if (_isTransition && _targetIndex >= 0)

@@ -25,7 +25,6 @@ namespace RPG.MotionSystem.States
 
         public override void OnUpdate(PlayerMotion owner)
         {
-            Debug.Log("Player Move State");
             
             if (owner.Param.IsSpecialHurt)
             {

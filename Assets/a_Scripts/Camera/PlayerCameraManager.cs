@@ -36,7 +36,7 @@ public class PlayerCameraManager : MonoBehaviour
     {
         currentState?.Tick();
 
-        // 修正：在锁定状态下保持朝向目标，即使玩家没输入
+        // 在锁定状态下保持朝向目标，即使玩家没输入
         var target = GetCurrentTarget();
         if (target != null)
         {
