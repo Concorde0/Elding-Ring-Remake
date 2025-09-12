@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardPrefab: {fileID: 0}
   rewardAmount: 1
-  questGiverName: NPC
   questName: collection mushroom
   description: collection mushroom
   isStarted: 0
@@ -27,5 +26,3 @@ MonoBehaviour:
   rewards:
   - itemData: {fileID: 11400000, guid: 389f51cadaf96c648bfe713dda98d96d, type: 2}
     amount: 1
-  - itemData: {fileID: 11400000, guid: c826d97c543b3754699d49ee59e4405d, type: 2}
-    amount: 2

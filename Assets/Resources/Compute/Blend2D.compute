@@ -17,6 +17,7 @@ float mdistance(DataPair data)
     return abs(pointerX - data.x) + abs(pointerY - data.y) + eps;
 }
 
+//定义线程组大小
 [numthreads(16,1,1)]
 void Compute (uint3 id : SV_DispatchThreadID)
 {

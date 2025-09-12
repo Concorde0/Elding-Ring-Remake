@@ -102,11 +102,13 @@ public class QuestData_SO : ScriptableObject
     private Vector3 GetGroundPosition()
     {
         Vector3 origin = Camera.main.transform.position + Camera.main.transform.forward * 2f;
+
         if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, 10f))
         {
-            return hit.point + new Vector3(0, 0.02f, 0);
+            return hit.point + Vector3.up * 1f;
         }
-        return origin - new Vector3(0, 0.98f, 0);
+        
+        return origin + Vector3.up * 1f;
     }
     
     

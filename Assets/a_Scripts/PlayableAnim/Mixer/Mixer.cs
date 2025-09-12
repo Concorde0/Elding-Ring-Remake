@@ -224,7 +224,7 @@ namespace RPG.AnimationSystem
             var adapter = (ScriptPlayable<AnimAdapter>)playable;
             var behaviour = adapter.GetBehaviour();
 
-            // adapter 层归0
+            // adapter 层归 0
             adapter.SetTime(0);
 
             // 递归重置子 AnimBehaviour 的时间（如果是 Mixer，会继续传下去）

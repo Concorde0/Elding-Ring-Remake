@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Bag Armor
   m_EditorClassIdentifier: 
   items:
-  - itemData: {fileID: 0}
-    amount: 0
-  - itemData: {fileID: 0}
-    amount: 0
-  - itemData: {fileID: 0}
-    amount: 0
-  - itemData: {fileID: 0}
-    amount: 0
+  - itemData: {fileID: 11400000, guid: 995438c49d99c4f4f9983946f034055c, type: 2}
+    amount: 1
+  - itemData: {fileID: 11400000, guid: 9adf824fc58813140af5b514f5c0e3c4, type: 2}
+    amount: 1
+  - itemData: {fileID: 11400000, guid: 4c66dd00dbe3a4c48a9c0f4fe72a0942, type: 2}
+    amount: 1
+  - itemData: {fileID: 11400000, guid: 702ef199425472742a1d28050b8844c8, type: 2}
+    amount: 1
   - itemData: {fileID: 0}
     amount: 0
   - itemData: {fileID: 0}

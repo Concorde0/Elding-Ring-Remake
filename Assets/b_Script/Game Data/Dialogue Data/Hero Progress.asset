@@ -15,6 +15,6 @@ MonoBehaviour:
   dialoguePieces:
   - id: Piecei01
     image: {fileID: 0}
-    text: did you find the mushroom?
+    text: did you kill the Kinght?
     quest: {fileID: 0}
     options: []

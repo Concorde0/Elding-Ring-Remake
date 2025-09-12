@@ -8,7 +8,7 @@ public class BD_PlayStagger : Action
     private bool started;
 
     public string staggerAnimName = "Hurt1"; // 受击动画状态名
-    public string fallbackState = "Idle";    // 播放完回Idle
+    public string fallbackState = "Idle";    //播放完回Idle
 
     public override void OnAwake()
     {

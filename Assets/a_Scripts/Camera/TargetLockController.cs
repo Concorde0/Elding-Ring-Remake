@@ -24,7 +24,10 @@ public class TargetLockController : MonoBehaviour
         if (Input.GetMouseButtonDown(2))
         {
             var mgr = GetComponent<PlayerCameraManager>();
-            if (mgr != null) mgr.ToggleLock();
+            if (mgr != null)
+            {
+                mgr.ToggleLock();
+            }
         }
     }
     
@@ -34,12 +37,26 @@ public class TargetLockController : MonoBehaviour
         var all = GameObject.FindGameObjectsWithTag(enemyTag);
         foreach (var go in all)
         {
-            if (go == null) continue;
+            if (go == null)
+            {
+                continue;
+            }
             var t = go.transform;
             float d = Vector3.Distance(mainCam.transform.position, t.position);
-            if (d > maxLockDistance) continue;
-            if (!IsInFrontOfCamera(t)) continue;
-            if (!IsVisible(t)) continue;
+            if (d > maxLockDistance)
+            {
+                continue;
+            }
+
+            if (!IsInFrontOfCamera(t))
+            {
+                continue;
+            }
+
+            if (!IsVisible(t))
+            {
+                continue;
+            }
             list.Add(t);
         }
 
@@ -68,7 +85,10 @@ public class TargetLockController : MonoBehaviour
         Vector3 dir = targetPos - camPos;
         if (Physics.Raycast(camPos, dir.normalized, out RaycastHit hit, dir.magnitude, occlusionMask))
         {
-            if (hit.transform == t || hit.transform.IsChildOf(t)) return true;
+            if (hit.transform == t || hit.transform.IsChildOf(t))
+            {
+                return true;
+            }
             return false;
         }
         return true;

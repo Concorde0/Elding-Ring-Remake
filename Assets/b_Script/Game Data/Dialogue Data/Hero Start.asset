@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePieces:
   - id: Piece01
-    image: {fileID: 585586958, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
+    image: {fileID: -206467691, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
     text: hello,help mehello,help mehello,help mehello,help mehello,help mehello,help
       mehello,help mehello,help mehello,help mehello,help mehello,help mehello,help
       mehello,help mehello,help me
@@ -28,7 +28,7 @@ MonoBehaviour:
       takeQuest: 0
   - id: Piece02
     image: {fileID: -206467691, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
-    text: 'shou ji mo gu '
+    text: kill Knight
     quest: {fileID: 11400000, guid: b106d5568894460489a6b6abbe06b94a, type: 2}
     options:
     - text: ok

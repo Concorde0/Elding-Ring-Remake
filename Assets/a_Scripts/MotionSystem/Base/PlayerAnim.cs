@@ -15,7 +15,6 @@ namespace RPG.MotionSystem
         
         private PlayableGraph _graph;
         private readonly Mixer _mixer;
-        //这个字典是把状态名切换成索引值，才能让 mixer 换动画
         private readonly Dictionary<string,int> _animStateIndex;
         private readonly Dictionary<string, float> _animLengths;
         private BlendTree2D _lockedMoveAnim;

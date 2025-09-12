@@ -83,7 +83,9 @@ namespace RPG.AnimationSystem
         {
             // 缓存当前权重
             for (int i = 0; i < _clipCount; i++)
+            {
                 _prevWeights[i] = _mixer.GetInputWeight(i);
+            }
 
             // 计算目标权重
             ComputeWeights(new Vector2(x, y));
@@ -91,7 +93,9 @@ namespace RPG.AnimationSystem
             // 计算速率
             _timeToNext = _blendTime;
             for (int i = 0; i < _clipCount; i++)
+            {
                 _weightSpeed[i] = (_targetWeights[i] - _prevWeights[i]) / _blendTime;
+            }
         }
 
         public override void Execute(Playable playable, FrameData info)
@@ -113,7 +117,9 @@ namespace RPG.AnimationSystem
 
                 // 结束时强制设置目标权重
                 if (_timeToNext <= 0f)
+                {
                     ApplyWeights(_targetWeights);
+                }
             }
         }
 
@@ -133,29 +139,37 @@ namespace RPG.AnimationSystem
             //把索引收集到列表，按 output 降序排序
             var list = new List<(int idx, float val)>(_clipCount);
             for (int i = 0; i < _clipCount; i++)
+            {
                 list.Add((i, _dataArray[i].output));
+            }
             list.Sort((a, b) => b.val.CompareTo(a.val));
 
             //只取前两个 highest 输出
             int take = Math.Min(2, _clipCount);
             var top2 = new HashSet<int>();
             for (int i = 0; i < take; i++)
+            {
                 top2.Add(list[i].idx);
+            }
+                
 
             //清除其它通道的 output，并累加 Top2 的总和
             float sum = 0f;
             for (int i = 0; i < _clipCount; i++)
             {
                 if (!top2.Contains(i))
+                {
                     _dataArray[i].output = 0f;
+                }
                 sum += _dataArray[i].output;
             }
 
             //最后对这两个通道做归一化赋给 _targetWeights
             for (int i = 0; i < _clipCount; i++)
-                _targetWeights[i] = (sum > 0f && _dataArray[i].output > 0f)
-                    ? _dataArray[i].output / sum
-                    : 0f;
+            {
+                _targetWeights[i] = (sum > 0f && _dataArray[i].output > 0f) ? _dataArray[i].output / sum : 0f;
+            }
+                
         }
 
         private void ApplyWeights(float[] weights)

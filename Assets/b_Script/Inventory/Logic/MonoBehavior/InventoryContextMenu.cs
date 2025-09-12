@@ -41,8 +41,8 @@ public class InventoryContextMenu : MonoBehaviour
         currentSlot = slot;
         var item = SafeGetItem(slot);
 
-        useButton.interactable = (item != null && (item.isConsumable || IsEquipItem(item)));
-        dropButton.interactable = (item != null);
+        useButton.interactable = item != null && (item.isConsumable || IsEquipItem(item));
+        dropButton.interactable = item != null;
 
         menuRoot.SetActive(true);
 
@@ -135,7 +135,12 @@ public class InventoryContextMenu : MonoBehaviour
             }
         }
 
-        if (targetIndex < 0) { Debug.Log("没有空的装备槽"); Close(); return; }
+        if (targetIndex < 0)
+        {
+            Debug.Log("没有空的装备槽"); 
+            Close(); 
+            return;
+        }
 
         // 放入装备槽
         equipmentBag.items[targetIndex].itemData = item;
@@ -151,14 +156,14 @@ public class InventoryContextMenu : MonoBehaviour
     //消耗品逻辑
     else if (item.isConsumable)
     {
-        if (GameManager.Instance != null && GameManager.Instance.playerStats != null)
+        if (GameManager.Instance.playerStats != null)
         {
-            if (item.useableData != null && item.useableData.healthPoint != 0)
+            if (item.useableData.healthPoint != 0)
             {
                 GameManager.Instance.playerStats.ApplyHealth(item.useableData.healthPoint);
             }
 
-            if (item.useableData != null && item.useableData.magicPoint != 0)
+            if (item.useableData.magicPoint != 0)
             {
                 GameManager.Instance.playerStats.ApplyFocus(item.useableData.magicPoint);
             }

@@ -37,12 +37,10 @@ public class BD_PlayerTriggeredExecution : Conditional
             executionTimer -= Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Debug.Log("Successful Execution Triggered");
 
                 stats.isExecution = false;
                 isListening = false;
-
-                // ✅ 设置玩家动画触发标志
+                
                 var playerStats = player.Value.GetComponent<CharacterStats>();
                 if (playerStats != null)
                 {

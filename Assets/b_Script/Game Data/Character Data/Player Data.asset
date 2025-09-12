@@ -23,7 +23,7 @@ MonoBehaviour:
   faith: 8
   induction: 8
   maxHealth: 500
-  currentHealth: 430
+  currentHealth: 400
   currentFocus: 88
   maxFocus: 88
   maxEnergy: 300

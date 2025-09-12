@@ -67,7 +67,10 @@ public class PlayerCameraManager : MonoBehaviour
 
     public void LockTo(Transform t)
     {
-        if (t == null) return;
+        if (t == null)
+        {
+            return;
+        }
         
         lockState.LockTo(t);
         currentState = lockState;
@@ -87,8 +90,11 @@ public class PlayerCameraManager : MonoBehaviour
     
     private void FaceTargetImmediately(Transform target)
     {
-        var player = GameLoop.Instance?.playerModel; 
-        if (player == null || target == null) return;
+        var player = GameLoop.Instance?.playerModel;
+        if (player == null || target == null)
+        {
+            return;
+        }
 
         Vector3 dir = target.position - player.position;
         dir.y = 0f;

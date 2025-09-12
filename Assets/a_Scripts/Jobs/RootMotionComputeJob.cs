@@ -16,15 +16,15 @@ namespace JobSystem
 
         public void Execute(int index)
         {
-            float4x4 prev = localToWorldPrevious[index];
-            float4x4 curr = localToWorldCurrent[index];
+            float4x4 previous = localToWorldPrevious[index];
+            float4x4 current = localToWorldCurrent[index];
 
             // 计算位置差
-            deltaPositions[index] = curr.c3.xyz - prev.c3.xyz;
+            deltaPositions[index] = current.c3.xyz - previous.c3.xyz;
 
             // 计算旋转差
-            quaternion prevRot = new quaternion(prev);
-            quaternion currRot = new quaternion(curr);
+            quaternion prevRot = new quaternion(previous);
+            quaternion currRot = new quaternion(current);
             deltaRotations[index] = math.mul(math.inverse(prevRot), currRot);
         }
     } 

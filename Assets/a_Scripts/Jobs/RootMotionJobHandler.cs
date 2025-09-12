@@ -31,11 +31,7 @@ public class RootMotionJobHandler
     // index 为实例索引
     public void RecordPrevious(int index, Transform transform)
     {
-        prevTransforms[index] = float4x4.TRS(
-            transform.position,
-            transform.rotation,
-            new float3(1,1,1)
-        );
+        prevTransforms[index] = float4x4.TRS(transform.position, transform.rotation, new float3(1,1,1));
     }
     
     // 在更新完 PlayableGraph 后，记录当前帧矩阵并调度 Job

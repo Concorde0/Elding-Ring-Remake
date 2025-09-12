@@ -35,7 +35,10 @@ namespace RPG.CameraSystem
             if (_lockCam == null) return;
             _lockCam.gameObject.SetActive(true);
             _lockCam.Priority = _lockPriority;
-            if (_freeLook != null) _freeLook.Priority = _freeLookPriority;
+            if (_freeLook != null)
+            {
+                _freeLook.Priority = _freeLookPriority;
+            }
         }
 
         public void Exit()
@@ -48,7 +51,10 @@ namespace RPG.CameraSystem
         {
             _currentTarget = target;
             if (_lockCam == null) return;
-            if (_playerFollow != null) _lockCam.Follow = _playerFollow;
+            if (_playerFollow != null)
+            {
+                _lockCam.Follow = _playerFollow;
+            }
             _lockCam.LookAt = _currentTarget;
 
             // composer参数可调整

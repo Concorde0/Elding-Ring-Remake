@@ -11,6 +11,9 @@ public class MainMenu : MonoBehaviour
     private Button continueButton;
     private Button exitButton;
     
+    [SerializeField] private GameObject faderPrefab;
+    private SceneFader faderInstance;
+    
     private PlayableDirector director;
 
     private void Awake()
@@ -44,19 +47,38 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
+        if (faderInstance == null && faderPrefab != null)
+        {
+            GameObject go = Instantiate(faderPrefab);
+            DontDestroyOnLoad(go);
+            faderInstance = go.GetComponent<SceneFader>();
+        }
+
+        if (faderInstance != null)
+        {
+            yield return faderInstance.FadeOut(faderInstance.fadeoutDuration);
+        }
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = true;
 
         while (!operation.isDone)
         {
-
             yield return null;
+        }
+
+        if (faderInstance != null)
+        {
+            yield return faderInstance.FadeIn(faderInstance.fadeDuration);
+            
+            Destroy(faderInstance.gameObject);
+            faderInstance = null;
         }
     }
 
     private void ContinueGame()
     {
-        //加载存档
+        
     }
 
     private void ExitGame()
