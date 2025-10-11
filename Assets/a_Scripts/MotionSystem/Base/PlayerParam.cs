@@ -13,12 +13,14 @@ namespace RPG.MotionSystem
     {
         public Vector2 MoveInput;
         public bool Run;
+        // public bool CheckLocked;
         public bool IsLocked;
         public bool IsInBoil;
         public bool IsIdleBack;
         public bool IsSpecialHurt;
         public bool IsLion;
         public readonly float RotateSpeed = 15f;
+        public readonly TriggerParam CheckLocked = new TriggerParam();
         public readonly TriggerParam JumpBackwardTrigger = new TriggerParam();
         public readonly TriggerParam BoilTrigger = new TriggerParam();
         public readonly TriggerParam AttackTrigger = new TriggerParam();

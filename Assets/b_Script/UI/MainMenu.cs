@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -10,10 +9,7 @@ public class MainMenu : MonoBehaviour
     private Button newGameButton;
     private Button continueButton;
     private Button exitButton;
-    
-    [SerializeField] private GameObject faderPrefab;
-    private SceneFader faderInstance;
-    
+
     private PlayableDirector director;
 
     private void Awake()
@@ -28,9 +24,8 @@ public class MainMenu : MonoBehaviour
 
         director = FindObjectOfType<PlayableDirector>();
         director.stopped += NewGame;
-
     }
-    
+
     private void PlayTimeLine()
     {
         if (director != null)
@@ -42,37 +37,17 @@ public class MainMenu : MonoBehaviour
     private void NewGame(PlayableDirector obj)
     {
         PlayerPrefs.DeleteAll();
-        StartCoroutine(LoadSceneAsync("SampleScene")); 
+        StartCoroutine(LoadSceneAsync("SampleScene"));
     }
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
-        if (faderInstance == null && faderPrefab != null)
-        {
-            GameObject go = Instantiate(faderPrefab);
-            DontDestroyOnLoad(go);
-            faderInstance = go.GetComponent<SceneFader>();
-        }
-
-        if (faderInstance != null)
-        {
-            yield return faderInstance.FadeOut(faderInstance.fadeoutDuration);
-        }
-
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = true;
 
         while (!operation.isDone)
         {
             yield return null;
-        }
-
-        if (faderInstance != null)
-        {
-            yield return faderInstance.FadeIn(faderInstance.fadeDuration);
-            
-            Destroy(faderInstance.gameObject);
-            faderInstance = null;
         }
     }
 
@@ -86,4 +61,3 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 }
-

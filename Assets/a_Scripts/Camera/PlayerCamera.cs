@@ -13,11 +13,13 @@ namespace RPG.CameraSystem
         private ICameraState _currentState;
         
         private readonly FreeLookCameraController _freeLook;
+        public PlayerParam _param;
         
-        public PlayerCamera(CameraResources camera) 
+        public PlayerCamera(CameraResources camera,PlayerMotion motion) 
         {
             _freeLook = new FreeLookCameraController(camera);
             _currentState = _freeLook;
+            _param = motion.Param;
         }
         
         public void Tick()

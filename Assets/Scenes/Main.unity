@@ -17256,7 +17256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62c7a888c6ff1b4bb4b2103faa8f3c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faderPrefab: {fileID: 2584629615659550006, guid: 901908996aac5f54da347839244f3a0d, type: 3}
 --- !u!1001 &1988187844
 PrefabInstance:
   m_ObjectHideFlags: 0

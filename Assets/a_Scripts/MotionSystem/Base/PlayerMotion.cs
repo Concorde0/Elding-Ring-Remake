@@ -37,7 +37,7 @@ namespace RPG.MotionSystem
             //TODO：这里RootMotion的参数代表了需要处理几个角色的根运动，目前只有Player所以简单记作1
             RootMotion = new RootMotionJobHandler(1);
             Input = new PlayerInputController(Param, Timer);
-            Camera = new PlayerCamera(camera);
+            Camera = new PlayerCamera(camera,this);
             Stats = model.GetComponent<CharacterStats>();
             
         }

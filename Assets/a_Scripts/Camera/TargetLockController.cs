@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using RPG.CameraSystem;
+using RPG.MotionSystem;
 using UnityEngine;
 
 public class TargetLockController : MonoBehaviour
@@ -11,6 +13,8 @@ public class TargetLockController : MonoBehaviour
 
     private Transform player;
     private Camera mainCam;
+    private PlayerCamera _camera;
+    private PlayerParam Param => GameLoop.Instance?._player?.Param;
 
     private void Awake()
     {
@@ -21,7 +25,7 @@ public class TargetLockController : MonoBehaviour
     private void Update()
     {
         //TODO:接入 InputSystem
-        if (Input.GetMouseButtonDown(2))
+        if (Param.CheckLocked.Consume())
         {
             var mgr = GetComponent<PlayerCameraManager>();
             if (mgr != null)

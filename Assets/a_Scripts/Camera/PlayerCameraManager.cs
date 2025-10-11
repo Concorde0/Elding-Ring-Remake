@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RPG.CameraSystem;
 using UnityEngine;
 using Cinemachine;
+using RPG.MotionSystem;
 
 [RequireComponent(typeof(TargetLockController))]
 public class PlayerCameraManager : MonoBehaviour
@@ -17,8 +18,11 @@ public class PlayerCameraManager : MonoBehaviour
     private ICameraState currentState;
 
     private TargetLockController targetLockController;
+    private PlayerParam Param => GameLoop.Instance?._player?.Param;
     
     public event Action<Transform> OnLockTargetChanged;
+    
+    
 
     private void Awake()
     {
@@ -42,6 +46,11 @@ public class PlayerCameraManager : MonoBehaviour
         {
             GameLoop.Instance?._player?.Motor?.HandleLockRotation();
         }
+
+        if (!Param.IsLocked)
+        {
+            Unlock();
+        }
     }
 
     public void ToggleLock()
@@ -52,6 +61,7 @@ public class PlayerCameraManager : MonoBehaviour
             List<Transform> candidates = targetLockController.GetCandidateTargets();
             if (candidates.Count > 0)
             {
+                Param.IsLocked = true;
                 LockTo(candidates[0]);
             }
             else
@@ -62,6 +72,7 @@ public class PlayerCameraManager : MonoBehaviour
         else
         {
             Unlock();
+            Param.IsLocked = false;
         }
     }
 
@@ -84,6 +95,7 @@ public class PlayerCameraManager : MonoBehaviour
     {
         lockState.Unlock();
         currentState = freeLookState;
+        Param.IsLocked = false;
 
         OnLockTargetChanged?.Invoke(null);
     }

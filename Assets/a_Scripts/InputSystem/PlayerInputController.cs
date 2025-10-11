@@ -26,16 +26,16 @@ namespace RPG.InputSystem
             _input.GamePlay.Attack.performed += OnAttackPerformed;
             
             _input.GamePlay.Move.performed += ctx => _param.MoveInput = ctx.ReadValue<Vector2>();
-            _input.GamePlay.Move.canceled += ctx => _param.MoveInput = Vector2.zero;
+            _input.GamePlay.Move.canceled += _ => _param.MoveInput = Vector2.zero;
 
             _input.GamePlay.Space.performed += OnSpacePressed;
             _input.GamePlay.Space.canceled += OnSpaceReleased;
             
-            _input.GamePlay.Inventory.performed += ctx => { };
+            _input.GamePlay.Inventory.performed += _ => { };
         
             //TODO: 加入检测可锁定目标时，再让isLocked的bool改变，以及可锁定目标消失时，isLocked变为false
-            _param.IsLocked = false;
-            _input.GamePlay.Lock.performed += _ => _param.IsLocked = !_param.IsLocked;
+            _input.GamePlay.Lock.performed += _ => _param.CheckLocked.Set();
+            
 
             _input.GamePlay.Hurt.performed += _ => _param.IsSpecialHurt = true;
 
@@ -45,6 +45,7 @@ namespace RPG.InputSystem
             //TODO：这里把翻滚状态设为true之后，需要在对应的单独 clip 中播放完动画后把 isBoil 转换为 false 
 
         }
+
         
         
         public PlayerInput Input => _input;

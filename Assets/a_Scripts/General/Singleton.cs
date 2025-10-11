@@ -19,7 +19,7 @@ public class Singleton<T> : MonoBehaviour where T : class
                     lock (syslock)
                     {
                         if (instance == null)
-                        {
+                        {         
                             var existing = Object.FindObjectOfType(typeof(T));
                             if (existing != null)
                             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using RPG.FSM;
@@ -24,6 +25,8 @@ namespace RPG.MotionSystem
         private Transform _lockTarget;
         
         private bool _hasPlayedLionSmash;
+        
+        public event Action OnRequestUnlock;
 
 
         public PlayerMotor(PlayerMotion motion, CameraResources cameraResources)
@@ -45,8 +48,7 @@ namespace RPG.MotionSystem
         
         public void Idle()
         {
-            if (_param.IsIdleBack) _anim.TransitionTo(StringConstants.AnimName.IdleBack);
-            else _anim.TransitionTo(StringConstants.AnimName.Idle);
+            _anim.TransitionTo(_param.IsIdleBack ? StringConstants.AnimName.IdleBack : StringConstants.AnimName.Idle);
         }
 
         public void Move(Vector2 input)
@@ -78,8 +80,7 @@ namespace RPG.MotionSystem
 
         public void Stop()
         {
-            if (_param.Run) _anim.TransitionTo(StringConstants.AnimName.RunStop);
-            else _anim.TransitionTo(StringConstants.AnimName.MoveStop);
+            _anim.TransitionTo(_param.Run ? StringConstants.AnimName.RunStop : StringConstants.AnimName.MoveStop);
         }
 
         public void RunTurn()
@@ -188,10 +189,10 @@ namespace RPG.MotionSystem
         
         public void HandleLockRotation()
         {
-
             if (_lockTarget == null)
             {
                 Debug.LogWarning("null");
+                _param.IsLocked = false;
                 return;
             }
 
