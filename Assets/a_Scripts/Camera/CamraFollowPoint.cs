@@ -10,5 +10,6 @@ public class CameraFollowPoint : MonoBehaviour
     {
         transform.position = target.position;
         transform.rotation = Quaternion.identity; 
+        
     }
 }
