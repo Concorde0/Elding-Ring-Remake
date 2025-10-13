@@ -18,7 +18,7 @@ public class PlayerCameraManager : MonoBehaviour
     private ICameraState currentState;
 
     private TargetLockController targetLockController;
-    private PlayerParam Param => GameLoop.Instance?._player?.Param;
+    private PlayerParam _param => GameLoop.Instance?._player?.Param;
     
     public event Action<Transform> OnLockTargetChanged;
     
@@ -47,7 +47,7 @@ public class PlayerCameraManager : MonoBehaviour
             GameLoop.Instance?._player?.Motor?.HandleLockRotation();
         }
 
-        if (!Param.IsLocked)
+        if (!_param.IsLocked)
         {
             Unlock();
         }
@@ -61,7 +61,7 @@ public class PlayerCameraManager : MonoBehaviour
             List<Transform> candidates = targetLockController.GetCandidateTargets();
             if (candidates.Count > 0)
             {
-                Param.IsLocked = true;
+                _param.IsLocked = true;
                 LockTo(candidates[0]);
             }
             else
@@ -72,11 +72,11 @@ public class PlayerCameraManager : MonoBehaviour
         else
         {
             Unlock();
-            Param.IsLocked = false;
+            _param.IsLocked = false;
         }
     }
 
-    public void LockTo(Transform t)
+    private void LockTo(Transform t)
     {
         if (t == null)
         {
@@ -91,11 +91,11 @@ public class PlayerCameraManager : MonoBehaviour
         FaceTargetImmediately(t);
     }
 
-    public void Unlock()
+    private void Unlock()
     {
         lockState.Unlock();
         currentState = freeLookState;
-        Param.IsLocked = false;
+        _param.IsLocked = false;
 
         OnLockTargetChanged?.Invoke(null);
     }
@@ -117,5 +117,5 @@ public class PlayerCameraManager : MonoBehaviour
     }
     
     public void ForceLockTo(Transform t) => LockTo(t);
-    public Transform GetCurrentTarget() => lockState.GetCurrentTarget();
+    private Transform GetCurrentTarget() => lockState.GetCurrentTarget();
 }
