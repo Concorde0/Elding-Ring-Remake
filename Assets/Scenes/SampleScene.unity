@@ -2436,7 +2436,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -96.734985, y: 1.0571289}
-  m_SizeDelta: {x: 168, y: 13.0944}
+  m_SizeDelta: {x: 278, y: 13.0944}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &211218491
 MonoBehaviour:
@@ -15729,7 +15729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8304bec2e08d1a4d93b3b5f39de9e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1414545971}
+  player: {fileID: 0}
+  positionLerpSpeed: 10
+  rotationLerpSpeed: 5
 --- !u!1001 &1278292125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22337,7 +22339,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 19.12}
+  m_SizeDelta: {x: 2, y: 19.12}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1612986488
 MonoBehaviour:
