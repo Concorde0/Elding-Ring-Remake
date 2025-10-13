@@ -53,18 +53,9 @@ namespace RPG.MotionSystem
 
         public void Update()
         {
-            if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-            {
-                // 鼠标当前在 UI 上，跳过角色输入处理
-                //TODO:这里的逻辑会导致角色卡在状态中
-                return;
-            }
             AI.Update();
             Camera.Update();
             Input.Update();
-            
-            
-            
         }
 
         public void FixedUpdate()

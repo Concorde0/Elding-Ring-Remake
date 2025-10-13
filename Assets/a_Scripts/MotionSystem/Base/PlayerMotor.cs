@@ -25,9 +25,6 @@ namespace RPG.MotionSystem
         private Transform _lockTarget;
         
         private bool _hasPlayedLionSmash;
-        
-        public event Action OnRequestUnlock;
-
 
         public PlayerMotor(PlayerMotion motion, CameraResources cameraResources)
         {
