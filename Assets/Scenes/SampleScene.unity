@@ -7719,6 +7719,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6530764182435078953, guid: 957579ed33eb22040bb203c8100f624f, type: 3}
   m_PrefabInstance: {fileID: 473403891}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &474299955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188281}
 --- !u!1001 &506425766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8392,7 +8415,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582030511}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.076000854, y: 6.750232e-17, z: 8.8560963e-16, w: 0.9971078}
+  m_LocalRotation: {x: 0.07600083, y: 6.75023e-17, z: 8.8560963e-16, w: 0.9971078}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9166,6 +9189,624 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6530764182435078953, guid: 957579ed33eb22040bb203c8100f624f, type: 3}
   m_PrefabInstance: {fileID: 662274167}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &663123540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 663123542}
+  - component: {fileID: 663123541}
+  m_Layer: 0
+  m_Name: GPUI Detail Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &663123541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663123540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0293089e577d0ef41bf2ac4c44548d66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDontDestroyOnLoad: 0
+  _prototypes:
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 6011036630121576164, guid: 0ec1c69bd47ad864f96cc2b516f6cd4b, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Bush_A
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 2803505663424749585, guid: b273de0d6e5818a4cb3195ce4f376ccb, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Bush_B
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 3381235597526909217, guid: a18ae5a380cefaa42984dd62c858aa2b, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Bush_Red
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 7219107292882874463, guid: 0d2d600394cae8e4f908c5bdd1154222, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Bush_Twig
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 2085449277718671952, guid: 6629880e46886724fa0107d3035304e6, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Fern_A
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 7369509780391000685, guid: 912739ab7781de749876d674ef8dd365, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: GrassDry_A
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 8486787402013068894, guid: 9e8508e3025d9c844810b83c5607c09e, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: GrassDry_B
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 398929321252300881, guid: 4e6885e0d11bd224fa27617a4657c329, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Grass_A
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 1245006558584958560, guid: 7b3e6db10d22f504dbc606110b2cb5e7, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Grass_B
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 6846659341408791651, guid: 4c72217d56dcb6749a897a75cad1f34e, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Grass_C
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 658749458356824200, guid: dd902ff2a6f685041be127af00c09664, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Heather_B
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 1565408744048187519, guid: e6fd4411c0e008642b42a086f0d297ca, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Shrub
+  defaultProfile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+  isEnableDefaultRenderingWhenDisabled: 1
+  editor_isRenderInEditMode: 1
+  editor_isTextMode: 0
+  editor_isRollbackRuntimeProfileChanges: 0
+  _prototypeDataArray:
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
+    dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  _gpuiTerrains:
+  - {fileID: 1542103393}
+  - {fileID: 731923852}
+  - {fileID: 1793485802}
+  - {fileID: 947821959}
+  - {fileID: 1390693314}
+  - {fileID: 1604568206}
+  - {fileID: 1372611401}
+  - {fileID: 1649480741}
+  - {fileID: 1111092838}
+  - {fileID: 1866213437}
+  - {fileID: 1522344447}
+  - {fileID: 1318967982}
+  - {fileID: 963808079}
+  - {fileID: 1781188308}
+  - {fileID: 474299955}
+  - {fileID: 1781188307}
+  _isAutoAddPrototypesBasedOnTerrains: 1
+  _isAutoAddActiveTerrainsOnInitialization: 0
+  _isAutoRemovePrototypesBasedOnTerrains: 0
+  defaultDetailTextureProfile: {fileID: 11400000, guid: 9ddb4a63c98793946b11b7369e690443, type: 2}
+  detailObjectDistance: 80
+  windVector: {x: 0.4, y: 0.8, z: 0, w: 0}
+  healthyDryNoiseTexture: {fileID: 2800000, guid: 9f956857cd1205048a6319af863aa4e6, type: 3}
+  detailUpdateDistance: 1
+  disableAsyncDetailDataRequest: 0
+--- !u!4 &663123542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663123540}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &665728323
 GameObject:
   m_ObjectHideFlags: 0
@@ -9716,6 +10357,29 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &731923852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188285}
 --- !u!1001 &756265017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10888,6 +11552,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1766490383188478063, guid: a93f80d252523a14d9206681c7713ce8, type: 3}
   m_PrefabInstance: {fileID: 934792064}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &947821959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188293}
 --- !u!1001 &950783209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11142,6 +11829,29 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &963808079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188297}
 --- !u!1 &971868237
 GameObject:
   m_ObjectHideFlags: 0
@@ -11707,6 +12417,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087805295}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1111092838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188279}
 --- !u!1001 &1124011422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12677,6 +13410,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1318967982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188289}
 --- !u!1 &1351629085
 GameObject:
   m_ObjectHideFlags: 0
@@ -12722,6 +13478,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1372611401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188303}
 --- !u!1001 &1374230268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12808,6 +13587,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6530764182435078953, guid: 957579ed33eb22040bb203c8100f624f, type: 3}
   m_PrefabInstance: {fileID: 1374230268}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1390693314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188295}
 --- !u!1 &1399859999
 GameObject:
   m_ObjectHideFlags: 0
@@ -16964,6 +17766,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6530764182435078953, guid: 957579ed33eb22040bb203c8100f624f, type: 3}
   m_PrefabInstance: {fileID: 1463191342}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1522344447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188277}
 --- !u!1 &1540113989
 GameObject:
   m_ObjectHideFlags: 0
@@ -16997,6 +17822,29 @@ Transform:
   - {fileID: 342438034}
   m_Father: {fileID: 620190050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1542103393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188287}
 --- !u!1 &1547675645
 GameObject:
   m_ObjectHideFlags: 0
@@ -17272,6 +18120,52 @@ SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6394484033406195607, guid: 0652a66b4e595f843a9768460d8067f7, type: 3}
   m_PrefabInstance: {fileID: 392937988}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1604568206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188283}
+--- !u!114 &1649480741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188301}
 --- !u!1 &1657842160
 GameObject:
   m_ObjectHideFlags: 0
@@ -18368,13 +19262,267 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 257142241316034338, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1781188308}
+    - targetCorrespondingSourceObject: {fileID: 257142243187119938, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1372611401}
+    - targetCorrespondingSourceObject: {fileID: 257142242431874011, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1649480741}
+    - targetCorrespondingSourceObject: {fileID: 257142242311654874, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1866213437}
+    - targetCorrespondingSourceObject: {fileID: 257142242484871122, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 963808079}
+    - targetCorrespondingSourceObject: {fileID: 257142242937042224, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1390693314}
+    - targetCorrespondingSourceObject: {fileID: 257142242807247231, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 947821959}
+    - targetCorrespondingSourceObject: {fileID: 257142242361213523, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1793485802}
+    - targetCorrespondingSourceObject: {fileID: 257142242105027304, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1318967982}
+    - targetCorrespondingSourceObject: {fileID: 257142241421274522, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1542103393}
+    - targetCorrespondingSourceObject: {fileID: 257142242276785764, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 731923852}
+    - targetCorrespondingSourceObject: {fileID: 257142241709043256, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1604568206}
+    - targetCorrespondingSourceObject: {fileID: 257142241893090610, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 474299955}
+    - targetCorrespondingSourceObject: {fileID: 257142241354730678, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1111092838}
+    - targetCorrespondingSourceObject: {fileID: 257142241226085149, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1522344447}
+    - targetCorrespondingSourceObject: {fileID: 257142241181060056, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1781188307}
   m_SourcePrefab: {fileID: 100100000, guid: f514be6126461c64eab6f02358f894f3, type: 3}
 --- !u!4 &1781188274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 257142241851313763, guid: f514be6126461c64eab6f02358f894f3, type: 3}
   m_PrefabInstance: {fileID: 1781188273}
   m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188275 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142241181060061, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142241226085149, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188277 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142241226085150, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142241354730678, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188279 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142241354730667, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188280 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142241893090610, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188281 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142241893090615, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142241709043256, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188283 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142241709043261, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142242276785764, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188285 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142242276785753, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188286 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142241421274522, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188287 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142241421274527, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142242105027304, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188289 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142242105027309, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142242361213523, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188291 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142242361213524, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188292 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142242807247231, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188293 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142242807247216, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142242937042224, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188295 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142242937042229, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142242484871122, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188297 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142242484871127, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142242311654874, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188299 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142242311654879, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142242431874011, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188301 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142242431874012, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188302 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142243187119938, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188303 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142243187119943, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142241316034338, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!218 &1781188305 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 257142241316034343, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1781188306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 257142241181060056, guid: f514be6126461c64eab6f02358f894f3, type: 3}
+  m_PrefabInstance: {fileID: 1781188273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1781188307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188275}
+--- !u!114 &1781188308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188305}
 --- !u!1001 &1784379865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18507,6 +19655,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6530764182435078953, guid: 957579ed33eb22040bb203c8100f624f, type: 3}
   m_PrefabInstance: {fileID: 1784379865}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1793485802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188291}
 --- !u!1001 &1801392995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19240,7 +20411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850529936}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16730519, y: -0.000000009338775, z: 0.0000000015847624, w: 0.9859052}
+  m_LocalRotation: {x: 0.1673052, y: 1.4859687e-16, z: 8.756597e-16, w: 0.9859052}
   m_LocalPosition: {x: 4.2351647e-22, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19504,6 +20675,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9005472901354583013, guid: 5e1b58f75618fc340baeccee09741a0e, type: 3}
   m_PrefabInstance: {fileID: 1857963901}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1866213437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781188298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ec84d136d88e4398d563cb01a9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounds:
+    m_Center: {x: 500, y: 400, z: 500}
+    m_Extent: {x: 500, y: 400, z: 500}
+  _bakedDetailTextures: []
+  isAutoFindTreeManager: 1
+  isAutoFindDetailManager: 1
+  terrainHolesSampleMode: 0
+  _terrainTreeDistance: 100
+  _isBakedDetailTextures: 0
+  _isCustomBakedDetailTextures: 0
+  _terrain: {fileID: 1781188299}
 --- !u!1 &1898285829
 GameObject:
   m_ObjectHideFlags: 0
@@ -20844,7 +22038,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043854603}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18833439, y: -0.0000000034547432, z: 6.6250355e-10, w: 0.982105}
+  m_LocalRotation: {x: 0.18833439, y: 1.6727454e-16, z: 8.7228443e-16, w: 0.98210496}
   m_LocalPosition: {x: 4.2351647e-22, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21474,3 +22668,4 @@ SceneRoots:
   - {fileID: 1351629087}
   - {fileID: 620190050}
   - {fileID: 351557676}
+  - {fileID: 663123542}
