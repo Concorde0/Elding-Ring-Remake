@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01694a6d0ad91f4985ea0689f262c1b, type: 3}
   m_Name: GPUIShaderBindings
   m_EditorClassIdentifier: 
-  shaderInstances: []
+  shaderInstances:
+  - shaderName: Shader Graphs/TerrainGrass
+    replacementShaderName: Shader Graphs/TerrainGrass
+    extensionCode: 
+    isUseOriginal: 1
+    modifiedDate: 10/15/2025 15:37:36.819

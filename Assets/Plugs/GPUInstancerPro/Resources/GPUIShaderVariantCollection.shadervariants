@@ -8,6 +8,11 @@ ShaderVariantCollection:
   m_PrefabAsset: {fileID: 0}
   m_Name: GPUIShaderVariantCollection
   m_Shaders:
+  - first: {fileID: -6465566751694194690, guid: dfa3b96612ed4df4a97b7fd06217ba23, type: 3}
+    second:
+      variants:
+      - keywords: _ALPHATEST_ON
+        passType: 0
   - first: {fileID: 4800000, guid: 8478781d80234fa29651593b02782b9d, type: 3}
     second:
       variants:
