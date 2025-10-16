@@ -74,6 +74,8 @@ namespace RPG.MotionSystem
             Anim.Stop();
             Input.Stop();
         }
+        
+        
 
         private void RootCalculate()
         {

@@ -155,10 +155,12 @@ namespace RPG.MotionSystem
             {
                 _model.position += (Vector3)deltaPos;
             }
-            _grounder.ResolveGrounding();
-            _grounder.ResolveStepClimb();
+            _grounder.Grounding();
+            _grounder.StepClimb();
             
         }
+        
+        
         
         public void HandleInputRotation()
         {
