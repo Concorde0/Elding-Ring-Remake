@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CameraFollowPoint : MonoBehaviour
 {
-    public Transform player;  // 要跟踪的玩家 Transform
-    [Tooltip("插值速度（越大越快但抖动可能被带动），典型值 5～20")]
+    public Transform player;
+    [Tooltip("插值速度")]
     public float positionLerpSpeed = 15f;
-    [Tooltip("如果你也想平滑旋转 / 朝向，可以加旋转插值")]
+    [Tooltip("旋转插值")]
     public float rotationLerpSpeed = 5f;
     
     private Vector3 _vel = Vector3.zero;

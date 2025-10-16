@@ -18,3 +18,23 @@ MonoBehaviour:
     extensionCode: 
     isUseOriginal: 1
     modifiedDate: 10/15/2025 15:37:36.819
+  - shaderName: Universal Render Pipeline/Lit
+    replacementShaderName: GPUInstancerPro/Universal Render Pipeline/Lit
+    extensionCode: 
+    isUseOriginal: 0
+    modifiedDate: 10/15/2025 15:50:20.417
+  - shaderName: Shader Graphs/Rock
+    replacementShaderName: Shader Graphs/Rock
+    extensionCode: 
+    isUseOriginal: 1
+    modifiedDate: 10/15/2025 15:54:53.724
+  - shaderName: Universal Render Pipeline/Nature/SpeedTreeURP_Bark
+    replacementShaderName: Universal Render Pipeline/Nature/SpeedTreeURP_Bark
+    extensionCode: 
+    isUseOriginal: 1
+    modifiedDate: 10/15/2025 15:54:53.727
+  - shaderName: Universal Render Pipeline/Nature/SpeedTreeURP_Branch
+    replacementShaderName: Universal Render Pipeline/Nature/SpeedTreeURP_Branch
+    extensionCode: 
+    isUseOriginal: 1
+    modifiedDate: 10/15/2025 15:55:31.054

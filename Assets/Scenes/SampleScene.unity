@@ -488,6 +488,351 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 883120403691809223, guid: b47483c1fe9f22546bca092055b64778, type: 3}
   m_PrefabInstance: {fileID: 48502314}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &55364045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 55364047}
+  - component: {fileID: 55364046}
+  m_Layer: 0
+  m_Name: GPUI Tree Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &55364046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55364045}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc071a606fd17964d988019d4f90155e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDontDestroyOnLoad: 0
+  _prototypes:
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 1030678204986712962, guid: 398b156fac7c6f44db09e9ad046c24dd, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_C_01
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 7601787364241631101, guid: 6b63070b5a692dc4389c591157da475d, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_C_02
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 3375602384960043644, guid: a93f80d252523a14d9206681c7713ce8, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_Overgrown_D
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 6060788920606015911, guid: e730e362773695e408e48f59e6dff87a, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Cypress_Forest_Desktop
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 8807064048693953627, guid: c06ecca5c3d565e42808724839b39b6f, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Red_Bush
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 4012337630082778474, guid: cce4d8667f2436a479759f07084d8ff4, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Conifer
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 100000, guid: 9ec4ab395efae3f44b859f77742dd451, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_C_01
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 2503636403554334455, guid: 451d860cead90b64bbbab1639909594c, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Pine_A
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 1127992084609228112, guid: 34776a9356ed54141bf7fed4fded28a0, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Pine_B
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 1722164173232303198, guid: 942660f4ebcf9cd438f45122b0ad63eb, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Pine_C
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 8316334779356437779, guid: 35e087cfaa0f57244b67615777188d3e, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Pine_D
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 100000, guid: 8d8873bd1f85c3942bf7f961cec01074, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_B_01
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 185186776739890662, guid: e71b98edf7da4b448bc6ae07b82d6935, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_B_01
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 100000, guid: d08e58249c8b5444cb22e208478dc55f, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_B_02
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 1338854965163658714, guid: dd1cb49c7d40bfb44a9b4201f7f74b6c, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_A_01
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+    prefabObject: {fileID: 100000, guid: 3bb55b9dc42e34c47b35dea94575a162, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Rock_A_01
+  defaultProfile: {fileID: 11400000, guid: 1bbed77ce41b4754ba49432af2b6e07b, type: 2}
+  isEnableDefaultRenderingWhenDisabled: 1
+  editor_isRenderInEditMode: 1
+  editor_isTextMode: 0
+  editor_isRollbackRuntimeProfileChanges: 0
+  _prototypeDataArray:
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  - isApplyRotation: 1
+    isApplyPrefabScale: 1
+    isApplyHeight: 1
+  _gpuiTerrains:
+  - {fileID: 731923852}
+  - {fileID: 1542103393}
+  - {fileID: 947821959}
+  - {fileID: 1390693314}
+  - {fileID: 1649480741}
+  - {fileID: 1372611401}
+  - {fileID: 1793485802}
+  - {fileID: 1604568206}
+  - {fileID: 1866213437}
+  - {fileID: 1781188307}
+  - {fileID: 1522344447}
+  - {fileID: 1111092838}
+  - {fileID: 474299955}
+  - {fileID: 1318967982}
+  - {fileID: 963808079}
+  - {fileID: 1781188308}
+  _isAutoAddPrototypesBasedOnTerrains: 1
+  _isAutoAddActiveTerrainsOnInitialization: 0
+  _isAutoRemovePrototypesBasedOnTerrains: 0
+  _enableTreeInstanceColors: 1
+--- !u!4 &55364047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55364045}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &101045181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8415,7 +8760,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582030511}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07600083, y: 0.00000004202495, z: -0.0000000032031935, w: 0.9971078}
+  m_LocalRotation: {x: 0.07600083, y: 6.75023e-17, z: 8.8560963e-16, w: 0.9971078}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9213,7 +9558,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663123540}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0293089e577d0ef41bf2ac4c44548d66, type: 3}
   m_Name: 
@@ -9388,6 +9733,20 @@ MonoBehaviour:
     isEnabled: 1
     enableSkinnedMeshRendering: 0
     name: Shrub
+  - prototypeType: 0
+    profile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
+    prefabObject: {fileID: 9069115365609291303, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
+    gpuiLODGroupData: {fileID: 0}
+    prototypeMesh: {fileID: 0}
+    prototypeMaterials: []
+    layer: 0
+    isGenerateBillboard: 0
+    isBillboardReplaceLODCulled: 1
+    billboardDistance: 0.9
+    billboardAsset: {fileID: 0}
+    isEnabled: 1
+    enableSkinnedMeshRendering: 0
+    name: Tree_05
   defaultProfile: {fileID: 11400000, guid: 1de11d575c621e44ab4aa9dc29884a55, type: 2}
   isEnableDefaultRenderingWhenDisabled: 1
   editor_isRenderInEditMode: 1
@@ -9740,6 +10099,37 @@ MonoBehaviour:
     noiseSpread: 0.1
     healthyColor: {r: 0.2627451, g: 0.9764706, b: 0.16470589, a: 1}
     dryColor: {r: 0.8039216, g: 0.7372549, b: 0.101960786, a: 1}
+    isBillboard: 0
+    ambientOcclusion: 0.2
+    gradientPower: 0.5
+    windWaveTintColor: {r: 0.69803923, g: 0.6, b: 0.5019608, a: 1}
+    isOverrideHealthyDryNoiseTexture: 0
+    healthyDryNoiseTexture: {fileID: 0}
+    windIdleSway: 0.6
+    windWavesOn: 1
+    windWaveSize: 0.8
+    windWaveTint: 0.5
+    windWaveSway: 0.5
+    contrast: 1
+    healthyDryRatio: 1
+    isUseDensityReduction: 1
+    densityReduceDistance: 200
+    densityReduceMultiplier: 16
+    densityReduceMaxScale: 0
+    densityReduceHeightScale: 0
+    initialBufferSize: 1024
+    maxDetailInstanceCountPerUnit: 16
+    detailBufferSizePercentageDifferenceForReduction: 0.5
+    detailExtraBufferSizePercentage: 0.2
+    densityAdjustment: 1
+    healthyDryScaleAdjustment: 0
+    noiseSeedAdjustment: 0
+    noiseSpreadAdjustment: 1
+  - mpbDescription: {fileID: 0}
+    detailTexture: {fileID: 0}
+    noiseSpread: 0.1
+    healthyColor: {r: 1, g: 1, b: 1, a: 1}
+    dryColor: {r: 1, g: 1, b: 1, a: 1}
     isBillboard: 0
     ambientOcclusion: 0.2
     gradientPower: 0.5
@@ -20411,8 +20801,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850529936}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16730528, y: -0.0000000093387795, z: 0.0000000015847645, w: 0.9859052}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.1673052, y: 1.4859687e-16, z: 8.756597e-16, w: 0.9859052}
+  m_LocalPosition: {x: -4.2351647e-22, y: 0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22038,8 +22428,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043854603}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18833442, y: -0.000000021212564, z: 0.000000004067851, w: 0.982105}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.18833439, y: 1.6727454e-16, z: 8.7228443e-16, w: 0.98210496}
+  m_LocalPosition: {x: -4.2351647e-22, y: 0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22669,3 +23059,4 @@ SceneRoots:
   - {fileID: 620190050}
   - {fileID: 351557676}
   - {fileID: 663123542}
+  - {fileID: 55364047}

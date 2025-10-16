@@ -8,6 +8,30 @@ ShaderVariantCollection:
   m_PrefabAsset: {fileID: 0}
   m_Name: GPUIShaderVariantCollection
   m_Shaders:
+  - first: {fileID: -6465566751694194690, guid: d4fdc026464a42041be7fe785babd90e, type: 3}
+    second:
+      variants:
+      - keywords: BACKFACE_NORMAL_MODE_MIRROR EFFECT_BILLBOARD LOD_FADE_CROSSFADE
+          _WINDQUALITY_FAST
+        passType: 0
+      - keywords: BACKFACE_NORMAL_MODE_MIRROR LOD_FADE_CROSSFADE _WINDQUALITY_BEST
+        passType: 0
+      - keywords: BACKFACE_NORMAL_MODE_MIRROR LOD_FADE_CROSSFADE _WINDQUALITY_BETTER
+        passType: 0
+      - keywords: BACKFACE_NORMAL_MODE_MIRROR LOD_FADE_CROSSFADE _WINDQUALITY_PALM
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 515f8966b1d702f4a8c97ca412a9a4e9, type: 3}
+    second:
+      variants:
+      - keywords: BACKFACE_NORMAL_MODE_MIRROR
+        passType: 0
+      - keywords: BACKFACE_NORMAL_MODE_NONE
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 48fe816c3f1833d4d8c09289fe3981cb, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
   - first: {fileID: -6465566751694194690, guid: dfa3b96612ed4df4a97b7fd06217ba23, type: 3}
     second:
       variants:
@@ -22,4 +46,9 @@ ShaderVariantCollection:
     second:
       variants:
       - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: bb19d3b0b62f6f94ba552521d931abe4, type: 3}
+    second:
+      variants:
+      - keywords: LOD_FADE_CROSSFADE _METALLICSPECGLOSSMAP _NORMALMAP _OCCLUSIONMAP
         passType: 0
