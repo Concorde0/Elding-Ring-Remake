@@ -161,7 +161,6 @@ GameObject:
   - component: {fileID: 5137387370408307206}
   - component: {fileID: 6755823861202905249}
   - component: {fileID: 9129745456808142065}
-  - component: {fileID: 2914172741334133719}
   m_Layer: 5
   m_Name: EquipmentSlot
   m_TagString: Untagged
@@ -228,21 +227,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2914172741334133719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1608207498010685362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6deffd87812ed4ba730bdfe6775faf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotType: 0
-  itemUI: {fileID: 8761830347994618081}
-  equipmentSlot: 1
 --- !u!1 &4371788988625271478
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,8 +236,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9040955449601894087}
-  - component: {fileID: 8761830347994618081}
-  - component: {fileID: 8992885230039516603}
   m_Layer: 0
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -278,35 +260,6 @@ Transform:
   - {fileID: 1075056767719104879}
   m_Father: {fileID: 5137387370408307206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8761830347994618081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4371788988625271478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a833a57778b3bdc4498d0c0141326080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 488551463103511373}
-  amount: {fileID: 0}
-  currentItemData: {fileID: 0}
-  lightBackGround: {fileID: 521979435930704995}
---- !u!114 &8992885230039516603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4371788988625271478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73ac6c9d80bda848936a0f2c6095578, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highLight: {fileID: 521979435930704995}
 --- !u!1 &6678587172454587104
 GameObject:
   m_ObjectHideFlags: 0

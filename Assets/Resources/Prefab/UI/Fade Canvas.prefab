@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 562571962407751482}
   - component: {fileID: 1929676599032104614}
   - component: {fileID: 7695722539301106140}
-  - component: {fileID: 1393498419774899156}
   m_Layer: 5
   m_Name: Fade Canvas
   m_TagString: Untagged
@@ -191,17 +190,3 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &1393498419774899156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2584629615659550006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b8f18703a5acd4ba6b98f02f656107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeDuration: 0.5
-  fadeoutDuration: 0.5

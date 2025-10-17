@@ -3561,7 +3561,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 890743171422269900}
-  - component: {fileID: 8413408155781721813}
   m_Layer: 5
   m_Name: TooltipEquipment
   m_TagString: Untagged
@@ -3594,45 +3593,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8413408155781721813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6237490647275546364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ed363b1c08d9af4bb5b3658f468d2be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  root: {fileID: 6237490647275546364}
-  icon: {fileID: 6703732547843771221}
-  icon2: {fileID: 7002366462461910034}
-  itemName: {fileID: 2303495192151750912}
-  t1: {fileID: 5822331175332035412}
-  t2: {fileID: 9036128675116087192}
-  t3: {fileID: 8940525304488411333}
-  t4: {fileID: 6484142766048577288}
-  a1: {fileID: 1538723616191012437}
-  a2: {fileID: 2365661316994014500}
-  a3: {fileID: 3500272148870776188}
-  a4: {fileID: 7795983882388740642}
-  d1: {fileID: 2122308750945574063}
-  d2: {fileID: 7689923113971945007}
-  d3: {fileID: 6631735716843607264}
-  d4: {fileID: 7795983882388740642}
-  c1: {fileID: 2644946652141341089}
-  c2: {fileID: 3430523281804798998}
-  c3: {fileID: 417623372044528164}
-  c4: {fileID: 8032938738365962604}
-  c5: {fileID: 7640486448077826034}
-  m1: {fileID: 3124806457328118212}
-  m2: {fileID: 2225956893156961759}
-  m3: {fileID: 4854371275709413024}
-  m4: {fileID: 2999812332856094484}
-  m5: {fileID: 1449801524178727169}
-  description: {fileID: 8772507249359942398}
 --- !u!1 &6343611577053719129
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ public class ToolTipUI : MonoBehaviour
     [Header("Requirements")]
     public TextMeshProUGUI m1;
     public TextMeshProUGUI m2;
-    public TextMeshProUGUI m3;
+    public TextMeshProUGUI m3; 
     public TextMeshProUGUI m4;
     public TextMeshProUGUI m5;
 

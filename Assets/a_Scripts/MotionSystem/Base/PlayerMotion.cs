@@ -25,6 +25,7 @@ namespace RPG.MotionSystem
         public RootMotionJobHandler RootMotion { get; private set; }
         public TimerManager Timer { get; private set; }
         public CharacterStats Stats { get; private set; }
+        
 
         public PlayerMotion(Transform model, AnimSetting setting, CameraResources camera)
         {
@@ -81,7 +82,7 @@ namespace RPG.MotionSystem
         {
             Anim.EvaluateGraph(Time.fixedDeltaTime);
             RootMotion.RecordAndSchedule(0, Model);
-            RootMotion.CompleteAndApply((index, deltaPos, deltaRot) =>
+            RootMotion.CompleteAndApply((_, deltaPos, deltaRot) =>
             {
                 Motor.ApplyRootMotion(deltaPos, deltaRot);
             }); 

@@ -277,7 +277,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4431066725729529995}
-  - component: {fileID: 8789400057005863716}
   m_Layer: 5
   m_Name: CharacterDataWindow
   m_TagString: Untagged
@@ -319,33 +318,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &8789400057005863716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3861226268058895385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cf179354d1d62141bd7a76401308c2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelText: {fileID: 456328880457972073}
-  lunText: {fileID: 118704683637663947}
-  healthText: {fileID: 2451343494887041088}
-  focusText: {fileID: 5142466760810831577}
-  weightText: {fileID: 1810431589748410200}
-  vitalityText: {fileID: 8927837537143939450}
-  concentrationText: {fileID: 510846998657239095}
-  enduranceText: {fileID: 4977307896589605487}
-  strengthText: {fileID: 1686395193126428382}
-  dexterityText: {fileID: 793111892342804209}
-  intelligenceText: {fileID: 5824357222400534360}
-  faithText: {fileID: 1002177115139651075}
-  inductionText: {fileID: 3071273901072427753}
-  energyText: {fileID: 8460967860050916700}
-  characterStats: {fileID: 0}
 --- !u!1 &4161728692563395765
 GameObject:
   m_ObjectHideFlags: 0

@@ -91,7 +91,7 @@ MonoBehaviour:
   - name: LightAttack1
     type: 0
     enterTime: 0.2
-    clip: {fileID: 1827226128182048838, guid: 74966c6ff0ebae5478d6ae4f47e539f8, type: 3}
+    clip: {fileID: 1827226128182048838, guid: f853b94e6ca41f446b4bfa0fb167eb95, type: 3}
     clipGroup: []
     infoGroup: []
     blendClip: []

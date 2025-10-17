@@ -555,7 +555,6 @@ GameObject:
   - component: {fileID: 831952162186348380}
   - component: {fileID: 8353418874701871737}
   - component: {fileID: 2811892288334823562}
-  - component: {fileID: 3356560102665780928}
   m_Layer: 5
   m_Name: EquipmentSelect
   m_TagString: Untagged
@@ -648,23 +647,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &3356560102665780928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3346946442287120474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0a1f9228352d89479ac3d49fcf6e941, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuRoot: {fileID: 3346946442287120474}
-  useButton: {fileID: 2355605293132701438}
-  dropButton: {fileID: 554217131366654243}
-  closeButton: {fileID: 76111477183209428}
-  blocker: {fileID: 1206485178148811614}
 --- !u!1 &4291350543067298048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,7 +1087,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3356560102665780928}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryContextMenu, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
