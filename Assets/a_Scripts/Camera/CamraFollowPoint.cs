@@ -21,5 +21,6 @@ public class CameraFollowPoint : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref _vel, 1f / positionLerpSpeed);
         transform.rotation = Quaternion.identity; 
         
+        
     }
 }
