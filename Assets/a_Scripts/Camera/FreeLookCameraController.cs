@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-
 public class FreeLookCameraController : ICameraState
     {
         private CinemachineFreeLook _camera;
@@ -21,7 +20,7 @@ public class FreeLookCameraController : ICameraState
         
         public void Tick()
         {
-           
+         
         }
 
         public void Enter()
