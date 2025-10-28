@@ -10,8 +10,16 @@ namespace QFramework.Example
 {
 	public partial class InventoryExample1 : ViewController
 	{
-		
-		
+		private void Awake()
+		{
+			ItemKit.LoadItemConfigByResources(nameof(Items.Head));
+			ItemKit.LoadItemConfigByResources(nameof(Items.BigSword));
+			
+			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.Head],1);
+			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.BigSword],1);
+
+		}
+
 		private void OnGUI()
 		{
 			IMGUIHelper.SetDesignResolution(640,360);
@@ -24,7 +32,7 @@ namespace QFramework.Example
 				}
 				else
 				{
-					GUILayout.Label($"格子：{slot.Item.Name} 物品{slot.Item.Key} x {slot.Count}");
+					GUILayout.Label($"格子：{slot.Item.GetName} 物品{slot.Item.GetKey} x {slot.Count}");
 				}
 				GUILayout.EndHorizontal();
 				
@@ -34,37 +42,26 @@ namespace QFramework.Example
 			GUILayout.Label($"物品1 ");
 			if (GUILayout.Button("+"))
 			{
-				if (!ItemKit.AddItem("Item_1"))
+				if (!ItemKit.AddItem(Items.Head))
 				{
 					Debug.Log("物品栏已满");
 				}
 			}
-			if (GUILayout.Button("-")) {ItemKit. SubItem("Item_1"); }
+			if (GUILayout.Button("-")) {ItemKit. SubItem(Items.Head); }
 			GUILayout.EndHorizontal();
 			
 			GUILayout.BeginHorizontal();
 			GUILayout.Label($"物品2 ");
 			if (GUILayout.Button("+"))
 			{
-				if (!ItemKit.AddItem("Item_2"))
+				if (!ItemKit.AddItem(Items.BigSword))
 				{
 					Debug.Log("物品栏已满");
 				}
 			}
-			if (GUILayout.Button("-")) { ItemKit.SubItem("Item_2"); }
+			if (GUILayout.Button("-")) { ItemKit.SubItem(Items.BigSword); }
 			GUILayout.EndHorizontal();
 			
-			GUILayout.BeginHorizontal();
-			GUILayout.Label($"物品3 ");
-			if (GUILayout.Button("+"))
-			{
-				if (!ItemKit.AddItem("Item_3"))
-				{
-					Debug.Log("物品栏已满");
-				}
-			}
-			if (GUILayout.Button("-")) { ItemKit.SubItem("Item_3"); }
-			GUILayout.EndHorizontal();
 			
 		}
 

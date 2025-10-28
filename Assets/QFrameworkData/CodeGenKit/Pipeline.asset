@@ -18,33 +18,9 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos:
-    - TypeName: UnityEngine.RectTransform
-      PathToRoot: UISlotRoot
-      MemberName: UISlotRoot
-    - TypeName: QFramework.UISlot
-      PathToRoot: UISlot
-      MemberName: UISlot
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnAddItem1
-      MemberName: BtnAddItem1
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnDeleteItem1
-      MemberName: BtnDeleteItem1
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnAddItem2
-      MemberName: BtnAddItem2
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnDeleteItem2
-      MemberName: BtnDeleteItem2
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnAddItem3
-      MemberName: BtnAddItem3
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnDeleteItem3
-      MemberName: BtnDeleteItem3
-    ScriptsFolder: Assets\QFramework\ItemKit\Example\UGUIInventoryExample
-    ClassName: UGUIInventoryExample
+    BindInfos: []
+    ScriptsFolder: Assets/QFramework/ItemKit/Example/UGUIInventoryExample
+    ClassName: ConfigManager
     Namespace: QFramework.Example
     MainCode: 
     DesignerCode: 

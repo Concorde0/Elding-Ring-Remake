@@ -9,7 +9,7 @@ namespace QFramework
 {
     public class UISlot : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler
     {
-        public Text Name;
+        public Image Icon;
         public Text Count;
         
         public Slot Data { get; private set; }
@@ -22,12 +22,16 @@ namespace QFramework
             
             if (Data.Count == 0)
             {
-                Name.text = "空";
+                Icon.Hide();
                 Count.text = "";
             }
             else
             {
-                Name.text = Data.Item.Name;
+                Icon.Show();
+                if (data.Item.GetIcon)
+                {
+                    Icon.sprite = data.Item.GetIcon;
+                }
                 Count.text = Data.Count.ToString();
             }
 
@@ -41,7 +45,7 @@ namespace QFramework
             if(RectTransformUtility.ScreenPointToLocalPointInRectangle(controller.transform as RectTransform, mousePos, null,
                    out var localPos))
             {
-                Name.LocalPosition2D(localPos);
+                Icon.LocalPosition2D(localPos);
             }
         }
         public void OnBeginDrag(PointerEventData eventData)
@@ -49,7 +53,7 @@ namespace QFramework
             if(mDragging || Data.Count == 0) return;
             mDragging = true;
             var controller = FindAnyObjectByType<UGUIInventoryExample>();
-            Name.Parent(controller);
+            Icon.Parent(controller);
             SyncItemToMousePos();
 
         }
@@ -66,8 +70,8 @@ namespace QFramework
         {
             if (mDragging)
             {
-                Name.Parent(transform);
-                Name.LocalPositionIdentity();
+                Icon.Parent(transform);
+                Icon.LocalPositionIdentity();
 
                 var uiSlots = transform.parent.GetComponentsInChildren<UISlot>();
 
