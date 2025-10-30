@@ -10,11 +10,10 @@ namespace QFramework.Example
 	{
 		void Start()
 		{
-			ItemKit.LoadItemConfigByResources(nameof(Items.Head));
-			ItemKit.LoadItemConfigByResources(nameof(Items.BigSword));
+			ItemKit.LoadItemDatabase("ExampleItemDatabase");
 			
-			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.Head],1);
-			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.BigSword],1);
+			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.Item_Head],1);
+			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.item_BigSword],1);
 			
 			UISlot.Hide();
 			Refresh();
@@ -22,7 +21,7 @@ namespace QFramework.Example
 
 			BtnAddItem1.onClick.AddListener(() =>
 			{
-				if (!ItemKit.AddItem(Items.Head))
+				if (!ItemKit.AddItem(Items.Item_Head))
 				{
 					Debug.Log("背包已满");
 				}
@@ -31,7 +30,7 @@ namespace QFramework.Example
 			
 			BtnAddItem2.onClick.AddListener(() =>
 			{
-				if (!ItemKit.AddItem(Items.BigSword))
+				if (!ItemKit.AddItem(Items.item_BigSword))
 				{
 					Debug.Log("背包已满");
 				}
@@ -41,7 +40,7 @@ namespace QFramework.Example
 			
 			BtnDeleteItem1.onClick.AddListener(() =>
 			{
-				if (!ItemKit.SubItem(Items.Head,10))
+				if (!ItemKit.SubItem(Items.Item_Head,10))
 				{
 					Debug.Log("数量不足");
 				}
@@ -49,7 +48,7 @@ namespace QFramework.Example
 			});
 			BtnDeleteItem2.onClick.AddListener(() =>
 			{
-				ItemKit.SubItem(Items.BigSword);
+				ItemKit.SubItem(Items.item_BigSword);
 				Refresh();
 			});
 		}

@@ -12,11 +12,10 @@ namespace QFramework.Example
 	{
 		private void Awake()
 		{
-			ItemKit.LoadItemConfigByResources(nameof(Items.Head));
-			ItemKit.LoadItemConfigByResources(nameof(Items.BigSword));
+			ItemKit.LoadItemDatabase("ExampleItemDatabase");
 			
-			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.Head],1);
-			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.BigSword],1);
+			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.Item_Head],1);
+			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.item_BigSword],1);
 
 		}
 
@@ -42,24 +41,24 @@ namespace QFramework.Example
 			GUILayout.Label($"物品1 ");
 			if (GUILayout.Button("+"))
 			{
-				if (!ItemKit.AddItem(Items.Head))
+				if (!ItemKit.AddItem(Items.Item_Head))
 				{
 					Debug.Log("物品栏已满");
 				}
 			}
-			if (GUILayout.Button("-")) {ItemKit. SubItem(Items.Head); }
+			if (GUILayout.Button("-")) {ItemKit. SubItem(Items.Item_Head); }
 			GUILayout.EndHorizontal();
 			
 			GUILayout.BeginHorizontal();
 			GUILayout.Label($"物品2 ");
 			if (GUILayout.Button("+"))
 			{
-				if (!ItemKit.AddItem(Items.BigSword))
+				if (!ItemKit.AddItem(Items.item_BigSword))
 				{
 					Debug.Log("物品栏已满");
 				}
 			}
-			if (GUILayout.Button("-")) { ItemKit.SubItem(Items.BigSword); }
+			if (GUILayout.Button("-")) { ItemKit.SubItem(Items.item_BigSword); }
 			GUILayout.EndHorizontal();
 			
 			

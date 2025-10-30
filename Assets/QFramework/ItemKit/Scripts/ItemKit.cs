@@ -6,10 +6,15 @@ namespace QFramework
 {
     public class ItemKit : MonoBehaviour
     {
+        
 
-        public static void LoadItemConfigByResources(string itemName)
+        public static void LoadItemDatabase(string databaseName)
         {
-            AddItemConfig(Resources.Load<ItemConfig>(itemName));
+            var database = Resources.Load<ItemDatabase>(databaseName);
+            foreach (var databaseItem in database.Items)
+            {
+                AddItemConfig(databaseItem);
+            }
         }
 
         public static void AddItemConfig(IItem itemConfig)
