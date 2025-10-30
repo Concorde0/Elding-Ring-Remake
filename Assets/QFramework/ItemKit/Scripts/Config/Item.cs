@@ -11,9 +11,9 @@ namespace QFramework
     public class Item : ScriptableObject,IItem
     {
         [DisplayLabel("名称")]
-        public string Name;
+        public string Name = string.Empty;
         [DisplayLabel("关键字")]
-        public string Key;
+        public string Key = string.Empty;
         public Sprite Icon;
         public string GetName => Name;
         public string GetKey => Key;

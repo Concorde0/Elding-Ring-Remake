@@ -13,6 +13,7 @@ namespace QFramework
     [CreateAssetMenu(menuName = "@ItemKit/Creat Item Database")]
     public class ItemDatabase : ScriptableObject
     {
+        [DisplayLabel("命名空间:")]
         public string NameSpace = "QFramework.Example";
         public List<Item> Items;
         
@@ -35,8 +36,12 @@ namespace QFramework
         {
             mItems = serializedObject.FindProperty("Items");
             
-            mItemEditors.Clear();
+            RefreshItemEditors();
+        }
 
+        private void RefreshItemEditors()
+        {
+            mItemEditors.Clear();
             for (int i = 0; i < mItems.arraySize; i++)
             {
                 var itemSo = mItems.GetArrayElementAtIndex(i);
@@ -49,66 +54,23 @@ namespace QFramework
             }
         }
 
+        private string mSearchKey = "";
+        private FluentGUIStyle mHeader = FluentGUIStyle.Label().FontBold();
+
+        private Queue<Action> mActionQueue = new Queue<Action>();
+        
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            serializedObject.DrawProperties(true,0,"Items");
-
-
-            if (GUILayout.Button("+"))
-            {
-                var itemConfig = CreateInstance<Item>();
-                AssetDatabase.AddObjectToAsset(itemConfig,target);
-                mItems.InsertArrayElementAtIndex(mItems.arraySize);
-                var arrayElement = mItems.GetArrayElementAtIndex(mItems.arraySize - 1);
-                arrayElement.objectReferenceValue = itemConfig;
-                
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
-                
-                OnEnable();
-            }
-
-            serializedObject.ApplyModifiedProperties();
+            GUILayout.BeginVertical("box");
+            serializedObject.DrawProperties(false,0,"Items");
             
-            for (var i = 0; i < mItemEditors.Count; i++)
+            if (mItems.arraySize != mItemEditors.Count)
             {
-                var itemEditor = mItemEditors[i];
-                GUILayout.BeginVertical("box");
-                GUILayout.BeginHorizontal();
-
-                itemEditor.Foldout = EditorGUILayout.Foldout(itemEditor.Foldout, itemEditor.Item.GetName);
-                var itemSo = new SerializedObject(itemEditor.Item);
-                itemSo.Update();
-                
-                GUILayout.FlexibleSpace();
-                if (GUILayout.Button("-"))
-                {
-                    if (EditorUtility.DisplayDialog("删除物品", "确定要删除吗？", "确定", "取消"))
-                    {
-                        var arrayElement = mItems.GetArrayElementAtIndex(i);
-                        AssetDatabase.RemoveObjectFromAsset(arrayElement.objectReferenceValue);
-                        mItems.DeleteArrayElementAtIndex(i);
-                        AssetDatabase.SaveAssets();
-                        AssetDatabase.Refresh();
-                        
-                        OnEnable();
-                    }
-                    
-                    
-                }
-                GUILayout.EndHorizontal();
-                if (itemEditor.Foldout)
-                { 
-                    itemEditor.Editor.OnInspectorGUI();
-                }
-
-                itemSo.ApplyModifiedPropertiesWithoutUndo();
-                GUILayout.EndVertical();
-                
+                RefreshItemEditors();
             }
             
-            if(GUILayout.Button("Create Code"))
+            if(GUILayout.Button("生成代码"))
             {
                 
                 var itemDb = target as ItemDatabase;
@@ -137,7 +99,80 @@ namespace QFramework
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
             }
+            GUILayout.EndVertical();
+           
+            EditorGUILayout.Separator();
+            GUILayout.Label("物品列表:",mHeader);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("搜索:",GUILayout.Width(40));
+            mSearchKey = EditorGUILayout.TextField(mSearchKey);
+            GUILayout.EndHorizontal();
+            
+            
+            for (var i = 0; i < mItemEditors.Count; i++)
+            {
+                var itemEditor = mItemEditors[i];
+                if (!itemEditor.Item.Name.Contains(mSearchKey) && !itemEditor.Item.Key.Contains(mSearchKey))
+                {
+                    continue;
+                }
+                
+                GUILayout.BeginVertical("box");
+                GUILayout.BeginHorizontal();
 
+                itemEditor.Foldout = EditorGUILayout.Foldout(itemEditor.Foldout, itemEditor.Item.GetName);
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("-"))
+                {
+                    var index = i;
+                    if (EditorUtility.DisplayDialog("删除物品", "确定要删除吗？", "确定", "取消"))
+                    {
+                        mActionQueue.Enqueue(() =>
+                        {
+                            var arrayElement = mItems.GetArrayElementAtIndex(index);
+                            AssetDatabase.RemoveObjectFromAsset(arrayElement.objectReferenceValue);
+                            mItems.DeleteArrayElementAtIndex(index);
+                            serializedObject.ApplyModifiedPropertiesWithoutUndo();
+                            AssetDatabase.SaveAssets();
+                            AssetDatabase.Refresh();
+                        });
+                    }
+                    
+                    
+                }
+                GUILayout.EndHorizontal();
+                if (itemEditor.Foldout)
+                { 
+                    itemEditor.Editor.OnInspectorGUI();
+                }
+                
+                GUILayout.EndVertical();
+                
+            }
+            
+            if (GUILayout.Button("创建物品"))
+            {
+                mActionQueue.Enqueue(() =>
+                {
+                    var item = CreateInstance<Item>();
+                    item.name = nameof(Item);
+                    item.Name = "新物品";
+                    item.Key = "item_key";
+                    AssetDatabase.AddObjectToAsset(item,target);
+                    mItems.InsertArrayElementAtIndex(mItems.arraySize);
+                    var arrayElement = mItems.GetArrayElementAtIndex(mItems.arraySize - 1);
+                    arrayElement.objectReferenceValue = item;
+                    serializedObject.ApplyModifiedPropertiesWithoutUndo();
+                
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                });
+            }
+
+            if (mActionQueue.Count > 0)
+            {
+                mActionQueue.Dequeue().Invoke();
+            }
             serializedObject.ApplyModifiedPropertiesWithoutUndo();
         }
     }

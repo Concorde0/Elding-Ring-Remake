@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6176542998387959478
+--- !u!114 &-7930612200805052578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8689e2ff78edd8148a24edd6a54c36ae, type: 3}
-  m_Name: 
+  m_Name: Item
   m_EditorClassIdentifier: 
   Name: "\u5934\u7532"
-  Key: Item_Head
+  Key: item_Head
   Icon: {fileID: -206467691, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -29,11 +29,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameSpace: QFramework.Example
   Items:
-  - {fileID: -6176542998387959478}
-  - {fileID: 6850879294239668374}
-  - {fileID: 1727154586607681648}
-  - {fileID: 0}
---- !u!114 &1727154586607681648
+  - {fileID: 3678679532006202831}
+  - {fileID: -7930612200805052578}
+  - {fileID: 4905052504574856374}
+--- !u!114 &3678679532006202831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,23 +42,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8689e2ff78edd8148a24edd6a54c36ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: "\u80F8\u7532"
-  Key: item_Chest
-  Icon: {fileID: 585586958, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
---- !u!114 &6850879294239668374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8689e2ff78edd8148a24edd6a54c36ae, type: 3}
-  m_Name: 
+  m_Name: Item
   m_EditorClassIdentifier: 
   Name: "\u7279\u5927\u5251"
-  Key: item_BigSword
+  Key: item_BigSowrd
   Icon: {fileID: -404838156, guid: c05deaf50ef4ce84e8e998e5f58a900f, type: 3}
+--- !u!114 &4905052504574856374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8689e2ff78edd8148a24edd6a54c36ae, type: 3}
+  m_Name: Item
+  m_EditorClassIdentifier: 
+  Name: "\u817F\u7532"
+  Key: item_Leg
+  Icon: {fileID: 425627743, guid: 8066d1ac46d3f2044be759e0285f7448, type: 3}
