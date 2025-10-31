@@ -12,17 +12,24 @@ namespace QFramework.Example
 	{
 		private void Awake()
 		{
+			ItemKit.CreatSlotGroup("背包2")
+				.CreateSlotByCount(20);
+		}
+		
+
+		private void Start()
+		{
 			ItemKit.LoadItemDatabase("ExampleItemDatabase");
 			
-			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.Item_Head],1);
-			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.item_BigSword],1);
-
+			ItemKit.CreatSlotGroup("背包")
+				.CreateSlot(ItemKit.ItemByKey[Items.item_Head],1)
+				.CreateSlot(ItemKit.ItemByKey[Items.item_BigSowrd],1);
 		}
 
 		private void OnGUI()
 		{
 			IMGUIHelper.SetDesignResolution(640,360);
-			foreach (var slot in ItemKit.Slots)
+			foreach (var slot in ItemKit.GetSlotGroupByKey("背包").Slots)
 			{
 				GUILayout.BeginHorizontal("box");
 				if (slot.Count == 0)
@@ -41,24 +48,24 @@ namespace QFramework.Example
 			GUILayout.Label($"物品1 ");
 			if (GUILayout.Button("+"))
 			{
-				if (!ItemKit.AddItem(Items.Item_Head))
+				if (!ItemKit.GetSlotGroupByKey("背包").AddItem(Items.item_Head))
 				{
 					Debug.Log("物品栏已满");
 				}
 			}
-			if (GUILayout.Button("-")) {ItemKit. SubItem(Items.Item_Head); }
+			if (GUILayout.Button("-")) {ItemKit.GetSlotGroupByKey("背包").SubItem(Items.item_Head); }
 			GUILayout.EndHorizontal();
 			
 			GUILayout.BeginHorizontal();
 			GUILayout.Label($"物品2 ");
 			if (GUILayout.Button("+"))
 			{
-				if (!ItemKit.AddItem(Items.item_BigSword))
+				if (!ItemKit.GetSlotGroupByKey("背包").AddItem(Items.item_BigSowrd))
 				{
 					Debug.Log("物品栏已满");
 				}
 			}
-			if (GUILayout.Button("-")) { ItemKit.SubItem(Items.item_BigSword); }
+			if (GUILayout.Button("-")) { ItemKit.GetSlotGroupByKey("背包").SubItem(Items.item_BigSowrd); }
 			GUILayout.EndHorizontal();
 			
 			

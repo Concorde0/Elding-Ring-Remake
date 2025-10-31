@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.EventSystems;
 
 namespace QFramework
 {
-    public class UISlot : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler
+    public class UISlot : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
     {
         public Image Icon;
         public Text Count;
@@ -19,21 +20,30 @@ namespace QFramework
         public UISlot InitWithData(Slot data)
         {
             Data = data;
-            
-            if (Data.Count == 0)
+
+            void UpdateView()
             {
-                Icon.Hide();
-                Count.text = "";
-            }
-            else
-            {
-                Icon.Show();
-                if (data.Item.GetIcon)
+                if (Data.Count == 0)
                 {
-                    Icon.sprite = data.Item.GetIcon;
+                    Icon.Hide();
+                    Count.text = "";
                 }
-                Count.text = Data.Count.ToString();
+                else
+                {
+                    Icon.Show();
+                    if (data.Item.GetIcon)
+                    {
+                        Icon.sprite = data.Item.GetIcon;
+                    }
+                    Count.text = Data.Count.ToString();
+                }
             }
+            Data.Changed.Register(UpdateView).
+                UnRegisterWhenGameObjectDestroyed(gameObject);
+            
+            UpdateView();
+            
+            
 
             return this;
         }
@@ -41,8 +51,7 @@ namespace QFramework
         private void SyncItemToMousePos()
         {
             var mousePos = Input.mousePosition;
-            var controller = FindAnyObjectByType<UGUIInventoryExample>();
-            if(RectTransformUtility.ScreenPointToLocalPointInRectangle(controller.transform as RectTransform, mousePos, null,
+            if(RectTransformUtility.ScreenPointToLocalPointInRectangle(transform as RectTransform, mousePos, null,
                    out var localPos))
             {
                 Icon.LocalPosition2D(localPos);
@@ -52,8 +61,11 @@ namespace QFramework
         {
             if(mDragging || Data.Count == 0) return;
             mDragging = true;
-            var controller = FindAnyObjectByType<UGUIInventoryExample>();
-            Icon.Parent(controller);
+            
+            var canvas = Icon.gameObject.AddComponent<Canvas>();
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = 1000;
+            
             SyncItemToMousePos();
 
         }
@@ -70,20 +82,17 @@ namespace QFramework
         {
             if (mDragging)
             {
-                Icon.Parent(transform);
+                mDragging = false;
+                var canvas = Icon.GetComponent<Canvas>();
+                canvas.DestroySelf();
                 Icon.LocalPositionIdentity();
-
-                var uiSlots = transform.parent.GetComponentsInChildren<UISlot>();
-
-                bool throwItem = true;
-
-                foreach (var uiSlot in uiSlots)
+                
+                if(ItemKit.CurrentSlotPointerOn)
                 {
+                    var uiSlot = ItemKit.CurrentSlotPointerOn;
                     var rectTransform = uiSlot.transform as RectTransform;
                     if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, Input.mousePosition))
                     {
-                        throwItem = false;
-                        
                         if (Data.Count != 0)
                         {
                             var cachedItem = uiSlot.Data.Item;
@@ -95,20 +104,34 @@ namespace QFramework
                             Data.Item = cachedItem;
                             Data.Count = cachedCount;
                             
-                            FindAnyObjectByType<UGUIInventoryExample>().Refresh();
-                        }
+                            uiSlot.Data.Changed.Trigger();
+                            Data.Changed.Trigger();
                             
+                        }
                         
-                        break;
                     }
                 }
-                
-                if (throwItem)
+                else
                 {
                     Data.Item = null;
                     Data.Count = 0;
-                    FindAnyObjectByType<UGUIInventoryExample>().Refresh();
+                    
+                    Data.Changed.Trigger();
                 }
+                
+            }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            ItemKit.CurrentSlotPointerOn = this;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (ItemKit.CurrentSlotPointerOn == this)
+            {
+                ItemKit.CurrentSlotPointerOn = null;
             }
         }
     }

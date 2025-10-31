@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using QFramework;
 using QFramework.Example;
@@ -8,60 +9,56 @@ namespace QFramework.Example
 {
 	public partial class UGUIInventoryExample : ViewController
 	{
-		void Start()
+		private void Awake()
 		{
 			ItemKit.LoadItemDatabase("ExampleItemDatabase");
+
+			ItemKit.CreatSlotGroup("物品栏")
+				.CreateSlot(ItemKit.ItemByKey[Items.item_Head], 1)
+				.CreateSlot(ItemKit.ItemByKey[Items.item_BigSowrd],1)
+				.CreateSlotByCount(8);
 			
-			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.Item_Head],1);
-			ItemKit.CreateSlot(ItemKit.ItemByKey[Items.item_BigSword],1);
+			ItemKit.CreatSlotGroup("背包")
+				.CreateSlotByCount(20);
+
+			ItemKit.CreatSlotGroup("武器")
+				.CreateSlot(null,0);
+		}
+
+		void Start()
+		{
 			
-			UISlot.Hide();
-			Refresh();
 			
 
 			BtnAddItem1.onClick.AddListener(() =>
 			{
-				if (!ItemKit.AddItem(Items.Item_Head))
+				if (!ItemKit.GetSlotGroupByKey("物品栏").AddItem(Items.item_Head))
 				{
 					Debug.Log("背包已满");
 				}
-				Refresh();
 			});
 			
 			BtnAddItem2.onClick.AddListener(() =>
 			{
-				if (!ItemKit.AddItem(Items.item_BigSword))
+				if (!ItemKit.GetSlotGroupByKey("物品栏").AddItem(Items.item_BigSowrd))
 				{
 					Debug.Log("背包已满");
 				}
-				Refresh();
 			});
 			
 			
 			BtnDeleteItem1.onClick.AddListener(() =>
 			{
-				if (!ItemKit.SubItem(Items.Item_Head,10))
+				if (!ItemKit.GetSlotGroupByKey("物品栏").SubItem(Items.item_Head,10))
 				{
 					Debug.Log("数量不足");
 				}
-				Refresh();
 			});
 			BtnDeleteItem2.onClick.AddListener(() =>
 			{
-				ItemKit.SubItem(Items.item_BigSword);
-				Refresh();
+				ItemKit.GetSlotGroupByKey("物品栏").SubItem(Items.item_BigSowrd);
 			});
 		}
-
-		public void Refresh()
-		{
-			UISlotRoot.DestroyChildren();
-			foreach (var slot in ItemKit.Slots)
-			{
-				UISlot.InstantiateWithParent(UISlotRoot)
-					.InitWithData(slot)
-					.Show();
-			}
-		}
+		
 	}
 }

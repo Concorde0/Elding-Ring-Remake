@@ -1,4 +1,4 @@
-// Generate Id:a9821cc6-c367-4536-a21e-1feda654ffc2
+// Generate Id:9d8c8c4a-5ad7-4cd2-8b6c-5355cb715b9a
 using UnityEngine;
 
 // 1.请在菜单 编辑器扩展/Namespace Settings 里设置命名空间
@@ -7,10 +7,6 @@ namespace QFramework.Example
 {
 	public partial class UGUIInventoryExample
 	{
-		public UnityEngine.RectTransform UISlotRoot;
-		
-		public QFramework.UISlot UISlot;
-		
 		public UnityEngine.UI.Button BtnAddItem1;
 		
 		public UnityEngine.UI.Button BtnDeleteItem1;
