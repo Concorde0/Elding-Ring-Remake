@@ -27,9 +27,6 @@ namespace QFramework.Example
 
 		void Start()
 		{
-			
-			
-
 			BtnAddItem1.onClick.AddListener(() =>
 			{
 				if (!ItemKit.GetSlotGroupByKey("物品栏").AddItem(Items.item_Head))

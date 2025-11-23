@@ -35,11 +35,18 @@ namespace QFramework
             {
                 for (int i = 0; i < UISlots.Count; i++)
                 {
+                   
                     UISlots[i].InitWithData(ItemKit.GetSlotGroupByKey(GroupKey).Slots[i]);
                 }
                 
             }
             
+        }
+
+        private void Update()
+        {
+           
+          
         }
 
         private void Refresh()

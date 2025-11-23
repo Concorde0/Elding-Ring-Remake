@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace QFramework
 {
@@ -15,7 +16,7 @@ namespace QFramework
             mSlots.Add(new Slot(item,count));
             return this;
         }
-
+    
         public SlotGroup CreateSlotByCount(int count)
         {
             for (var i = 0; i < count; i++)
@@ -35,6 +36,7 @@ namespace QFramework
         {
             return mSlots.Find(s => s.Count == 0);
         }
+        
         
         public Slot FindAddableSlot(string itemKey)
         {
